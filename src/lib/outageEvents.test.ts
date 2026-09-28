@@ -16,24 +16,24 @@ describe("canonicalCause", () => {
 
 describe("outageEventMeta", () => {
   it("gives distinct app-facing labels (not collapsed) with a tooltip", () => {
-    expect(outageEventMeta("EVENT_REASON_OUTAGE_NO_PINGS").label).toBe("Ping Network Interruption");
+    expect(outageEventMeta("EVENT_REASON_OUTAGE_NO_PINGS").label).toBe("Interrupção de rede (ping)");
     expect(outageEventMeta("EVENT_REASON_OUTAGE_NO_DOWNLINK").label).toBe(
-      "Downlink Network Interruption",
+      "Interrupção de rede (downlink)",
     );
-    expect(outageEventMeta("OBSTRUCTED").label).toBe("Dish's view obstructed");
-    expect(outageEventMeta("OBSTRUCTED").tip).toContain("blocked the dish's view");
+    expect(outageEventMeta("OBSTRUCTED").label).toBe("Visão da antena obstruída");
+    expect(outageEventMeta("OBSTRUCTED").tip).toContain("visão da antena");
   });
 
   it("resolves a legacy persisted label to the same meaning", () => {
     expect(outageEventMeta("ut alert rain snr persistently low").label).toBe(
-      "Weather interference",
+      "Interferência climática",
     );
   });
 
   it("names the router (wifi_get_history) events, auto-cleaning the long tail", () => {
-    expect(outageEventMeta("EVENT_REASON_ROUTER_POWER_CYCLE").label).toBe("Router powered on");
+    expect(outageEventMeta("EVENT_REASON_ROUTER_POWER_CYCLE").label).toBe("Roteador ligado");
     expect(outageEventMeta("EVENT_REASON_CLIENT_SWITCHING_BAND").label).toBe(
-      "Device switched WiFi band",
+      "Dispositivo trocou a banda Wi‑Fi",
     );
     // Unmapped router reasons still read cleanly via the sentence-case fallback.
     expect(outageEventMeta("EVENT_REASON_ROUTER_SOFTWARE_UPDATE").label).toBe(
@@ -48,7 +48,7 @@ describe("outageEventMeta", () => {
   });
 
   it("passes an already-human label (thermal episode) through untouched", () => {
-    expect(outageEventMeta("Thermal throttle (ongoing)").label).toBe("Thermal throttle (ongoing)");
+    expect(outageEventMeta("limitação térmica (ongoing)").label).toBe("limitação térmica (ongoing)");
   });
 });
 
@@ -87,7 +87,7 @@ describe("outageEventKind", () => {
   });
 
   it("gives the thermal episodes' human labels a kind rather than undefined", () => {
-    expect(outageEventKind("Thermal throttle (ongoing)")).toBe("info");
+    expect(outageEventKind("limitação térmica (ongoing)")).toBe("info");
     expect(outageEventKind("")).toBe("info");
   });
 });

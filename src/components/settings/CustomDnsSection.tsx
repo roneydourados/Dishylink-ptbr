@@ -14,7 +14,7 @@ import { normalizeIpAddress } from "@core/ipAddress";
 import { MAX_NAMESERVERS } from "@core/routerConfigUpdate";
 import { dnsFieldsValid, nameserversFrom } from "./customDnsFields";
 
-const LABELS = ["Primary", "Backup", "Backup", "Backup"];
+const LABELS = ["Primário", "Backup", "Backup", "Backup"];
 const PLACEHOLDERS = ["1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001"];
 
 export function CustomDnsSection({
@@ -70,13 +70,13 @@ export function CustomDnsSection({
   return (
     <>
       <SettingRow
-        title='Custom DNS'
-        info="Custom DNS lets you specify IPv4 or IPv6 addresses of one or more alternate DNS servers to be used for lookups instead of the Starlink defaults. A server that doesn't answer stops lookups for every device on the network."
+        title='DNS personalizado'
+        info='O DNS personalizado permite indicar endereços IPv4 ou IPv6 de um ou mais servidores DNS alternativos para consultas, em vez dos padrões da Starlink. Um servidor que não responde interrompe as consultas de todos os dispositivos na rede.'
         infoSeverity='warn'
         caption={
           disabled
-            ? "Connect your Starlink account to use this"
-            : "Send name lookups to your own servers instead of Starlink's"
+            ? "Conecte sua conta Starlink para usar isto"
+            : "Envie consultas de nome aos seus próprios servidores em vez dos da Starlink"
         }
       >
         <Switch checked={enabled} disabled={disabled || saving} onCheckedChange={toggle} />
@@ -99,7 +99,7 @@ export function CustomDnsSection({
                 placeholder={PLACEHOLDERS[index]}
                 spellCheck={false}
                 autoComplete='off'
-                aria-label={`${LABELS[index]} DNS server`}
+                aria-label={`Servidor DNS ${LABELS[index].toLowerCase()}`}
                 aria-invalid={field.trim() !== "" && normalizeIpAddress(field) === null}
                 className='h-8 w-[232px] font-mono text-[12px] tabular-nums'
               />
@@ -113,7 +113,7 @@ export function CustomDnsSection({
               disabled={disabled || saving || !changed || !dnsFieldsValid(fields)}
               onClick={() => void run(nameserversFrom(fields))}
             >
-              {saving ? "Saving…" : "Save"}
+              {saving ? "Salvando…" : "Salvar"}
             </Button>
           </div>
         </div>

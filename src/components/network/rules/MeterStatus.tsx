@@ -41,7 +41,7 @@ function OtherRules({
   return (
     <div className='space-y-1.5'>
       <div className='text-[11px] tracking-wide text-muted-foreground uppercase'>
-        Other rules on this device
+        Outras regras neste dispositivo
       </div>
       {others.map((other) => (
         <div
@@ -49,18 +49,18 @@ function OtherRules({
           className='flex items-baseline justify-between gap-3 text-[12.5px]'
         >
           <span className='truncate text-muted-foreground'>
-            {other.groupName ?? `${deviceName}’s own limit`}
+            {other.groupName ?? `Limite próprio de ${deviceName}`}
           </span>
           <span className='shrink-0 font-medium tabular-nums text-foreground'>
             {other.countdownMs !== undefined
-              ? `${formatDuration(countdownLeftMs(other, nowMs) ?? 0)} left`
+              ? `${formatDuration(countdownLeftMs(other, nowMs) ?? 0)} restantes`
               : other.allocationBytes > 0
-                ? `${formatBytes(other.usageBytes)} of ${formatBytes(other.allocationBytes)}`
+                ? `${formatBytes(other.usageBytes)} de ${formatBytes(other.allocationBytes)}`
                 : // Hours, not an allowance: "of 0 B" reads as a limit of nothing.
                   scheduleActive(other.schedule)
-                  ? "On a schedule"
+                  ? "Em uma agenda"
                   : formatBytes(other.usageBytes)}
-            {other.holding ? " · holding" : ""}
+            {other.holding ? " · retendo" : ""}
           </span>
         </div>
       ))}
@@ -167,13 +167,13 @@ export function MeterStatus({
     <>
       <DialogHeader className='pb-4'>
         <DialogTitle className='text-[19px] leading-snug'>
-          {timing ? "Timer" : leading === "schedule" ? "Schedule" : "Data limit"}
+          {timing ? "Timer" : leading === "schedule" ? "Agenda" : "Limite de dados"}
         </DialogTitle>
         <DialogDescription className='text-[13px]'>
-          {rule.groupName ? `${deviceName} · shared with others` : deviceName}
+          {rule.groupName ? `${deviceName} · compartilhado com outros` : deviceName}
         </DialogDescription>
         <div className='text-[11.5px] text-muted-foreground'>
-          Created {formatDateTime(rule.createdMs)}
+          Criada em {formatDateTime(rule.createdMs)}
         </div>
       </DialogHeader>
 
@@ -184,7 +184,7 @@ export function MeterStatus({
             {paused && (
               <div className='flex items-center justify-center gap-2 pt-2 text-foreground/60'>
                 <Wifi className='size-4.5' strokeWidth={2} />
-                <span className='text-[15px] font-semibold tracking-wide'>PAUSED</span>
+                <span className='text-[15px] font-semibold tracking-wide'>PAUSADO</span>
               </div>
             )}
           </div>
@@ -195,7 +195,7 @@ export function MeterStatus({
               {paused ? (
                 <span className='flex flex-col items-center gap-2 text-foreground/60 [animation:paused-pulse_2.4s_ease-in-out_infinite]'>
                   <Wifi className='size-9' strokeWidth={2} />
-                  <span className='text-[17px] font-semibold tracking-wide'>PAUSED</span>
+                  <span className='text-[17px] font-semibold tracking-wide'>PAUSADO</span>
                 </span>
               ) : (
                 <>
@@ -207,7 +207,7 @@ export function MeterStatus({
                     <CountdownReading leftMs={leftMs} />
                   )}
                   <span className='mt-1.5 text-[11.5px] tracking-wide text-muted-foreground'>
-                    {bytesReading?.unit ?? "LEFT"}
+                    {bytesReading?.unit ?? "RESTANTES"}
                   </span>
                 </>
               )}
@@ -218,16 +218,15 @@ export function MeterStatus({
           <div className='text-center text-[15px] text-muted-foreground'>
             {timing ? (
               <>
-                of a{" "}
+                de um timer de{" "}
                 <span className='font-semibold text-foreground'>
                   {formatDuration(rule.countdownMs!)}
-                </span>{" "}
-                timer
+                </span>
               </>
             ) : (
               <>
-                of <span className='font-semibold text-foreground'>{formatBytes(allowance)}</span>{" "}
-                allowance
+                de uma franquia de{" "}
+                <span className='font-semibold text-foreground'>{formatBytes(allowance)}</span>
               </>
             )}
           </div>
@@ -236,10 +235,10 @@ export function MeterStatus({
         {paused && (
           <Callout tone='error'>
             {timing
-              ? `${deviceName}’s ${formatDuration(rule.countdownMs!)} timer is up, so its internet is paused until you start it over.`
+              ? `O timer de ${formatDuration(rule.countdownMs!)} de ${deviceName} acabou, então a internet está pausada até você recomeçar.`
               : leading === "schedule"
-                ? `${deviceName} is outside the hours this rule allows, so its internet is paused.`
-                : `${deviceName} reached its ${formatBytes(allowance)} allowance, so its internet is paused${resets ? ` until the cycle ${resets.replace(/^ends/, "resets")}` : ""}.`}
+                ? `${deviceName} está fora dos horários que esta regra permite, então a internet está pausada.`
+                : `${deviceName} atingiu a franquia de ${formatBytes(allowance)}, então a internet está pausada${resets ? ` — o ciclo ${resets}` : ""}.`}
           </Callout>
         )}
 
@@ -248,20 +247,20 @@ export function MeterStatus({
             <Stat
               label={
                 scheduleDormant(rule, nowMs)
-                  ? "Resumes in"
+                  ? "Retoma em"
                   : rule.windowBlocked
-                    ? "Opens in"
-                    : "Closes in"
+                    ? "Abre em"
+                    : "Fecha em"
               }
               value={rule.windowEndMs ? (timeLeft(rule.windowEndMs, nowMs) ?? "—") : "—"}
             />
             <Stat
-              label='Right now'
+              label='Agora'
               value={
                 scheduleDormant(rule, nowMs)
-                  ? "Not scheduled"
+                  ? "Sem agenda"
                   : rule.windowBlocked
-                    ? "Paused"
+                    ? "Pausado"
                     : "Online"
               }
               align='right'
@@ -270,23 +269,23 @@ export function MeterStatus({
         ) : (
           <RuleStats>
             <Stat
-              label={timing ? "Time left" : "Remaining"}
+              label={timing ? "Tempo restante" : "Restante"}
               value={timing ? formatDuration(leftMs) : formatBytes(remaining)}
               tone={(timing ? leftMs <= 0 : remaining <= 0) ? "text-destructive" : undefined}
             />
             <Stat
-              label={timing ? "Pauses at" : "Resets in"}
+              label={timing ? "Pausa às" : "Reinicia em"}
               value={
                 timing
                   ? leftMs > 0
                     ? endsAtLabel(leftMs, nowMs)
-                    : "now"
-                  : (timeLeft(rule.periodEndMs, nowMs) ?? "never")
+                    : "agora"
+                  : (timeLeft(rule.periodEndMs, nowMs) ?? "nunca")
               }
               align='center'
             />
             <Stat
-              label={timing ? "Set for" : "Cycle"}
+              label={timing ? "Definido para" : "Ciclo"}
               value={timing ? formatDuration(rule.countdownMs!) : cycleLabel(rule.cycle)}
               align='right'
             />
@@ -294,14 +293,14 @@ export function MeterStatus({
         )}
 
         {leading === "schedule" && capped && (
-          <Section label='Data allowance'>
+          <Section label='Franquia de dados'>
             <div className='flex items-baseline justify-between gap-3'>
               <span className='text-[15px] font-semibold tabular-nums text-foreground'>
                 {formatBytes(used)}
               </span>
               <span className='text-[13px] text-muted-foreground'>
-                of {formatBytes(allowance)}
-                {rule.sharedAllowance ? " shared" : ""} · {cycleLabel(rule.cycle)}
+                de {formatBytes(allowance)}
+                {rule.sharedAllowance ? " compartilhada" : ""} · {cycleLabel(rule.cycle)}
               </span>
             </div>
             <Bar spent={spent} tone={meterTone(spent, paused)} />
@@ -310,18 +309,24 @@ export function MeterStatus({
 
         {(leading === "allowance" || (leading === "schedule" && capped)) && (
           <p className='text-center text-[12px] font-medium text-muted-foreground'>
-            Only data used while Dishylink is running is counted.
+            Só os dados usados enquanto o Dishylink está em execução são contados.
           </p>
         )}
         {!rule.autoPause && (
           <Callout tone='info'>
-            Auto-pause is off, so this {leading} is watched and announced but never enforced.
+            A pausa automática está desligada, então{" "}
+            {leading === "timer"
+              ? "este timer"
+              : leading === "schedule"
+                ? "esta agenda"
+                : "este limite"}{" "}
+            é observado e anunciado, mas nunca aplicado.
           </Callout>
         )}
         {rule.pauseState === "failed" && rule.reached && (
           <Callout tone='error'>
-            This device reached its limit, but the pause could not be sent to Starlink.
-            {rule.pauseError ? ` ${rule.pauseError}.` : ""} It is retried every minute.
+            Este dispositivo atingiu o limite, mas a pausa não pôde ser enviada à Starlink.
+            {rule.pauseError ? ` ${rule.pauseError}.` : ""} A tentativa é repetida a cada minuto.
           </Callout>
         )}
         {meter.error && <Callout tone='error'>{meter.error}</Callout>}
@@ -331,22 +336,24 @@ export function MeterStatus({
         <OtherRules meter={meter} deviceName={deviceName} nowMs={nowMs} />
         {rule.groupName && (
           <Callout tone='info'>
-            This limit covers {rule.groupName}
-            {rule.sharedAllowance ? ", which share it between them" : ", each with their own"}.
-            Editing it here changes it for all of them.
+            Este limite cobre {rule.groupName}
+            {rule.sharedAllowance
+              ? ", que compartilham entre si"
+              : ", cada um com a sua própria franquia"}
+            . Editar aqui altera para todos eles.
           </Callout>
         )}
         {rule.autoPause && !paused && !rule.groupName && (
           <Callout tone='info'>
-            Device data will automatically pause when usage reaches this limit.
+            Os dados do dispositivo pausam automaticamente ao atingir este limite.
           </Callout>
         )}
         <DialogFooter className='flex-row items-center justify-end gap-2'>
           <Button variant='outline' className='cursor-pointer' onClick={onClose}>
-            Close
+            Fechar
           </Button>
           <Button className='cursor-pointer' onClick={onEdit}>
-            Edit limit
+            Editar limite
           </Button>
         </DialogFooter>
       </div>

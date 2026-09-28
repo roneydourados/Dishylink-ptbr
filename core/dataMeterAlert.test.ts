@@ -34,7 +34,7 @@ describe("dataLimitAlertSpec", () => {
 
   it("given: an allowance, should: name the figure it reached", () => {
     expect(dataLimitAlertSpec(rule(), "iPhone").firing).toBe(
-      "iPhone reached its 50.0 GB data allowance",
+      "iPhone atingiu a franquia de 50.0 GB",
     );
   });
 
@@ -42,8 +42,8 @@ describe("dataLimitAlertSpec", () => {
     // A timer measures no bytes. The allowance on the rule is whatever the form
     // last carried, and quoting it describes a limit the timer never had.
     const spec = dataLimitAlertSpec(rule({ countdownMs: 5_400_000 }), "iPhone");
-    expect(spec.firing).toBe("iPhone reached the end of its 1h 30m timer");
-    expect(spec.firing).not.toMatch(/GB|TB|allowance/);
+    expect(spec.firing).toBe("iPhone esgotou o timer de 1h 30m");
+    expect(spec.firing).not.toMatch(/GB|TB|franquia|allowance/);
   });
 
   it("given: a shared allowance, should: file under the group and speak for all of it", () => {
@@ -51,7 +51,7 @@ describe("dataLimitAlertSpec", () => {
       groupName: "Kids",
     });
     expect(spec.key).toBe("dataLimit:group:kids");
-    expect(spec.firing).toBe("Kids reached their 50.0 GB data allowance");
+    expect(spec.firing).toBe("Kids atingiram a franquia de 50.0 GB");
   });
 
   it("given: a group countdown, should: file under the group even without a shared allowance", () => {
@@ -61,13 +61,13 @@ describe("dataLimitAlertSpec", () => {
       groupName: "Kids",
     });
     expect(spec.key).toBe("dataLimit:group:kids");
-    expect(spec.firing).toBe("Kids reached the end of their 1h timer");
+    expect(spec.firing).toBe("Kids esgotaram o timer de 1h");
   });
 
   it("given: a group down to one device, should: name the device rather than a plural", () => {
     const spec = dataLimitAlertSpec(rule({ groupId: "kids", sharedAllowance: true }), "iPhone");
     // Still filed under the group, so it closes the episode the recorder opened.
     expect(spec.key).toBe("dataLimit:group:kids");
-    expect(spec.firing).toBe("iPhone reached its 50.0 GB data allowance");
+    expect(spec.firing).toBe("iPhone atingiu a franquia de 50.0 GB");
   });
 });

@@ -58,7 +58,7 @@ export function NetworkPanel({
 
   return (
     <DetailsModal
-      title='Network'
+      title='Rede'
       size='wide'
       onClose={onClose}
       onBack={selectedKey ? () => setSelectedKey(null) : undefined}
@@ -170,7 +170,7 @@ function NetworkPanelBody({
   }, [totals, devices, resolveMeterKey]);
 
   if (network.routerReachable === null) {
-    return <Loading message='Contacting the router…' />;
+    return <Loading message='Contatando o roteador…' />;
   }
   // Branch on the diagnosis rather than on `routerReachable` again: it is
   // derived from that same flag, so this cannot render an empty callout.
@@ -248,14 +248,14 @@ function NetworkPanelBody({
     <div>
       <SegmentedControl
         variant='glider'
-        label='Network view'
+        label='Visão da rede'
         className='mb-3.5'
         value={tab}
         onChange={setTab}
         options={[
-          { value: "connected", label: <TabLabel text='Connected' count={devices.length} /> },
-          { value: "nodes", label: <TabLabel text='Nodes' count={nodes.length} /> },
-          { value: "rules", label: <TabLabel text='Rules' /> },
+          { value: "connected", label: <TabLabel text='Conectados' count={devices.length} /> },
+          { value: "nodes", label: <TabLabel text='Nós' count={nodes.length} /> },
+          { value: "rules", label: <TabLabel text='Regras' /> },
         ]}
       />
 
@@ -265,15 +265,15 @@ function NetworkPanelBody({
         <Callout
           tone='info'
           className='mb-2.5'
-          dismissLabel='Dismiss this note'
+          dismissLabel='Dispensar esta nota'
           onDismiss={() => {
             setAccountRosterNoticeDismissed(true);
             setNoticeDismissed(true);
           }}
         >
-          {unreachable ? `${unreachable.message} ` : ""}These devices come from your Starlink
-          account, so they refresh every {CLOUD_CLIENTS_POLL_MS / 1000}&nbsp;s and carry no live
-          throughput.
+          {unreachable ? `${unreachable.message} ` : ""}Estes dispositivos vêm da sua conta
+          Starlink, então atualizam a cada {CLOUD_CLIENTS_POLL_MS / 1000}&nbsp;s e não têm
+          throughput ao vivo.
         </Callout>
       )}
 
@@ -283,12 +283,12 @@ function NetworkPanelBody({
             <div className='mb-2 text-[11.5px] text-destructive'>{network.accountRosterError}</div>
           )}
           <ListSection
-            caption={`${devices.length} device${devices.length === 1 ? "" : "s"} · ${
+            caption={`${devices.length} dispositivo${devices.length === 1 ? "" : "s"} · ${
               viaCloud
                 ? network.accountRosterError
-                  ? "via your Starlink account, no longer refreshing"
-                  : `via your Starlink account, refreshed every ${CLOUD_CLIENTS_POLL_MS / 1000} s`
-                : `live from the router, refreshed every ${CLIENTS_POLL_MS / 1000} s`
+                  ? "via sua conta Starlink, sem atualizar"
+                  : `via sua conta Starlink, atualizado a cada ${CLOUD_CLIENTS_POLL_MS / 1000} s`
+                : `ao vivo do roteador, atualizado a cada ${CLIENTS_POLL_MS / 1000} s`
             }`}
           >
             {sortedDevices.map((client, index) => (
@@ -302,7 +302,7 @@ function NetworkPanelBody({
           </ListSection>
           {(accountUnavailable || needsSelfDevice) && (
             <Callout tone='info' iconSeverity='warn' className='mt-2.5'>
-              Pause feature disabled! To enable,{" "}
+              Pausa desativada! Para ativar,{" "}
               {accountUnavailable && (
                 <>
                   <button
@@ -310,27 +310,28 @@ function NetworkPanelBody({
                     className={inlineLinkButton}
                     onClick={() => requestPanel("account")}
                   >
-                    {needsAccount ? "sign in" : "reconnect"}
+                    {needsAccount ? "entre" : "reconecte"}
                   </button>{" "}
-                  to your Starlink account
+                  na sua conta Starlink
                 </>
               )}
-              {accountUnavailable && needsSelfDevice && " and "}
+              {accountUnavailable && needsSelfDevice && " e "}
               {needsSelfDevice && (
                 <>
-                  pick the current device you are using under app&rsquo;s{" "}
+                  escolha o dispositivo que você está usando nas{" "}
                   <button
                     type='button'
                     className={inlineLinkButton}
                     onClick={() => requestPanel("settings", "app")}
                   >
-                    settings
-                  </button>
+                    configurações
+                  </button>{" "}
+                  do app
                 </>
               )}
               .
               {needsSelfDevice &&
-                " That keeps your own device off the list of things this app can cut off."}
+                " Isso mantém seu próprio dispositivo fora da lista do que este app pode cortar."}
             </Callout>
           )}
           {/* The device list is where a split record is noticed — one name on two
@@ -352,7 +353,7 @@ function NetworkPanelBody({
       )}
 
       {tab === "nodes" && (
-        <ListSection caption='Router and mesh nodes'>
+        <ListSection caption='Roteador e nós mesh'>
           {nodes.map((node) => (
             <NetworkRow
               key={node.key}
@@ -361,7 +362,7 @@ function NetworkPanelBody({
               sub={node.status}
               band={
                 node.devices.length
-                  ? `${node.devices.length} device${node.devices.length === 1 ? "" : "s"}`
+                  ? `${node.devices.length} dispositivo${node.devices.length === 1 ? "" : "s"}`
                   : undefined
               }
               showChevron={node.connected}

@@ -95,19 +95,19 @@ describe("DeviceMergePrompt", () => {
         onAnswer={() => {}}
       />,
     );
-    await waitForText("Possible duplicate device");
+    await waitForText("Possível dispositivo duplicado");
     expect(text()).toContain("MacBook Pro M1");
     // Each side reads as the device row it is: maker + a labelled router id (not a
     // bare number), the usage a person recognises from the list — 586 GB idle vs
     // 51 GB live — and active-vs-last-seen as the direction of the merge. The
-    // masked address reads "Private" for both.
-    expect(text()).toContain("Private");
-    expect(text()).toContain("Router ID: 13011248");
-    expect(text()).toContain("Router ID: 2806438232");
+    // masked address reads "Privado" for both.
+    expect(text()).toContain("Privado");
+    expect(text()).toContain("ID do roteador: 13011248");
+    expect(text()).toContain("ID do roteador: 2806438232");
     expect(text()).toContain("586 GB");
     expect(text()).toContain("51 GB");
-    expect(text()).toContain("2 days ago");
-    expect(text()).toContain("Active now");
+    expect(text()).toContain("há 2 dias");
+    expect(text()).toContain("Ativo agora");
   });
 
   test("states the combined total when both records cover one month", async () => {
@@ -119,10 +119,10 @@ describe("DeviceMergePrompt", () => {
         onAnswer={() => {}}
       />,
     );
-    await waitForText("Combining keeps one device with");
+    await waitForText("Combinar mantém um dispositivo com");
     // The recorder's figure, not one recomputed here: 590 + 47 = 637 GB.
     expect(text()).toContain("637");
-    expect(text()).toContain("joins their usage history");
+    expect(text()).toContain("une o histórico de uso");
   });
 
   test("quotes the recorder's total even when it differs from summing the rows", async () => {
@@ -141,8 +141,8 @@ describe("DeviceMergePrompt", () => {
         onAnswer={() => {}}
       />,
     );
-    await waitForText("Combining keeps one device with");
-    expect(text()).toContain("with 1 GB this month");
+    await waitForText("Combinar mantém um dispositivo com");
+    expect(text()).toContain("com 1 GB neste mês");
     expect(text()).not.toContain("637");
   });
 
@@ -165,8 +165,8 @@ describe("DeviceMergePrompt", () => {
     render(
       <DeviceMergePrompt candidates={[split]} totals={totals} nowMs={NOW} onAnswer={() => {}} />,
     );
-    await waitForText("different months");
-    expect(text()).not.toContain("Combining keeps one device with");
+    await waitForText("meses diferentes");
+    expect(text()).not.toContain("Combinar mantém um dispositivo com");
   });
 
   test("reports same-device and different-devices distinctly", async () => {
@@ -179,10 +179,10 @@ describe("DeviceMergePrompt", () => {
         onAnswer={onAnswer}
       />,
     );
-    await waitForText("Same device");
-    button("Same device").click();
+    await waitForText("Mesmo dispositivo");
+    button("Mesmo dispositivo").click();
     expect(onAnswer).toHaveBeenCalledWith(candidate, true);
-    button("Different devices").click();
+    button("Dispositivos diferentes").click();
     expect(onAnswer).toHaveBeenCalledWith(candidate, false);
     // Both answers reach the caller; neither button stands in for the other.
     expect(onAnswer).toHaveBeenCalledTimes(2);
@@ -198,9 +198,9 @@ describe("DeviceMergePrompt", () => {
         onAnswer={() => {}}
       />,
     );
-    await waitForText("1 more to review");
+    await waitForText("mais 1 para revisar");
     // Only the first pair is put to the user; the second waits its turn.
-    expect(text()).not.toContain("2 more to review");
+    expect(text()).not.toContain("mais 2 para revisar");
   });
 
   test("says nothing when there is nothing to ask", async () => {
@@ -213,7 +213,7 @@ describe("DeviceMergePrompt", () => {
       />,
     );
     await settle();
-    expect(text()).not.toContain("Possible duplicate device");
+    expect(text()).not.toContain("Possível dispositivo duplicado");
   });
 
   test("stays silent when a candidate names a record the list does not hold", async () => {
@@ -226,6 +226,6 @@ describe("DeviceMergePrompt", () => {
       />,
     );
     await settle();
-    expect(text()).not.toContain("Possible duplicate device");
+    expect(text()).not.toContain("Possível dispositivo duplicado");
   });
 });

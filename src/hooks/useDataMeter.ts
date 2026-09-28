@@ -129,7 +129,7 @@ export function useDataMeter(clientKey: string | null): DataMeter {
       setPauseEnforceable(body.pauseEnforceable === true);
       setError(null);
     } catch {
-      setError("The recorder isn’t answering, so data limits can’t be read or changed.");
+      setError("O gravador não está respondendo, então os limites de dados não podem ser lidos nem alterados.");
     } finally {
       setLoading(false);
     }
@@ -155,7 +155,7 @@ export function useDataMeter(clientKey: string | null): DataMeter {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         setError(null);
       } catch {
-        setError("The recorder refused the change.");
+        setError("O gravador recusou a alteração.");
       } finally {
         await load();
       }

@@ -101,19 +101,19 @@ export function RouterSettingsTab({
 
   return (
     <>
-      {routerReachable === null && <Loading message='Contacting the router…' />}
+      {routerReachable === null && <Loading message='Contatando o roteador…' />}
       {/* Branch on the diagnosis rather than on `routerReachable` again: it is
           derived from that same flag, so this cannot render an empty callout. */}
       {unreachable && <Callout tone='error'>{unreachable.message}</Callout>}
 
       {configKnown && (
         <>
-          <SectionLabel>Networks</SectionLabel>
+          <SectionLabel>Redes</SectionLabel>
           {ssids.map(([ssid, bands]) => (
             <SettingRow
               key={ssid}
               title={ssid}
-              caption='WPA2 · password managed in the Starlink app'
+              caption='WPA2 · senha gerenciada no app Starlink'
             >
               {[...new Set(bands)].map((band) => (
                 <Badge key={band}>{band}</Badge>
@@ -123,15 +123,15 @@ export function RouterSettingsTab({
 
           {meshNodes.length > 0 && (
             <>
-              <SectionLabel>Mesh nodes</SectionLabel>
+              <SectionLabel>Nós mesh</SectionLabel>
               {meshNodes.map((node, nodeIndex) => (
                 <SettingRow
                   key={nodeIndex}
-                  title={node.displayName ?? "Mesh node"}
+                  title={node.displayName ?? "Nó mesh"}
                   caption={node.hardwareVersion ? `hardware ${node.hardwareVersion}` : undefined}
                 >
                   <Badge tone={node.auth !== "MESH_AUTH_TRUSTED" ? "critical" : "neutral"}>
-                    {node.auth === "MESH_AUTH_TRUSTED" ? "trusted" : (node.auth ?? "unknown")}
+                    {node.auth === "MESH_AUTH_TRUSTED" ? "confiável" : (node.auth ?? "desconhecido")}
                   </Badge>
                 </SettingRow>
               ))}
@@ -140,8 +140,8 @@ export function RouterSettingsTab({
 
           {wifiConfig?.boot?.evenSideSoftwareVersion && (
             <SettingRow
-              title='Router firmware'
-              caption={`country ${wifiConfig.countryCode ?? "—"}`}
+              title='Firmware do roteador'
+              caption={`país ${wifiConfig.countryCode ?? "—"}`}
             >
               <span className='font-mono text-[12px] text-muted-foreground tabular-nums'>
                 {wifiConfig.boot.evenSideSoftwareVersion}
@@ -151,51 +151,51 @@ export function RouterSettingsTab({
         </>
       )}
 
-      <SectionLabel>Maintenance</SectionLabel>
+      <SectionLabel>Manutenção</SectionLabel>
       <DangerAction
-        title='Reboot router'
+        title='Reiniciar roteador'
         caption={
           answering
-            ? "WiFi drops for a minute or two; the dish stays up"
-            : "Unavailable until the router answers"
+            ? "O Wi-Fi cai por um ou dois minutos; a antena continua ligada"
+            : "Indisponível até o roteador responder"
         }
-        buttonLabel='Reboot'
-        slideLabel='Slide to reboot router'
-        confirmLabel='Reboot router'
+        buttonLabel='Reiniciar'
+        slideLabel='Deslize para reiniciar o roteador'
+        confirmLabel='Reiniciar roteador'
         disabled={!answering}
         onRun={async () => {
           const routerClient = await DishClient.load("router");
           await routerClient.reboot();
-          return "Reboot sent — the router is restarting.";
+          return "Reinício enviado — o roteador está reiniciando.";
         }}
       />
       <DangerAction
-        title='Factory reset router'
+        title='Restaurar fábrica do roteador'
         caption={
           answering || accountConnected
-            ? "Wipes the WiFi name, password and every router setting. Not reversible."
-            : "Needs the router on this network, or your Starlink account"
+            ? "Apaga o nome do Wi-Fi, a senha e todas as configurações do roteador. Irreversível."
+            : "Precisa do roteador nesta rede, ou da sua conta Starlink"
         }
-        buttonLabel='Factory reset'
-        slideLabel='Slide to factory reset the router'
-        confirmLabel='Factory reset router'
-        warning='Factory reset will clear your WiFi network name, password, and other settings. This will interrupt your service until you set it up again.'
+        buttonLabel='Restaurar fábrica'
+        slideLabel='Deslize para restaurar a fábrica do roteador'
+        confirmLabel='Restaurar fábrica do roteador'
+        warning='A restauração de fábrica apaga o nome da rede Wi-Fi, a senha e outras configurações. Isso interrompe o serviço até você configurar de novo.'
         disabled={!answering && !accountConnected}
         onRun={async () => {
           // A bypassed router is off the LAN, which is exactly when a reset is
           // wanted: the account reaches it there and nothing local does.
           if (!answering) {
             await applyRouterConfigUpdate({ kind: "factoryReset" });
-            return "Factory reset sent through your Starlink account — the router is wiping and restarting.";
+            return "Restauração de fábrica enviada pela sua conta Starlink — o roteador está apagando e reiniciando.";
           }
           await (await DishClient.load("router")).factoryReset();
-          return "Factory reset sent — the router is wiping and restarting.";
+          return "Restauração de fábrica enviada — o roteador está apagando e reiniciando.";
         }}
       />
-      <CollapsibleSection title='Advanced'>
+      <CollapsibleSection title='Avançado'>
         {addresses && (
           <>
-            <SectionLabel>Connection</SectionLabel>
+            <SectionLabel>Conexão</SectionLabel>
             <RouterAddressRow
               addresses={addresses}
               onChanged={(next) => {
@@ -218,7 +218,7 @@ export function RouterSettingsTab({
             />
           </>
         )}
-        <SectionLabel>Network</SectionLabel>
+        <SectionLabel>Rede</SectionLabel>
         <SubnetSection
           currentSubnet={configSubnet ?? cloudSubnet}
           disabled={!accountConnected}

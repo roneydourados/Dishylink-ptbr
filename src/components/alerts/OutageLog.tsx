@@ -25,14 +25,17 @@ export function OutageLog({ outageEvents }: { outageEvents: OutageEvent[] }) {
     <div className='col-span-4 min-w-0 rounded-xl bg-card px-[18px] py-4'>
       <div className='mb-2.5 flex items-center justify-between gap-3'>
         <span className='text-[16px] font-semibold tracking-[0.005em] text-foreground'>
-          Events &amp; outages
+          Eventos e interrupções
         </span>
         <span className='text-[12px] font-medium text-muted-foreground'>
-          {newestFirst.length} events
+          {newestFirst.length}{" "}
+          {newestFirst.length === 1 ? "evento" : "eventos"}
         </span>
       </div>
       {newestFirst.length === 0 ? (
-        <EmptyState className='py-[18px]'>no outages recorded in the current window</EmptyState>
+        <EmptyState className='py-[18px]'>
+          nenhuma interrupção registrada nesta janela
+        </EmptyState>
       ) : (
         <div className='thin-scroll flex max-h-[240px] flex-col overflow-y-auto'>
           {newestFirst.map((outage) => {

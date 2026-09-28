@@ -128,7 +128,7 @@ export function DeviceDetail({
     const timer = window.setTimeout(() => {
       setPendingPaused(null);
       setPauseError(
-        new Error("The router has not applied this yet. Give it a moment, then try again."),
+        new Error("O roteador ainda não aplicou isso. Espere um momento e tente de novo."),
       );
     }, pauseSettleTimeoutMs(rosterRefreshMs));
     return () => {
@@ -205,7 +205,7 @@ export function DeviceDetail({
               {client.clientId}
             </span>
           )}
-          {paused && <Badge className='mt-1'>{heldByRule ? "Paused · limit" : "Paused"}</Badge>}
+          {paused && <Badge className='mt-1'>{heldByRule ? "Pausado · limite" : "Pausado"}</Badge>}
         </div>
         <div className='flex items-center justify-end gap-1.5'>
           {showMeterControl && client.macAddress && (
@@ -214,7 +214,7 @@ export function DeviceDetail({
                 <Button
                   variant='ghost'
                   size='sm'
-                  aria-label='Data limit'
+                  aria-label='Limite de dados'
                   className='cursor-pointer px-2'
                   onClick={() => setEditingMeter(true)}
                 >
@@ -224,7 +224,7 @@ export function DeviceDetail({
                   />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side='top'>Data limit</TooltipContent>
+              <TooltipContent side='top'>Limite de dados</TooltipContent>
             </Tooltip>
           )}
           {showPauseControl && (
@@ -242,12 +242,12 @@ export function DeviceDetail({
                 <SpinLoader
                   variant='segment'
                   size={16}
-                  label={pendingPaused ? "Pausing" : "Unpausing"}
+                  label={pendingPaused ? "Pausando" : "Retomando"}
                 />
               ) : paused ? (
-                "Unpause"
+                "Retomar"
               ) : (
-                "Pause"
+                "Pausar"
               )}
             </Button>
           )}
@@ -263,10 +263,10 @@ export function DeviceDetail({
           overlayClassName='bg-black/30 backdrop-blur-[2px]'
         >
           <DialogHeader>
-            <DialogTitle className='text-[19px] leading-snug'>Pause “{name}”?</DialogTitle>
+            <DialogTitle className='text-[19px] leading-snug'>Pausar “{name}”?</DialogTitle>
             <DialogDescription className='text-[13.5px] leading-relaxed'>
-              This will pause internet access for this device. It stays connected to your network,
-              and you can unpause it at any time.
+              Isso pausa o acesso à internet deste dispositivo. Ele permanece conectado à sua rede,
+              e você pode retomar a qualquer momento.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className='mt-2 gap-2'>
@@ -275,7 +275,7 @@ export function DeviceDetail({
               className='cursor-pointer sm:min-w-28'
               onClick={() => setConfirmingPause(false)}
             >
-              Cancel
+              Cancelar
             </Button>
             <Button
               className='cursor-pointer sm:min-w-28'
@@ -284,7 +284,7 @@ export function DeviceDetail({
                 void applyPaused(true);
               }}
             >
-              Pause
+              Pausar
             </Button>
           </DialogFooter>
         </DialogContent>

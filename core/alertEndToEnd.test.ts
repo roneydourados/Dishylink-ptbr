@@ -47,14 +47,14 @@ describe("a dish going offline with no window open", () => {
     const host = recorder();
     host.poll(START, {});
     host.poll(START + POLL_MS, null, null); // the connection drops
-    expect(host.shown).toEqual(["Dish isn’t answering", "Router isn’t answering"]);
+    expect(host.shown).toEqual(["A antena não está respondendo", "O roteador não está respondendo"]);
 
     host.poll(START + 2 * POLL_MS, {}, {}); // and comes back
     expect(host.shown).toEqual([
-      "Dish isn’t answering",
-      "Router isn’t answering",
-      "Dish is answering",
-      "Router is answering",
+      "A antena não está respondendo",
+      "O roteador não está respondendo",
+      "A antena está respondendo",
+      "O roteador está respondendo",
     ]);
   });
 
@@ -63,19 +63,19 @@ describe("a dish going offline with no window open", () => {
     host.poll(START, {});
     for (let i = 1; i <= 20; i += 1) host.poll(START + i * POLL_MS, null, null);
     // 20 polls over 100 seconds. The alert is one event, not twenty.
-    expect(host.shown.filter((body) => body === "Dish isn’t answering")).toHaveLength(1);
+    expect(host.shown.filter((body) => body === "A antena não está respondendo")).toHaveLength(1);
     expect(host.recorded.filter((line) => line.endsWith("dishUnreachable"))).toHaveLength(1);
   });
 
   it("does not report the dish's own alerts as cleared while it is silent", () => {
     const host = recorder();
     host.poll(START, { dishWaterDetected: true });
-    expect(host.shown).toEqual(["Water detected inside the dish"]);
+    expect(host.shown).toEqual(["Água detectada dentro da antena"]);
 
     host.poll(START + POLL_MS, null);
     // Water has not been observed to stop — the dish simply stopped talking.
     // Announcing "no water inside the dish" here would be a lie.
-    expect(host.shown).not.toContain("No water inside the dish");
+    expect(host.shown).not.toContain("Sem água dentro da antena");
     expect(host.engine.activeAlerts().map((a) => a.key)).toContain("dishWaterDetected");
   });
 
@@ -93,7 +93,7 @@ describe("a dish going offline with no window open", () => {
   it("announces a recovery that happened while the app was down", () => {
     const host = recorder([{ source: "dish", key: "dishWaterDetected" }]);
     host.poll(START, {});
-    expect(host.shown).toEqual(["No water inside the dish"]);
+    expect(host.shown).toEqual(["Sem água dentro da antena"]);
   });
 });
 
@@ -125,13 +125,13 @@ describe("a Starlink outage while the dish itself is fine", () => {
 
     pollWithSamples(host, START + POLL_MS, dropping);
     expect(host.shown).toEqual([
-      "The dish is reachable, but pings to the Starlink network are failing",
+      "A antena está alcançável, mas os pings para a rede Starlink estão falhando",
     ]);
 
     pollWithSamples(host, START + 2 * POLL_MS, flowing);
     expect(host.shown).toEqual([
-      "The dish is reachable, but pings to the Starlink network are failing",
-      "Pings to the Starlink network are succeeding again",
+      "A antena está alcançável, mas os pings para a rede Starlink estão falhando",
+      "Os pings para a rede Starlink voltaram a funcionar",
     ]);
   });
 
@@ -172,7 +172,7 @@ describe("what reaches the user versus what is written down", () => {
     // A link flapping on every 5s poll for two minutes.
     for (let i = 0; i < 24; i += 1)
       host.poll(START + i * POLL_MS, { thermalThrottle: i % 2 === 0 });
-    const onsets = host.shown.filter((b) => b.startsWith("Dish is hot"));
+    const onsets = host.shown.filter((b) => b.startsWith("A antena está quente"));
     // Every crossing is recorded; the user hears about it roughly once a minute.
     expect(host.recorded.length).toBeGreaterThan(20);
     expect(onsets.length).toBeLessThanOrEqual(3);

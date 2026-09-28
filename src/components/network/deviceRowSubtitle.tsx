@@ -13,10 +13,10 @@ import { deviceSubtitle } from "./networkFormat";
 export function deviceRowSubtitle(client: WifiClientJson, isSelf: boolean): ReactNode {
   const base = deviceSubtitle(client);
   if (!isSelf) return base;
-  const rest = base === "unknown device" ? "" : ` · ${base}`;
+  const rest = base === "dispositivo desconhecido" ? "" : ` · ${base}`;
   return (
     <>
-      <span className='font-semibold text-foreground/60'>This device</span>
+      <span className='font-semibold text-foreground/60'>Este dispositivo</span>
       {rest}
     </>
   );

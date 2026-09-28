@@ -46,7 +46,7 @@ export function PromptDialog({
             />
 
             <DialogPrimitive.Close
-              aria-label='Dismiss'
+              aria-label='Fechar'
               className='absolute top-5 right-5 inline-flex size-8 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent text-[13px] text-ink-secondary/60 transition-colors hover:bg-[color-mix(in_srgb,var(--ink)_8%,transparent)] hover:text-ink'
             >
               ✕
@@ -77,14 +77,14 @@ export function PromptDialog({
                   onClick={onLater}
                   className='cursor-pointer border-0 bg-transparent text-[13px] text-ink-secondary/80 transition-colors hover:text-ink'
                 >
-                  Maybe later
+                  Talvez depois
                 </button>
                 <button
                   type='button'
                   onClick={onNever}
                   className='cursor-pointer border-0 bg-transparent text-[12px] text-ink-secondary/45 transition-colors hover:text-ink-secondary'
                 >
-                  Don&rsquo;t ask again
+                  Não perguntar de novo
                 </button>
               </div>
             </div>

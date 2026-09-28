@@ -21,8 +21,8 @@ describe("describeTransition", () => {
   it("words an onset with the alert's firing message", () => {
     const notification = describeTransition(transitionFor({ dishWaterDetected: true }));
     expect(notification).toMatchObject({
-      title: "Dish alert",
-      body: "Water detected inside the dish",
+      title: "Alerta da antena",
+      body: "Água detectada dentro da antena",
       severity: "critical",
     });
   });
@@ -32,8 +32,8 @@ describe("describeTransition", () => {
     engine.update({ dish: { alerts: { dishWaterDetected: true }, atMs: NOW } });
     const [cleared] = engine.update({ dish: { alerts: {}, atMs: NOW + 1_000 } });
     expect(describeTransition(cleared!)).toMatchObject({
-      title: "Dish alert cleared",
-      body: "No water inside the dish",
+      title: "Alerta da antena resolvido",
+      body: "Sem água dentro da antena",
     });
   });
 
@@ -80,8 +80,8 @@ describe("describeTransition", () => {
     const engine = new AlertEngine();
     const [transition] = engine.update({ dish: { alerts: null, atMs: NOW } });
     expect(describeTransition(transition!)).toMatchObject({
-      title: "Dishylink alert",
-      body: "Dish isn’t answering",
+      title: "Alerta do Dishylink",
+      body: "A antena não está respondendo",
     });
   });
 });

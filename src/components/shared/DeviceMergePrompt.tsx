@@ -49,18 +49,18 @@ export function DeviceMergePrompt({
         <div className='flex items-center gap-1.5'>
           <MergeIcon size={15} className='text-chart-warm' />
           <span className='text-[14.5px] font-[650] text-foreground'>
-            Possible duplicate device
+            Possível dispositivo duplicado
           </span>
           {candidates.length > 1 && (
             <span className='ml-auto text-[11px] text-muted-foreground'>
-              {candidates.length - 1} more to review
+              mais {candidates.length - 1} para revisar
             </span>
           )}
         </div>
         <div className='mt-1 text-[13.5px] leading-[1.55] text-ink-secondary'>
-          This device appears twice, both named{" "}
-          <span className='font-medium text-foreground'>{candidate.detail}</span>. This happens when
-          a device changes its Wi-Fi address and your router treats it as new.
+          Este dispositivo aparece duas vezes, ambos com o nome{" "}
+          <span className='font-medium text-foreground'>{candidate.detail}</span>. Isso acontece
+          quando um dispositivo muda o endereço Wi-Fi e o roteador o trata como novo.
         </div>
 
         <div className='mt-2.5 flex items-stretch gap-2'>
@@ -78,10 +78,10 @@ export function DeviceMergePrompt({
             a total it does not produce. The history joins either way. */}
         <div className='mt-2.5 text-[13.5px] leading-[1.55] text-ink-secondary'>
           {candidate.foldsBytes
-            ? `Combining keeps one device with ${formatBytes(
+            ? `Combinar mantém um dispositivo com ${formatBytes(
                 candidate.resultRxBytes + candidate.resultTxBytes,
-              )} this month, and joins their usage history.`
-            : "These cover different months, so their usage history is joined but the monthly figures stay as they are."}
+              )} neste mês e une o histórico de uso.`
+            : "Eles cobrem meses diferentes, então o histórico de uso é unido, mas os valores mensais permanecem como estão."}
         </div>
 
         <div className='mt-2.5 flex items-center gap-3'>
@@ -89,13 +89,13 @@ export function DeviceMergePrompt({
             className='cursor-pointer rounded-md border-0 bg-foreground px-2.5 py-1 text-[12px] font-semibold text-background'
             onClick={() => onAnswer(candidate, true)}
           >
-            Same device
+            Mesmo dispositivo
           </button>
           <button
             className='cursor-pointer border-0 bg-transparent p-0 text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground'
             onClick={() => onAnswer(candidate, false)}
           >
-            Different devices
+            Dispositivos diferentes
           </button>
         </div>
       </div>
@@ -116,15 +116,15 @@ export function DeviceMergePrompt({
 // softer colour, not a smaller size.
 function MergeDeviceCard({ total, nowMs }: { total: ClientUsageTotal; nowMs: number }) {
   const vendor = vendorForMac(total.macAddress);
-  const maker = vendor || "Private";
+  const maker = vendor || "Privado";
   const name = total.name || vendor || total.macAddress;
   const kind = classifyDevice(name);
-  const routerId = total.clientId !== undefined ? String(total.clientId) : "unknown";
+  const routerId = total.clientId !== undefined ? String(total.clientId) : "desconhecido";
   // Matches the usage row's threshold: a device the historian touched within two
   // minutes is here now, and "Active now" against the other's "2 days ago" is the
   // contrast that reads the direction of the merge.
   const isActive = nowMs - total.lastSeenMs < 120_000;
-  const seenLabel = isActive ? "Active now" : formatRelativeTime(total.lastSeenMs, nowMs);
+  const seenLabel = isActive ? "Ativo agora" : formatRelativeTime(total.lastSeenMs, nowMs);
 
   return (
     <div className='flex flex-1 items-center gap-3 rounded-md border border-border p-2.5'>
@@ -135,7 +135,7 @@ function MergeDeviceCard({ total, nowMs }: { total: ClientUsageTotal; nowMs: num
           {maker} · {seenLabel}
         </span>
         <span className='text-[11.5px] leading-[1.3] text-muted-foreground'>
-          Router ID: {routerId}
+          ID do roteador: {routerId}
         </span>
       </span>
       <span className='flex flex-none flex-col items-end'>

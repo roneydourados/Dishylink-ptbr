@@ -47,6 +47,6 @@ describe("buildNodeRoster", () => {
     } as unknown as WifiNetworkConfigJson;
     const roster = buildNodeRoster([controllerClient], wifiConfig);
     const down = roster.find((node) => node.key === NODE);
-    expect(down).toMatchObject({ name: "Garage", connected: false, status: "Disconnected" });
+    expect(down).toMatchObject({ name: "Garage", connected: false, status: "Desconectado" });
   });
 });

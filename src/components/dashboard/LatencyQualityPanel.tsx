@@ -37,20 +37,20 @@ function bucketTitle(bucket: LatencySummary["buckets"][number], range: EnergyRan
   // was up (seconds recorded), and a gap in recording if it was not.
   if (bucket.p95 === null) {
     return bucket.sampledSeconds > 0
-      ? `${when} · service was down`
-      : `${when} · no data — the recorder wasn't running`;
+      ? `${when} · serviço fora do ar`
+      : `${when} · sem dados — o gravador não estava em execução`;
   }
   const parts = [
     `p95 ${bucket.p95.toFixed(0)} ms`,
     bucket.p99 !== null ? `p99 ${bucket.p99.toFixed(0)} ms` : null,
     bucket.jitter !== null ? `jitter ${bucket.jitter.toFixed(0)} ms` : null,
-    bucket.dropPct !== null ? `loss ${bucket.dropPct.toFixed(1)}%` : null,
+    bucket.dropPct !== null ? `perda ${bucket.dropPct.toFixed(1)}%` : null,
   ].filter(Boolean) as string[];
   const total = parts.join(" · ");
   if (!isPartial(bucket)) return `${when} · ${total}`;
   const sampled = Math.round(bucket.sampledSeconds / 60);
   const expected = Math.round(bucket.expectedSeconds / 60);
-  return `${when} · ${total} — only ${sampled} of ${expected} min recorded`;
+  return `${when} · ${total} — apenas ${sampled} de ${expected} min registrados`;
 }
 
 export function LatencyQualityPanel() {
@@ -101,21 +101,22 @@ export function LatencyQualityPanel() {
         )}
       </div>
       <div className='mt-1 text-[12px] font-medium text-muted-foreground'>
-        Latency quality score
+        Pontuação de qualidade de latência
       </div>
 
       <SegmentedControl
         options={RANGE_TABS}
         value={range}
         onChange={setRange}
-        label='Latency range'
+        label='Intervalo de latência'
         className='mt-3'
       />
 
       {unavailable ? (
         <Callout className='mt-3'>
-          Long-term latency needs the history recorder running. Start it with{" "}
-          <code>npm run historian</code> and it will build up day / week history from now on.
+          A latência de longo prazo precisa do gravador de histórico em execução. Inicie com{" "}
+          <code>npm run historian</code> e ele acumulará o histórico diário / semanal a partir de
+          agora.
         </Callout>
       ) : (
         <>
@@ -125,7 +126,7 @@ export function LatencyQualityPanel() {
               figure("p95", dish?.p95, "ms"),
               figure("p99", dish?.p99, "ms"),
               figure("Jitter", dish?.jitter, "ms"),
-              figure("Packet loss", dish?.dropPct, "%"),
+              figure("Perda de pacotes", dish?.dropPct, "%"),
               ...(dish?.spread !== null && dish?.spread !== undefined
                 ? [figure("p99 − p50", dish.spread, "ms")]
                 : []),
@@ -134,13 +135,13 @@ export function LatencyQualityPanel() {
 
           {data && (
             <div className='mt-1 text-[12px] font-medium text-muted-foreground'>
-              collected {coveragePct}% of this period
-              {coveragePct < 95 && " — figures cover only the time the recorder was running"}
+              coletado {coveragePct}% deste período
+              {coveragePct < 95 && " — os valores cobrem só o tempo em que o gravador estava ativo"}
             </div>
           )}
 
           <div className='mt-4'>
-            <h3 className='text-[14.5px] font-[650]'>p95 latency</h3>
+            <h3 className='text-[14.5px] font-[650]'>Latência p95</h3>
             <RangeBars
               columns={columns}
               range={range}
@@ -151,12 +152,12 @@ export function LatencyQualityPanel() {
         </>
       )}
 
-      <Explainer title='What is latency quality?'>
-        Latency quality summarizes the period as a single 0–100 score with a letter grade, weighing
-        typical latency, jitter, worst-case spikes, and packet loss together rather than just the
-        average. A connection that's mostly fast but occasionally stutters scores lower than one
-        that's a little slower but steady, since that unevenness is what you'd actually notice in a
-        game, a call, or a video stream.
+      <Explainer title='O que é qualidade de latência?'>
+        A qualidade de latência resume o período em uma pontuação de 0–100 com uma nota em letra,
+        ponderando latência típica, jitter, picos no pior caso e perda de pacotes juntos — e não só
+        a média. Uma conexão que é rápida na maior parte do tempo mas ocasionalmente engasga pontua
+        menos do que uma um pouco mais lenta porém estável, pois essa irregularidade é o que você
+        realmente nota em um jogo, uma chamada ou um vídeo.
       </Explainer>
     </div>
   );

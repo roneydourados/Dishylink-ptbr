@@ -35,15 +35,15 @@ export function useOutageNotifications(telemetry: DishTelemetry): void {
     if (isDropping && !wasDroppingRef.current) {
       sendNotification(
         "starlink-outage",
-        "Starlink outage in progress",
-        "The dish is powered and reachable, but pings to the Starlink network are failing.",
+        "Interrupção Starlink em andamento",
+        "A antena está ligada e alcançável, mas os pings para a rede Starlink estão falhando.",
       );
     }
     if (!isDropping && wasDroppingRef.current) {
       sendNotification(
         "recovered",
-        "Starlink connection restored",
-        "Pings to the Starlink network are succeeding again.",
+        "Conexão Starlink restaurada",
+        "Os pings para a rede Starlink voltaram a funcionar.",
       );
     }
     wasDroppingRef.current = isDropping;

@@ -64,25 +64,25 @@ function MenuLink({ href, icon: Icon, iconClassName, children }: MenuLinkItem) {
 
 const SECTIONS: { label: string; items: MenuLinkItem[] }[] = [
   {
-    label: "Support development",
+    label: "Apoiar o desenvolvimento",
     items: [
       {
         href: SUPPORT_LINKS.starRepo,
         icon: StarIcon,
         iconClassName: "text-(--accent)",
-        children: "Star project on GitHub",
+        children: "Dar estrela no GitHub",
       },
       {
         href: SUPPORT_LINKS.githubSponsors,
         icon: HeartIcon,
         iconClassName: "text-[#ea4aaa]",
-        children: "Become a GitHub Sponsor",
+        children: "Tornar-se GitHub Sponsor",
       },
       {
         href: SUPPORT_LINKS.patreon,
         icon: PatreonIcon,
         iconClassName: "text-ink",
-        children: "Become a Patreon",
+        children: "Apoiar no Patreon",
       },
       {
         href: SUPPORT_LINKS.buyMeACoffee,
@@ -95,14 +95,14 @@ const SECTIONS: { label: string; items: MenuLinkItem[] }[] = [
   {
     label: "Feedback",
     items: [
-      { href: SUPPORT_LINKS.reportIssue, icon: BugIcon, children: "Report an issue" },
-      { href: SUPPORT_LINKS.requestFeature, icon: BulbIcon, children: "Request a feature" },
+      { href: SUPPORT_LINKS.reportIssue, icon: BugIcon, children: "Reportar um problema" },
+      { href: SUPPORT_LINKS.requestFeature, icon: BulbIcon, children: "Sugerir um recurso" },
     ],
   },
   {
-    label: "Contact",
+    label: "Contato",
     items: [
-      { href: SUPPORT_LINKS.contact, icon: MailIcon, children: "Contact me" },
+      { href: SUPPORT_LINKS.contact, icon: MailIcon, children: "Fale comigo" },
       { href: SUPPORT_LINKS.x, icon: XIcon, children: "@daveyhert" },
       { href: SUPPORT_LINKS.linkedin, icon: LinkedinIcon, children: "LinkedIn" },
     ],
@@ -110,8 +110,8 @@ const SECTIONS: { label: string; items: MenuLinkItem[] }[] = [
   {
     label: "Legal",
     items: [
-      { href: SUPPORT_LINKS.privacyPolicy, icon: ShieldIcon, children: "Privacy Policy" },
-      { href: SUPPORT_LINKS.disclaimer, icon: ScaleIcon, children: "Disclaimer" },
+      { href: SUPPORT_LINKS.privacyPolicy, icon: ShieldIcon, children: "Política de Privacidade" },
+      { href: SUPPORT_LINKS.disclaimer, icon: ScaleIcon, children: "Aviso legal" },
     ],
   },
 ];
@@ -139,8 +139,10 @@ export function SupportMenu() {
       <PopoverTrigger asChild>
         <button
           className='relative inline-flex size-8 cursor-pointer items-center justify-center rounded-full border-0 bg-card text-ink-secondary transition-colors hover:text-foreground'
-          aria-label={updateVersion ? "Support and more (update available)" : "Support and more"}
-          title='Support & more'
+          aria-label={
+            updateVersion ? "Suporte e mais (atualização disponível)" : "Suporte e mais"
+          }
+          title='Suporte e mais'
         >
           <HeartIcon />
           {updateVersion && (
@@ -172,7 +174,7 @@ export function SupportMenu() {
         {updateVersion && (
           <div className={SECTION}>
             <div className={cn(MENU_LABEL, "flex items-center gap-1.5")}>
-              Update available
+              Atualização disponível
               <span className='size-1 rounded-full bg-red-500 shadow-[0_0_4px_1.5px_rgba(239,68,68,0.85)]' />
             </div>
             <MenuLink
@@ -180,7 +182,7 @@ export function SupportMenu() {
               icon={DownloadIcon}
               iconClassName='text-status-good'
             >
-              Download v{updateVersion}
+              Baixar v{updateVersion}
             </MenuLink>
           </div>
         )}

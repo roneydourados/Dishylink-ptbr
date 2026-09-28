@@ -8,18 +8,18 @@ export const RANGE_TABS: { label: string; value: EnergyRange }[] = [
   { label: "1H", value: "1h" },
   { label: "6H", value: "6h" },
   { label: "12H", value: "12h" },
-  { label: "Today", value: "today" },
-  { label: "Day", value: "day" },
-  { label: "Week", value: "week" },
-  { label: "Month", value: "month" },
+  { label: "Hoje", value: "today" },
+  { label: "Dia", value: "day" },
+  { label: "Semana", value: "week" },
+  { label: "Mês", value: "month" },
 ];
 
 /** Clock time for sub-day ranges, date for day/week, month name for month. */
 export function bucketLabel(epochSeconds: number, range: EnergyRange): string {
   const date = new Date(epochSeconds * 1000);
-  if (range === "month") return date.toLocaleDateString([], { month: "short" }); // Jul
+  if (range === "month") return date.toLocaleDateString("pt-BR", { month: "short" }); // jul.
   if (range === "day" || range === "week") {
-    return date.toLocaleDateString([], { month: "numeric", day: "numeric" });
+    return date.toLocaleDateString("pt-BR", { month: "numeric", day: "numeric" });
   }
-  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  return date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 }

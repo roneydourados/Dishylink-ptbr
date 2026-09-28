@@ -22,11 +22,11 @@ export interface NodeEntry {
  *  node prefers the name saved in its config over anything the client entry
  *  carries. */
 function nodeName(client: WifiClientJson, wifiConfig: WifiNetworkConfigJson | null): string {
-  if (client.role === "CONTROLLER") return "Main Router";
+  if (client.role === "CONTROLLER") return "Roteador principal";
   const configured = client.deviceId
     ? wifiConfig?.meshConfigs?.[client.deviceId]?.displayName
     : undefined;
-  return configured || client.givenName || client.name || "Mesh node";
+  return configured || client.givenName || client.name || "Nó mesh";
 }
 
 /**
@@ -45,7 +45,7 @@ export function buildNodeRoster(
   const nodes: NodeEntry[] = infrastructure.map((client, index) => ({
     key: client.deviceId ?? client.macAddress ?? `node-${index}`,
     name: nodeName(client, wifiConfig),
-    status: client.role === "CONTROLLER" ? "Connected to Starlink" : "Connected",
+    status: client.role === "CONTROLLER" ? "Conectado à Starlink" : "Conectado",
     connected: true,
     client,
     devices: clients.filter(
@@ -57,8 +57,8 @@ export function buildNodeRoster(
     if (liveDeviceIds.has(deviceId)) continue;
     nodes.push({
       key: deviceId,
-      name: meshNode.displayName || "Mesh node",
-      status: "Disconnected",
+      name: meshNode.displayName || "Nó mesh",
+      status: "Desconectado",
       connected: false,
       // A node that is down reports no clients — they have roamed elsewhere.
       devices: [],

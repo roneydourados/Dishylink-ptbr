@@ -154,14 +154,14 @@ describe("RuleDialog", () => {
     mockPauseEnforceable = false;
     render(<Harness />);
 
-    await expect.element(page.getByRole("textbox", { name: "Name" })).toBeInTheDocument();
-    expect(page.getByText("Connect your Starlink account").elements()).toHaveLength(0);
+    await expect.element(page.getByRole("textbox", { name: "Nome" })).toBeInTheDocument();
+    expect(page.getByText("Conecte sua conta Starlink").elements()).toHaveLength(0);
   });
 
   test("given: a device's own rule, should: save it back to the device", async () => {
     render(<Harness rule={deviceRule()} />);
 
-    await page.getByRole("button", { name: "Save rule" }).click();
+    await page.getByRole("button", { name: "Salvar regra" }).click();
 
     await expect.poll(() => deviceRulesSaved).toEqual(["42"]);
     expect(groupsSaved).toEqual([]);
@@ -172,9 +172,9 @@ describe("RuleDialog", () => {
     // group's card never shows.
     render(<Harness rule={deviceRule()} />);
 
-    await page.getByRole("button", { name: "This device" }).click();
+    await page.getByRole("button", { name: "Este dispositivo" }).click();
     await page.getByText("Kids iPad").click();
-    await page.getByRole("button", { name: "Save rule" }).click();
+    await page.getByRole("button", { name: "Salvar regra" }).click();
 
     await expect.poll(() => groupsSaved).toHaveLength(1);
     expect(groupsSaved[0].memberKeys).toEqual(["42", "43"]);
@@ -190,7 +190,7 @@ describe("RuleDialog", () => {
       />,
     );
 
-    await page.getByRole("button", { name: "Save rule" }).click();
+    await page.getByRole("button", { name: "Salvar regra" }).click();
 
     await expect.poll(() => groupsSaved).toHaveLength(1);
     expect(groupsSaved[0].groupId).toBe("kids");
@@ -201,7 +201,7 @@ describe("RuleDialog", () => {
   test("given: a device's own rule, should: offer Start over and Delete rule, and restart by client key", async () => {
     render(<Harness rule={deviceRule()} />);
 
-    await page.getByRole("button", { name: "Start over" }).click();
+    await page.getByRole("button", { name: "Recomeçar" }).click();
 
     await expect.poll(() => rulesRestarted).toEqual([{ clientKey: "42" }]);
   });
@@ -209,7 +209,7 @@ describe("RuleDialog", () => {
   test("given: a device's own rule, should: delete it through the device rather than a group", async () => {
     render(<Harness rule={deviceRule()} />);
 
-    await page.getByRole("button", { name: "Delete rule" }).click();
+    await page.getByRole("button", { name: "Excluir regra" }).click();
 
     await expect.poll(() => deviceRulesRemoved).toEqual(["42"]);
     expect(groupsRemoved).toEqual([]);
@@ -221,12 +221,12 @@ describe("RuleDialog", () => {
     // mounted and visible through Radix's close animation when that happens,
     // so what it shows must not go blank a beat before it actually closes.
     const screen = await render(<Harness rule={deviceRule()} />);
-    await expect.element(page.getByRole("textbox", { name: "Name" })).toHaveValue("PS5 Console");
+    await expect.element(page.getByRole("textbox", { name: "Nome" })).toHaveValue("PS5 Console");
 
     await screen.rerender(<Harness rule={undefined} open={false} />);
 
-    expect(page.getByRole("heading", { name: "Edit rule" }).element()).toBeTruthy();
-    expect((page.getByRole("textbox", { name: "Name" }).element() as HTMLInputElement).value).toBe(
+    expect(page.getByRole("heading", { name: "Editar regra" }).element()).toBeTruthy();
+    expect((page.getByRole("textbox", { name: "Nome" }).element() as HTMLInputElement).value).toBe(
       "PS5 Console",
     );
   });
@@ -238,10 +238,10 @@ describe("RuleDialog", () => {
       />,
     );
 
-    await page.getByRole("button", { name: "Start over" }).click();
+    await page.getByRole("button", { name: "Recomeçar" }).click();
     await expect.poll(() => rulesRestarted).toEqual([{ groupId: "kids" }]);
 
-    await page.getByRole("button", { name: "Delete rule" }).click();
+    await page.getByRole("button", { name: "Excluir regra" }).click();
     await expect.poll(() => groupsRemoved).toEqual(["kids"]);
     expect(deviceRulesRemoved).toEqual([]);
   });
@@ -249,26 +249,26 @@ describe("RuleDialog", () => {
   test("given: a new rule, should: open on the limit with no schedule and no allowance switch", async () => {
     render(<Harness />);
 
-    await expect.poll(() => document.body.textContent ?? "").toContain("Allowance");
+    await expect.poll(() => document.body.textContent ?? "").toContain("Franquia");
     const text = document.body.textContent ?? "";
     // A plain limit always carries one, so there is nothing to toggle.
-    expect(text).not.toContain("Data allowance");
-    expect(text).not.toContain("Every week");
+    expect(text).not.toContain("Franquia de dados");
+    expect(text).not.toContain("Toda semana");
   });
 
   test("given: schedule picked, should: show the hours and offer an allowance, off", async () => {
     render(<Harness />);
-    await page.getByRole("button", { name: "Schedule" }).click();
+    await page.getByRole("button", { name: "Agenda" }).click();
 
     const text = () => document.body.textContent ?? "";
     // A window is opened with the mode: a schedule with none reads as a mode that
     // did nothing.
-    await expect.poll(text).toContain("Every week");
-    expect(text()).toContain("Mon");
+    await expect.poll(text).toContain("Toda semana");
+    expect(text()).toContain("Seg");
     // Those hours are usually unrestricted, so the cap is the exception to opt in.
-    expect(text()).toContain("Data allowance");
+    expect(text()).toContain("Franquia de dados");
     const cap = document.querySelector('[role="switch"][aria-checked="true"]');
-    expect(text()).toContain("Cap the data these devices use");
+    expect(text()).toContain("Limite os dados que estes dispositivos usam");
     expect(cap).not.toBeNull(); // auto-pause is on; the allowance switch is not
     expect(document.querySelectorAll('[role="switch"][aria-checked="true"]').length).toBe(1);
   });
@@ -278,17 +278,17 @@ describe("RuleDialog", () => {
     await page.getByRole("button", { name: "Timer" }).click();
 
     const text = () => document.body.textContent ?? "";
-    await expect.poll(text).toContain("Hours");
-    expect(text()).not.toContain("Every week");
-    expect(text()).not.toContain("Data allowance");
-    expect(text()).not.toContain("Resets");
+    await expect.poll(text).toContain("Horas");
+    expect(text()).not.toContain("Toda semana");
+    expect(text()).not.toContain("Franquia de dados");
+    expect(text()).not.toContain("Reinicia");
   });
 
   test("given: a rule named after its one device, should: not offer a name to type", async () => {
     render(<Harness rule={deviceRule()} />);
 
     const name = () =>
-      document.querySelector<HTMLInputElement>('input[placeholder="Kids devices"]');
+      document.querySelector<HTMLInputElement>('input[placeholder="Dispositivos das crianças"]');
     await expect.poll(() => name()?.value).toBe("PS5 Console");
     expect(name()?.disabled).toBe(true);
   });

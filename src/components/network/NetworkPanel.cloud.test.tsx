@@ -40,7 +40,7 @@ const network: RouterNetwork = {
 
 const unreachable = {
   cause: "differentNetwork" as const,
-  message: "The router isn't answering on this network.",
+  message: "O roteador não está respondendo nesta rede.",
 };
 
 test("given: a roster from the account, should: show the devices and name where they came from", async () => {
@@ -52,10 +52,10 @@ test("given: a roster from the account, should: show the devices and name where 
     timeout: 8_000,
   });
   const text = document.body.textContent ?? "";
-  expect(text).toContain("come from your Starlink account");
-  expect(text).toContain("via your Starlink account");
+  expect(text).toContain("vêm da sua conta Starlink");
+  expect(text).toContain("via sua conta Starlink");
   // The diagnosis is carried into that note rather than replacing the list.
-  expect(text).toContain("The router isn't answering on this network.");
+  expect(text).toContain("O roteador não está respondendo nesta rede.");
   expect(document.querySelector('[data-slot="callout"][data-tone="error"]')).toBeNull();
 });
 
@@ -73,11 +73,11 @@ test("given: a device with no recorded series, should: name what is silent rathe
   await renderedPanel.getByText("Nanoleaf").click();
 
   await vi.waitFor(() =>
-    expect(document.body.textContent).toContain("The history recorder isn't running"),
+    expect(document.body.textContent).toContain("O gravador de histórico não está em execução"),
   );
   const text = document.body.textContent ?? "";
-  expect(text).toContain("the router on your network can't be reached");
-  expect(text).not.toContain("Collecting live throughput");
+  expect(text).toContain("o roteador da sua rede não pode ser alcançado");
+  expect(text).not.toContain("Coletando throughput ao vivo");
 });
 
 test("given: recorded readings older than the window, should: say so rather than draw a blank chart", async () => {
@@ -109,11 +109,11 @@ test("given: recorded readings older than the window, should: say so rather than
   await renderedPanel.getByText("Nanoleaf").click();
 
   await vi.waitFor(() =>
-    expect(document.body.textContent).toContain("Nothing recorded for this device"),
+    expect(document.body.textContent).toContain("Nada registrado para este dispositivo"),
   );
   const text = document.body.textContent ?? "";
-  expect(text).toContain("a longer window still has them");
-  expect(text).not.toContain("Collecting live throughput");
+  expect(text).toContain("uma janela maior ainda as mostra");
+  expect(text).not.toContain("Coletando throughput ao vivo");
   // The window picker is what acts on that, so it has to still be there.
   expect(document.body.textContent).toContain("6H");
 });
@@ -137,9 +137,9 @@ test("given: a live router whose recorder is down, should: blame the recorder al
   await renderedPanel.getByText("Nanoleaf").click();
 
   await vi.waitFor(() =>
-    expect(document.body.textContent).toContain("so nothing is being recorded"),
+    expect(document.body.textContent).toContain("então nada está sendo registrado"),
   );
-  expect(document.body.textContent ?? "").not.toContain("can't be reached");
+  expect(document.body.textContent ?? "").not.toContain("não pode ser alcançado");
 });
 
 test("given: a silent router and a connected account, should: offer the account read rather than take it", async () => {
@@ -164,7 +164,7 @@ test("given: a silent router and a connected account, should: offer the account 
     />,
   );
 
-  const offer = renderedPanel.getByText("Connect through Cloud");
+  const offer = renderedPanel.getByText("Conectar pela nuvem");
   await vi.waitFor(() => expect(offer.query()).not.toBeNull(), { timeout: 8_000 });
   await offer.click();
 
@@ -177,12 +177,12 @@ test("given: the router still being checked, should: say so at once rather than 
   await render(
     <NetworkPanel
       network={{ ...network, clients: [], clientsSource: null }}
-      unreachable={{ cause: "checking", message: "Checking the router…" }}
+      unreachable={{ cause: "checking", message: "Descobrindo o motivo…" }}
       onClose={() => {}}
     />,
   );
 
-  await vi.waitFor(() => expect(document.body.textContent).toContain("Checking the router"), {
+  await vi.waitFor(() => expect(document.body.textContent).toContain("Descobrindo o motivo"), {
     timeout: 8_000,
   });
 });
@@ -193,11 +193,11 @@ test("given: a reader done with the account note, should: keep it dismissed acro
   const first = await render(
     <NetworkPanel network={network} unreachable={unreachable} onClose={() => {}} />,
   );
-  await vi.waitFor(() => expect(document.body.textContent).toContain("come from your Starlink"), {
+  await vi.waitFor(() => expect(document.body.textContent).toContain("vêm da sua conta Starlink"), {
     timeout: 8_000,
   });
-  await first.getByRole("button", { name: "Dismiss this note" }).click();
-  expect(document.body.textContent ?? "").not.toContain("come from your Starlink account");
+  await first.getByRole("button", { name: "Dispensar esta nota" }).click();
+  expect(document.body.textContent ?? "").not.toContain("vêm da sua conta Starlink");
 
   await first.unmount();
   await render(<NetworkPanel network={network} unreachable={unreachable} onClose={() => {}} />);
@@ -205,9 +205,9 @@ test("given: a reader done with the account note, should: keep it dismissed acro
   await vi.waitFor(() => expect(document.body.textContent).toContain("Nanoleaf"), {
     timeout: 8_000,
   });
-  expect(document.body.textContent ?? "").not.toContain("come from your Starlink account");
+  expect(document.body.textContent ?? "").not.toContain("vêm da sua conta Starlink");
   // The devices themselves are not what was waved away.
-  expect(document.body.textContent).toContain("via your Starlink account");
+  expect(document.body.textContent).toContain("via sua conta Starlink");
 });
 
 test("given: the router answering again, should: bring the note back for the next outage", async () => {
@@ -227,7 +227,7 @@ test("given: the router answering again, should: bring the note back for the nex
 
   await render(<NetworkPanel network={network} unreachable={unreachable} onClose={() => {}} />);
 
-  await vi.waitFor(() => expect(document.body.textContent).toContain("come from your Starlink"), {
+  await vi.waitFor(() => expect(document.body.textContent).toContain("vêm da sua conta Starlink"), {
     timeout: 8_000,
   });
 });
@@ -240,7 +240,7 @@ test("given: a roster on screen that has stopped refreshing, should: say so over
       network={{
         ...network,
         accountRosterStatus: "failed",
-        accountRosterError: "Couldn't reach your Starlink account.",
+        accountRosterError: "Não foi possível alcançar sua conta Starlink.",
       }}
       unreachable={unreachable}
       onClose={() => {}}
@@ -251,10 +251,10 @@ test("given: a roster on screen that has stopped refreshing, should: say so over
     timeout: 8_000,
   });
   const text = document.body.textContent ?? "";
-  expect(text).toContain("Couldn't reach your Starlink account.");
+  expect(text).toContain("Não foi possível alcançar sua conta Starlink.");
   // The caption must not keep promising a refresh that is not happening.
-  expect(text).toContain("no longer refreshing");
-  expect(text).not.toContain("refreshed every");
+  expect(text).toContain("sem atualizar");
+  expect(text).not.toContain("atualizado a cada");
 });
 
 test("given: an account read that cannot leave this device, should: say so rather than sit there", async () => {
@@ -272,7 +272,7 @@ test("given: an account read that cannot leave this device, should: say so rathe
         clients: [],
         clientsSource: null,
         accountRosterStatus: "failed",
-        accountRosterError: "Couldn't reach your Starlink account.",
+        accountRosterError: "Não foi possível alcançar sua conta Starlink.",
       }}
       unreachable={unreachable}
       onClose={() => {}}
@@ -280,7 +280,7 @@ test("given: an account read that cannot leave this device, should: say so rathe
   );
 
   await vi.waitFor(() =>
-    expect(document.body.textContent).toContain("Couldn't reach your Starlink account."),
+    expect(document.body.textContent).toContain("Não foi possível alcançar sua conta Starlink."),
   );
 });
 

@@ -52,7 +52,7 @@ describe("CustomDnsSection", () => {
   test("Save stays disabled until every filled field parses and the primary is set", async () => {
     mount({ nameservers: ["1.1.1.1"] });
     const primary = page.getByPlaceholder("1.1.1.1");
-    const save = page.getByRole("button", { name: "Save" });
+    const save = page.getByRole("button", { name: "Salvar" });
     await expect.element(save).toBeInTheDocument();
     expect(save.element().hasAttribute("disabled")).toBe(true); // unchanged from what the router reports
 
@@ -69,7 +69,7 @@ describe("CustomDnsSection", () => {
     const { onSave } = mount({ nameservers: ["1.1.1.1"] });
     await page.getByPlaceholder("1.0.0.1").fill("  1.0.0.1  ");
 
-    await page.getByRole("button", { name: "Save" }).click();
+    await page.getByRole("button", { name: "Salvar" }).click();
     await settle();
     expect(onSave).toHaveBeenCalledWith(["1.1.1.1", "1.0.0.1"]);
   });
@@ -102,7 +102,7 @@ describe("CustomDnsSection", () => {
 
   test("disables every control when there is no account to send the write through", async () => {
     mount({ nameservers: ["1.1.1.1"], disabled: true });
-    const save = page.getByRole("button", { name: "Save" });
+    const save = page.getByRole("button", { name: "Salvar" });
     await expect.element(save).toBeInTheDocument();
 
     expect(page.getByRole("switch").element().hasAttribute("disabled")).toBe(true);

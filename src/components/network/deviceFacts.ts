@@ -49,40 +49,40 @@ export function buildDeviceFacts({
     {
       key: "status",
       label: "Status",
-      value: idleSeconds < IDLE_AFTER_S ? "active" : `idle · ${formatUptime(idleSeconds)}`,
+      value: idleSeconds < IDLE_AFTER_S ? "ativo" : `ocioso · ${formatUptime(idleSeconds)}`,
     },
   ];
-  if (client.role) facts.push({ key: "role", label: "Role", value: client.role });
-  if (upstreamName) facts.push({ key: "connectedTo", label: "Connected to", value: upstreamName });
+  if (client.role) facts.push({ key: "role", label: "Função", value: client.role });
+  if (upstreamName) facts.push({ key: "connectedTo", label: "Conectado a", value: upstreamName });
   // Always shown. A randomized MAC carries no vendor, so the row reads "Private"
   // as the app's does — an absent row just looks broken.
-  facts.push({ key: "manufacturer", label: "Manufacturer", value: vendor ?? "Unknown" });
-  facts.push({ key: "connection", label: "Connection", value: bandLabel(client) });
+  facts.push({ key: "manufacturer", label: "Fabricante", value: vendor ?? "Desconhecido" });
+  facts.push({ key: "connection", label: "Conexão", value: bandLabel(client) });
   if (quality) {
     facts.push({
       key: "signal",
-      label: "Signal",
+      label: "Sinal",
       value: createElement(
         "span",
         { style: { color: `var(${quality.colorVar})` } },
-        client.iface === "ETH" ? "wired" : `${client.signalStrength} dBm · ${quality.label}`,
+        client.iface === "ETH" ? "cabeado" : `${client.signalStrength} dBm · ${quality.label}`,
       ),
     });
   }
   if (client.snr !== undefined && client.snr > 0) {
-    facts.push({ key: "snr", label: "Signal-to-noise", value: `${client.snr} dB` });
+    facts.push({ key: "snr", label: "Relação sinal-ruído", value: `${client.snr} dB` });
   }
   if (client.channelWidth) {
-    facts.push({ key: "bandwidth", label: "Bandwidth", value: `${client.channelWidth} MHz` });
+    facts.push({ key: "bandwidth", label: "Largura de banda", value: `${client.channelWidth} MHz` });
   }
   if (client.rxStats?.mcs !== undefined) {
-    facts.push({ key: "mcs", label: "MCS index", value: client.rxStats.mcs });
+    facts.push({ key: "mcs", label: "Índice MCS", value: client.rxStats.mcs });
   }
   if (client.rxStats?.nss !== undefined) {
-    facts.push({ key: "nss", label: "Spatial streams", value: client.rxStats.nss });
+    facts.push({ key: "nss", label: "Fluxos espaciais", value: client.rxStats.nss });
   }
-  if (linkRx) facts.push({ key: "rx", label: "Rx rate", value: `${linkRx} Mbps` });
-  if (linkTx) facts.push({ key: "tx", label: "Tx rate", value: `${linkTx} Mbps` });
+  if (linkRx) facts.push({ key: "rx", label: "Taxa Rx", value: `${linkRx} Mbps` });
+  if (linkTx) facts.push({ key: "tx", label: "Taxa Tx", value: `${linkTx} Mbps` });
   if (client.ipAddress) facts.push({ key: "ipv4", label: "IPv4", value: client.ipAddress });
   if (client.ipv6Addresses && client.ipv6Addresses.length > 0) {
     facts.push({
@@ -91,11 +91,11 @@ export function buildDeviceFacts({
       value: createElement("span", { className: "text-[11px]" }, client.ipv6Addresses[0]),
     });
   }
-  if (client.macAddress) facts.push({ key: "mac", label: "MAC address", value: client.macAddress });
+  if (client.macAddress) facts.push({ key: "mac", label: "Endereço MAC", value: client.macAddress });
   if (client.associatedTimeS) {
     facts.push({
       key: "connectedFor",
-      label: "Connected for",
+      label: "Conectado há",
       value: formatUptime(client.associatedTimeS),
     });
   }
@@ -104,7 +104,7 @@ export function buildDeviceFacts({
     // the router's own counter resets on. Preferred whenever it exists.
     facts.push({
       key: "dataUsage",
-      label: "Data used this month",
+      label: "Dados usados neste mês",
       value: `${formatBytes(total.rxBytes)} ↓ / ${formatBytes(total.txBytes)} ↑`,
     });
   } else if (rxBytes > 0 || txBytes > 0) {
@@ -113,7 +113,7 @@ export function buildDeviceFacts({
     // lifetime or monthly total.
     facts.push({
       key: "dataUsage",
-      label: "Data used (this connection)",
+      label: "Dados usados (nesta conexão)",
       value: `${formatBytes(rxBytes)} ↓ / ${formatBytes(txBytes)} ↑`,
     });
   }

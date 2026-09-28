@@ -143,7 +143,7 @@ export function DangerAction({
     try {
       setResult(await onRun());
     } catch (error) {
-      setResult(`Failed: ${(error as Error).message}`);
+      setResult(`Falhou: ${(error as Error).message}`);
     } finally {
       setBusy(false);
       setArmed(false);
@@ -162,7 +162,7 @@ export function DangerAction({
               <div ref={armedRef} className='flex flex-col gap-2 pt-1 pb-0.5'>
                 <SlideToConfirm
                   label={slideLabel}
-                  busyLabel={busy ? "Sending…" : "Confirm to continue"}
+                  busyLabel={busy ? "Enviando…" : "Confirme para continuar"}
                   tone='danger'
                   busy={confirming || busy}
                   onConfirm={() => setConfirming(true)}
@@ -194,7 +194,7 @@ export function DangerAction({
           <>
             {!slideLabel && (
               <button className={actionButton("danger")} disabled={busy} onClick={() => void run()}>
-                {busy ? "Sending…" : confirmLabel}
+                {busy ? "Enviando…" : confirmLabel}
               </button>
             )}
             <button
@@ -202,7 +202,7 @@ export function DangerAction({
               disabled={busy}
               onClick={() => setArmed(false)}
             >
-              Cancel
+              Cancelar
             </button>
           </>
         )}
@@ -215,7 +215,7 @@ export function DangerAction({
           overlayClassName='bg-black/30 backdrop-blur-[2px]'
         >
           <DialogHeader>
-            <DialogTitle className='text-[19px] leading-snug'>Are you sure?</DialogTitle>
+            <DialogTitle className='text-[19px] leading-snug'>Tem certeza?</DialogTitle>
             <DialogDescription className='text-[13.5px] leading-relaxed'>
               {caption}
             </DialogDescription>
@@ -227,7 +227,7 @@ export function DangerAction({
               disabled={busy}
               onClick={() => setConfirming(false)}
             >
-              Cancel
+              Cancelar
             </Button>
             <Button
               variant='destructive'
@@ -235,7 +235,7 @@ export function DangerAction({
               disabled={busy}
               onClick={() => void run()}
             >
-              {busy ? "Sending…" : confirmLabel}
+              {busy ? "Enviando…" : confirmLabel}
             </Button>
           </DialogFooter>
         </DialogContent>

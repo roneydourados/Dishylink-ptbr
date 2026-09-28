@@ -51,7 +51,7 @@ describe("formatActuatorState", () => {
     // Confirmed against hardware: our dish omits actuator_state entirely and the
     // official app shows "Idle" for it. Unlike the attitude filter, silence here
     // has a documented meaning.
-    expect(formatActuatorState(undefined)).toBe("Idle");
+    expect(formatActuatorState(undefined)).toBe("Parado");
   });
 
   it("names the motor states a mast-mounted kit reports", () => {

@@ -113,15 +113,15 @@ export function RuleStatus({
           <div className='space-y-0.5'>
             <DialogTitle className='text-[19px] leading-snug'>{rule.name}</DialogTitle>
             <DialogDescription className='text-[13px]'>
-              {rule.memberKeys.length} device{rule.memberKeys.length === 1 ? "" : "s"}
+              {rule.memberKeys.length} dispositivo{rule.memberKeys.length === 1 ? "" : "s"}
               {capped && pooled
-                ? " · sharing one allowance"
+                ? " · compartilhando uma franquia"
                 : capped && perDevice
-                  ? " · one allowance each"
+                  ? " · uma franquia cada"
                   : ""}
             </DialogDescription>
             <div className='text-[11.5px] text-muted-foreground'>
-              Created {formatDateTime(rule.createdMs)}
+              Criada em {formatDateTime(rule.createdMs)}
             </div>
           </div>
         </div>
@@ -135,7 +135,7 @@ export function RuleStatus({
                 {formatDuration(leftMs)}
               </span>
               <span className='text-[13px] text-muted-foreground'>
-                of {formatDuration(rule.countdownMs!)}
+                de {formatDuration(rule.countdownMs!)}
               </span>
             </div>
             <Bar
@@ -154,8 +154,8 @@ export function RuleStatus({
                 {formatBytes(rule.usageBytes)}
               </span>
               <span className='text-[13px] text-muted-foreground'>
-                of {formatBytes(rule.allocationBytes)}
-                {pooled ? " shared" : ""}
+                de {formatBytes(rule.allocationBytes)}
+                {pooled ? " compartilhada" : ""}
               </span>
             </div>
             <Bar spent={spent} tone={meterTone(spent, allPaused)} />
@@ -165,61 +165,61 @@ export function RuleStatus({
         {rule.paused && held.length > 0 && (
           <Callout tone='error'>
             {held.length === rule.memberCount && rule.memberCount > 1
-              ? "Every device on this rule is paused"
-              : `${held.map((member) => member.name).join(", ")} ${held.length === 1 ? "is" : "are"} paused`}
+              ? "Todos os dispositivos desta regra estão pausados"
+              : `${held.map((member) => member.name).join(", ")} ${held.length === 1 ? "está" : "estão"} pausado${held.length === 1 ? "" : "s"}`}
             {rule.windowBlocked
-              ? " because it is outside the hours this rule allows."
+              ? " porque está fora dos horários que esta regra permite."
               : timing
-                ? " because the timer is up."
-                : " because the limit was reached."}
+                ? " porque o timer acabou."
+                : " porque o limite foi atingido."}
           </Callout>
         )}
 
         {leading === "timer" ? (
           <RuleStats>
             <Stat
-              label='Time left'
+              label='Tempo restante'
               value={formatDuration(leftMs)}
               tone={leftMs <= 0 ? "text-destructive" : undefined}
             />
-            <Stat label='Pauses at' value={leftMs > 0 ? endsAtLabel(leftMs, nowMs) : "now"} />
-            <Stat label='Set for' value={formatDuration(rule.countdownMs!)} />
+            <Stat label='Pausa às' value={leftMs > 0 ? endsAtLabel(leftMs, nowMs) : "agora"} />
+            <Stat label='Definido para' value={formatDuration(rule.countdownMs!)} />
           </RuleStats>
         ) : leading === "schedule" ? (
           <RuleStats>
             <Stat
               label={
                 scheduleDormant(rule, nowMs)
-                  ? "Resumes in"
+                  ? "Retoma em"
                   : rule.windowBlocked
-                    ? "Opens in"
-                    : "Closes in"
+                    ? "Abre em"
+                    : "Fecha em"
               }
               value={rule.windowEndMs ? (timeLeft(rule.windowEndMs, nowMs) ?? "—") : "—"}
             />
             <Stat
-              label='Right now'
+              label='Agora'
               value={
                 scheduleDormant(rule, nowMs)
-                  ? "Not scheduled"
+                  ? "Sem agenda"
                   : rule.windowBlocked
-                    ? "Paused"
+                    ? "Pausado"
                     : "Online"
               }
             />
             <Stat
-              label='Devices'
-              value={`${rule.memberKeys.length} device${rule.memberKeys.length === 1 ? "" : "s"}`}
+              label='Dispositivos'
+              value={`${rule.memberKeys.length} dispositivo${rule.memberKeys.length === 1 ? "" : "s"}`}
             />
           </RuleStats>
         ) : (
           capped && (
             <RuleStats>
               <Stat
-                label={perDevice ? "Allowance" : "Remaining"}
+                label={perDevice ? "Franquia" : "Restante"}
                 value={
                   perDevice
-                    ? `${formatBytes(rule.allocationBytes)} each`
+                    ? `${formatBytes(rule.allocationBytes)} cada`
                     : formatBytes(Math.max(0, rule.allocationBytes - rule.usageBytes))
                 }
                 tone={
@@ -228,8 +228,8 @@ export function RuleStatus({
                     : undefined
                 }
               />
-              <Stat label='Resets in' value={timeLeft(rule.periodEndMs, nowMs) ?? "never"} />
-              <Stat label='Cycle' value={cycleLabel(rule.cycle)} />
+              <Stat label='Reinicia em' value={timeLeft(rule.periodEndMs, nowMs) ?? "nunca"} />
+              <Stat label='Ciclo' value={cycleLabel(rule.cycle)} />
             </RuleStats>
           )
         )}
@@ -237,14 +237,14 @@ export function RuleStatus({
         {/* A rule that leads with its hours can still carry an allowance, and one
             that leads with a timer never does. */}
         {leading === "schedule" && capped && (
-          <Section label='Data allowance'>
+          <Section label='Franquia de dados'>
             <div className='flex items-baseline justify-between gap-3'>
               <span className='text-[15px] font-semibold tabular-nums text-foreground'>
                 {formatBytes(rule.usageBytes)}
               </span>
               <span className='text-[13px] text-muted-foreground'>
-                of {formatBytes(rule.allocationBytes)}
-                {perDevice ? " each" : pooled ? " shared" : ""} · {cycleLabel(rule.cycle)}
+                de {formatBytes(rule.allocationBytes)}
+                {perDevice ? " cada" : pooled ? " compartilhada" : ""} · {cycleLabel(rule.cycle)}
               </span>
             </div>
             {!perDevice && <Bar spent={spent} tone={meterTone(spent, rule.paused)} />}
@@ -252,7 +252,7 @@ export function RuleStatus({
         )}
 
         {perDevice ? (
-          <Section label='Devices'>
+          <Section label='Dispositivos'>
             <div className='space-y-3'>
               {rule.members.map((member) => (
                 <MemberMeter
@@ -266,7 +266,7 @@ export function RuleStatus({
           </Section>
         ) : (
           (leading === "schedule" || rule.memberCount > 1) && (
-            <Section label='Devices'>
+            <Section label='Dispositivos'>
               <div className='space-y-1'>
                 {rule.members.map((member) => (
                   <div
@@ -286,17 +286,18 @@ export function RuleStatus({
 
         {!rule.autoPause && (
           <Callout tone='info'>
-            Auto-pause is off, so this rule is watched and announced but nothing is paused.
+            A pausa automática está desligada, então esta regra é observada e anunciada, mas nada é
+            pausado.
           </Callout>
         )}
       </div>
 
       <DialogFooter className='flex-row items-center justify-end gap-2 border-t border-border/60 pt-4'>
         <Button variant='outline' className='cursor-pointer' onClick={onClose}>
-          Close
+          Fechar
         </Button>
         <Button className='cursor-pointer' onClick={onEdit}>
-          Edit rule
+          Editar regra
         </Button>
       </DialogFooter>
     </>

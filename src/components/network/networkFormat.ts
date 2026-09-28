@@ -48,7 +48,7 @@ export function bandLabel(client: WifiClientJson): string {
 export function radioBandLabel(band: string): string {
   if (band === "RF_2GHZ") return "2.4 GHz";
   if (band === "RF_5GHZ") return "5 GHz";
-  if (band === "RF_5GHZ_HIGH") return "5 GHz high";
+  if (band === "RF_5GHZ_HIGH") return "5 GHz alto";
   return band;
 }
 
@@ -60,13 +60,13 @@ export interface SignalQuality {
 
 /** Signal quality bucket from dBm (wifi). Ethernet has no RSSI. */
 export function signalQuality(client: WifiClientJson): SignalQuality | null {
-  if (client.iface === "ETH") return { label: "wired", bars: 4, colorVar: "--status-good" };
+  if (client.iface === "ETH") return { label: "cabeado", bars: 4, colorVar: "--status-good" };
   const dbm = client.signalStrength;
   if (dbm === undefined || dbm === 0) return null;
-  if (dbm > -55) return { label: "excellent", bars: 4, colorVar: "--status-good" };
-  if (dbm > -67) return { label: "good", bars: 3, colorVar: "--status-good" };
-  if (dbm > -75) return { label: "fair", bars: 2, colorVar: "--chart-warm" };
-  return { label: "weak", bars: 1, colorVar: "--status-critical" };
+  if (dbm > -55) return { label: "excelente", bars: 4, colorVar: "--status-good" };
+  if (dbm > -67) return { label: "bom", bars: 3, colorVar: "--status-good" };
+  if (dbm > -75) return { label: "razoável", bars: 2, colorVar: "--chart-warm" };
+  return { label: "fraco", bars: 1, colorVar: "--status-critical" };
 }
 
 /** Combined live rate for sorting. Reads the tracker's byte-delta rate where the
@@ -105,7 +105,7 @@ export function isClientDevice(client: WifiClientJson): boolean {
 
 export function displayName(client: WifiClientJson): string {
   return (
-    client.givenName || client.name || client.ipAddress || client.macAddress || "Unnamed device"
+    client.givenName || client.name || client.ipAddress || client.macAddress || "Dispositivo sem nome"
   );
 }
 
@@ -117,5 +117,5 @@ export function deviceSubtitle(client: WifiClientJson): string {
   // "Private" is a meaningful subtitle, not a missing brand — a device behind a
   // randomized MAC. Show it like the official app does rather than hiding it.
   if (vendor && !parts.includes(vendor)) parts.push(vendor);
-  return parts.join(" · ") || "unknown device";
+  return parts.join(" · ") || "dispositivo desconhecido";
 }

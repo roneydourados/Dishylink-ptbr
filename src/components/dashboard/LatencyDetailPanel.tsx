@@ -10,8 +10,8 @@ import { SegmentedControl } from "../ui/segmented-control";
 type LatencyView = "live" | "quality";
 
 const VIEW_TABS = [
-  { label: "Live", value: "live" as const },
-  { label: "Quality", value: "quality" as const },
+  { label: "Ao vivo", value: "live" as const },
+  { label: "Qualidade", value: "quality" as const },
 ];
 
 export function LatencyDetailPanel({
@@ -29,7 +29,7 @@ export function LatencyDetailPanel({
         options={VIEW_TABS}
         value={view}
         onChange={setView}
-        label='Latency view'
+        label='Visão de latência'
         variant='glider'
         className='mb-1'
       />

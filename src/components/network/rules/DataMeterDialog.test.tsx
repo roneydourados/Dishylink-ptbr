@@ -136,12 +136,12 @@ describe("DataMeterDialog", () => {
     // Left standing, it goes on holding this device against a limit the group's
     // card never shows — and it counts from its own anchors, not the group's.
     render(<Harness value={meter({ rule: rule() })} />);
-    await expect.poll(text).toContain("Edit limit");
-    await page.getByRole("button", { name: "Edit limit" }).click();
+    await expect.poll(text).toContain("Editar limite");
+    await page.getByRole("button", { name: "Editar limite" }).click();
 
-    await page.getByRole("button", { name: "This device" }).click();
+    await page.getByRole("button", { name: "Este dispositivo" }).click();
     await page.getByText("Kids iPad").click();
-    await page.getByRole("button", { name: "Save limit for all" }).click();
+    await page.getByRole("button", { name: "Salvar limite para todos" }).click();
 
     await expect.poll(() => groupsSaved).toHaveLength(1);
     expect(groupsSaved[0].memberKeys).toEqual(["42", "43"]);
@@ -151,11 +151,11 @@ describe("DataMeterDialog", () => {
   test("given: a device with a rule, should: show what it is doing before offering to edit it", async () => {
     render(<Harness value={meter({ rule: rule() })} />);
 
-    await expect.poll(text).toContain("GB USED");
-    expect(text()).toContain("Remaining");
+    await expect.poll(text).toContain("GB USADOS");
+    expect(text()).toContain("Restante");
     expect(text()).toContain("38 GB");
-    expect(text()).not.toContain("Save limit");
-    expect(text()).toContain("Created");
+    expect(text()).not.toContain("Salvar limite");
+    expect(text()).toContain("Criada em");
   });
 
   test("given: usage under a gigabyte, should: read the ring in MB rather than round it to 0.9", async () => {
@@ -163,16 +163,16 @@ describe("DataMeterDialog", () => {
       <Harness value={meter({ rule: rule({ usageBytes: 944_700_000, allocationBytes: GB }) })} />,
     );
 
-    await expect.poll(text).toContain("MB USED");
+    await expect.poll(text).toContain("MB USADOS");
     expect(text()).toContain("945");
-    expect(text()).not.toContain("GB USED");
+    expect(text()).not.toContain("GB USADOS");
   });
 
   test("given: usage at a gigabyte, should: turn over to GB rather than show 1000 MB", async () => {
     render(<Harness value={meter({ rule: rule({ usageBytes: GB, allocationBytes: 5 * GB }) })} />);
 
-    await expect.poll(text).toContain("GB USED");
-    expect(text()).not.toContain("MB USED");
+    await expect.poll(text).toContain("GB USADOS");
+    expect(text()).not.toContain("MB USADOS");
   });
 
   // The countdown and the cadence move independently: a rule five days out is
@@ -189,10 +189,10 @@ describe("DataMeterDialog", () => {
       />,
     );
 
-    await expect.poll(text).toContain("Resets in");
-    expect(text()).toContain("5 days");
-    expect(text()).toContain("Cycle");
-    expect(text()).toContain("Weekly");
+    await expect.poll(text).toContain("Reinicia em");
+    expect(text()).toContain("5 dias");
+    expect(text()).toContain("Ciclo");
+    expect(text()).toContain("Semanal");
   });
 
   test("given: a one-off allowance, should: say it never resets rather than show a blank slot", async () => {
@@ -204,24 +204,24 @@ describe("DataMeterDialog", () => {
       />,
     );
 
-    await expect.poll(text).toContain("Resets in");
-    expect(text()).toContain("never");
-    expect(text()).toContain("One-off");
+    await expect.poll(text).toContain("Reinicia em");
+    expect(text()).toContain("nunca");
+    expect(text()).toContain("Única vez");
   });
 
   test("given: a device with no rule, should: open on the form, since there is nothing to show", async () => {
     render(<Harness value={meter({ rule: null })} />);
 
-    await expect.poll(text).toContain("Save limit");
-    expect(text()).not.toContain("GB USED");
+    await expect.poll(text).toContain("Salvar limite");
+    expect(text()).not.toContain("GB USADOS");
   });
 
   test("given: a rule still loading, should: show neither face rather than a form of defaults", async () => {
     render(<Harness value={meter({ rule: null, loading: true })} />);
 
-    await expect.poll(text).toContain("Data limit");
-    expect(text()).not.toContain("Save limit");
-    expect(text()).not.toContain("Remaining");
+    await expect.poll(text).toContain("Limite de dados");
+    expect(text()).not.toContain("Salvar limite");
+    expect(text()).not.toContain("Restante");
   });
 
   test("given: a paused device, should: name the allowance it reached", async () => {
@@ -229,19 +229,19 @@ describe("DataMeterDialog", () => {
       <Harness value={meter({ rule: rule({ pauseState: "applied", usageBytes: 50 * GB }) })} />,
     );
 
-    await expect.poll(text).toContain("PAUSED");
-    expect(text()).toContain("50 GB allowance");
+    await expect.poll(text).toContain("PAUSADO");
+    expect(text()).toContain("franquia de 50 GB");
   });
 
   test("given: an edit that is cancelled, should: return to the status view rather than close", async () => {
     render(<Harness value={meter({ rule: rule() })} />);
 
-    await page.getByText("Edit limit").click();
-    await expect.poll(text).toContain("Save limit");
+    await page.getByText("Editar limite").click();
+    await expect.poll(text).toContain("Salvar limite");
 
-    await page.getByText("Cancel").click();
-    await expect.poll(text).toContain("GB USED");
-    expect(text()).not.toContain("Save limit");
+    await page.getByText("Cancelar").click();
+    await expect.poll(text).toContain("GB USADOS");
+    expect(text()).not.toContain("Salvar limite");
     // The card is still open: cancelling an edit steps back, it does not dismiss.
     expect(document.querySelector('[data-slot="dialog-overlay"]')).not.toBeNull();
   });
@@ -254,43 +254,43 @@ describe("DataMeterDialog", () => {
       />,
     );
 
-    await page.getByText("Edit limit").click();
-    await expect.poll(text).toContain("Save limit");
+    await page.getByText("Editar limite").click();
+    await expect.poll(text).toContain("Salvar limite");
 
-    await page.getByText("Start over").click();
+    await page.getByText("Recomeçar").click();
 
-    await expect.poll(text).toContain("GB USED");
+    await expect.poll(text).toContain("GB USADOS");
     expect(restarted).toEqual(["reset"]);
-    expect(text()).not.toContain("Save limit");
+    expect(text()).not.toContain("Salvar limite");
   });
 
   test("given: the Timer chip, should: swap the allowance for a countdown rather than add one", async () => {
     render(<Harness value={meter({ rule: null })} />);
-    await expect.poll(text).toContain("Allowance");
+    await expect.poll(text).toContain("Franquia");
 
     await page.getByText("Timer").click();
 
-    await expect.poll(text).toContain("Hours");
-    expect(text()).toContain("Minutes");
+    await expect.poll(text).toContain("Horas");
+    expect(text()).toContain("Minutos");
     expect(text()).toContain("24h");
-    expect(text()).toContain("Start timer");
+    expect(text()).toContain("Iniciar timer");
     // The two are alternatives. A form offering both would be setting two rules.
-    expect(text()).not.toContain("Resets on day");
+    expect(text()).not.toContain("Reinicia no dia");
   });
 
   test("given: a second device picked, should: save the limit for all of them, not just this one", async () => {
     render(<Harness value={meter({ rule: null })} />);
-    await expect.poll(text).toContain("Applies to");
-    expect(text()).toContain("This device");
+    await expect.poll(text).toContain("Aplica-se a");
+    expect(text()).toContain("Este dispositivo");
 
-    await page.getByRole("button", { name: "This device" }).click();
+    await page.getByRole("button", { name: "Este dispositivo" }).click();
     await page.getByText("Kids iPad").click();
 
-    await expect.poll(text).toContain("2 devices");
-    expect(text()).toContain("Save limit for all");
+    await expect.poll(text).toContain("2 dispositivos");
+    expect(text()).toContain("Salvar limite para todos");
     // The choice that is the whole difference a group makes.
-    expect(text()).toContain("Shared");
-    expect(text()).toContain("Each");
+    expect(text()).toContain("Compartilhada");
+    expect(text()).toContain("Cada um");
   });
 
   test("given: a group narrowed to one device, should: keep the group rather than write a rule that starts the count over", async () => {
@@ -316,8 +316,8 @@ describe("DataMeterDialog", () => {
         })}
       />,
     );
-    await expect.poll(text).toContain("Edit limit");
-    await page.getByRole("button", { name: "Edit limit" }).click();
+    await expect.poll(text).toContain("Editar limite");
+    await page.getByRole("button", { name: "Editar limite" }).click();
 
     // A group of more than one opens its picker already expanded, so the rows are
     // there to untick without asking for them.
@@ -325,8 +325,8 @@ describe("DataMeterDialog", () => {
     await page.getByText("Kids iPad").click();
     // The button names who it writes for, so losing "for all" is the untick
     // landing — a signal that cannot read as true while the group still has two.
-    await expect.poll(text).not.toContain("Save limit for all");
-    await page.getByRole("button", { name: "Save limit" }).click();
+    await expect.poll(text).not.toContain("Salvar limite para todos");
+    await page.getByRole("button", { name: "Salvar limite" }).click();
 
     // A member's rule carries what this cycle has spent. A device rule of its own
     // opens a fresh cycle, counting from zero.
@@ -338,13 +338,13 @@ describe("DataMeterDialog", () => {
 
   test("given: a device that is away, should: still offer it, tagging the ones that are here", async () => {
     render(<Harness value={meter({ rule: null })} />);
-    await expect.poll(text).toContain("Applies to");
+    await expect.poll(text).toContain("Aplica-se a");
 
-    await page.getByRole("button", { name: "This device" }).click();
+    await page.getByRole("button", { name: "Este dispositivo" }).click();
 
     // Being offline is a tag on the row, never a reason it cannot be metered.
     await expect.poll(text).toContain("Kids iPad");
-    expect(text()).toContain("ACTIVE NOW");
+    expect(text()).toContain("ATIVO AGORA");
     const away = [...document.querySelectorAll("label")].find((label) =>
       label.textContent?.includes("Kids iPad"),
     );
@@ -353,30 +353,30 @@ describe("DataMeterDialog", () => {
 
   test("given: a timer over several devices, should: not offer a choice whose options are the same", async () => {
     render(<Harness value={meter({ rule: null })} />);
-    await expect.poll(text).toContain("Applies to");
+    await expect.poll(text).toContain("Aplica-se a");
 
     await page.getByText("Timer").click();
-    await page.getByRole("button", { name: "This device" }).click();
+    await page.getByRole("button", { name: "Este dispositivo" }).click();
     await page.getByText("Kids iPad").click();
 
-    await expect.poll(text).toContain("start and end on one clock");
-    expect(text()).not.toContain("One allowance between them");
+    await expect.poll(text).toContain("começam e terminam no mesmo relógio");
+    expect(text()).not.toContain("Uma franquia entre eles");
   });
 
   test("given: the device this card is for, should: refuse to drop it from its own limit", async () => {
     render(<Harness value={meter({ rule: null })} />);
-    await expect.poll(text).toContain("Applies to");
+    await expect.poll(text).toContain("Aplica-se a");
 
-    await page.getByRole("button", { name: "This device" }).click();
+    await page.getByRole("button", { name: "Este dispositivo" }).click();
     await page.getByText("PS5 Console").nth(1).click();
 
-    await expect.poll(text).toContain("This device");
-    expect(text()).not.toContain("0 devices");
+    await expect.poll(text).toContain("Este dispositivo");
+    expect(text()).not.toContain("0 dispositivos");
   });
 
   test("given: a day between 2 and 9, should: accept it — clamping every keystroke made it unreachable", async () => {
     render(<Harness value={meter({ rule: null })} />);
-    await expect.poll(text).toContain("Resets on day");
+    await expect.poll(text).toContain("Reinicia no dia");
 
     const day = [...document.querySelectorAll("input")].find(
       (input) => input.inputMode === "numeric",
@@ -389,14 +389,14 @@ describe("DataMeterDialog", () => {
 
   test("given: the Schedule chip, should: offer hours and an allowance beside them, off", async () => {
     render(<Harness value={meter({ rule: null })} />);
-    await expect.poll(text).toContain("Allowance");
+    await expect.poll(text).toContain("Franquia");
 
-    await page.getByRole("button", { name: "Schedule" }).click();
+    await page.getByRole("button", { name: "Agenda" }).click();
 
-    await expect.poll(text).toContain("Every week");
-    expect(text()).toContain("Data allowance");
+    await expect.poll(text).toContain("Toda semana");
+    expect(text()).toContain("Franquia de dados");
     // Those hours are usually unrestricted, so the cap starts off.
-    expect(text()).not.toContain("Resets on day");
+    expect(text()).not.toContain("Reinicia no dia");
   });
 
   test("given: a device's own rule with a schedule and an allowance, should: keep the schedule when only the allowance is re-saved", async () => {
@@ -416,11 +416,11 @@ describe("DataMeterDialog", () => {
         })}
       />,
     );
-    await expect.poll(text).toContain("Edit limit");
-    await page.getByRole("button", { name: "Edit limit" }).click();
+    await expect.poll(text).toContain("Editar limite");
+    await page.getByRole("button", { name: "Editar limite" }).click();
 
-    await expect.poll(text).toContain("Every week");
-    await page.getByRole("button", { name: "Save limit" }).click();
+    await expect.poll(text).toContain("Toda semana");
+    await page.getByRole("button", { name: "Salvar limite" }).click();
 
     await expect.poll(() => saved).toHaveLength(1);
     expect(saved[0]).toMatchObject({ schedule });
@@ -442,11 +442,11 @@ describe("DataMeterDialog", () => {
         })}
       />,
     );
-    await page.getByRole("button", { name: "Edit limit" }).click();
-    await expect.poll(text).toContain("Every week");
+    await page.getByRole("button", { name: "Editar limite" }).click();
+    await expect.poll(text).toContain("Toda semana");
 
-    await page.getByRole("button", { name: "Limit", exact: true }).click();
-    await page.getByRole("button", { name: "Save limit" }).click();
+    await page.getByRole("button", { name: "Limite", exact: true }).click();
+    await page.getByRole("button", { name: "Salvar limite" }).click();
 
     await expect.poll(() => saved).toHaveLength(1);
     expect(saved[0]).not.toHaveProperty("schedule");

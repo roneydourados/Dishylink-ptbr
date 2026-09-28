@@ -51,10 +51,10 @@ export function LatencyHistogram({
         <div
           key={chartSeries.id}
           className='mt-2'
-          aria-label={`${chartSeries.label} latency distribution, peak ${maxPct.toFixed(1)}% of samples in one bin`}
+          aria-label={`Distribuição de latência de ${chartSeries.label}, pico de ${maxPct.toFixed(1)}% das amostras em um intervalo`}
         >
           <div className='text-[11px] font-medium font-mono tabular-nums text-muted-foreground'>
-            {maxPct.toFixed(1)}% max
+            {maxPct.toFixed(1)}% máx.
           </div>
           <div className='mt-1 flex h-[85px]  items-end gap-[1px]' aria-hidden='true'>
             {bins.map((pct, binIndex) => (

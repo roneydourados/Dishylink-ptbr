@@ -32,7 +32,7 @@ test("a transient throw recovers silently — no notice, content returns", async
     document.querySelector('[data-testid="ok"]'),
     "child should have remounted",
   ).not.toBeNull();
-  expect(document.body.textContent).not.toContain("Reload");
+  expect(document.body.textContent).not.toContain("Recarregar");
 });
 
 test("a recurring throw stops retrying and shows the reload notice", async () => {
@@ -44,7 +44,7 @@ test("a recurring throw stops retrying and shows the reload notice", async () =>
   await settle();
   expect(document.querySelector('[data-testid="ok"]')).toBeNull();
   const reload = Array.from(document.querySelectorAll("button")).find(
-    (b) => b.textContent?.trim() === "Reload",
+    (b) => b.textContent?.trim() === "Recarregar",
   );
   expect(reload, "reload notice should be shown after the retry budget").toBeTruthy();
 });

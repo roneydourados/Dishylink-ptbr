@@ -66,7 +66,7 @@ export function NodeDetail({
           <div className='flex items-center gap-2'>
             <span className='text-[18px] font-bold text-foreground'>{node.name}</span>
             {canRename && !editing && (
-              <RenameButton label='Rename node' onClick={() => setEditing(true)} />
+              <RenameButton label='Renomear nó' onClick={() => setEditing(true)} />
             )}
           </div>
           <div className='text-[11.5px] font-medium text-muted-foreground'>{node.status}</div>
@@ -83,7 +83,7 @@ export function NodeDetail({
       )}
 
       <div className='flex flex-col'>
-        {client?.role && <DataRow label='Role' value={client.role} />}
+        {client?.role && <DataRow label='Função' value={client.role} />}
         {/* A mesh node is a client entry like any other, so it carries the same
             radio detail — the app's node screen leads with these two, and they
             are what a "move it closer" prompt is actually asking you to fix.
@@ -92,27 +92,27 @@ export function NodeDetail({
             backhaul as "good" while the Starlink app called the same node slow.
             The app prints the raw dBm too, and judges the node separately. */}
         {client?.signalStrength !== undefined && client.iface !== "ETH" && (
-          <DataRow label='Signal strength' value={`${client.signalStrength} dBm`} />
+          <DataRow label='Força do sinal' value={`${client.signalStrength} dBm`} />
         )}
         {linkRxMbps !== undefined && (
-          <DataRow label='Rx rate' value={`${Math.round(linkRxMbps)} Mbps`} />
+          <DataRow label='Taxa Rx' value={`${Math.round(linkRxMbps)} Mbps`} />
         )}
-        {client && <DataRow label='Connection' value={bandLabel(client)} />}
+        {client && <DataRow label='Conexão' value={bandLabel(client)} />}
         {client?.iface && <DataRow label='Interface' value={client.iface} />}
-        {isRouter && <DataRow label='Uplink' value='Starlink dish' />}
-        {client?.macAddress && <DataRow label='MAC address' value={client.macAddress} />}
-        {client?.deviceId && <DataRow label='Device ID' value={client.deviceId} />}
-        {client?.ipAddress && <DataRow label='IP address' value={client.ipAddress} />}
+        {isRouter && <DataRow label='Uplink' value='Antena Starlink' />}
+        {client?.macAddress && <DataRow label='Endereço MAC' value={client.macAddress} />}
+        {client?.deviceId && <DataRow label='ID do dispositivo' value={client.deviceId} />}
+        {client?.ipAddress && <DataRow label='Endereço IP' value={client.ipAddress} />}
         {firmware && <DataRow label='Firmware' value={firmware} />}
         {(meshConfig?.hardwareVersion ?? routerHardware) && (
           <DataRow label='Hardware' value={meshConfig?.hardwareVersion ?? routerHardware!} />
         )}
         {routerUptimeS !== undefined && (
-          <DataRow label='Uptime' value={formatUptime(Number(routerUptimeS))} />
+          <DataRow label='Tempo ligado' value={formatUptime(Number(routerUptimeS))} />
         )}
-        {lastRebootReason && <DataRow label='Last reboot' value={lastRebootReason} />}
+        {lastRebootReason && <DataRow label='Última reinicialização' value={lastRebootReason} />}
         {wifiConfig?.countryCode && isRouter && (
-          <DataRow label='Region' value={wifiConfig.countryCode} />
+          <DataRow label='Região' value={wifiConfig.countryCode} />
         )}
       </div>
 
@@ -123,10 +123,10 @@ export function NodeDetail({
           device, not a leaf. */}
       {node.connected && (
         <div>
-          <SectionHeading title='Connected devices' />
+          <SectionHeading title='Dispositivos conectados' />
           {node.devices.length === 0 ? (
             <div className='text-[11.5px] font-medium text-muted-foreground'>
-              No devices are using this node right now.
+              Nenhum dispositivo está usando este nó agora.
             </div>
           ) : (
             <div className='flex flex-col gap-1.5'>
@@ -145,8 +145,8 @@ export function NodeDetail({
 
       {!node.connected && (
         <div className='text-[11.5px] font-medium text-muted-foreground py-3.5'>
-          This node is paired with your network but not currently reachable. Power it on, or move it
-          closer to the router, and it will reappear here.
+          Este nó está pareado com sua rede, mas não está acessível agora. Ligue-o ou aproxime-o do
+          roteador, e ele voltará a aparecer aqui.
         </div>
       )}
     </div>

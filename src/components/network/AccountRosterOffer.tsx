@@ -24,17 +24,18 @@ export function AccountRosterOffer({
       >
         {status === "loading" ? (
           <>
-            <SpinLoader variant='segment' size={16} label='Connecting' />
-            Connecting…
+            <SpinLoader variant='segment' size={16} label='Conectando' />
+            Conectando…
           </>
         ) : (
-          "Connect through Cloud"
+          "Conectar pela nuvem"
         )}
       </Button>
       <span
         className={error ? "text-[11.5px] text-destructive" : "text-[11.5px] text-muted-foreground"}
       >
-        {error ?? "Your devices, read from your Starlink account until the router answers again."}
+        {error ??
+          "Seus dispositivos, lidos da sua conta Starlink até o roteador responder de novo."}
       </span>
     </div>
   );

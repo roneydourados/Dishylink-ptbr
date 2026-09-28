@@ -79,7 +79,7 @@ describe("runMeters", () => {
 
     expect(writes).toEqual([{ clientId: 111, paused: true }]);
     expect(alerts.map((alert) => alert.kind)).toEqual(["fired"]);
-    expect(alerts[0].spec.firing).toBe("Phone reached its 10.0 GB data allowance");
+    expect(alerts[0].spec.firing).toBe("Phone atingiu a franquia de 10.0 GB");
     expect((await pauseFor(store))?.state).toBe("applied");
   });
 
@@ -139,7 +139,7 @@ describe("runMeters", () => {
     const pause = await pauseFor(store);
     expect(pause?.state).toBe("failed");
     expect(pause?.error).toBe("No Starlink account connected");
-    expect(alerts[0].spec.advice).toMatch(/Connect your Starlink account/);
+    expect(alerts[0].spec.advice).toMatch(/Conecte sua conta Starlink/);
   });
 
   it("records what it announced, so history does not read back as a raw key", async () => {
@@ -150,7 +150,7 @@ describe("runMeters", () => {
 
     const [episode] = await store.readAlerts(T0 + 1_000);
     expect(episode!.key).toBe(`dataLimit:${KEY}`);
-    expect(episode!.label).toBe("Phone reached its 10.0 GB data allowance");
+    expect(episode!.label).toBe("Phone atingiu a franquia de 10.0 GB");
     expect(episode!.severity).toBe("warning");
   });
 
@@ -463,7 +463,7 @@ describe("runMeters", () => {
     // One group, one announcement, named for the group rather than for whichever
     // member's reading happened to cross the sum.
     expect(alerts).toHaveLength(1);
-    expect(alerts[0].spec.firing).toBe("Kids reached their 10.0 GB data allowance");
+    expect(alerts[0].spec.firing).toBe("Kids atingiram a franquia de 10.0 GB");
     expect(alerts[0].key).toBe("dataLimit:group:kids");
   });
 

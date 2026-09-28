@@ -22,7 +22,7 @@ import {
 
 /** Offered as the advice on a rule that asked for a pause this host cannot send. */
 export const CONNECT_ACCOUNT_ADVICE =
-  "Connect your Starlink account to have Dishylink pause a device when it reaches its allowance.";
+  "Conecte sua conta Starlink para o Dishylink pausar um dispositivo ao atingir a franquia.";
 
 export function dataLimitAlertKey(clientKey: string): string {
   return `dataLimit:${clientKey}`;
@@ -50,18 +50,18 @@ export function dataLimitAlertSpec(
     key: dataLimitAlertKey(announcementSubject(rule)),
     ok: timing
       ? asGroup
-        ? `${subject} have time left`
-        : `${subject} has time left`
+        ? `${subject} ainda têm tempo`
+        : `${subject} ainda tem tempo`
       : asGroup
-        ? `${subject} are within their data allowance`
-        : `${subject} is within its data allowance`,
+        ? `${subject} estão dentro da franquia de dados`
+        : `${subject} está dentro da franquia de dados`,
     firing: timing
       ? asGroup
-        ? `${subject} reached the end of their ${formatDuration(rule.countdownMs!)} timer`
-        : `${subject} reached the end of its ${formatDuration(rule.countdownMs!)} timer`
+        ? `${subject} esgotaram o timer de ${formatDuration(rule.countdownMs!)}`
+        : `${subject} esgotou o timer de ${formatDuration(rule.countdownMs!)}`
       : asGroup
-        ? `${subject} reached their ${formatAllowance(rule.allocationBytes)} data allowance`
-        : `${subject} reached its ${formatAllowance(rule.allocationBytes)} data allowance`,
+        ? `${subject} atingiram a franquia de ${formatAllowance(rule.allocationBytes)}`
+        : `${subject} atingiu a franquia de ${formatAllowance(rule.allocationBytes)}`,
     advice: options.advice,
     severity: "warning",
     notify: true,

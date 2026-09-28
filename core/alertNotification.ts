@@ -86,14 +86,14 @@ export function notificationsProblem(state: NotificationState): string | null {
  *  and on macOS what raises the permission prompt. Shared so the tray and the
  *  alerts panel confirm in the same words. */
 export const NOTIFICATIONS_ON_CONFIRMATION = {
-  title: "Notifications on",
-  body: "Dishylink will alert you about Starlink outages.",
+  title: "Notificações ativadas",
+  body: "O Dishylink vai avisá-lo sobre interrupções da Starlink.",
 };
 
-function deviceName(source: AlertTransition["source"]): string {
-  if (source === "dish") return "Dish";
-  if (source === "router") return "Router";
-  return "Dishylink";
+function alertTitle(source: AlertTransition["source"], cleared: boolean): string {
+  if (source === "dish") return cleared ? "Alerta da antena resolvido" : "Alerta da antena";
+  if (source === "router") return cleared ? "Alerta do roteador resolvido" : "Alerta do roteador";
+  return cleared ? "Alerta do Dishylink resolvido" : "Alerta do Dishylink";
 }
 
 /**
@@ -106,10 +106,9 @@ export function describeTransition(transition: AlertTransition): AlertNotificati
   if (!transition.spec.notify) return null;
   const cleared = transition.kind === "cleared";
   if (cleared && transition.spec.notifyClear === false) return null;
-  const device = deviceName(transition.source);
   return {
     key: `alert-${transition.source}:${transition.key}${cleared ? "-cleared" : ""}`,
-    title: cleared ? `${device} alert cleared` : `${device} alert`,
+    title: alertTitle(transition.source, cleared),
     body: cleared ? transition.spec.ok : transition.spec.firing,
     severity: transition.spec.severity,
     cleared,

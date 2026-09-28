@@ -33,7 +33,8 @@ export function ActiveTab({
   // Active is a feed of alerts, not a report on the hardware. Empty means there
   // is nothing to tell you — what the devices' checks currently say is Status's
   // job, and claiming it here would be this tab speaking for that one.
-  if (active.length === 0) return <EmptyState className='px-4 py-8'>No active alerts.</EmptyState>;
+  if (active.length === 0)
+    return <EmptyState className='px-4 py-8'>Nenhum alerta ativo.</EmptyState>;
   return (
     <>
       {active.map((a) => {
@@ -41,9 +42,9 @@ export function ActiveTab({
         const startedMs = openedAt.get(id);
         const seenMs = firstSeen.get(id);
         const when = startedMs
-          ? ` · started ${relativeTime(startedMs)}`
+          ? ` · iniciou ${relativeTime(startedMs)}`
           : seenMs
-            ? ` · seen ${relativeTime(seenMs)}`
+            ? ` · visto ${relativeTime(seenMs)}`
             : "";
         return (
           <AlertRow
@@ -73,11 +74,14 @@ export function HistoryTab({
   if (historianUp === false)
     return (
       <EmptyState className='px-4 py-8'>
-        History unavailable — the recorder isn’t running. Live alerts are unaffected.
+        Histórico indisponível — o gravador não está em execução. Os alertas ao vivo não são
+        afetados.
       </EmptyState>
     );
   if (past.length === 0)
-    return <EmptyState className='px-4 py-8'>No alerts cleared in the last 30 days.</EmptyState>;
+    return (
+      <EmptyState className='px-4 py-8'>Nenhum alerta encerrado nos últimos 30 dias.</EmptyState>
+    );
   return (
     <>
       {past.map((e) => (
@@ -85,7 +89,7 @@ export function HistoryTab({
           key={`${e.source}:${e.key}:${e.startMs}`}
           color={SEVERITY_COLOR[e.severity]}
           title={e.label}
-          meta={`${deviceLabel(e.source)} · lasted ${formatSpan(e.startMs, e.endMs!)} · cleared ${relativeTime(e.endMs!)}`}
+          meta={`${deviceLabel(e.source)} · durou ${formatSpan(e.startMs, e.endMs!)} · encerrado ${relativeTime(e.endMs!)}`}
         />
       ))}
     </>
@@ -104,8 +108,8 @@ export function StatusTab({
   routerReachable: boolean | null;
 }) {
   const groups: { source: AlertSource; label: string; live: boolean }[] = [
-    { source: "dish", label: "Dish", live: dishReachable },
-    { source: "router", label: "Router", live: routerReachable !== false },
+    { source: "dish", label: "Antena", live: dishReachable },
+    { source: "router", label: "Roteador", live: routerReachable !== false },
   ];
   return (
     <>
@@ -121,7 +125,7 @@ export function StatusTab({
               {/* Never let a stale snapshot read as a live all-clear. */}
               {!live && (
                 <span className='normal-case tracking-normal'>
-                  Starlink offline · last known status
+                  Starlink offline · último status conhecido
                 </span>
               )}
             </p>

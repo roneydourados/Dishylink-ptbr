@@ -54,14 +54,14 @@ export function DeviceThroughput({
     <>
       <SectionHeading title='Throughput'>
         {!recordingStopped && (
-          <InfoDot tip='How much data this device is transferring right now. Stream a video and watch it jump.' />
+          <InfoDot tip='Quanto de dados este dispositivo está transferindo agora. Transmita um vídeo e veja o valor subir.' />
         )}
         {history.length >= 2 && (
           <SegmentedControl
             options={WINDOW_OPTIONS}
             value={String(windowMinutes)}
             onChange={(minutes) => setWindowMinutes(Number(minutes))}
-            label='Chart time window'
+            label='Janela de tempo do gráfico'
             className='ml-auto'
           />
         )}
@@ -98,11 +98,11 @@ function outsideWindowMessage(windowMinutes: number): string {
   const longestWindowMinutes = Number(WINDOW_OPTIONS[WINDOW_OPTIONS.length - 1].value);
   const windowSpanLabel =
     windowMinutes < 60
-      ? `${windowMinutes} minutes`
-      : `${windowMinutes / 60} hour${windowMinutes === 60 ? "" : "s"}`;
+      ? `${windowMinutes} minutos`
+      : `${windowMinutes / 60} hora${windowMinutes === 60 ? "" : "s"}`;
   return windowMinutes >= longestWindowMinutes
-    ? `Nothing recorded for this device in the last ${windowSpanLabel}.`
-    : `Nothing recorded for this device in the last ${windowSpanLabel}. Its earlier readings are kept, so a longer window still has them.`;
+    ? `Nada registrado para este dispositivo nos últimos ${windowSpanLabel}.`
+    : `Nada registrado para este dispositivo nos últimos ${windowSpanLabel}. Leituras anteriores são mantidas, então uma janela maior ainda as mostra.`;
 }
 
 function noHistoryMessage(
@@ -112,15 +112,15 @@ function noHistoryMessage(
   const noRecorder = historianAnswering === false;
   const noRouter = routerReachable === false;
   if (noRecorder && noRouter) {
-    return "No throughput history. The history recorder isn't running, and the router on your network can't be reached.";
+    return "Sem histórico de throughput. O gravador de histórico não está em execução, e o roteador da sua rede não pode ser alcançado.";
   }
   if (noRecorder) {
-    return "No throughput history. The history recorder isn't running, so nothing is being recorded.";
+    return "Sem histórico de throughput. O gravador de histórico não está em execução, então nada está sendo registrado.";
   }
   if (noRouter) {
-    return "No throughput history. Per-device rates are read from the router on your network, which can't be reached right now.";
+    return "Sem histórico de throughput. As taxas por dispositivo são lidas do roteador da sua rede, que não pode ser alcançado agora.";
   }
-  return "Collecting live throughput… charts fill in as the router is polled (every 5 s).";
+  return "Coletando throughput ao vivo… os gráficos preenchem conforme o roteador é consultado (a cada 5 s).";
 }
 
 function DirectionChart({

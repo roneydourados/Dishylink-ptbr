@@ -137,7 +137,7 @@ export function DashboardView({
       label: "Download",
       value: liveDownlink.value,
       unit: liveDownlink.unit,
-      caption: "current traffic",
+      caption: "tráfego atual",
       sparkValues: sparklines.downlink,
       sparkColorVar: "--series-down",
       onOpenDetail: () => setOpenDetailId("download"),
@@ -146,24 +146,24 @@ export function DashboardView({
       label: "Upload",
       value: liveUplink.value,
       unit: liveUplink.unit,
-      caption: "current traffic",
+      caption: "tráfego atual",
       sparkValues: sparklines.uplink,
       sparkColorVar: "--series-up",
       onOpenDetail: () => setOpenDetailId("upload"),
     },
     {
-      label: "Latency",
+      label: "Latência",
       value: (liveLatencyMs ?? 0).toFixed(0),
       unit: "ms",
       caption:
         !latencyQuality.unavailable && latencyQuality.data ? (
           <span className='flex w-full items-center justify-between gap-2 whitespace-nowrap'>
             <span>
-              Quality:{" "}
+              Qualidade:{" "}
               <span className='text-[13px] font-semibold text-foreground'>
                 {latencyQuality.data.score}
               </span>
-              , grade{" "}
+              , nota{" "}
               <span
                 className='text-[10px]'
                 style={{ color: `var(${gradeColorVar(latencyQuality.data.grade)})` }}
@@ -177,38 +177,38 @@ export function DashboardView({
             <span className='flex-none max-[1300px]:hidden'>
               {latencyQuality.data.dish.p95 !== null
                 ? `${latencyQuality.data.dish.p95.toFixed(0)} ms p95`
-                : "no data"}
+                : "sem dados"}
             </span>
           </span>
         ) : (
-          "pop ping, live"
+          "ping PoP, ao vivo"
         ),
       sparkValues: sparklines.latency,
       onOpenDetail: () => setOpenDetailId("latency"),
     },
     {
-      label: "Power draw",
+      label: "Consumo de energia",
       value: livePowerW.toFixed(0),
       unit: "W",
-      caption: "current draw",
+      caption: "consumo atual",
       sparkValues: sparklines.power,
       onOpenDetail: () => setOpenDetailId("power"),
     },
     {
-      label: "Ping success",
+      label: "Sucesso do ping",
       value: recentPingSuccessPercent.toFixed(1),
       unit: "%",
-      caption: "last minute",
+      caption: "último minuto",
       sparkValues: sparklines.pingSuccess,
       onOpenDetail: () => setOpenDetailId("pingSuccess"),
     },
     {
-      label: "Sky obstructed",
+      label: "Céu obstruído",
       value: ((status?.obstructionStats?.fractionObstructed ?? 0) * 100).toFixed(2),
       unit: "%",
       caption: status?.obstructionStats?.patchesValid
-        ? `${status.obstructionStats.patchesValid.toLocaleString()} patches mapped`
-        : "all-time view",
+        ? `${status.obstructionStats.patchesValid.toLocaleString()} regiões mapeadas`
+        : "visão acumulada",
     },
   ];
 
@@ -226,14 +226,14 @@ export function DashboardView({
       <section className='grid grid-cols-12 gap-3.5 max-[1080px]:flex max-[1080px]:flex-col'>
         {/* Throughput chart */}
         <SectionCard
-          title='Throughput'
+          title='Taxa de transferência'
           className='col-span-8'
           headerAction={
             <SegmentedControl
               options={CHART_TIME_RANGE_FILTER_OPTIONS}
               value={String(windowMinutes)}
               onChange={(minutes) => onWindowMinutesChange(Number(minutes))}
-              label='Chart time window'
+              label='Janela de tempo do gráfico'
             />
           }
         >
@@ -267,7 +267,7 @@ export function DashboardView({
         />
 
         {/* Latency chart */}
-        <SectionCard title='Latency' className='col-span-8' meta='pop ping · red bands = outages'>
+        <SectionCard title='Latência' className='col-span-8' meta='ping PoP · faixas vermelhas = interrupções'>
           <TelemetryChart
             samples={chartSamples}
             series={LATENCY_SERIES}
@@ -280,9 +280,9 @@ export function DashboardView({
 
         {/* Power draw chart */}
         <SectionCard
-          title='Power draw'
+          title='Consumo de energia'
           className='col-span-8'
-          meta={`≈ ${((averagePowerW * 24) / 1000).toFixed(2)} kWh/day at recent draw`}
+          meta={`≈ ${((averagePowerW * 24) / 1000).toFixed(2)} kWh/dia no consumo recente`}
         >
           <TelemetryChart
             samples={powerChartSamples}
@@ -302,12 +302,12 @@ export function DashboardView({
           <DishTerminalCard status={status} stale={stale} onExpand={onExpandTerminal} />
         ) : (
           <SectionCard
-            title='Starlink Dish Terminal'
+            title='Terminal da Antena Starlink'
             className='col-span-12'
             meta={
               connectionState === "unreachable"
-                ? "dish isn’t answering — no status received yet"
-                : "waiting for the dish’s first reply…"
+                ? "a antena não está respondendo — nenhum status recebido ainda"
+                : "aguardando a primeira resposta da antena…"
             }
           />
         )}

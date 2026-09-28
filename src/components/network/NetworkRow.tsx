@@ -81,7 +81,7 @@ export function NetworkRow({
               className={`size-[18px] flex-none ${METER_INDICATOR_COLOR[meterIndicator] || "text-muted-foreground"}`}
             />
           )}
-          {paused && <Badge>{meterIndicator === "held" ? "Paused · limit" : "Paused"}</Badge>}
+          {paused && <Badge>{meterIndicator === "held" ? "Pausado · limite" : "Pausado"}</Badge>}
           {band && <Badge>{band}</Badge>}
         </span>
       )}

@@ -26,13 +26,13 @@ export interface ToolbarItem {
 // first, then the network it feeds, the account behind it, the sky it sees, and
 // the app's own settings last.
 const TOOLBAR_ITEMS: ToolbarItem[] = [
-  { id: "speedtest", label: "Speed test", Icon: SpeedometerIcon },
-  { id: "alignment", label: "Alignment", Icon: CrosshairIcon },
-  { id: "datausage", label: "Data usage", Icon: ChartLineIcon },
-  { id: "network", label: "Network", Icon: NetworkIcon },
-  { id: "account", label: "Account", Icon: UserIcon },
-  { id: "satellite", label: "Satellite view", Icon: PlanetIcon },
-  { id: "settings", label: "Settings", Icon: SettingsIcon },
+  { id: "speedtest", label: "Teste de velocidade", Icon: SpeedometerIcon },
+  { id: "alignment", label: "Alinhamento", Icon: CrosshairIcon },
+  { id: "datausage", label: "Uso de dados", Icon: ChartLineIcon },
+  { id: "network", label: "Rede", Icon: NetworkIcon },
+  { id: "account", label: "Conta", Icon: UserIcon },
+  { id: "satellite", label: "Visão de satélites", Icon: PlanetIcon },
+  { id: "settings", label: "Configurações", Icon: SettingsIcon },
 ];
 
 interface AppToolbarProps {

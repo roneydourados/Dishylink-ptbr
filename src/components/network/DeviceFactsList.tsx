@@ -38,7 +38,7 @@ export function DeviceFactsList({ facts }: { facts: DeviceFact[] }) {
         onClick={() => setExpanded((open) => !open)}
         aria-expanded={expanded}
       >
-        {expanded ? "Collapse" : "View full details"}
+        {expanded ? "Recolher" : "Ver detalhes completos"}
         <span
           className={`text-[14px] leading-none transition-transform ${expanded ? "-rotate-90" : "rotate-90"}`}
           aria-hidden='true'

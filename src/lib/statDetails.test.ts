@@ -51,35 +51,35 @@ describe("coverageNote", () => {
   }
 
   it("reports a fully recorded window as covered", () => {
-    expect(coverageNote(run(NOW, 901), 15)).toBe("over the selected window");
+    expect(coverageNote(run(NOW, 901), 15)).toBe("na janela selecionada");
   });
 
   it("counts a gap as missing rather than reporting the full span", () => {
     // 5 minutes, a 5-minute outage, 5 more minutes: 15 minutes wide, 10 recorded.
     const samples = [...run(NOW - 10 * 60_000, 300), ...run(NOW, 300)];
-    expect(coverageNote(samples, 15)).toBe("recorded 10 min of this window");
+    expect(coverageNote(samples, 15)).toBe("registrados 10 min desta janela");
   });
 
   it("counts a window that readings stopped partway through as partial", () => {
     // Recording ran 5 minutes then stopped; the rest of the window is an outage
     // still in progress. Span first-to-last is 5 min and so is the coverage.
-    expect(coverageNote(run(NOW - 10 * 60_000, 300), 15)).toBe("recorded 5 min of this window");
+    expect(coverageNote(run(NOW - 10 * 60_000, 300), 15)).toBe("registrados 5 min desta janela");
   });
 
   it("does not treat a few dropped 1 Hz readings as an outage", () => {
     const samples = run(NOW, 901);
     samples.splice(400, 2);
-    expect(coverageNote(samples, 15)).toBe("over the selected window");
+    expect(coverageNote(samples, 15)).toBe("na janela selecionada");
   });
 
   it("names an empty window as unrecorded rather than as a short session", () => {
     // A dish silent for longer than the window leaves nothing inside it. "not
     // enough data yet" would read as a session that just started.
-    expect(coverageNote([], 15)).toBe("nothing recorded in this window");
+    expect(coverageNote([], 15)).toBe("nada registrado nesta janela");
   });
 
   it("reports a lone reading as under a minute rather than as no data", () => {
-    expect(coverageNote(run(NOW, 1), 15)).toBe("recorded < 1 min of this window");
+    expect(coverageNote(run(NOW, 1), 15)).toBe("registrados < 1 min desta janela");
   });
 });
 

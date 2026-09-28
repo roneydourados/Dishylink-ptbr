@@ -6,11 +6,11 @@ import { inlineLinkButton } from "../ui/action-button";
 export function AccountRequiredNotice() {
   return (
     <>
-      An authorized account is required —{" "}
+      É necessária uma conta autorizada —{" "}
       <button type='button' className={inlineLinkButton} onClick={() => requestPanel("account")}>
-        sign in
+        entre
       </button>{" "}
-      to use this feature.
+      para usar este recurso.
     </>
   );
 }

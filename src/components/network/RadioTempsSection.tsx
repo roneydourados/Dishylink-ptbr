@@ -15,8 +15,8 @@ export function RadioTempsSection({ radios }: { radios: RadioReading[] }) {
   if (radios.length === 0) return null;
   return (
     <>
-      <SectionHeading title='Radio temperatures'>
-        <InfoDot tip="How warm each of the router's Wi-Fi radios is running. If one gets too hot, the router slows that band's Wi-Fi down to cool off — you'll see that noted here when it happens." />
+      <SectionHeading title='Temperaturas do rádio'>
+        <InfoDot tip='Quanto cada rádio Wi-Fi do roteador está aquecido. Se um esquentar demais, o roteador reduz o Wi-Fi dessa banda para esfriar — você verá isso anotado aqui quando acontecer.' />
       </SectionHeading>
       <div className='flex flex-col'>
         {radios.map((radio) => {
@@ -36,7 +36,7 @@ export function RadioTempsSection({ radios }: { radios: RadioReading[] }) {
                   {throttling && (
                     <span style={{ color: "var(--status-critical)" }}>
                       {" · "}
-                      throttled to {radio.dutyCycle}%
+                      limitado a {radio.dutyCycle}%
                     </span>
                   )}
                 </>

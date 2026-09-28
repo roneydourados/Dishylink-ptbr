@@ -18,9 +18,9 @@ import { addressSavable, saveArgument } from "./routerAddressDraft";
 
 const REFUSAL_MESSAGE: Record<Extract<RouterAddressWriteResult, { ok: false }>["reason"], string> =
   {
-    invalid: "That isn't an IP address this app can reach. Use the numeric address, not a name.",
-    denied: "Permission to reach that address was declined, so it wasn't saved.",
-    unsupported: "This browser can't be granted access to that address. Use an IPv4 address.",
+    invalid: "Isso não é um endereço IP que este app possa alcançar. Use o endereço numérico, não um nome.",
+    denied: "A permissão para alcançar esse endereço foi recusada, então ele não foi salvo.",
+    unsupported: "Este navegador não pode receber acesso a esse endereço. Use um endereço IPv4.",
   };
 
 export function RouterAddressRow({
@@ -66,15 +66,15 @@ export function RouterAddressRow({
   return (
     <>
       <SettingRow
-        title='Router IP address'
-        info={`Dishylink looks for your router at this address. Change it only if the router's subnet was moved in the Starlink app, or your kit is in bypass mode behind a third-party router. Clearing the box returns to ${fallback}.`}
+        title='Endereço IP do roteador'
+        info={`O Dishylink procura seu roteador neste endereço. Altere só se a sub-rede do roteador foi mudada no app Starlink, ou se seu kit está em modo bypass atrás de um roteador de terceiros. Limpar o campo volta para ${fallback}.`}
         infoSeverity='warn'
-        caption={`Default is ${fallback}`}
+        caption={`O padrão é ${fallback}`}
         note={
           refused ? (
             <span className='text-destructive'>{REFUSAL_MESSAGE[refused]}</span>
           ) : stored ? (
-            `Dishylink is using ${stored}. Clear the box to go back to ${fallback}.`
+            `O Dishylink está usando ${stored}. Limpe o campo para voltar a ${fallback}.`
           ) : undefined
         }
       >
@@ -88,7 +88,7 @@ export function RouterAddressRow({
           spellCheck={false}
           autoComplete='off'
           inputMode='numeric'
-          aria-label='Router IP address'
+          aria-label='Endereço IP do roteador'
           aria-invalid={trimmed !== "" && normalizeIpAddress(trimmed) === null}
           className='h-8 w-[168px] font-mono text-[12px] tabular-nums'
         />
@@ -98,7 +98,7 @@ export function RouterAddressRow({
           disabled={!addressSavable(draft, stored) || saving}
           onClick={save}
         >
-          {saving ? "Saving…" : "Save"}
+          {saving ? "Salvando…" : "Salvar"}
         </Button>
       </SettingRow>
     </>

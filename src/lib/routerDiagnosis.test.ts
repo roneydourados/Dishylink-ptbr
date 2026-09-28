@@ -69,7 +69,7 @@ describe("diagnoseRouterUnreachable", () => {
       presence: "present",
       onRouterSubnet: false,
     });
-    expect(message).toContain("subnet was changed");
+    expect(message).toContain("sub-rede do roteador foi alterada");
   });
 
   it("reports no router when the dish says there is none", () => {
@@ -98,7 +98,7 @@ describe("diagnoseRouterUnreachable", () => {
       onRouterSubnet: false,
     });
     expect(cause).toBe("bypassed");
-    expect(message).not.toContain("Connect to your Starlink WiFi");
+    expect(message).not.toContain("Conecte-se ao Wi‑Fi Starlink");
   });
 
   it("names bypass whatever our own address and settings say", () => {
@@ -248,7 +248,7 @@ it("never suggests the address the router already answers on", () => {
       { ...AT_DEFAULT_ADDRESS_AND_PERSISTENT, presence: "present", onRouterSubnet: true },
       routerAddress,
     );
-    const suggestion = /different address \(like ([\d.]+)\)/.exec(message)?.[1];
+    const suggestion = /outro endereço ao outro roteador \(como ([\d.]+)\)/.exec(message)?.[1];
     expect(suggestion).toBeDefined();
     expect(suggestion).not.toBe(routerAddress);
   }

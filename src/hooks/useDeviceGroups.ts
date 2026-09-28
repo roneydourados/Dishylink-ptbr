@@ -52,7 +52,7 @@ export function useDeviceGroups(): DeviceGroups {
       setPauseEnforceable(body.pauseEnforceable === true);
       setError(null);
     } catch {
-      setError("The recorder isn’t answering, so groups can’t be read or changed.");
+      setError("O gravador não está respondendo, então os grupos não podem ser lidos nem alterados.");
     } finally {
       setLoading(false);
     }
@@ -78,7 +78,7 @@ export function useDeviceGroups(): DeviceGroups {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         setError(null);
       } catch {
-        setError("The recorder refused the change.");
+        setError("O gravador recusou a alteração.");
       } finally {
         // A group write is what sets its members' rules, and nothing polling
         // those knows it happened.

@@ -162,7 +162,7 @@ export function NoDataBands({
               textAnchor='middle'
               {...AXIS_TEXT}
             >
-              no data
+              sem dados
             </text>
           )}
         </g>

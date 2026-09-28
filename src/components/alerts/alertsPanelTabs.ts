@@ -5,7 +5,7 @@
 export type AlertsTab = "active" | "history" | "status";
 
 export const ALERTS_TABS: { key: AlertsTab; label: string }[] = [
-  { key: "active", label: "Active" },
-  { key: "history", label: "History" },
+  { key: "active", label: "Ativos" },
+  { key: "history", label: "Histórico" },
   { key: "status", label: "Status" },
 ];

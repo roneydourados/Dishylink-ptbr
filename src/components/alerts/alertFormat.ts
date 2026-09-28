@@ -10,13 +10,13 @@ export const SEVERITY_COLOR: Record<AlertSeverity, string> = {
 };
 
 export const SEVERITY_LABEL: Record<AlertSeverity, string> = {
-  critical: "Critical",
-  warning: "Warning",
-  advisory: "Advisory",
+  critical: "Crítico",
+  warning: "Aviso",
+  advisory: "Informativo",
 };
 
 export function deviceLabel(source: AlertSource): string {
-  return source === "dish" ? "Dish" : source === "router" ? "Router" : "System";
+  return source === "dish" ? "Antena" : source === "router" ? "Roteador" : "Sistema";
 }
 
 /** How long an episode ran — the fact history is actually for. */
@@ -31,10 +31,11 @@ export function formatSpan(startMs: number, endMs: number): string {
 
 export function relativeTime(atMs: number, nowMs: number = Date.now()): string {
   const deltaS = Math.max(0, Math.round((nowMs - atMs) / 1000));
-  if (deltaS < 60) return "just now";
+  if (deltaS < 60) return "agora mesmo";
   const minutes = Math.round(deltaS / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return `há ${minutes} min`;
   const hours = Math.round(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  return `${Math.round(hours / 24)}d ago`;
+  if (hours < 24) return hours === 1 ? "há 1 h" : `há ${hours} h`;
+  const days = Math.round(hours / 24);
+  return days === 1 ? "há 1 dia" : `há ${days} dias`;
 }

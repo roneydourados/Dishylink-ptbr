@@ -59,10 +59,10 @@ export function RulesTab({ candidates }: { candidates: MemberCandidate[] }) {
               gearColor={rules.length < 1 ? "var(--ink)" : "var(--accent)"}
               className='size-[15px] flex-none text-muted-foreground'
             />
-            Rules
+            Regras
           </h2>
           <p className='text-[12px] text-muted-foreground'>
-            Manage data limits, schedules and timers, across the devices on your network.
+            Gerencie limites de dados, agendas e timers nos dispositivos da sua rede.
           </p>
         </div>
         <Button
@@ -71,7 +71,7 @@ export function RulesTab({ candidates }: { candidates: MemberCandidate[] }) {
           onClick={() => setCreating(true)}
         >
           <Plus className='size-3.5' />
-          New rule
+          Nova regra
         </Button>
       </div>
 
@@ -93,7 +93,7 @@ export function RulesTab({ candidates }: { candidates: MemberCandidate[] }) {
                   <PopoverTrigger asChild>
                     <button
                       type='button'
-                      aria-label={`Actions for ${rule.name}`}
+                      aria-label={`Ações para ${rule.name}`}
                       className='grid size-7 cursor-pointer place-items-center rounded-md text-muted-foreground transition-colors hover:bg-[color-mix(in_srgb,var(--ink)_10%,transparent)] hover:text-foreground'
                     >
                       <MoreHorizontal className='size-4' />
@@ -109,21 +109,21 @@ export function RulesTab({ candidates }: { candidates: MemberCandidate[] }) {
                       onClick={() => setEditing(rule)}
                       className='w-full cursor-pointer rounded-md px-2.5 py-1.5 text-left text-[13px] transition-colors hover:bg-[color-mix(in_srgb,var(--ink)_8%,transparent)]'
                     >
-                      Edit rule
+                      Editar regra
                     </button>
                     <button
                       type='button'
                       onClick={() => void restart(rule)}
                       className='w-full cursor-pointer rounded-md px-2.5 py-1.5 text-left text-[13px] transition-colors hover:bg-[color-mix(in_srgb,var(--ink)_8%,transparent)]'
                     >
-                      {rule.countdownMs === undefined ? "Start cycle over" : "Restart timer"}
+                      {rule.countdownMs === undefined ? "Reiniciar ciclo" : "Reiniciar timer"}
                     </button>
                     <button
                       type='button'
                       onClick={() => void removeRule(rule)}
                       className='w-full cursor-pointer rounded-md px-2.5 py-1.5 text-left text-[13px] text-destructive transition-colors hover:bg-[color-mix(in_srgb,var(--status-critical)_10%,transparent)]'
                     >
-                      Remove rule
+                      Remover regra
                     </button>
                   </PopoverContent>
                 </Popover>
@@ -140,9 +140,9 @@ export function RulesTab({ candidates }: { candidates: MemberCandidate[] }) {
               <span className='mx-auto grid size-9 place-items-center rounded-full border border-border/70'>
                 <Plus className='size-4' />
               </span>
-              <span className='block text-[13px] font-medium'>Create a rule</span>
+              <span className='block text-[13px] font-medium'>Criar uma regra</span>
               <span className='block text-[11.5px] text-muted-foreground'>
-                Group devices and set their limits
+                Agrupe dispositivos e defina seus limites
               </span>
             </span>
           </button>
@@ -151,7 +151,8 @@ export function RulesTab({ candidates }: { candidates: MemberCandidate[] }) {
 
       {!loading && rules.length === 0 && (
         <EmptyState className='pt-1'>
-          No rules yet. A rule can cap data, run a timer, or schedule when its devices are online.
+          Ainda não há regras. Uma regra pode limitar dados, rodar um timer ou agendar quando os
+          dispositivos ficam online.
         </EmptyState>
       )}
 

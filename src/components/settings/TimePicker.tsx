@@ -94,7 +94,7 @@ export function TimePicker({
             )}
             onClick={() => openWith(false)}
           >
-            Cancel
+            Cancelar
           </button>
           <button
             type='button'
@@ -104,7 +104,7 @@ export function TimePicker({
               setOpen(false);
             }}
           >
-            Set
+            Definir
           </button>
         </div>
       </PopoverContent>
@@ -163,7 +163,7 @@ function TimeDial({ minutes, onChange }: { minutes: number; onChange: (minutes: 
   return (
     <div className='flex items-center justify-center gap-1.5'>
       <TimeStepper
-        label='hour'
+        label='hora'
         onUp={() => stepHour(1)}
         onDown={() => stepHour(-1)}
         editing={editingHour}
@@ -188,7 +188,7 @@ function TimeDial({ minutes, onChange }: { minutes: number; onChange: (minutes: 
           <button
             type='button'
             onClick={startEditHour}
-            title='Click to type'
+            title='Clique para digitar'
             className='grid w-8 cursor-text place-items-center rounded-sm transition-colors hover:bg-accent'
           >
             <TwoDigit value={hour12} tensSequence={HOUR_TENS} onesSequence={HOUR_ONES} />
@@ -199,7 +199,7 @@ function TimeDial({ minutes, onChange }: { minutes: number; onChange: (minutes: 
       <span className='text-[16px] font-semibold leading-none text-muted-foreground'>:</span>
 
       <TimeStepper
-        label='minute'
+        label='minuto'
         onUp={() => stepMinute(1)}
         onDown={() => stepMinute(-1)}
         editing={editingMinute}
@@ -224,7 +224,7 @@ function TimeDial({ minutes, onChange }: { minutes: number; onChange: (minutes: 
           <button
             type='button'
             onClick={startEditMinute}
-            title='Click to type'
+            title='Clique para digitar'
             className='grid w-8 cursor-text place-items-center rounded-sm transition-colors hover:bg-accent'
           >
             <TwoDigit value={minute} tensSequence={MINUTE_TENS} onesSequence={MINUTE_ONES} />
@@ -280,7 +280,7 @@ function TimeStepper({
       <button
         type='button'
         onClick={onUp}
-        aria-label={`Increase ${label}`}
+        aria-label={`Aumentar ${label}`}
         tabIndex={editing ? -1 : 0}
         className={stepBtnClass}
       >
@@ -290,7 +290,7 @@ function TimeStepper({
       <button
         type='button'
         onClick={onDown}
-        aria-label={`Decrease ${label}`}
+        aria-label={`Diminuir ${label}`}
         tabIndex={editing ? -1 : 0}
         className={stepBtnClass}
       >

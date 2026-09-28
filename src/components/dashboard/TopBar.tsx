@@ -26,9 +26,15 @@ interface TopBarProps {
 }
 
 const CONNECTION_LABEL: Record<DishConnectionState, string> = {
-  connecting: "connecting",
+  connecting: "conectando",
   online: "online",
-  unreachable: "dish unreachable",
+  unreachable: "antena inacessível",
+};
+
+const THEME_LABEL: Record<ThemeName, string> = {
+  light: "claro",
+  dark: "escuro",
+  system: "sistema",
 };
 
 // The status dot: a 7px disc that pulses while the link is live or being found,
@@ -86,7 +92,7 @@ export function TopBar({
           )}
           {status?.deviceState?.uptimeS && (
             <span className={`${statusItem} ${statusDivider}`}>
-              up {formatUptime(Number(status.deviceState.uptimeS))}
+              ativo há {formatUptime(Number(status.deviceState.uptimeS))}
             </span>
           )}
         </div>
@@ -101,8 +107,8 @@ export function TopBar({
         <button
           className={iconButton}
           onClick={onCycleTheme}
-          aria-label={`Color theme: ${theme}. Switch to ${nextTheme(theme)}.`}
-          title={`Color theme: ${theme}`}
+          aria-label={`Tema de cores: ${THEME_LABEL[theme]}. Alternar para ${THEME_LABEL[nextTheme(theme)]}.`}
+          title={`Tema de cores: ${THEME_LABEL[theme]}`}
         >
           <ThemeIcon />
         </button>

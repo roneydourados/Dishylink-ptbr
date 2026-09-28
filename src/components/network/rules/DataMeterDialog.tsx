@@ -63,7 +63,7 @@ export function DataMeterDialog({
       ) : (
         <>
           <DialogHeader className='pb-4'>
-            <DialogTitle className='text-[19px] leading-snug'>Data limit</DialogTitle>
+            <DialogTitle className='text-[19px] leading-snug'>Limite de dados</DialogTitle>
             <DialogDescription className='text-[13px]'>{deviceName}</DialogDescription>
           </DialogHeader>
           <div className='grid min-h-[220px] place-items-center border-t border-border/60'>

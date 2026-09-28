@@ -21,7 +21,7 @@ export const THROUGHPUT_SERIES: ChartSeries[] = [
 export const LATENCY_SERIES: ChartSeries[] = [
   {
     id: "latency",
-    label: "Latency",
+    label: "Latência",
     colorVar: "--chart-ink",
     getValue: (sample) => sample.latencyMs,
     bucketReduce: "max",
@@ -39,7 +39,7 @@ export const LATENCY_SERIES: ChartSeries[] = [
 export const ROUTER_PING_SUCCESS_SERIES: ChartSeries[] = [
   {
     id: "router-ping-success",
-    label: "Router",
+    label: "Roteador",
     colorVar: "--chart-warm",
     getValue: (sample) => sample.routerPingSuccessPercent,
   },
@@ -69,7 +69,7 @@ export const LATENCY_DETAIL_SERIES: ChartSeries[] = [
   },
   {
     id: "router-latency",
-    label: "Router",
+    label: "Roteador",
     colorVar: "--chart-warm",
     getValue: (sample) => sample.routerLatencyMs,
   },
@@ -81,7 +81,7 @@ export const LATENCY_DETAIL_SERIES: ChartSeries[] = [
 export const PING_SUCCESS_SERIES: ChartSeries[] = [
   {
     id: "ping-success",
-    label: "Ping success",
+    label: "Sucesso de ping",
     colorVar: "--chart-ink",
     getValue: (sample) => (1 - sample.dropRate) * 100,
     bucketReduce: "min",
@@ -91,7 +91,7 @@ export const PING_SUCCESS_SERIES: ChartSeries[] = [
 export const POWER_SERIES: ChartSeries[] = [
   {
     id: "power",
-    label: "Power draw",
+    label: "Consumo",
     colorVar: "--chart-ink",
     getValue: (sample) => sample.powerW,
   },
@@ -150,17 +150,17 @@ export function coverageNote(slice: TelemetrySample[], windowMinutes: number): s
   // No readings in the window at all — the dish has been silent for longer than
   // the window is wide. Distinct from a thin window, which is a real if short
   // measurement and reports the minutes it has.
-  if (slice.length === 0) return "nothing recorded in this window";
+  if (slice.length === 0) return "nada registrado nesta janela";
   let coveredMs = 0;
   for (let index = 1; index < slice.length; index++) {
     const step = slice[index].timestampMs - slice[index - 1].timestampMs;
     if (step <= COVERAGE_GAP_MS) coveredMs += step;
   }
   const windowMs = windowMinutes * 60_000;
-  if (coveredMs >= windowMs * 0.95) return "over the selected window";
+  if (coveredMs >= windowMs * 0.95) return "na janela selecionada";
   const coveredMinutes = coveredMs / 60_000;
   const rounded = coveredMinutes >= 1 ? `${Math.round(coveredMinutes)} min` : "< 1 min";
-  return `recorded ${rounded} of this window`;
+  return `registrados ${rounded} desta janela`;
 }
 
 export interface StatDetailInputs {
@@ -198,7 +198,7 @@ export function buildStatDetails({
       formatValue: formatThroughputLabel,
       formatTick: formatThroughputTick,
       explainer:
-        "Download throughput is the rate data arrives from the internet to your dish, in bits per second. It spikes while you're actively pulling data and idles near zero when nothing is downloading.",
+        "A taxa de download é a velocidade com que os dados chegam da internet à sua antena, em bits por segundo. Sobe quando você está baixando algo e fica perto de zero quando não há download.",
     },
     upload: {
       label: "Upload",
@@ -208,21 +208,21 @@ export function buildStatDetails({
       formatValue: formatThroughputLabel,
       formatTick: formatThroughputTick,
       explainer:
-        "Upload throughput is the rate data leaves your dish for the internet. It's typically much lower than download and rises when you send large files, back up data, or make video calls.",
+        "A taxa de upload é a velocidade com que os dados saem da sua antena para a internet. Costuma ser bem menor que o download e sobe ao enviar arquivos grandes, fazer backup ou em videochamadas.",
     },
     latency: {
-      label: "Latency",
+      label: "Latência",
       current: readRouterLatencyMs(status?.popPingLatencyMs) ?? 0,
       formatBig: (value) => ({ value: value.toFixed(0), unit: "ms" }),
       series: LATENCY_DETAIL_SERIES,
       formatValue: (value) => `${value.toFixed(0)} ms`,
       explainer:
-        "The Starlink dish and router both send test pings to the internet many times per minute. Latency measures how long, in milliseconds, a request takes to go to the internet and back. High latency may impact your experience with online gaming, video calls, and web browsing. It may be caused by extreme weather or periods of high network usage.",
+        "A antena e o roteador Starlink enviam pings de teste para a internet várias vezes por minuto. A latência mede quanto tempo, em milissegundos, uma ida e volta até a internet leva. Latência alta pode afetar jogos online, videochamadas e navegação. Pode ser causada por clima extremo ou períodos de uso intenso da rede.",
       outageEvents,
       distribution: true,
     },
     pingSuccess: {
-      label: "Ping success",
+      label: "Sucesso de ping",
       current: recentPingSuccessPercent,
       formatBig: (value) => ({ value: value.toFixed(2), unit: "%" }),
       series: PING_SUCCESS_SERIES,
@@ -230,26 +230,26 @@ export function buildStatDetails({
       formatTick: (value) => `${value.toFixed(0)}%`,
       maxValue: 100,
       explainer:
-        "Starlink and the Starlink router both send test pings to the internet many times per minute. It is normal for a few pings to drop without your connection noticeably suffering. Sustained dips are what matter, and they line up with the outages marked on the chart.",
+        "A Starlink e o roteador enviam pings de teste para a internet várias vezes por minuto. É normal alguns pings falharem sem a conexão sofrer de forma perceptível. Quedas sustentadas é que importam, e elas batem com as interrupções marcadas no gráfico.",
       outageEvents,
-      modalTitle: "Starlink ping success",
+      modalTitle: "Sucesso de ping da Starlink",
       secondaryChart: {
-        title: "Router ping success",
-        note: "the router's own pings to its point of presence, over a rolling five minutes",
+        title: "Sucesso de ping do roteador",
+        note: "os próprios pings do roteador até o ponto de presença, em uma média móvel de cinco minutos",
         // Both absences look the same in the data, so the message claims neither.
         emptyNote:
-          "nothing recorded in this window — the router wasn't answering, or nothing was running to record it",
+          "nada registrado nesta janela — o roteador não estava respondendo, ou nada estava gravando",
         series: ROUTER_PING_SUCCESS_SERIES,
       },
     },
     power: {
-      label: "Power draw",
+      label: "Consumo",
       current: currentPowerW,
       formatBig: (value) => ({ value: value.toFixed(0), unit: "W" }),
       series: POWER_SERIES,
       formatValue: (value) => `${value.toFixed(0)} W`,
       explainer:
-        "Power draw is how much electricity the Starlink terminal is using. It rises under heavy load and when the dish heats itself to melt snow or ice.",
+        "O consumo é quanta eletricidade o terminal Starlink está usando. Sobe sob carga pesada e quando a antena esquenta para derreter neve ou gelo.",
       showWindowEnergy: true,
       showEnergyHistory: true,
       chartWindowEndMs: powerWindowEndMs,

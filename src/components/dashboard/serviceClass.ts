@@ -5,11 +5,11 @@
 export function formatServiceClass(classOfService?: string, mobilityClass?: string): string {
   switch (classOfService) {
     case "CONSUMER":
-      return mobilityClass === "NOMADIC" || mobilityClass === "MOBILE" ? "roam" : "residential";
+      return mobilityClass === "NOMADIC" || mobilityClass === "MOBILE" ? "roam" : "residencial";
     case "BUSINESS":
-      return "business";
+      return "empresarial";
     case "BUSINESS_PLUS":
-      return "business plus";
+      return "empresarial plus";
     default:
       return (classOfService ?? "—").replaceAll("_", " ").toLowerCase();
   }

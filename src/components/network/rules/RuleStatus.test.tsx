@@ -72,8 +72,8 @@ describe("RuleStatus", () => {
     // against nothing and the largest speaks only for one of them.
     show();
 
-    await expect.poll(text).toContain("one allowance each");
-    expect(text()).toContain("50 GB each");
+    await expect.poll(text).toContain("uma franquia cada");
+    expect(text()).toContain("50 GB cada");
     // Each device reads its own share of the allowance it has to itself.
     expect(text()).toContain("40%");
     expect(text()).toContain("14%");
@@ -86,9 +86,9 @@ describe("RuleStatus", () => {
     show({ mode: "pooled", usageBytes: 30 * GB, capacityBytes: 50 * GB });
 
     await expect.poll(text).toContain("30 GB");
-    expect(text()).toContain("of 50 GB shared");
-    expect(text()).toContain("sharing one allowance");
-    expect(text()).toContain("Remaining");
+    expect(text()).toContain("de 50 GB compartilhada");
+    expect(text()).toContain("compartilhando uma franquia");
+    expect(text()).toContain("Restante");
   });
 
   test("given: several devices, should: list what each of them spent", async () => {
@@ -112,8 +112,8 @@ describe("RuleStatus", () => {
       ],
     });
 
-    await expect.poll(text).toContain("iPad is paused");
-    expect(text()).toContain("the limit was reached");
+    await expect.poll(text).toContain("iPad está pausado");
+    expect(text()).toContain("o limite foi atingido");
   });
 
   test("given: a schedule, should: lead with the hours rather than an allowance", async () => {
@@ -129,11 +129,11 @@ describe("RuleStatus", () => {
       windowEndMs: NOW + 3_600_000,
     });
 
-    await expect.poll(text).toContain("Mon–Fri");
-    expect(text()).toContain("4:00 PM – 8:00 PM");
+    await expect.poll(text).toContain("Seg–Sex");
+    expect(text()).toContain("16:00 – 20:00");
     expect(text()).toContain("Online");
-    expect(text()).not.toContain("Resets in");
-    expect(text()).not.toContain("Remaining");
+    expect(text()).not.toContain("Reinicia em");
+    expect(text()).not.toContain("Restante");
   });
 
   test("given: a schedule naming only one device, should: still say which device it is", async () => {
@@ -152,8 +152,8 @@ describe("RuleStatus", () => {
       windowEndMs: NOW + 3_600_000,
     });
 
-    await expect.poll(text).toContain("Mon–Fri");
-    expect(text()).toContain("Devices");
+    await expect.poll(text).toContain("Seg–Sex");
+    expect(text()).toContain("Dispositivos");
     expect(text()).toContain("iPad");
   });
 
@@ -169,16 +169,16 @@ describe("RuleStatus", () => {
       windowEndMs: NOW + 3_600_000,
     });
 
-    await expect.poll(text).toContain("Mon–Fri");
-    expect(text()).toContain("Data allowance");
-    expect(text()).toContain("of 50 GB shared");
+    await expect.poll(text).toContain("Seg–Sex");
+    expect(text()).toContain("Franquia de dados");
+    expect(text()).toContain("de 50 GB compartilhada");
   });
 
   test("given: a rule, should: show when it was created", async () => {
     show({ createdMs: new Date(2026, 2, 4, 9, 15).getTime() });
 
-    await expect.poll(text).toContain("Created");
-    expect(text()).toContain("Mar 4, 2026");
+    await expect.poll(text).toContain("Criada em");
+    expect(text()).toContain("4 de mar. de 2026");
   });
 
   test("given: a timer, should: count the clock rather than bytes", async () => {
@@ -192,7 +192,7 @@ describe("RuleStatus", () => {
     });
 
     await expect.poll(text).toContain("of 2h");
-    expect(text()).toContain("Time left");
-    expect(text()).not.toContain("Resets in");
+    expect(text()).toContain("Tempo restante");
+    expect(text()).not.toContain("Reinicia em");
   });
 });

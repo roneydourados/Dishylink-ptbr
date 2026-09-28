@@ -35,8 +35,8 @@ export function useClientTotals() {
       response.ok
         ? null
         : response.status === 403
-          ? "The historian refused the change — open the dashboard from this machine or your local network."
-          : `The historian rejected the change (HTTP ${response.status}).`,
+          ? "O gravador de histórico recusou a alteração — abra o painel nesta máquina ou na sua rede local."
+          : `O gravador de histórico rejeitou a alteração (HTTP ${response.status}).`,
     );
   }, []);
 

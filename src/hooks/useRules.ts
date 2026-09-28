@@ -200,7 +200,7 @@ export function useRules(): Rules {
       setPauseEnforceable(meterBody.pauseEnforceable === true);
       setError(null);
     } catch {
-      setError("The recorder isn’t answering, so rules can’t be read or changed.");
+      setError("O gravador não está respondendo, então as regras não podem ser lidas nem alteradas.");
     } finally {
       setLoading(false);
     }

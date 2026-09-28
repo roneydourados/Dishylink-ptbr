@@ -12,14 +12,14 @@ export function SearchingHero() {
         {/* the rotating sweep */}
         <div className='absolute inset-0 animate-[sweep_2.6s_linear_infinite] [background:conic-gradient(from_0deg,transparent_78%,color-mix(in_srgb,var(--ink)_45%,transparent))]' />
       </div>
-      <div className='text-[19px] font-bold tracking-[0.18em]'>SEARCHING FOR DISH</div>
+      <div className='text-[19px] font-bold tracking-[0.18em]'>PROCURANDO ANTENA</div>
       <p className='max-w-[420px] text-[13.5px] text-ink-secondary'>
-        Dishylink talks to your Starlink terminal directly at{" "}
+        O Dishylink se comunica diretamente com o terminal Starlink em{" "}
         <code className='rounded-[5px] dark:bg-card px-1.5 py-px font-mono text-[12px]'>
           {DISH_LAN_ADDRESS}
         </code>
-        . Make sure this machine is connected to the Starlink network (Wi‑Fi or ethernet behind the
-        Starlink router) and that the dish is powered. Retrying automatically…
+        . Confirme que este computador está na rede Starlink (Wi‑Fi ou Ethernet atrás do
+        roteador Starlink) e que a antena está ligada. Tentando novamente automaticamente…
       </p>
     </div>
   );

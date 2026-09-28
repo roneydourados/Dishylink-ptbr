@@ -116,64 +116,64 @@ function travelled(): string | null {
 describe("BypassSection", () => {
   test("sends the change the dialog named, even when the account flips underneath it", async () => {
     const { onSave, reportNow } = mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
+    await waitForText("Tem certeza?");
 
     // The account catches up mid-decision — exactly the two-minute lag landing at
     // the worst moment. The dialog must keep asking what it asked.
     reportNow(true);
     await settle();
-    expect(text()).toContain("will switch off");
+    expect(text()).toContain("serão desligados");
 
-    button("Turn on").click();
+    button("Ativar").click();
     await settle();
     expect(onSave).toHaveBeenCalledWith(true);
   });
 
   test("turns the control around once the write is away, so the way back starts where the handle is", async () => {
     mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn on").click();
-    await waitForText("Sent.");
+    await waitForText("Tem certeza?");
+    button("Ativar").click();
+    await waitForText("Enviado.");
     await settle();
 
     // Bypass now reads as on, so the track runs the other way and the spent
     // travel is cleared. Together those leave the handle at the end it reached.
-    expect(text()).toContain("Slide to turn off bypass");
+    expect(text()).toContain("Deslize para desativar o modo bypass");
     expect(travelled()).toBe("0");
   });
 
   test("writes nothing when the dialog is dismissed, and gives the travel back", async () => {
     const { onSave } = mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Cancel").click();
+    await waitForText("Tem certeza?");
+    button("Cancelar").click();
     await settle();
 
     expect(onSave).not.toHaveBeenCalled();
     expect(travelled()).toBe("0");
-    expect(text()).toContain("Slide to turn on bypass");
+    expect(text()).toContain("Deslize para ativar o modo bypass");
   });
 
   test("holds the assumed state until the account agrees, then stops saying so", async () => {
     const { reportNow, observeNow } = mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn on").click();
-    await waitForText("Sent.");
+    await waitForText("Tem certeza?");
+    button("Ativar").click();
+    await waitForText("Enviado.");
 
     // Assumed: the spinner stands in for the badge, because this is what was
     // asked for rather than what is known.
-    expect(document.querySelector("[aria-label='Turning bypass on']")).not.toBeNull();
+    expect(document.querySelector("[aria-label='Ativando bypass']")).not.toBeNull();
 
     // Bypass silences the router on the LAN, so the account agreeing while it
     // still answers is a state the hardware cannot be in.
@@ -181,57 +181,57 @@ describe("BypassSection", () => {
     reportNow(true);
     await settle();
 
-    expect(document.querySelector("[aria-label='Turning bypass on']")).toBeNull();
-    expect(text()).toContain("The Starlink router is disabled");
-    expect(text()).not.toContain("Sent.");
+    expect(document.querySelector("[aria-label='Ativando bypass']")).toBeNull();
+    expect(text()).toContain("O roteador Starlink está desativado");
+    expect(text()).not.toContain("Enviado.");
   });
 
   test("settles on the dish rather than waiting out the account", async () => {
     // A bypassed router stops uploading telemetry, so the account can sit on the
     // old value until the wait times out. The dish names the role in seconds.
     const { observeNow } = mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn on").click();
-    await waitForText("Sent.");
+    await waitForText("Tem certeza?");
+    button("Ativar").click();
+    await waitForText("Enviado.");
 
     // The account is left saying the old thing, exactly as it does on hardware.
     observeNow({ dishPresence: "bypassed", routerAnswering: false });
     await settle();
 
-    expect(document.querySelector("[aria-label='Turning bypass on']")).toBeNull();
-    expect(text()).toContain("The Starlink router is disabled");
+    expect(document.querySelector("[aria-label='Ativando bypass']")).toBeNull();
+    expect(text()).toContain("O roteador Starlink está desativado");
   });
 
   test("takes the dish's word even in the pass that loses the account", async () => {
     const { observeNow } = mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn on").click();
-    await waitForText("Sent.");
+    await waitForText("Tem certeza?");
+    button("Ativar").click();
+    await waitForText("Enviado.");
 
     // Both arrive together: the confirmation settles it, so the unreachable
     // account is no longer worth a word.
     observeNow({ dishPresence: "bypassed", routerAnswering: false, accountAnswering: false });
     await settle();
 
-    expect(text()).toContain("The Starlink router is disabled");
-    expect(text()).not.toContain("can't reach your Starlink account");
-    expect(text()).not.toContain("Sent.");
+    expect(text()).toContain("O roteador Starlink está desativado");
+    expect(text()).not.toContain("não alcança sua conta Starlink");
+    expect(text()).not.toContain("Enviado.");
   });
 
   test("refuses the opposite write while the first is still unresolved", async () => {
     const { onSave } = mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn on").click();
-    await waitForText("Sent.");
+    await waitForText("Tem certeza?");
+    button("Ativar").click();
+    await waitForText("Enviado.");
     await settle();
     expect(onSave).toHaveBeenCalledTimes(1);
 
@@ -248,22 +248,22 @@ describe("BypassSection", () => {
     // still said bypassed. The row sat on `On` for four minutes because the
     // slowest signal outranked the one that had just proved itself.
     const { observeNow } = mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn on").click();
-    await waitForText("Sent.");
+    await waitForText("Tem certeza?");
+    button("Ativar").click();
+    await waitForText("Enviado.");
 
     // The account catches up, so the assumption is spent and the row reads it.
     observeNow({ routerAnswering: false, dishPresence: "bypassed" });
     await settle();
-    expect(text()).toContain("The Starlink router is disabled");
+    expect(text()).toContain("O roteador Starlink está desativado");
 
     // The router comes back on the LAN. The account has not caught up yet.
     observeNow({ routerAnswering: true, dishPresence: "bypassed" });
     await settle();
-    expect(text()).toContain("The Starlink router is running your network");
+    expect(text()).toContain("O roteador Starlink está gerenciando sua rede");
   });
 
   test("ends the wait on the dish dropping the bypassed role, not on the account", async () => {
@@ -274,35 +274,35 @@ describe("BypassSection", () => {
       routerAnswering: false,
       dishPresence: "bypassed",
     });
-    await waitForText("Slide to turn off bypass");
+    await waitForText("Deslize para desativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn off").click();
-    await waitForText("Sent!");
+    await waitForText("Tem certeza?");
+    button("Desativar").click();
+    await waitForText("Enviado!");
 
     observeNow({ dishPresence: "present" });
     await settle();
 
-    expect(document.querySelector("[aria-label='Turning bypass off']")).toBeNull();
-    expect(text()).toContain("The Starlink router is running your network");
+    expect(document.querySelector("[aria-label='Desativando bypass']")).toBeNull();
+    expect(text()).toContain("O roteador Starlink está gerenciando sua rede");
   });
 
   test("reads bypass as off when the router answers, whatever the account carries", async () => {
     mount({ reported: null, routerAnswering: true });
-    await waitForText("The Starlink router is running your network");
-    expect(text()).toContain("Slide to turn on bypass");
+    await waitForText("O roteador Starlink está gerenciando sua rede");
+    expect(text()).toContain("Deslize para ativar o modo bypass");
   });
 
   test("offers the way back when nothing can say where bypass stands", async () => {
     const { onSave } = mount({ reported: null, routerAnswering: false });
-    await waitForText("Couldn't tell whether the router is bypassed");
+    await waitForText("Não foi possível saber se o roteador está em bypass");
     expect(handle().getAttribute("aria-disabled")).not.toBe("true");
-    expect(text()).toContain("Slide to turn off bypass");
+    expect(text()).toContain("Deslize para desativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn off").click();
+    await waitForText("Tem certeza?");
+    button("Desativar").click();
     await settle();
     expect(onSave).toHaveBeenCalledWith(false);
   });
@@ -310,26 +310,26 @@ describe("BypassSection", () => {
   test("stops waiting on an account that turning bypass on has put out of reach", async () => {
     // The confirmation rides the network the write tears down.
     const { observeNow } = mount({ reported: false });
-    await waitForText("Slide to turn on bypass");
+    await waitForText("Deslize para ativar o modo bypass");
 
     slide();
-    await waitForText("Are you sure?");
-    button("Turn on").click();
-    await waitForText("Sent.");
-    expect(document.querySelector("[aria-label='Turning bypass on']")).not.toBeNull();
+    await waitForText("Tem certeza?");
+    button("Ativar").click();
+    await waitForText("Enviado.");
+    expect(document.querySelector("[aria-label='Ativando bypass']")).not.toBeNull();
 
     observeNow({ accountAnswering: false, routerAnswering: false });
-    await waitForText("can't reach your Starlink account");
+    await waitForText("não alcança sua conta Starlink");
 
     // The spinner stops without unlearning the write, so the way back is offered.
-    expect(document.querySelector("[aria-label='Turning bypass on']")).toBeNull();
+    expect(document.querySelector("[aria-label='Ativando bypass']")).toBeNull();
     expect(handle().getAttribute("aria-disabled")).not.toBe("true");
-    expect(text()).toContain("Slide to turn off bypass");
-    expect(text()).toContain("The Starlink router is disabled");
+    expect(text()).toContain("Deslize para desativar o modo bypass");
+    expect(text()).toContain("O roteador Starlink está desativado");
   });
 
   test("names the way back when the account cannot be reached", async () => {
     mount({ reported: null, routerAnswering: false, disabled: true });
-    await waitForText("Connect this device to the internet");
+    await waitForText("Conecte este dispositivo à internet");
   });
 });

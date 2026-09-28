@@ -97,12 +97,12 @@ export function SettingsModal({
       <DialogContent className='max-w-md bg-card border-border p-0 gap-0' showCloseButton={false}>
         <DialogHeader className='flex flex-row items-center justify-between px-5 pt-[12px] pb-1 text-left'>
           <DialogTitle className='text-[17px] font-semibold tracking-[0.01em]'>
-            Settings
+            Configurações
           </DialogTitle>
           <button
             className='inline-flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full border-0 bg-[color-mix(in_srgb,var(--ink)_6%,var(--surface))] text-[13px] leading-none text-ink-secondary transition-colors hover:text-foreground'
             onClick={onClose}
-            aria-label='Close'
+            aria-label='Fechar'
           >
             ✕
           </button>
@@ -111,12 +111,12 @@ export function SettingsModal({
         <div className='px-5 pt-2 pb-1.5'>
           <SegmentedControl
             variant='glider'
-            label='Settings section'
+            label='Seção de configurações'
             value={tab}
             onChange={setTab}
             options={[
               { value: "starlink", label: "Starlink" },
-              { value: "router", label: "Router" },
+              { value: "router", label: "Roteador" },
               { value: "app", label: "App" },
             ]}
           />

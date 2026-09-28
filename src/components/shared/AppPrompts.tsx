@@ -28,10 +28,10 @@ const FUNDING = [
   {
     href: SUPPORT_LINKS.githubSponsors,
     icon: HeartIcon,
-    label: "Become a GitHub Sponsor",
+    label: "Tornar-se GitHub Sponsor",
     iconClassName: "text-[#ea4aaa]",
   },
-  { href: SUPPORT_LINKS.patreon, icon: PatreonIcon, label: "Become a Patreon" },
+  { href: SUPPORT_LINKS.patreon, icon: PatreonIcon, label: "Apoiar no Patreon" },
 ];
 
 export function AppPrompts() {
@@ -58,8 +58,8 @@ export function AppPrompts() {
     return (
       <PromptDialog
         icon={<StarIcon />}
-        title='Enjoying Dishylink?'
-        body="A rating takes ten seconds, but it's the one thing that helps other Starlink owners find the app."
+        title='Curtindo o Dishylink?'
+        body='Uma avaliação leva dez segundos, mas é o que mais ajuda outros donos de Starlink a encontrar o app.'
         onLater={later}
         onNever={never}
         actions={
@@ -68,7 +68,7 @@ export function AppPrompts() {
             className='w-full cursor-pointer'
             onClick={() => acted(reviewUrl(store))}
           >
-            Rate on {reviewStoreName(store)}
+            Avaliar na {reviewStoreName(store)}
           </Button>
         }
       />
@@ -78,8 +78,8 @@ export function AppPrompts() {
   return (
     <PromptDialog
       icon={<HandHeartIcon />}
-      title='Dishylink is free, and always will be.'
-      body='I built it in my free time, because nothing like it existed. Your one-off or recurring contribution does a lot to keep it maintained and updated. Please show the project some support if you can!'
+      title='O Dishylink é gratuito, e sempre será.'
+      body='Eu construí no meu tempo livre, porque nada assim existia. Sua contribuição pontual ou recorrente faz muita diferença para manter o projeto atualizado. Se puder, apoie!'
       onLater={later}
       onNever={never}
       actions={FUNDING.map(({ href, icon: Icon, label, iconClassName }, i) => (

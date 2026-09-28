@@ -24,12 +24,12 @@ function isPartial(bucket: EnergyBucket): boolean {
 
 function bucketTitle(bucket: EnergyBucket, range: EnergyRange): string {
   const when = bucketLabel(bucket.t, range);
-  if (bucket.kWh === null) return `${when} · no data — the historian wasn't running`;
+  if (bucket.kWh === null) return `${when} · sem dados — o gravador não estava em execução`;
   const total = `${when} · ${bucket.kWh.toFixed(3)} kWh`;
   if (!isPartial(bucket)) return total;
   const sampled = Math.round(bucket.sampledSeconds / 60);
   const expected = Math.round(bucket.expectedSeconds / 60);
-  return `${total} — only ${sampled} of ${expected} min recorded`;
+  return `${total} — apenas ${sampled} de ${expected} min registrados`;
 }
 
 function EnergyBars({ buckets, range }: { buckets: EnergyBucket[]; range: EnergyRange }) {
@@ -70,20 +70,20 @@ export function EnergyHistoryPanel({ active }: { active: boolean }) {
   return (
     <div className='mt-4 border-t border-hairline pt-[13px]'>
       <div className='flex flex-wrap items-center justify-between gap-2.5'>
-        <span className='text-[14.5px] font-[650]'>Total energy used</span>
+        <span className='text-[14.5px] font-[650]'>Energia total usada</span>
         <SegmentedControl
           options={RANGE_TABS}
           value={range}
           onChange={setRange}
-          label='Energy range'
+          label='Intervalo de energia'
         />
       </div>
 
       {unavailable ? (
         <Callout className='mt-2.5'>
-          Long-term energy needs the history recorder running. Start it with{" "}
+          A energia de longo prazo precisa do gravador de histórico em execução. Inicie com{" "}
           <code>npm run historian</code>
-          and it will build up day / week / month history from now on.
+          e ele acumulará o histórico diário / semanal / mensal a partir de agora.
         </Callout>
       ) : (
         <>
@@ -92,8 +92,8 @@ export function EnergyHistoryPanel({ active }: { active: boolean }) {
           </div>
           {data && (
             <div className='mt-1 text-[12px] font-medium text-muted-foreground'>
-              collected {coveragePct}% of this period
-              {coveragePct < 95 && " — total covers only the time the recorder was running"}
+              coletado {coveragePct}% deste período
+              {coveragePct < 95 && " — o total cobre só o tempo em que o gravador estava ativo"}
             </div>
           )}
           {data && <EnergyBars buckets={data.buckets} range={range} />}

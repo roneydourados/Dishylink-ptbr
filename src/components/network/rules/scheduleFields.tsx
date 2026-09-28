@@ -42,7 +42,7 @@ export function ScheduleWindows({
         }
       >
         <span>{schedule.mode === "allow" ? "Online" : "Offline"}</span>
-        {compact && <span>Hours</span>}
+        {compact && <span>Horários</span>}
       </div>
       {shown.map((window, index) => (
         <div
@@ -69,7 +69,7 @@ export function ScheduleWindows({
           </span>
         </div>
       ))}
-      {rest > 0 && <div className='text-[12px] text-muted-foreground'>and {rest} more</div>}
+      {rest > 0 && <div className='text-[12px] text-muted-foreground'>e mais {rest}</div>}
     </>
   );
 }
@@ -79,15 +79,15 @@ export function ScheduleFields({ draft }: { draft: ScheduleDraft }) {
     <div className='space-y-3'>
       <div className='flex items-center justify-between gap-3'>
         <div>
-          <div className='text-[13px] font-medium text-foreground'>Schedule</div>
+          <div className='text-[13px] font-medium text-foreground'>Agenda</div>
           <div className='text-[12px] text-muted-foreground'>
             {draft.mode === "allow"
-              ? "Online during these times, paused the rest of the days."
-              : "Paused during these times, online otherwise."}
+              ? "Online nestes horários, pausado no restante do dia."
+              : "Pausado nestes horários, online no restante."}
           </div>
         </div>
         <SegmentedControl
-          label='What the schedule does'
+          label='O que a agenda faz'
           value={draft.mode}
           onChange={draft.setMode}
           options={[
@@ -108,9 +108,9 @@ export function ScheduleFields({ draft }: { draft: ScheduleDraft }) {
             <div className='flex items-center gap-0.5 text-[12px]'>
               {(
                 [
-                  ["weekly", "Every week"],
-                  ["range", "Date range"],
-                  ["once", "One-off"],
+                  ["weekly", "Toda semana"],
+                  ["range", "Intervalo"],
+                  ["once", "Única vez"],
                 ] as const
               ).map(([repeat, repeatLabel]) => (
                 <button
@@ -131,13 +131,13 @@ export function ScheduleFields({ draft }: { draft: ScheduleDraft }) {
             <div className='flex min-w-0 items-center gap-2'>
               {window.repeat !== "weekly" && (
                 <span className='truncate text-[12px] text-muted-foreground'>
-                  {runLabel(window) ?? "Pick a date"}
+                  {runLabel(window) ?? "Escolher data"}
                 </span>
               )}
               <button
                 type='button'
                 onClick={() => draft.removeWindow(index)}
-                aria-label='Remove this schedule'
+                aria-label='Remover esta agenda'
                 className='grid size-6 shrink-0 cursor-pointer place-items-center rounded-md text-muted-foreground transition-colors hover:bg-[color-mix(in_srgb,var(--ink)_10%,transparent)] hover:text-foreground'
               >
                 <X className='size-3.5' />
@@ -176,12 +176,12 @@ export function ScheduleFields({ draft }: { draft: ScheduleDraft }) {
 
           <div className='flex flex-wrap items-center gap-x-5 gap-y-3'>
             <TimeOfDayField
-              label='From'
+              label='De'
               value={window.startMinute}
               onChange={(startMinute) => draft.updateWindow(index, { startMinute })}
             />
             <TimeOfDayField
-              label='To'
+              label='Até'
               value={window.endMinute}
               onChange={(endMinute) => draft.updateWindow(index, { endMinute })}
             />
@@ -189,7 +189,7 @@ export function ScheduleFields({ draft }: { draft: ScheduleDraft }) {
 
           {window.endMinute <= window.startMinute && (
             <p className='text-[11.5px] text-muted-foreground'>
-              Runs past midnight into the next day.
+              Vai além da meia-noite, até o dia seguinte.
             </p>
           )}
         </div>
@@ -202,7 +202,7 @@ export function ScheduleFields({ draft }: { draft: ScheduleDraft }) {
         onClick={draft.addWindow}
       >
         <Plus className='size-3.5' />
-        {draft.windows.length === 0 ? "Set a schedule" : "Add another time"}
+        {draft.windows.length === 0 ? "Definir uma agenda" : "Adicionar outro horário"}
       </Button>
     </div>
   );

@@ -519,10 +519,10 @@ export function useRouterNetwork(active: boolean): RouterNetwork {
         // sign-in can fix. Connecting one bumps `cloudSession` and re-runs this.
         if (error instanceof CloudNotConnectedError) {
           window.clearInterval(timerId);
-          setAccountRosterError("Connect your Starlink account first.");
+          setAccountRosterError("Conecte sua conta Starlink primeiro.");
         } else {
           setAccountRosterError(
-            "Couldn't reach your Starlink account. Check this device's internet connection.",
+            "Não foi possível alcançar sua conta Starlink. Verifique a conexão à internet deste dispositivo.",
           );
         }
       } finally {

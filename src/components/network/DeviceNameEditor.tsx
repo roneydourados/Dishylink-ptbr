@@ -13,7 +13,7 @@ import { AccountRequiredNotice } from "../shared/AccountRequiredNotice";
 
 export function RenameButton({
   onClick,
-  label = "Rename device",
+  label = "Renomear dispositivo",
 }: {
   onClick: () => void;
   label?: string;
@@ -96,10 +96,10 @@ function NameEditorForm({
           disabled={busy || !canSave}
           onClick={() => void commit()}
         >
-          {busy ? <SpinLoader variant='segment' size={16} label='Saving' /> : "Save"}
+          {busy ? <SpinLoader variant='segment' size={16} label='Salvando' /> : "Salvar"}
         </button>
         <button className={actionButton("subtle")} disabled={busy} onClick={onDone}>
-          Cancel
+          Cancelar
         </button>
       </div>
       {error && (
@@ -124,7 +124,7 @@ export function DeviceNameEditor({
     <NameEditorForm
       currentName={displayName(client)}
       initialName={client.givenName ?? client.name ?? ""}
-      placeholder='Device name'
+      placeholder='Nome do dispositivo'
       extraValid={client.clientId !== undefined}
       onSave={(name) => onRename(client.clientId as number, name)}
       onDone={onDone}
@@ -148,7 +148,7 @@ export function MeshNodeNameEditor({
   return (
     <NameEditorForm
       currentName={currentName}
-      placeholder='Node name'
+      placeholder='Nome do nó'
       onSave={(name) => onRename(deviceId, name)}
       onDone={onDone}
     />

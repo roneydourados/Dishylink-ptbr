@@ -133,34 +133,34 @@ function suggestedAlternative(routerAddress: string): string {
 function messagesFor(routerAddress: string): Record<RouterUnreachableCause, string> {
   return {
     addressTaken:
-      `Another device on this network is using ${routerAddress}, the address the Starlink ` +
-      `router answers on, so the router is hidden behind it. To fix it, connect to your ` +
-      `Starlink WiFi, give the other router a different address (like ` +
-      `${suggestedAlternative(routerAddress)}), or point Dishylink's router address at wherever ` +
-      `your Starlink router actually is.`,
+      `Outro dispositivo nesta rede está usando ${routerAddress}, o endereço em que o roteador ` +
+      `Starlink responde, então o roteador fica escondido atrás dele. Para corrigir, conecte-se ao ` +
+      `Wi‑Fi Starlink, dê outro endereço ao outro roteador (como ` +
+      `${suggestedAlternative(routerAddress)}), ou aponte o endereço do roteador no Dishylink para ` +
+      `onde o roteador Starlink realmente está.`,
     configuredAddressSilent:
-      `Nothing answered at ${routerAddress}, the address Dishylink is set to use, but the dish ` +
-      `reports your Starlink router is running. It is most likely at a different address. ` +
-      `Check that setting, or clear it to go back to the default.`,
+      `Nada respondeu em ${routerAddress}, o endereço que o Dishylink está configurado para usar, ` +
+      `mas a antena indica que seu roteador Starlink está ligado. Provavelmente ele está em outro ` +
+      `endereço. Confira essa configuração, ou limpe-a para voltar ao padrão.`,
     differentNetwork:
-      `Your Starlink router is running, but this device isn't on the network ${routerAddress} ` +
-      `belongs to. Connect to your Starlink WiFi, or if the router's subnet was changed, point ` +
-      `Dishylink's router address at where it is now.`,
+      `Seu roteador Starlink está ligado, mas este dispositivo não está na rede a que ` +
+      `${routerAddress} pertence. Conecte-se ao Wi‑Fi Starlink ou, se a sub-rede do roteador foi ` +
+      `alterada, aponte o endereço do roteador no Dishylink para onde ele está agora.`,
     bypassed:
-      `Bypass mode is on, so the Starlink router is switched off and a third-party router runs ` +
-      `your network. WiFi, the client list and the router's own settings all come from it, so ` +
-      `there's nothing to show here. Everything on the dish is unaffected.`,
+      `O modo bypass está ativo, então o roteador Starlink está desligado e um roteador de ` +
+      `terceiros gerencia sua rede. Wi‑Fi, lista de clientes e as configurações do roteador vêm ` +
+      `dele, então não há o que mostrar aqui. Tudo na antena segue normal.`,
     noRouter:
-      `The dish isn't reporting a Starlink router, so this kit either doesn't have one or it's ` +
-      `powered off. WiFi and connected devices come from the router, so there's nothing to show ` +
-      `here. Everything on the dish is unaffected.`,
+      `A antena não está reportando um roteador Starlink, então este kit não tem um ou ele está ` +
+      `desligado. Wi‑Fi e dispositivos conectados vêm do roteador, então não há o que mostrar ` +
+      `aqui. Tudo na antena segue normal.`,
     unknown:
-      `Couldn't reach the Starlink router at ${routerAddress}. Another device may be using ` +
-      `that address, the router may be in bypass mode or on a different network, or it may be ` +
-      `at an address other than the one Dishylink is set to use.`,
+      `Não foi possível alcançar o roteador Starlink em ${routerAddress}. Outro dispositivo pode ` +
+      `estar usando esse endereço, o roteador pode estar em bypass ou em outra rede, ou em um ` +
+      `endereço diferente do que o Dishylink está configurado para usar.`,
     checking:
-      `Couldn't reach the Starlink router at ${routerAddress}. Working out why; most short ` +
-      `silences are the router restarting.`,
+      `Não foi possível alcançar o roteador Starlink em ${routerAddress}. Descobrindo o motivo; ` +
+      `a maioria dos silêncios curtos é o roteador reiniciando.`,
   };
 }
 

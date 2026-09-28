@@ -100,8 +100,8 @@ function pickerRows(name: string): HTMLLabelElement[] {
 }
 
 async function openNewRule() {
-  await page.getByText("Rules").click();
-  await page.getByText("New rule").click();
+  await page.getByText("Regras").click();
+  await page.getByText("Nova regra").click();
 }
 
 test("given: a device the odometer has never counted, should: still offer it in the rule picker", async () => {
@@ -122,7 +122,7 @@ test("given: a device the odometer has never counted, should: still offer it in 
     expect(text).toContain("PS5");
   });
   // And the wired one says why an allowance would measure nothing on it.
-  expect(document.body.textContent).toContain("no usage data");
+  expect(document.body.textContent).toContain("sem dados de uso");
 });
 
 // The recorder folds a device's old identity into its newer one and keeps a note
@@ -151,7 +151,7 @@ test("given: a device the recorder merged onto a newer id, should: offer it once
   await openNewRule();
 
   await vi.waitFor(() => expect(pickerRows("Nanoleaf")).toHaveLength(1));
-  expect(pickerRows("Nanoleaf")[0].textContent).toContain("ACTIVE NOW");
+  expect(pickerRows("Nanoleaf")[0].textContent).toContain("ATIVO AGORA");
 });
 
 // The other half of the same note: the card has to ask for the device's rules

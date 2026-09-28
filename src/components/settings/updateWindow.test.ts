@@ -26,7 +26,7 @@ describe("UPDATE_WINDOWS", () => {
 describe("updateWindowFor", () => {
   it("maps the dish's real value to the window the app shows selected", () => {
     // The live dish reports 3, and the app shows "Overnight" selected.
-    expect(updateWindowFor(3).label).toBe("Overnight, around 3 AM");
+    expect(updateWindowFor(3).label).toBe("Madrugada, por volta das 3h");
   });
 
   it("selects each window from its own representative hour", () => {

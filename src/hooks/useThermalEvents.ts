@@ -30,32 +30,33 @@ interface ThermalAlertSpec {
 const THERMAL_ALERTS: ThermalAlertSpec[] = [
   {
     alertKey: "thermalShutdown",
-    cause: "thermal shutdown",
+    cause: "desligamento térmico",
     severity: "critical",
-    onsetTitle: "Dish thermal shutdown",
+    onsetTitle: "Antena desligada por temperatura",
     onsetBody:
-      "The dish has shut itself down to avoid overheating. Service stays offline until it cools.",
-    clearedTitle: "Dish thermal shutdown ended",
-    clearedBody: "The dish has cooled enough to come back online.",
+      "A antena se desligou para evitar superaquecimento. O serviço fica offline até esfriar.",
+    clearedTitle: "Desligamento térmico da antena encerrado",
+    clearedBody: "A antena esfriou o bastante para voltar ao ar.",
   },
   {
     alertKey: "thermalThrottle",
-    cause: "thermal throttle",
+    cause: "limitação térmica",
     severity: "warning",
-    onsetTitle: "Dish thermally throttled",
-    onsetBody: "The dish is hot and is limiting performance to cool down. Expect reduced speeds.",
-    clearedTitle: "Dish thermal throttling ended",
-    clearedBody: "The dish has cooled down and is back to full performance.",
+    onsetTitle: "Antena com limitação térmica",
+    onsetBody:
+      "A antena está quente e limitando o desempenho para esfriar. Espere velocidades reduzidas.",
+    clearedTitle: "Limitação térmica da antena encerrada",
+    clearedBody: "A antena esfriou e voltou ao desempenho total.",
   },
   {
     alertKey: "powerSupplyThermalThrottle",
-    cause: "power supply thermal throttle",
+    cause: "limitação térmica da fonte",
     severity: "warning",
-    onsetTitle: "Power supply thermally throttled",
+    onsetTitle: "Fonte com limitação térmica",
     onsetBody:
-      "The dish's power supply is hot and is limiting output. Check for airflow around it.",
-    clearedTitle: "Power supply throttling ended",
-    clearedBody: "The dish's power supply has cooled back to normal.",
+      "A fonte da antena está quente e limitando a saída. Verifique a ventilação ao redor.",
+    clearedTitle: "Limitação térmica da fonte encerrada",
+    clearedBody: "A fonte da antena voltou à temperatura normal.",
   },
 ];
 

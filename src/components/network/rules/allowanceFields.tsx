@@ -40,21 +40,21 @@ export type { RuleMode };
 const RULE_MODES: { mode: RuleMode; label: string; icon: typeof TimerIcon; detail: string }[] = [
   {
     mode: "limit",
-    label: "Limit",
+    label: "Limite",
     icon: GaugeIcon,
-    detail: "Pauses once a set amount of data is used, and frees up when the cycle turns over.",
+    detail: "Pausa ao atingir uma quantidade de dados, e libera quando o ciclo reinicia.",
   },
   {
     mode: "schedule",
-    label: "Schedule",
+    label: "Agenda",
     icon: CalendarClockIcon,
-    detail: "Pauses outside the hours you set, on chosen weekdays or dates.",
+    detail: "Pausa fora dos horários que você definir, em dias da semana ou datas.",
   },
   {
     mode: "timer",
     label: "Timer",
     icon: TimerIcon,
-    detail: "Pauses once a countdown runs out, starting from when you save.",
+    detail: "Pausa quando a contagem regressiva acaba, a partir do momento em que você salva.",
   },
 ];
 
@@ -65,7 +65,7 @@ export function RuleModesInfo() {
       <TooltipTrigger asChild>
         <button
           type='button'
-          aria-label='What each kind of rule does'
+          aria-label='O que cada tipo de regra faz'
           className='grid size-5 shrink-0 translate-y-px cursor-help place-items-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground'
         >
           <InfoIcon className='size-3.5' />
@@ -128,7 +128,7 @@ function CountdownFields({ draft }: { draft: AllowanceDraft }) {
     <div className='space-y-3'>
       <div className='grid grid-cols-2 gap-3'>
         <label className='space-y-1.5'>
-          <span className='text-[12px] font-medium text-foreground'>Hours</span>
+          <span className='text-[12px] font-medium text-foreground'>Horas</span>
           <Input
             value={hoursText}
             inputMode='numeric'
@@ -138,7 +138,7 @@ function CountdownFields({ draft }: { draft: AllowanceDraft }) {
           />
         </label>
         <label className='space-y-1.5'>
-          <span className='text-[12px] font-medium text-foreground'>Minutes</span>
+          <span className='text-[12px] font-medium text-foreground'>Minutos</span>
           <Input
             value={minutesText}
             inputMode='numeric'
@@ -162,7 +162,7 @@ function CountdownFields({ draft }: { draft: AllowanceDraft }) {
       </div>
       {countdownMs !== undefined && countdownMs >= MAX_COUNTDOWN_MS && (
         <p className='text-[11.5px] text-muted-foreground'>
-          A timer runs for at most 24 hours. Use an allowance for anything longer.
+          A timer dura no máximo 24 horas. Use uma franquia para períodos maiores.
         </p>
       )}
     </div>
@@ -196,10 +196,10 @@ export function AppliesToField({
   const [open, setOpen] = useState(selected.length !== 1);
   const summary =
     selected.length === 0
-      ? "Pick devices"
+      ? "Escolher dispositivos"
       : selected.length === 1
-        ? "This device"
-        : `${selected.length} devices`;
+        ? "Este dispositivo"
+        : `${selected.length} dispositivos`;
   // The order holds still, not the array: the odometer mints a fresh list on its
   // own poll, so this recomputes and the sort is what keeps a row from moving
   // under the cursor.
@@ -207,7 +207,7 @@ export function AppliesToField({
   return (
     <div className='space-y-1.5'>
       <div className='flex items-baseline justify-between'>
-        <span className='text-[12px] font-medium text-foreground'>Applies to</span>
+        <span className='text-[12px] font-medium text-foreground'>Aplica-se a</span>
         <button
           type='button'
           onClick={() => setOpen(!open)}
@@ -244,7 +244,7 @@ export function AppliesToField({
                     <span className='truncate'>{candidate.name}</span>
                     {candidate.hasCounters === false ? (
                       <span className='truncate text-[11px] text-muted-foreground'>
-                        {vendor ? `${vendor} · ` : ""}no usage data — hours only
+                        {vendor ? `${vendor} · ` : ""}sem dados de uso — só horários
                       </span>
                     ) : (
                       vendor && (
@@ -254,7 +254,7 @@ export function AppliesToField({
                   </span>
                   {candidate.active && (
                     <span className='ml-auto shrink-0 text-[10.5px] tracking-wide text-muted-foreground'>
-                      ACTIVE NOW
+                      ATIVO AGORA
                     </span>
                   )}
                 </label>
@@ -266,22 +266,22 @@ export function AppliesToField({
               <MemberModeChoice
                 selected={!shared}
                 onSelect={() => onSharedChange(false)}
-                title='Each'
-                detail='Every device gets the full allowance on its own.'
+                title='Cada um'
+                detail='Cada dispositivo recebe a franquia completa sozinho.'
               />
               <MemberModeChoice
                 selected={shared}
                 onSelect={() => onSharedChange(true)}
-                title='Shared'
-                detail='One allowance between them. They pause together.'
+                title='Compartilhada'
+                detail='Uma franquia entre eles. Pausam juntos.'
               />
             </div>
           )}
           {selected.length > 1 && !carriesAllowance && (
             <p className='pt-1 text-[11.5px] text-muted-foreground'>
               {timer
-                ? `All ${selected.length} devices start and end on one clock.`
-                : `These hours apply to all ${selected.length} devices.`}
+                ? `Todos os ${selected.length} dispositivos começam e terminam no mesmo relógio.`
+                : `Estes horários valem para todos os ${selected.length} dispositivos.`}
             </p>
           )}
         </>
@@ -327,7 +327,7 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
     <>
       <div className='grid grid-cols-2 gap-3'>
         <label className='space-y-1.5'>
-          <span className='text-[12px] font-medium text-foreground'>Allowance</span>
+          <span className='text-[12px] font-medium text-foreground'>Franquia</span>
           <div className='relative'>
             <Input
               value={allocationText}
@@ -345,9 +345,9 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
           </div>
         </label>
         <div className='space-y-1.5'>
-          <span className='text-[12px] font-medium text-foreground'>Resets</span>
+          <span className='text-[12px] font-medium text-foreground'>Reinicia</span>
           <Select value={kind} onValueChange={(next) => draft.setKind(next as MeterCycle["kind"])}>
-            <SelectTrigger className='w-full text-[13px]' aria-label='Resets'>
+            <SelectTrigger className='w-full text-[13px]' aria-label='Reinicia'>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -359,8 +359,8 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
                 >
                   {option.value === "billing"
                     ? billingDay === null
-                      ? "Starlink billing (needs your account)"
-                      : `Starlink billing (${billingDay})`
+                      ? "Faturamento Starlink (precisa da sua conta)"
+                      : `Faturamento Starlink (${billingDay})`
                     : option.label}
                 </SelectItem>
               ))}
@@ -375,13 +375,13 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
           max={ceiling}
           step={stepFor(ceiling)}
           onValueChange={([next]) => setAllocationText(String(next))}
-          aria-label='Allowance in gigabytes'
+          aria-label='Franquia em gigabytes'
         />
         <div className='flex shrink-0 flex-col items-center gap-0.5'>
           <button
             type='button'
             onClick={() => setCeiling(stepCeiling(ceiling, Number(allocationText) || 0, 1))}
-            aria-label='Extend the slider'
+            aria-label='Ampliar o controle deslizante'
             className={stepButtonClass}
           >
             <ChevronUpIcon className='size-3' />
@@ -389,7 +389,7 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
           <button
             type='button'
             onClick={() => setCeiling(stepCeiling(ceiling, Number(allocationText) || 0, 1))}
-            title='Change how far the slider reaches'
+            title='Alterar até onde o controle deslizante vai'
             className='cursor-pointer rounded-sm px-1 text-[11.5px] leading-none tabular-nums text-muted-foreground transition-colors hover:bg-accent hover:text-foreground'
           >
             {ceilingLabel(ceiling)}
@@ -397,7 +397,7 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
           <button
             type='button'
             onClick={() => setCeiling(stepCeiling(ceiling, Number(allocationText) || 0, -1))}
-            aria-label='Shorten the slider'
+            aria-label='Encurtar o controle deslizante'
             className={stepButtonClass}
           >
             <ChevronDownIcon className='size-3' />
@@ -407,12 +407,12 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
 
       {kind === "weekly" && (
         <div className='space-y-1.5'>
-          <span className='text-[12px] font-medium text-foreground'>Resets on</span>
+          <span className='text-[12px] font-medium text-foreground'>Reinicia em</span>
           <Select
             value={String(draft.weekday)}
             onValueChange={(next) => draft.setWeekday(Number(next))}
           >
-            <SelectTrigger className='w-full text-[13px]' aria-label='Resets on'>
+            <SelectTrigger className='w-full text-[13px]' aria-label='Reinicia em'>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -427,7 +427,7 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
       )}
       {kind === "monthly" && (
         <label className='block space-y-1.5'>
-          <span className='text-[12px] font-medium text-foreground'>Resets on day</span>
+          <span className='text-[12px] font-medium text-foreground'>Reinicia no dia</span>
           <div className='relative'>
             <Input
               value={draft.dayText}
@@ -440,7 +440,7 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
               <button
                 type='button'
                 onClick={() => draft.setDayText(String(stepDay(draft.day, 1)))}
-                aria-label='Later in the month'
+                aria-label='Mais tarde no mês'
                 className={stepButtonClass}
               >
                 <ChevronUpIcon className='size-3' />
@@ -448,7 +448,7 @@ export function AllowanceFields({ draft }: { draft: AllowanceDraft }) {
               <button
                 type='button'
                 onClick={() => draft.setDayText(String(stepDay(draft.day, -1)))}
-                aria-label='Earlier in the month'
+                aria-label='Mais cedo no mês'
                 className={stepButtonClass}
               >
                 <ChevronDownIcon className='size-3' />

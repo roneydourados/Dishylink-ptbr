@@ -28,28 +28,28 @@ describe("relativeTime", () => {
   const now = 1_000_000_000_000;
 
   it("says 'just now' inside the first minute", () => {
-    expect(relativeTime(now - 30_000, now)).toBe("just now");
+    expect(relativeTime(now - 30_000, now)).toBe("agora mesmo");
   });
 
   it("steps through minutes, hours and days", () => {
-    expect(relativeTime(now - 5 * 60_000, now)).toBe("5m ago");
-    expect(relativeTime(now - 3 * 3_600_000, now)).toBe("3h ago");
-    expect(relativeTime(now - 2 * 86_400_000, now)).toBe("2d ago");
+    expect(relativeTime(now - 5 * 60_000, now)).toBe("há 5 min");
+    expect(relativeTime(now - 3 * 3_600_000, now)).toBe("há 3 h");
+    expect(relativeTime(now - 2 * 86_400_000, now)).toBe("há 2 dias");
   });
 
   it("never reports a future timestamp as negative", () => {
     // Clock skew between the historian and the browser can hand us an onset
     // slightly in the future; it must not render as "-1m ago".
-    expect(relativeTime(now + 5_000, now)).toBe("just now");
+    expect(relativeTime(now + 5_000, now)).toBe("agora mesmo");
   });
 });
 
 describe("deviceLabel", () => {
   it("names both devices, and calls anything else System", () => {
-    expect(deviceLabel("dish")).toBe("Dish");
-    expect(deviceLabel("router")).toBe("Router");
+    expect(deviceLabel("dish")).toBe("Antena");
+    expect(deviceLabel("router")).toBe("Roteador");
     // Alerts the dashboard raises itself (historian down, say) rather than
     // either device reporting them.
-    expect(deviceLabel("system")).toBe("System");
+    expect(deviceLabel("system")).toBe("Sistema");
   });
 });

@@ -28,7 +28,7 @@ import { SpinLoader } from "../loaders/SpinLoader";
 import { SettingRow } from "./settingsChrome";
 
 const BYPASS_TIP =
-  "Advanced feature that disables the Starlink router completely, so the dish serves a third-party router instead. The Starlink WiFi goes off and the client list, custom DNS and subnet stop working. Most users should leave this off.";
+  "Recurso avançado que desativa completamente o roteador Starlink, para a antena servir um roteador de terceiros. O Wi-Fi Starlink fica fora e a lista de clientes, DNS personalizado e sub-rede param de funcionar. A maioria dos usuários deve deixar isso desligado.";
 
 /** The dish names the role within seconds of a flip, so a wait that outlasts this
  *  is one the dish is not going to end. */
@@ -105,7 +105,7 @@ export function BypassSection({
   else if (settling && assumed === true && !accountAnswering) {
     setSettling(false);
     setNote(
-      "Sent. This device can't reach your Starlink account now, so nothing here can confirm it.",
+      "Enviado. Este dispositivo não alcança sua conta Starlink agora, então nada aqui pode confirmar.",
     );
   }
 
@@ -114,7 +114,7 @@ export function BypassSection({
     const giveUp = setTimeout(() => {
       setAssumed(null);
       setSettling(false);
-      setNote("Couldn't confirm the change from here. Reopen this panel to check again.");
+      setNote("Não foi possível confirmar a alteração daqui. Reabra este painel para verificar de novo.");
       // Asked once on the way out rather than polled throughout: the account is
       // the only thing left to ask, and it is the slowest of the three.
       onReload();
@@ -128,13 +128,13 @@ export function BypassSection({
       // when the router is silent can bypass be the reason, and then the way
       // back is what the caption has to name.
       bypassed === false
-      ? "Connect your Starlink account to use this"
-      : "Connect this device to the internet and sign in your account to use"
+      ? "Conecte sua conta Starlink para usar isto"
+      : "Conecte este dispositivo à internet e entre na sua conta para usar"
     : bypassed === null
-      ? "Couldn't tell whether the router is bypassed"
+      ? "Não foi possível saber se o roteador está em bypass"
       : bypassed
-        ? "The Starlink router is disabled; a third-party router runs the network"
-        : "The Starlink router is running your network";
+        ? "O roteador Starlink está desativado; um roteador de terceiros gerencia a rede"
+        : "O roteador Starlink está gerenciando sua rede";
 
   const applyBypass = async (value: boolean) => {
     // Batched with the flag below, so the slider never sees both go false and
@@ -150,8 +150,8 @@ export function BypassSection({
       // which the router also returns for changes it goes on to discard.
       setNote(
         value
-          ? "Sent. The Starlink WiFi is going down; waiting for the account to confirm."
-          : "Sent! The router is coming back up; waiting for confirmation…",
+          ? "Enviado. O Wi-Fi Starlink está caindo; aguardando a conta confirmar."
+          : "Enviado! O roteador está voltando; aguardando confirmação…",
       );
       setAssumed(value);
       setSettling(true);
@@ -165,7 +165,7 @@ export function BypassSection({
   return (
     <>
       <SettingRow
-        title='Bypass mode'
+        title='Modo bypass'
         info={BYPASS_TIP}
         infoSeverity='danger'
         caption={caption}
@@ -181,18 +181,18 @@ export function BypassSection({
         }
       >
         {settling ? (
-          <SpinLoader size={15} label={assumed ? "Turning bypass on" : "Turning bypass off"} />
+          <SpinLoader size={15} label={assumed ? "Ativando bypass" : "Desativando bypass"} />
         ) : (
           bypassed !== null && (
-            <Badge tone={bypassed ? "critical" : "neutral"}>{bypassed ? "On" : "Off"}</Badge>
+            <Badge tone={bypassed ? "critical" : "neutral"}>{bypassed ? "Ligado" : "Desligado"}</Badge>
           )
         )}
       </SettingRow>
 
       <div className='flex flex-col gap-2.5 pb-2'>
         <SlideToConfirm
-          label={shown ? "Slide to turn on bypass mode" : "Slide to turn off bypass mode"}
-          busyLabel={saving ? "Sending…" : "Confirm to continue"}
+          label={shown ? "Deslize para ativar o modo bypass" : "Deslize para desativar o modo bypass"}
+          busyLabel={saving ? "Enviando…" : "Confirme para continuar"}
           direction={shown ? "right" : "left"}
           tone={shown ? "danger" : "default"}
           // A flip is unresolved until the dish or the account says otherwise, and
@@ -206,10 +206,10 @@ export function BypassSection({
             weight instead, which is what it is separately severable for. */}
         <Callout tone='info' icon='warning' iconSeverity={bypassed === false ? "danger" : "normal"}>
           {bypassed === false
-            ? "Bypass mode will completely disable the Starlink router and its WiFi. Only a third-party router wired to the dish stays online. You can turn it back off from here as long as this device has access to the internet."
+            ? "O modo bypass desativa completamente o roteador Starlink e o Wi-Fi dele. Só um roteador de terceiros ligado à antena permanece online. Você pode desativar de novo daqui enquanto este dispositivo tiver acesso à internet."
             : bypassed
-              ? "Bypass is on, so the Starlink router is disabled and a third-party router runs your network. Turning bypass off brings the Starlink router and its WiFi back."
-              : "Can't tell whether bypass is on. Turning it off is the safe direction either way: it brings the Starlink router and its WiFi back, and changes nothing if bypass was already off."}
+              ? "O bypass está ligado, então o roteador Starlink está desativado e um roteador de terceiros gerencia sua rede. Desativar o bypass traz de volta o roteador Starlink e o Wi-Fi dele."
+              : "Não dá para saber se o bypass está ligado. Desativá-lo é o caminho seguro de qualquer forma: traz de volta o roteador Starlink e o Wi-Fi dele, e não muda nada se o bypass já estava desligado."}
         </Callout>
       </div>
 
@@ -220,11 +220,11 @@ export function BypassSection({
           overlayClassName='bg-black/30 backdrop-blur-[2px]'
         >
           <DialogHeader>
-            <DialogTitle className='text-[19px] leading-snug'>Are you sure?</DialogTitle>
+            <DialogTitle className='text-[19px] leading-snug'>Tem certeza?</DialogTitle>
             <DialogDescription className='text-[13.5px] leading-relaxed'>
               {offered
-                ? "The Starlink router and its WiFi will switch off. Only devices behind a third-party router wired to the dish stay online. You can turn bypass back off from here as long as this device still has internet — if nothing else provides it, you will need another device on mobile data."
-                : "The Starlink router and its WiFi come back on. Devices connected through a third-party router may need to reconnect."}
+                ? "O roteador Starlink e o Wi-Fi dele serão desligados. Só dispositivos atrás de um roteador de terceiros ligado à antena permanecem online. Você pode desativar o bypass daqui enquanto este dispositivo ainda tiver internet — se nada mais fornecer, será preciso outro dispositivo com dados móveis."
+                : "O roteador Starlink e o Wi-Fi dele voltam. Dispositivos conectados por um roteador de terceiros podem precisar reconectar."}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className='mt-2 gap-2'>
@@ -234,7 +234,7 @@ export function BypassSection({
               disabled={saving}
               onClick={() => setOffered(null)}
             >
-              Cancel
+              Cancelar
             </Button>
             <Button
               variant={offered ? "destructive" : "default"}
@@ -242,7 +242,7 @@ export function BypassSection({
               disabled={saving}
               onClick={() => offered !== null && void applyBypass(offered)}
             >
-              {saving ? "Sending…" : offered ? "Turn on" : "Turn off"}
+              {saving ? "Enviando…" : offered ? "Ativar" : "Desativar"}
             </Button>
           </DialogFooter>
         </DialogContent>

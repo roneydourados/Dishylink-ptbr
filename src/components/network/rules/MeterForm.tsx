@@ -29,11 +29,11 @@ import { useScheduleDraft } from "./scheduleTerms";
  *  covers since there is no name to type. */
 function groupNameFor(memberKeys: readonly string[], candidates: MemberCandidate[]): string {
   const named = memberKeys.map(
-    (key) => candidates.find((candidate) => candidate.clientKey === key)?.name ?? `device ${key}`,
+    (key) => candidates.find((candidate) => candidate.clientKey === key)?.name ?? `dispositivo ${key}`,
   );
   if (named.length <= 1) return named[0] ?? "";
-  if (named.length === 2) return `${named[0]} and ${named[1]}`;
-  return `${named[0]} and ${named.length - 1} others`;
+  if (named.length === 2) return `${named[0]} e ${named[1]}`;
+  return `${named[0]} e mais ${named.length - 1}`;
 }
 
 export function MeterForm({
@@ -147,15 +147,15 @@ export function MeterForm({
         <div className='flex items-start justify-between gap-3'>
           <div className='space-y-1'>
             <DialogTitle className='flex items-center gap-1.5 text-[19px] leading-snug'>
-              {mode === "timer" ? "Timer" : mode === "schedule" ? "Schedule" : "Data limit"}
+              {mode === "timer" ? "Timer" : mode === "schedule" ? "Agenda" : "Limite de dados"}
               <RuleModesInfo />
             </DialogTitle>
             <DialogDescription className='text-[13px]'>
               {mode === "timer"
-                ? `Pause “${deviceName}” once the time is up.`
+                ? `Pausar “${deviceName}” quando o tempo acabar.`
                 : mode === "schedule"
-                  ? `Set the hours “${deviceName}” is online.`
-                  : `Pause “${deviceName}” once it has used its share.`}
+                  ? `Definir os horários em que “${deviceName}” fica online.`
+                  : `Pausar “${deviceName}” ao usar sua franquia.`}
             </DialogDescription>
           </div>
           <RuleModeToggle mode={mode} onChange={rules.chooseMode} />
@@ -169,7 +169,7 @@ export function MeterForm({
           }
         >
           <div className='flex items-baseline justify-between'>
-            <span className='text-[13px] font-medium text-foreground'>This cycle</span>
+            <span className='text-[13px] font-medium text-foreground'>Este ciclo</span>
             <span className='text-[13px] tabular-nums text-muted-foreground'>
               <span
                 className={`font-semibold ${remaining <= 0 ? "text-destructive" : "text-foreground"}`}
@@ -188,19 +188,19 @@ export function MeterForm({
           <div className='mt-1.5 flex justify-between text-[11.5px] text-muted-foreground'>
             <span>
               {rule
-                ? (endsIn(rule.periodEndMs, nowMs) ?? "Does not reset on its own")
-                : "No limit set yet"}
+                ? (endsIn(rule.periodEndMs, nowMs) ?? "Não reinicia sozinho")
+                : "Nenhum limite definido ainda"}
             </span>
             {rule && allocationBytes > 0 && (
               <span className={remaining <= 0 ? "text-destructive" : undefined}>
-                {formatBytes(Math.max(0, remaining))} left
+                {formatBytes(Math.max(0, remaining))} restantes
               </span>
             )}
           </div>
         </div>
 
         <SwitchRow
-          title='Auto-pause data'
+          title='Pausa automática de dados'
           detail={autoPauseDetail(autoPause, mode, several)}
           checked={autoPause}
           onChange={setAutoPause}
@@ -210,7 +210,7 @@ export function MeterForm({
           rules={rules}
           allowance={draft}
           timetable={timetable}
-          capDetail={`Cap the data ${several ? "these devices use" : "this device uses"}, on top of its hours.`}
+          capDetail={`Limite os dados que ${several ? "estes dispositivos usam" : "este dispositivo usa"}, além dos horários.`}
         />
 
         {membershipKnown && (
@@ -227,26 +227,26 @@ export function MeterForm({
 
         {mode !== "timer" && willPauseOnSave && (
           <Callout tone='error'>
-            This device has already used more than that, so saving pauses it straight away.
+            Este dispositivo já usou mais do que isso, então salvar o pausa imediatamente.
           </Callout>
         )}
         {!loading &&
           autoPause &&
           (pauseEnforceable ? (
             <Callout tone='info'>
-              Auto-pausing requires your Starlink account to be signed in. It works whether or not
-              this computer is on the same network as the router.
+              A pausa automática exige que sua conta Starlink esteja conectada. Funciona mesmo se
+              este computador não estiver na mesma rede do roteador.
             </Callout>
           ) : (
             <Callout tone='error'>
-              Connect your Starlink account for Dishylink to pause a device on its own. Until then
-              the limit is watched and announced, but nothing is paused.
+              Conecte sua conta Starlink para o Dishylink pausar um dispositivo sozinho. Até lá, o
+              limite é observado e anunciado, mas nada é pausado.
             </Callout>
           ))}
         {rule?.pauseState === "failed" && rule.reached && (
           <Callout tone='error'>
-            This device reached its limit, but the pause could not be sent to Starlink.
-            {rule.pauseError ? ` ${rule.pauseError}.` : ""} It is retried every minute.
+            Este dispositivo atingiu o limite, mas a pausa não pôde ser enviada à Starlink.
+            {rule.pauseError ? ` ${rule.pauseError}.` : ""} A tentativa é repetida a cada minuto.
           </Callout>
         )}
         {error && <Callout tone='error'>{error}</Callout>}
@@ -268,7 +268,7 @@ export function MeterForm({
                   void restart();
                 }}
               >
-                Start over
+                Recomeçar
               </Button>
               <Button
                 variant='ghost'
@@ -289,9 +289,9 @@ export function MeterForm({
                 }
               >
                 {pending === "delete" ? (
-                  <SpinLoader variant='segment' size={14} label='Deleting' />
+                  <SpinLoader variant='segment' size={14} label='Excluindo' />
                 ) : (
-                  "Delete rule"
+                  "Excluir regra"
                 )}
               </Button>
             </>
@@ -299,7 +299,7 @@ export function MeterForm({
         </div>
         <div className='flex gap-2'>
           <Button variant='outline' className='cursor-pointer' onClick={onCancel}>
-            Cancel
+            Cancelar
           </Button>
           <Button
             className='cursor-pointer'
@@ -312,13 +312,13 @@ export function MeterForm({
             }
           >
             {pending === "save" ? (
-              <SpinLoader variant='segment' size={16} label='Saving' />
+              <SpinLoader variant='segment' size={16} label='Salvando' />
             ) : mode === "timer" ? (
-              "Start timer"
+              "Iniciar timer"
             ) : several ? (
-              "Save limit for all"
+              "Salvar limite para todos"
             ) : (
-              "Save limit"
+              "Salvar limite"
             )}
           </Button>
         </div>

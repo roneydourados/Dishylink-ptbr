@@ -136,8 +136,8 @@ export function StatDetailPanel({ detail, samples }: StatDetailPanelProps) {
   const displayEnergyKWh = useHistorianEnergy ? energyHistory.data!.totalKWh : windowEnergy;
   const energyNote = useHistorianEnergy
     ? energyHistory.data!.coverage.fraction >= 0.95
-      ? "over the selected window"
-      : `recorded ${Math.round(energyHistory.data!.coverage.fraction * 100)}% of this window`
+      ? "na janela selecionada"
+      : `registrado ${Math.round(energyHistory.data!.coverage.fraction * 100)}% desta janela`
     : coverageNote(windowed, windowMinutes);
 
   // An empty chart is just a confusing box; say so in words until a reading
@@ -170,9 +170,9 @@ export function StatDetailPanel({ detail, samples }: StatDetailPanelProps) {
     return null;
   }, [samples, secondaryGetValue]);
   const secondaryFigures = [
-    { label: "Average", ...detail.formatBig(secondaryAverage) },
+    { label: "Média", ...detail.formatBig(secondaryAverage) },
     ...(secondaryCurrent !== null
-      ? [{ label: "Current", ...detail.formatBig(secondaryCurrent) }]
+      ? [{ label: "Atual", ...detail.formatBig(secondaryCurrent) }]
       : []),
   ];
 
@@ -183,15 +183,15 @@ export function StatDetailPanel({ detail, samples }: StatDetailPanelProps) {
     <>
       <FigureRow
         figures={[
-          { label: "Average", value: average.value, unit: average.unit },
-          { label: "Current", value: current.value, unit: current.unit },
+          { label: "Média", value: average.value, unit: average.unit },
+          { label: "Atual", value: current.value, unit: current.unit },
         ]}
       />
       <SegmentedControl
         options={WINDOW_OPTIONS}
         value={String(windowMinutes)}
         onChange={(minutes) => setWindowMinutes(Number(minutes))}
-        label='Time window'
+        label='Janela de tempo'
         className='mb-2.5'
       />
 
@@ -228,9 +228,9 @@ export function StatDetailPanel({ detail, samples }: StatDetailPanelProps) {
 
       {detail.distribution && (
         <section className='mt-4'>
-          <h3 className='text-[15px] font-semibold'>Latency distribution</h3>
+          <h3 className='text-[15px] font-semibold'>Distribuição de latência</h3>
           <p className='mt-0.5 mb-2 text-[12px] font-medium text-muted-foreground'>
-            over the selected window
+            na janela selecionada
           </p>
           <LatencyHistogram samples={windowed} series={detail.series} />
         </section>
@@ -269,14 +269,14 @@ export function StatDetailPanel({ detail, samples }: StatDetailPanelProps) {
             {displayEnergyKWh.toFixed(displayEnergyKWh < 1 ? 3 : 2)} kWh
           </div>
           <div className='mt-0.5 text-[12px] font-medium text-muted-foreground'>
-            energy used {energyNote}
+            energia usada {energyNote}
           </div>
         </div>
       )}
 
       {detail.showEnergyHistory && <EnergyHistoryPanel active />}
 
-      <Explainer title={`What is ${detail.label.toLowerCase()}?`}>{detail.explainer}</Explainer>
+      <Explainer title={`O que é ${detail.label.toLowerCase()}?`}>{detail.explainer}</Explainer>
     </>
   );
 }

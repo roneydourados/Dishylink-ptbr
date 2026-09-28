@@ -33,16 +33,16 @@ import { TimePicker } from "./TimePicker";
 import { UPDATE_WINDOWS, updateWindowFor } from "./updateWindow";
 
 const SNOW_MELT_LABEL: Record<SnowMeltMode, string> = {
-  AUTO: "Automatic",
-  ALWAYS_ON: "Always on",
-  ALWAYS_OFF: "Off",
+  AUTO: "Automático",
+  ALWAYS_ON: "Sempre ligado",
+  ALWAYS_OFF: "Desligado",
 };
 
 const SNOW_MELT_DESCRIPTION: Record<SnowMeltMode, string> = {
-  AUTO: "Automatically detect snow and heat up when needed.",
+  AUTO: "Detecta neve automaticamente e aquece quando necessário.",
   ALWAYS_ON:
-    "Keep warm to better resist snow build-up. This option may increase power consumption.",
-  ALWAYS_OFF: "Never use extra power to melt snow.",
+    "Mantém aquecido para resistir melhor ao acúmulo de neve. Esta opção pode aumentar o consumo de energia.",
+  ALWAYS_OFF: "Nunca usa energia extra para derreter neve.",
 };
 
 function SnowMeltOption({ mode }: { mode: SnowMeltMode }) {
@@ -108,7 +108,7 @@ export function StarlinkSettingsTab({
 
   return (
     <>
-      {settings.loading && <Loading message='Reading dish configuration…' />}
+      {settings.loading && <Loading message='Lendo configuração da antena…' />}
       {/* Same Callout the Router tab uses for its failures — the two tabs are
           siblings and their errors must not read as two different apps. */}
       {settings.error && (
@@ -123,8 +123,8 @@ export function StarlinkSettingsTab({
       {config && (
         <>
           <SettingRow
-            title='Snow melt'
-            caption="Heats the panel to shed snow. Auto uses the dish's own sensors."
+            title='Derretimento de neve'
+            caption='Aquece o painel para tirar a neve. Automático usa os sensores da própria antena.'
           >
             <Select
               value={config.snowMeltMode ?? "AUTO"}
@@ -143,11 +143,11 @@ export function StarlinkSettingsTab({
           </SettingRow>
 
           <SettingRow
-            title='Sleep schedule'
+            title='Horário de sono'
             caption={
               sleepEnabled
-                ? `Dish powers down daily at ${formatClock12(sleepStartLocal)} and wakes at ${formatClock12(wakeLocal)}`
-                : "Power the dish down for part of every day"
+                ? `A antena desliga diariamente às ${formatClock12(sleepStartLocal)} e liga às ${formatClock12(wakeLocal)}`
+                : "Desliga a antena durante parte de cada dia"
             }
           >
             <Switch
@@ -169,7 +169,7 @@ export function StarlinkSettingsTab({
           </SettingRow>
           {sleepEnabled && (
             <div className='flex items-center justify-end gap-2 pb-[8px]'>
-              <span className='mt-px block text-[12px] text-muted-foreground'>from</span>
+              <span className='mt-px block text-[12px] text-muted-foreground'>de</span>
               <TimePicker
                 minutes={sleepStartLocal}
                 disabled={settings.saving}
@@ -180,7 +180,7 @@ export function StarlinkSettingsTab({
                   })
                 }
               />
-              <span className='mt-px block text-[12px] text-muted-foreground'>to</span>
+              <span className='mt-px block text-[12px] text-muted-foreground'>até</span>
               <TimePicker
                 minutes={wakeLocal}
                 disabled={settings.saving}
@@ -198,8 +198,8 @@ export function StarlinkSettingsTab({
               six-hour band, which is why the official app offers exactly these
               and words them "around 3 AM · Between 12 AM and 6 AM". */}
           <SettingRow
-            title='Software updates'
-            caption={`Update reboots happen ${updateWindow.range.toLowerCase()}`}
+            title='Atualizações de software'
+            caption={`Reinícios da atualização ocorrem ${updateWindow.range.toLowerCase()}`}
           >
             <Select
               value={String(updateWindow.hour)}
@@ -223,7 +223,7 @@ export function StarlinkSettingsTab({
             </Select>
           </SettingRow>
 
-          <SettingRow title='Defer updates' caption='Hold firmware updates for up to 3 days'>
+          <SettingRow title='Adiar atualizações' caption='Segura atualizações de firmware por até 3 dias'>
             <Switch
               checked={Boolean(config.swupdateThreeDayDeferralEnabled)}
               disabled={settings.saving}
@@ -232,8 +232,8 @@ export function StarlinkSettingsTab({
           </SettingRow>
 
           <SettingRow
-            title='Debug data'
-            caption='Diagnostics + status + config as JSON, for support or bug reports'
+            title='Dados de depuração'
+            caption='Diagnósticos + status + config em JSON, para suporte ou relatos de bug'
           >
             <button
               className={actionButton("subtle")}
@@ -245,62 +245,62 @@ export function StarlinkSettingsTab({
               }}
             >
               {copyState === "copied"
-                ? "Copied ✓"
+                ? "Copiado ✓"
                 : copyState === "failed"
-                  ? "Copy failed"
-                  : "Copy"}
+                  ? "Falha ao copiar"
+                  : "Copiar"}
             </button>
           </SettingRow>
 
-          <SectionLabel>Maintenance</SectionLabel>
+          <SectionLabel>Manutenção</SectionLabel>
           <DangerAction
-            title='Reset obstruction map'
-            caption='Wipes the learned sky survey — do this after physically relocating the dish. Takes hours to relearn.'
-            buttonLabel='Reset'
-            confirmLabel='Yes, reset map'
+            title='Redefinir mapa de obstrução'
+            caption='Apaga o levantamento do céu aprendido — faça isso após mover a antena fisicamente. Leva horas para reaprender.'
+            buttonLabel='Redefinir'
+            confirmLabel='Sim, redefinir mapa'
             onRun={async () => {
               await (await loadDish()).clearObstructionMap();
-              return "Obstruction map cleared — the survey restarts now.";
+              return "Mapa de obstrução limpo — o levantamento recomeça agora.";
             }}
           />
           <DangerAction
-            title='Reboot Starlink'
-            caption='Internet drops for ~2–3 minutes while the dish restarts'
-            buttonLabel='Reboot'
-            slideLabel='Slide to reboot dish'
-            confirmLabel='Reboot dish'
+            title='Reiniciar Starlink'
+            caption='A internet cai por ~2–3 minutos enquanto a antena reinicia'
+            buttonLabel='Reiniciar'
+            slideLabel='Deslize para reiniciar a antena'
+            confirmLabel='Reiniciar antena'
             onRun={async () => {
               await (await loadDish()).reboot();
-              return "Reboot command sent — the dish is restarting.";
+              return "Comando de reinício enviado — a antena está reiniciando.";
             }}
           />
           <DangerAction
-            title='Factory reset Starlink'
-            caption='Wipes every dish setting back to how it shipped. Not reversible.'
-            buttonLabel='Factory reset'
-            slideLabel='Slide to factory reset the dish'
-            confirmLabel='Factory reset dish'
-            warning='Only factory reset as a last resort or when Starlink recommends it. Frequent factory resets can cause permanent hardware failure.'
+            title='Restaurar fábrica do Starlink'
+            caption='Apaga todas as configurações da antena para o estado de fábrica. Irreversível.'
+            buttonLabel='Restaurar fábrica'
+            slideLabel='Deslize para restaurar a fábrica da antena'
+            confirmLabel='Restaurar fábrica da antena'
+            warning='Só restaure de fábrica como último recurso ou quando a Starlink recomendar. Restaurações frequentes podem causar falha permanente do hardware.'
             onRun={async () => {
               await (await loadDish()).factoryReset();
-              return "Factory reset sent — the dish is wiping and restarting.";
+              return "Restauração de fábrica enviada — a antena está apagando e reiniciando.";
             }}
           />
           {isMotorized && (
             <DangerAction
-              title={status?.stowRequested ? "Unstow dish" : "Stow dish"}
+              title={status?.stowRequested ? "Desdobrar antena" : "Recolher antena"}
               caption={
                 status?.stowRequested
-                  ? "Unfold and reacquire satellites over a few minutes"
-                  : "Folds the dish flat and stops internet until unstowed"
+                  ? "Desdobra e readquire satélites em alguns minutos"
+                  : "Dobra a antena e interrompe a internet até desdobrar"
               }
-              buttonLabel={status?.stowRequested ? "Unstow" : "Stow"}
-              confirmLabel={status?.stowRequested ? "Yes, unstow" : "Yes, stow"}
+              buttonLabel={status?.stowRequested ? "Desdobrar" : "Recolher"}
+              confirmLabel={status?.stowRequested ? "Sim, desdobrar" : "Sim, recolher"}
               onRun={async () => {
                 await (await loadDish()).stow(Boolean(status?.stowRequested));
                 return status?.stowRequested
-                  ? "Unstow sent — deploying."
-                  : "Stow sent — folding flat.";
+                  ? "Desdobramento enviado — abrindo."
+                  : "Recolhimento enviado — dobrando.";
               }}
             />
           )}

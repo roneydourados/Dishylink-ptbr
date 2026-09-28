@@ -120,7 +120,7 @@ function RuleForm({
       }
       onSaved();
     } catch {
-      setError("The recorder refused the change.");
+      setError("O gravador recusou a alteração.");
     } finally {
       setPending(null);
     }
@@ -145,7 +145,7 @@ function RuleForm({
       else await removeDeviceRule(rule.memberKeys[0]);
       onSaved();
     } catch {
-      setError("The recorder refused the change.");
+      setError("O gravador recusou a alteração.");
     } finally {
       setPending(null);
     }
@@ -157,7 +157,7 @@ function RuleForm({
         <div className='flex items-start justify-between gap-3'>
           <div className='space-y-1'>
             <DialogTitle className='flex items-center gap-1.5 text-[19px] leading-snug'>
-              {rule ? "Edit rule" : "New rule"}
+              {rule ? "Editar regra" : "Nova regra"}
               <RuleModesInfo />
             </DialogTitle>
           </div>
@@ -167,12 +167,12 @@ function RuleForm({
 
       <div className='space-y-5 border-t border-border/60 py-5'>
         <label className='block space-y-1.5'>
-          <span className='text-[12px] font-medium text-foreground'>Name</span>
+          <span className='text-[12px] font-medium text-foreground'>Nome</span>
           <Input
             value={name}
-            placeholder='Kids devices'
+            placeholder='Dispositivos das crianças'
             disabled={!named}
-            title={named ? undefined : "Named after the device it covers"}
+            title={named ? undefined : "Nomeado conforme o dispositivo que cobre"}
             onChange={(event) => setName(event.target.value)}
           />
         </label>
@@ -194,7 +194,7 @@ function RuleForm({
         />
 
         <SwitchRow
-          title='Auto-pause'
+          title='Pausa automática'
           detail={autoPauseDetail(allowance.autoPause, rules.mode, members.length > 1)}
           checked={allowance.autoPause}
           onChange={allowance.setAutoPause}
@@ -204,13 +204,13 @@ function RuleForm({
           rules={rules}
           allowance={allowance}
           timetable={timetable}
-          capDetail='Cap the data these devices use, on top of their hours.'
+          capDetail='Limite os dados que estes dispositivos usam, além dos horários.'
         />
 
         {!groups.loading && !groups.pauseEnforceable && allowance.autoPause && (
           <Callout tone='error'>
-            Connect your Starlink account for Dishylink to pause a device on its own. Until then
-            this rule is watched and announced, but nothing is paused.
+            Conecte sua conta Starlink para o Dishylink pausar um dispositivo sozinho. Até lá, esta
+            regra é observada e anunciada, mas nada é pausado.
           </Callout>
         )}
         {error && <Callout tone='error'>{error}</Callout>}
@@ -227,7 +227,7 @@ function RuleForm({
                 disabled={busy}
                 onClick={startOver}
               >
-                Start over
+                Recomeçar
               </Button>
               <Button
                 variant='ghost'
@@ -237,9 +237,9 @@ function RuleForm({
                 onClick={() => void deleteRule()}
               >
                 {pending === "delete" ? (
-                  <SpinLoader variant='segment' size={14} label='Deleting' />
+                  <SpinLoader variant='segment' size={14} label='Excluindo' />
                 ) : (
-                  "Delete rule"
+                  "Excluir regra"
                 )}
               </Button>
             </>
@@ -247,15 +247,15 @@ function RuleForm({
         </div>
         <div className='flex gap-2'>
           <Button variant='outline' className='cursor-pointer' onClick={onCancel}>
-            Cancel
+            Cancelar
           </Button>
           <Button className='cursor-pointer' disabled={busy || !ready} onClick={() => void save()}>
             {pending === "save" ? (
-              <SpinLoader variant='segment' size={16} label='Saving' />
+              <SpinLoader variant='segment' size={16} label='Salvando' />
             ) : rule ? (
-              "Save rule"
+              "Salvar regra"
             ) : (
-              "Create rule"
+              "Criar regra"
             )}
           </Button>
         </div>

@@ -96,104 +96,104 @@ export interface OutageMeta {
 // each keeps its own meaning, with the raw dish jargon explained in `tip`.
 const OUTAGE_META: Record<string, OutageMeta> = {
   NO_PINGS: {
-    label: "Ping Network Interruption",
-    tip: "Radio frequency link looked fine but pings to the ground station/POP failed — traffic wasn't actually flowing.",
+    label: "Interrupção de rede (ping)",
+    tip: "O link de rádio parecia ok, mas os pings para a estação/PoP falharam — o tráfego não estava fluindo de fato.",
     kind: "outage",
   },
   NO_DOWNLINK: {
-    label: "Downlink Network Interruption",
-    tip: "Dish was pointed at a satellite but received no decodable downlink signal.",
+    label: "Interrupção de rede (downlink)",
+    tip: "A antena apontava para um satélite, mas não recebeu sinal de downlink decodificável.",
     kind: "outage",
   },
   NO_SATS: {
-    label: "No satellite in range",
-    tip: "No Starlink satellite was overhead to connect to.",
+    label: "Nenhum satélite no alcance",
+    tip: "Não havia satélite Starlink overhead para conectar.",
     kind: "outage",
   },
   NO_SCHEDULE: {
-    label: "No service scheduled",
-    tip: "Network gave your cell no time slot (seen during network congestion, service issues, account problems, or right after boot before a schedule downloads).",
+    label: "Sem serviço agendado",
+    tip: "A rede não deu slot de tempo à sua célula (visto em congestionamento, problemas de serviço/conta, ou logo após o boot antes do agendamento baixar).",
     kind: "outage",
   },
   UNKNOWN: {
-    label: "Unknown Event",
-    tip: "Dish couldn't classify the drop.",
+    label: "Evento desconhecido",
+    tip: "A antena não conseguiu classificar a queda.",
     kind: "outage",
   },
   OBSTRUCTED: {
-    label: "Dish's view obstructed",
-    tip: "Something physically blocked the dish's view of the sky (branch, roof, pole), so it dropped the satellite.",
+    label: "Visão da antena obstruída",
+    tip: "Algo bloqueou fisicamente a visão da antena do céu (galho, telhado, poste), e ela perdeu o satélite.",
     kind: "outage",
   },
   THERMAL_SHUTDOWN: {
-    label: "Overheated",
-    tip: "The dish's internal temperature exceeded safe limits (hot climate + direct sun) and it shut down to cool off.",
+    label: "Superaquecimento",
+    tip: "A temperatura interna da antena passou do limite seguro (clima quente + sol direto) e ela desligou para esfriar.",
     kind: "outage",
   },
   RAIN_SNR_PERSISTENTLY_LOW: {
-    label: "Weather interference",
-    tip: "Heavy rain/snow degraded signal-to-noise below usable level.",
+    label: "Interferência climática",
+    tip: "Chuva/neve forte degradou a relação sinal-ruído abaixo do nível útil.",
     kind: "outage",
   },
   // A prior build persisted this label before we stored raw enums; keep it as an
   // alias so those rows still resolve to the same meaning and dedupe.
   WEAK_SIGNAL_FROM_WEATHER: {
-    label: "Weather interference",
-    tip: "Heavy rain/snow degraded signal-to-noise below usable level.",
+    label: "Interferência climática",
+    tip: "Chuva/neve forte degradou a relação sinal-ruído abaixo do nível útil.",
     kind: "outage",
   },
   BOOTING: {
-    label: "Starlink booting",
-    tip: "Dish was rebooting / powering up.",
+    label: "Starlink iniciando",
+    tip: "A antena estava reiniciando / ligando.",
     kind: "outage",
   },
   SKY_SEARCH: {
-    label: "Searching for satellites",
-    tip: "Dish was scanning the sky to lock onto satellites (after boot or being moved).",
+    label: "Buscando satélites",
+    tip: "A antena estava varrendo o céu para travar nos satélites (após o boot ou ser movida).",
     kind: "outage",
   },
   ACTUATOR_ACTIVITY: {
-    label: "Repositioning",
-    tip: "The dish's motors were physically moving it (repositioning/realigning); RF is muted while it moves.",
+    label: "Reposicionando",
+    tip: "Os motores da antena a estavam movendo (reposicionamento/realinhamento); o RF fica mudo enquanto ela se move.",
     kind: "outage",
   },
   STOWED: {
-    label: "Dish stowed",
-    tip: "Dish was folded in stow position.",
+    label: "Antena recolhida",
+    tip: "A antena estava dobrada na posição de recolhimento.",
     kind: "outage",
   },
   SLEEPING: {
-    label: "Scheduled sleep",
-    tip: 'Scheduled sleep window (the "snooze" schedule in the app).',
+    label: "Sono agendado",
+    tip: 'Janela de sono agendada (o agendamento de "soneca" no app).',
     kind: "outage",
   },
   CABLE_TEST: {
-    label: "Cable test",
-    tip: "Dish was running its cable diagnostic.",
+    label: "Teste de cabo",
+    tip: "A antena estava rodando o diagnóstico do cabo.",
     kind: "outage",
   },
   INHIBIT_RF: {
-    label: "Transmission paused",
-    tip: "Dish stopped transmitting (RF inhibited — for safety, or commanded off).",
+    label: "Transmissão pausada",
+    tip: "A antena parou de transmitir (RF inibido — por segurança, ou comando para desligar).",
     kind: "outage",
   },
   // Router (wifi_get_history) events. The rest of the EventReason set auto-cleans
   // via prettifyToken ("Router software update", "Router reboot", …); only these
   // need bespoke wording.
   ROUTER_POWER_CYCLE: {
-    label: "Router powered on",
-    tip: "The router lost and regained power (unplugged/replugged, or a power blip).",
+    label: "Roteador ligado",
+    tip: "O roteador perdeu e recuperou energia (desconectado/reconectado, ou queda de luz).",
     kind: "info",
   },
   CLIENT_SWITCHING_BAND: {
-    label: "Device switched WiFi band",
-    tip: "A connected device moved between the 2.4 GHz and 5 GHz bands. This is normal when devices are optimizing their connection for best WiFi performance.",
+    label: "Dispositivo trocou a banda Wi‑Fi",
+    tip: "Um dispositivo conectado mudou entre as bandas de 2,4 GHz e 5 GHz. Isso é normal quando os aparelhos otimizam a conexão.",
     kind: "info",
   },
   // prettifyToken renders this one as "Eth no link", which explains nothing.
   ETH_NO_LINK: {
-    label: "Ethernet cable link to dish disconnected",
-    tip: "The ethernet link between the router and the dish went dead. Expected for a few seconds while either device reboots; at any other time, check the cable at both ends.",
+    label: "Link Ethernet com a antena desconectado",
+    tip: "O link Ethernet entre o roteador e a antena caiu. Esperado por alguns segundos enquanto um dos dois reinicia; em qualquer outro momento, verifique o cabo nas duas pontas.",
     kind: "outage",
   },
 
@@ -202,33 +202,33 @@ const OUTAGE_META: Record<string, OutageMeta> = {
   // anywhere: none of the four below is an outage, and three of them ran for
   // half a minute or more while throughput carried on uninterrupted.
   ROUTER_POP_IPV4_PING_DROP: {
-    label: "Router lost its keepalive ping (IPv4)",
-    tip: "The router's own ping to the ground station went unanswered. It watches the link with these pings; losing them means the path looked unhealthy to the router, not that your traffic stopped — data usually keeps flowing right through it.",
+    label: "Roteador perdeu o ping keepalive (IPv4)",
+    tip: "O ping do roteador para a estação terrestre não teve resposta. Ele monitora o link com esses pings; perdê-los significa que o caminho parecia ruim para o roteador, não que seu tráfego parou — os dados costumam continuar fluindo.",
     kind: "degraded",
   },
   ROUTER_POP_IPV6_PING_DROP: {
-    label: "Router lost its keepalive ping (IPv6)",
-    tip: "As the IPv4 drop, on the IPv6 path. Seen alone it usually means only IPv6 was affected, which most traffic can route around.",
+    label: "Roteador perdeu o ping keepalive (IPv6)",
+    tip: "Como a queda IPv4, no caminho IPv6. Sozinho, em geral só o IPv6 foi afetado, e a maior parte do tráfego contorna isso.",
     kind: "degraded",
   },
   ROUTER_DISH_PING_DROP: {
-    label: "Router lost contact with the dish briefly",
-    tip: "The router's keepalive ping to the dish over the Ethernet cable went unanswered. Expected while the dish reboots; otherwise it points at the cable between them.",
+    label: "Roteador perdeu contato com a antena por um instante",
+    tip: "O ping keepalive do roteador para a antena pelo cabo Ethernet não teve resposta. Esperado enquanto a antena reinicia; caso contrário, aponta para o cabo entre eles.",
     kind: "degraded",
   },
   HIGH_DOWNLINK_PACKET_LOSS: {
-    label: "High downlink packet loss",
-    tip: "A raised share of incoming packets was lost. The connection stayed up — this is quality degrading, not service stopping.",
+    label: "Alta perda de pacotes no downlink",
+    tip: "Uma parcela maior dos pacotes recebidos foi perdida. A conexão continuou — isto é qualidade caindo, não serviço parado.",
     kind: "degraded",
   },
   CLIENT_SWITCHING_UPSTREAM_MAC: {
-    label: "Device moved to another access point",
-    tip: "A connected device handed off between the router and a mesh node, or between radios.",
+    label: "Dispositivo mudou de ponto de acesso",
+    tip: "Um dispositivo conectado fez handoff entre o roteador e um nó mesh, ou entre rádios.",
     kind: "info",
   },
   ROUTER_PUBLIC_IPV4_CHANGE: {
-    label: "Public IP address changed",
-    tip: "Starlink issued the router a different public IPv4 address — normal on a CGNAT network.",
+    label: "Endereço IP público alterado",
+    tip: "A Starlink atribuiu ao roteador um IPv4 público diferente — normal em rede CGNAT.",
     kind: "info",
   },
 };
@@ -246,7 +246,7 @@ function prettifyToken(token: string): string {
  *  string) map to the catalogue; an already-human label (thermal episodes) passes
  *  through as its own title with no tip. */
 export function outageEventMeta(cause: string): OutageMeta {
-  if (!cause) return { label: "Unknown event", kind: "info" };
+  if (!cause) return { label: "Evento desconhecido", kind: "info" };
   const meta = OUTAGE_META[canonicalCause(cause)];
   if (meta) return meta;
   const bare = cause.replace(/^EVENT_REASON_/, "");

@@ -173,17 +173,17 @@ function SelfDeviceRow({ clients }: { clients: WifiClientJson[] }) {
 
   return (
     <SettingRow
-      title='Your device on this network'
-      info='The router lists every connected device the same way, so Dishylink cannot tell which one you are sitting at. Pick yours and it is marked "This device" in the network list, with no pause button of its own: pausing it would cut off the internet connection this dashboard needs to unpause it again, and you would have to undo it from another device or the Starlink app. Change or clear it here at any time.'
+      title='Seu dispositivo nesta rede'
+      info='O roteador lista todos os dispositivos conectados da mesma forma, então o Dishylink não consegue saber em qual você está. Escolha o seu e ele fica marcado como "Este dispositivo" na lista da rede, sem botão de pausa próprio: pausá-lo cortaria a internet que este painel precisa para despausar de novo, e você teria que desfazer em outro dispositivo ou no app Starlink. Altere ou limpe aqui a qualquer momento.'
       infoSeverity='warn'
-      caption='Pick the computer you are using right now'
+      caption='Escolha o computador que você está usando agora'
       note={
         saveFailed
-          ? "That could not be saved, so nothing changed. Try again."
+          ? "Não foi possível salvar, então nada mudou. Tente de novo."
           : clientId === null
-            ? "Until you pick one, no device can be paused."
+            ? "Até você escolher um, nenhum dispositivo pode ser pausado."
             : missing
-              ? "The device you picked is not connected right now. Pick it again when it is back."
+              ? "O dispositivo que você escolheu não está conectado agora. Escolha de novo quando voltar."
               : undefined
       }
     >
@@ -194,17 +194,17 @@ function SelfDeviceRow({ clients }: { clients: WifiClientJson[] }) {
         <SelectTrigger className={triggerClass} style={{ maxWidth: 178 }}>
           <SelectValue>
             <span className='truncate'>
-              {named ? displayName(named) : missing ? "Not connected" : "Choose…"}
+              {named ? displayName(named) : missing ? "Não conectado" : "Escolher…"}
             </span>
           </SelectValue>
         </SelectTrigger>
         <SelectContent className={selectContentClass}>
           <SelectItem value={NO_SELF_DEVICE} className={selectItemClass}>
-            None
+            Nenhum
           </SelectItem>
           {devices.length === 0 && (
             <div className='px-2 py-1.5 text-xs text-muted-foreground'>
-              Waiting for the router to list your devices…
+              Aguardando o roteador listar seus dispositivos…
             </div>
           )}
           {devices.map((device) => (
@@ -254,9 +254,9 @@ function BadgeModeRow() {
 
   return (
     <SettingRow
-      title='Toolbar badge'
-      info='The count on the extension icon. Being away from your Starlink makes both devices unreachable, and the badge cannot tell that from a device that has actually failed — so "Device faults only" leaves both out. Alerts still reach the panel and your notifications either way.'
-      caption='What the count on the extension icon includes'
+      title='Badge da barra de ferramentas'
+      info='A contagem no ícone da extensão. Estar longe do Starlink deixa os dois dispositivos inacessíveis, e o badge não distingue isso de um dispositivo que realmente falhou — então "Só falhas de dispositivo" deixa os dois de fora. Os alertas ainda chegam ao painel e às notificações de qualquer forma.'
+      caption='O que a contagem no ícone da extensão inclui'
     >
       <Select value={mode} onValueChange={choose}>
         <SelectTrigger className={triggerClass} style={{ width: 158 }}>
@@ -264,13 +264,13 @@ function BadgeModeRow() {
         </SelectTrigger>
         <SelectContent className={selectContentClass}>
           <SelectItem value='all' className={selectItemClass}>
-            All alerts
+            Todos os alertas
           </SelectItem>
           <SelectItem value='faults' className={selectItemClass}>
-            Device faults only
+            Só falhas de dispositivo
           </SelectItem>
           <SelectItem value='off' className={selectItemClass}>
-            No badge
+            Sem badge
           </SelectItem>
         </SelectContent>
       </Select>
@@ -285,11 +285,11 @@ export function AppSettingsTab({ clients }: { clients: WifiClientJson[] }) {
   const trayStyle = useTrayIconStyle();
   // The readout lives in the menu bar on macOS and the taskbar on Windows; name
   // whichever this host is. Only reached when the bridge is present, i.e. desktop.
-  const surface = window.dishlink?.platform === "win32" ? "taskbar" : "menu bar";
+  const surface = window.dishlink?.platform === "win32" ? "barra de tarefas" : "barra de menus";
 
   return (
     <>
-      <SettingRow title='App toolbar' caption='Floating dock or a left rail for the section links'>
+      <SettingRow title='Barra do app' caption='Dock flutuante ou trilho esquerdo para os links de seção'>
         <Select
           value={toolbarStyle}
           onValueChange={(value) => setToolbarStyle(value as ToolbarStyle)}
@@ -302,7 +302,7 @@ export function AppSettingsTab({ clients }: { clients: WifiClientJson[] }) {
               Dock
             </SelectItem>
             <SelectItem value='rail' className={selectItemClass}>
-              Left rail
+              Trilho esquerdo
             </SelectItem>
           </SelectContent>
         </Select>
@@ -314,21 +314,21 @@ export function AppSettingsTab({ clients }: { clients: WifiClientJson[] }) {
 
       {menuBar && (
         <SettingRow
-          title={`Throughput in ${surface}`}
-          caption={`Show the live ↓/↑ rate in the ${surface}`}
+          title={`Taxa na ${surface}`}
+          caption={`Mostrar a taxa ↓/↑ ao vivo na ${surface}`}
         >
           <Switch checked={menuBar[0]} onCheckedChange={menuBar[1]} />
         </SettingRow>
       )}
 
       {menuBar?.[0] && hideTrayIcon && (
-        <SettingRow title='Hide menu bar icon' caption='Show only the throughput readout, no icon'>
+        <SettingRow title='Ocultar ícone da barra de menus' caption='Mostrar só a taxa, sem ícone'>
           <Switch checked={hideTrayIcon[0]} onCheckedChange={hideTrayIcon[1]} />
         </SettingRow>
       )}
 
       {trayStyle && !hideTrayIcon?.[0] && (
-        <SettingRow title='Menu bar icon' caption='How it looks in the menu bar'>
+        <SettingRow title='Ícone da barra de menus' caption='Como aparece na barra de menus'>
           <Select
             value={trayStyle[0]}
             onValueChange={(value) => trayStyle[1](value as TrayIconStyle)}
@@ -338,13 +338,13 @@ export function AppSettingsTab({ clients }: { clients: WifiClientJson[] }) {
             </SelectTrigger>
             <SelectContent className={selectContentClass}>
               <SelectItem value='template' className={selectItemClass}>
-                Monochrome
+                Monocromático
               </SelectItem>
               <SelectItem value='outline' className={selectItemClass}>
-                Outline
+                Contorno
               </SelectItem>
               <SelectItem value='original' className={selectItemClass}>
-                App icon
+                Ícone do app
               </SelectItem>
             </SelectContent>
           </Select>

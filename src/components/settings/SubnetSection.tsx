@@ -31,10 +31,10 @@ import { SettingRow } from "./settingsChrome";
 import { SUBNET_PRESETS, subnetRefusal } from "@core/routerConfigUpdate";
 
 const SUBNET_TIP =
-  "Advanced feature that changes the IP addresses assigned to your devices. Most users should use the default. Changing it drops the network for up to a minute while every device is issued a new address.";
+  "Recurso avançado que muda os endereços IP atribuídos aos seus dispositivos. A maioria dos usuários deve usar o padrão. Alterar derruba a rede por até um minuto enquanto cada dispositivo recebe um novo endereço.";
 
 const PASSWORD_TIP =
-  "Entering the wrong password here overrides your current password and no device can rejoin the WiFi until you set back the correct password in the official Starlink mobile app.";
+  "Digitar a senha errada aqui sobrescreve sua senha atual e nenhum dispositivo consegue voltar ao Wi-Fi até você definir a senha correta no app móvel oficial da Starlink.";
 
 export function SubnetSection({
   /** What the router reports today, so the current entry can be marked. */
@@ -82,7 +82,7 @@ export function SubnetSection({
     setError(null);
     try {
       await onSave(subnet, password);
-      setSuccessNote(`Moving to ${subnet}. Reconnect to the WiFi if this device drops.`);
+      setSuccessNote(`Mudando para ${subnet}. Reconecte ao Wi-Fi se este dispositivo cair.`);
       setConfirming(false);
       setPassword("");
       setEditInProgress(false);
@@ -96,15 +96,15 @@ export function SubnetSection({
   return (
     <>
       <SettingRow
-        title='Subnet'
+        title='Sub-rede'
         info={SUBNET_TIP}
         infoSeverity='danger'
         caption={
           disabled
-            ? "Connect your Starlink account to use this"
+            ? "Conecte sua conta Starlink para usar isto"
             : currentSubnet === null && !successNote
-              ? "Couldn't tell which subnet the router is on"
-              : "The address range the router gives your devices"
+              ? "Não foi possível saber em qual sub-rede o roteador está"
+              : "A faixa de endereços que o roteador dá aos seus dispositivos"
         }
         note={
           successNote && (
@@ -126,7 +126,7 @@ export function SubnetSection({
           }}
         >
           <SelectTrigger size='sm' className='w-[168px] font-mono text-[12px] tabular-nums'>
-            <SelectValue placeholder='Not known' />
+            <SelectValue placeholder='Desconhecida' />
           </SelectTrigger>
           <SelectContent>
             {SUBNET_PRESETS.map((preset) => (
@@ -137,7 +137,7 @@ export function SubnetSection({
               >
                 {preset}
                 {preset === currentSubnet && (
-                  <span className='ml-2 font-sans text-[11px] text-muted-foreground'>Current</span>
+                  <span className='ml-2 font-sans text-[11px] text-muted-foreground'>Atual</span>
                 )}
               </SelectItem>
             ))}
@@ -150,7 +150,7 @@ export function SubnetSection({
           <div className='relative flex items-center justify-between gap-5'>
             <ConnectorThread className='pointer-events-none absolute -top-[29px] right-[13px] h-[45px] w-2 animate-[rise_320ms_ease_both] text-ink/20' />
             <span className='flex items-center gap-1.5 text-[12px] text-muted-foreground'>
-              WiFi password
+              Senha do Wi-Fi
               <InfoDot severity='danger' tip={PASSWORD_TIP} />
             </span>
             <div className='flex shrink-0 items-center gap-2'>
@@ -164,15 +164,15 @@ export function SubnetSection({
                     setEditInProgress(true);
                     setError(null);
                   }}
-                  placeholder='Your current WiFi password'
+                  placeholder='Sua senha atual do Wi-Fi'
                   spellCheck={false}
                   autoComplete='off'
-                  aria-label='WiFi password'
+                  aria-label='Senha do Wi-Fi'
                   className='h-8 w-[232px] pr-8 text-[12px]'
                 />
                 <button
                   type='button'
-                  aria-label={passwordVisible ? "Hide password" : "Show password"}
+                  aria-label={passwordVisible ? "Ocultar senha" : "Mostrar senha"}
                   onClick={() => setPasswordVisible(!passwordVisible)}
                   className='absolute top-1/2 right-1 -translate-y-1/2 cursor-pointer rounded-sm border-0 bg-transparent p-1 text-muted-foreground transition-colors hover:text-foreground'
                 >
@@ -197,7 +197,7 @@ export function SubnetSection({
               disabled={disabled || saving || refusalMessage !== null}
               onClick={() => setConfirming(true)}
             >
-              {saving ? "Moving…" : "Save"}
+              {saving ? "Mudando…" : "Salvar"}
             </Button>
           </div>
         </div>
@@ -210,11 +210,11 @@ export function SubnetSection({
           overlayClassName='bg-black/30 backdrop-blur-[2px]'
         >
           <DialogHeader>
-            <DialogTitle className='text-[19px] leading-snug'>Move to {subnet}?</DialogTitle>
+            <DialogTitle className='text-[19px] leading-snug'>Mudar para {subnet}?</DialogTitle>
             <DialogDescription className='text-[13.5px] leading-relaxed'>
-              The network drops for up to a minute while every device is issued a new address. If
-              the password is wrong, nothing can rejoin the WiFi until you retype it in the official
-              Starlink app.
+              A rede cai por até um minuto enquanto cada dispositivo recebe um novo endereço. Se a
+              senha estiver errada, nada consegue voltar ao Wi-Fi até você redigitá-la no app
+              oficial da Starlink.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className='mt-2 gap-2'>
@@ -224,7 +224,7 @@ export function SubnetSection({
               disabled={saving}
               onClick={() => setConfirming(false)}
             >
-              Cancel
+              Cancelar
             </Button>
             <Button
               variant='destructive'
@@ -232,7 +232,7 @@ export function SubnetSection({
               disabled={saving}
               onClick={() => void applySubnet()}
             >
-              {saving ? "Moving…" : "Move"}
+              {saving ? "Mudando…" : "Mudar"}
             </Button>
           </DialogFooter>
         </DialogContent>

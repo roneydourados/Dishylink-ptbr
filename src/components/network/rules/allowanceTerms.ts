@@ -22,58 +22,58 @@ export function billingDayOf(cycles: { startDate: string }[] | undefined): numbe
 }
 
 export const CYCLE_OPTIONS: { label: string; value: MeterCycle["kind"] }[] = [
-  { label: "Daily", value: "daily" },
-  { label: "Weekly", value: "weekly" },
-  { label: "Monthly", value: "monthly" },
-  { label: "Starlink billing", value: "billing" },
-  { label: "One-off", value: "once" },
+  { label: "Diário", value: "daily" },
+  { label: "Semanal", value: "weekly" },
+  { label: "Mensal", value: "monthly" },
+  { label: "Faturamento Starlink", value: "billing" },
+  { label: "Única vez", value: "once" },
 ];
 
 export const WEEKDAYS = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  "Domingo",
+  "Segunda-feira",
+  "Terça-feira",
+  "Quarta-feira",
+  "Quinta-feira",
+  "Sexta-feira",
+  "Sábado",
 ];
 
-/** "in 5 days" / "tomorrow" / "in 3 hours" — how long this cycle has left. */
+/** "em 5 dias" / "amanhã" / "em 3 horas" — how long this cycle has left. */
 export function endsIn(endMs: number, nowMs: number): string | null {
   if (!Number.isFinite(endMs)) return null;
   const hours = Math.max(0, Math.round((endMs - nowMs) / HOUR_MS));
-  if (hours < 1) return "ends within the hour";
-  if (hours < 24) return `ends in ${hours} hour${hours === 1 ? "" : "s"}`;
+  if (hours < 1) return "termina nesta hora";
+  if (hours < 24) return `termina em ${hours} hora${hours === 1 ? "" : "s"}`;
   const days = Math.round(hours / 24);
-  return days === 1 ? "ends tomorrow" : `ends in ${days} days`;
+  return days === 1 ? "termina amanhã" : `termina em ${days} dias`;
 }
 
 export function timeLeft(endMs: number, nowMs: number): string | null {
   if (!Number.isFinite(endMs)) return null;
   const minutes = Math.max(0, Math.round((endMs - nowMs) / 60_000));
-  if (minutes < 1) return "under a minute";
-  if (minutes < 60) return `${minutes} minute${minutes === 1 ? "" : "s"}`;
+  if (minutes < 1) return "menos de um minuto";
+  if (minutes < 60) return `${minutes} minuto${minutes === 1 ? "" : "s"}`;
   const hours = Math.round(minutes / 60);
-  if (hours < 24) return `${hours} hour${hours === 1 ? "" : "s"}`;
+  if (hours < 24) return `${hours} hora${hours === 1 ? "" : "s"}`;
   const days = Math.round(hours / 24);
-  return `${days} day${days === 1 ? "" : "s"}`;
+  return `${days} dia${days === 1 ? "" : "s"}`;
 }
 
 export function cycleLabel(cycle: MeterCycle): string {
   switch (cycle.kind) {
     case "daily":
-      return "Daily";
+      return "Diário";
     case "weekly":
-      return "Weekly";
+      return "Semanal";
     case "monthly":
-      return "Monthly";
+      return "Mensal";
     case "custom":
-      return `Every ${cycle.days} days`;
+      return `A cada ${cycle.days} dias`;
     case "billing":
-      return "Starlink billing";
+      return "Faturamento Starlink";
     case "once":
-      return "One-off";
+      return "Única vez";
   }
 }
 
@@ -84,8 +84,8 @@ export function gigabytes(bytes: number): string {
 
 export function ringReading(bytes: number): { value: string; unit: string } {
   const megabytes = Math.round(bytes / 1e6);
-  if (megabytes < 1000) return { value: String(megabytes), unit: "MB USED" };
-  return { value: gigabytes(bytes), unit: "GB USED" };
+  if (megabytes < 1000) return { value: String(megabytes), unit: "MB USADOS" };
+  return { value: gigabytes(bytes), unit: "GB USADOS" };
 }
 
 export const CEILING_RUNGS_GB = [10, 25, 50, 100, 250, 500, 1000];
@@ -126,7 +126,7 @@ export function stepFor(ceiling: number): number {
 
 /** The clock time a countdown running from now would reach. */
 export function endsAtLabel(remainingMs: number, nowMs: number): string {
-  return new Date(nowMs + remainingMs).toLocaleTimeString(undefined, {
+  return new Date(nowMs + remainingMs).toLocaleTimeString("pt-BR", {
     hour: "numeric",
     minute: "2-digit",
   });
@@ -273,11 +273,11 @@ export type RuleMode = "limit" | "timer" | "schedule";
 
 /** What auto-pause does as it is currently set. */
 export function autoPauseDetail(on: boolean, mode: RuleMode, several: boolean): string {
-  if (!on) return "Watches and announces, but never cuts anything off.";
-  const whose = several ? "their internet" : "this device’s internet";
-  if (mode === "timer") return `Cuts ${whose} when the time is up.`;
-  if (mode === "schedule") return `Cuts ${whose} outside the hours set below.`;
-  return `Cuts ${whose} until the cycle turns over.`;
+  if (!on) return "Observa e avisa, mas nunca corta o acesso.";
+  const whose = several ? "a internet deles" : "a internet deste dispositivo";
+  if (mode === "timer") return `Corta ${whose} quando o tempo acaba.`;
+  if (mode === "schedule") return `Corta ${whose} fora dos horários definidos abaixo.`;
+  return `Corta ${whose} até o ciclo reiniciar.`;
 }
 
 export interface RuleModeDraft {

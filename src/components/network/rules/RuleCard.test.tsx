@@ -68,9 +68,9 @@ describe("RuleCard", () => {
   test("given: an allowance, should: read the spend against the limit", async () => {
     show();
     await expect.poll(text).toContain("Kids devices");
-    expect(text()).toContain("3 devices");
-    expect(text()).toContain("Limit: 20 GB");
-    expect(text()).toContain("Active");
+    expect(text()).toContain("3 dispositivos");
+    expect(text()).toContain("Limite: 20 GB");
+    expect(text()).toContain("Ativa");
   });
 
   // Whose allowance the figure is. Unqualified over several devices it reads as
@@ -78,34 +78,34 @@ describe("RuleCard", () => {
   // and the bar underneath measures a different thing in each mode.
   test("given: a per-member allowance, should: say the limit is each device's", async () => {
     show();
-    await expect.poll(text).toContain("Limit: 20 GB each");
+    await expect.poll(text).toContain("Limite: 20 GB cada");
   });
 
   test("given: a pooled allowance, should: say the limit is shared", async () => {
     show({ mode: "pooled" });
-    await expect.poll(text).toContain("Limit: 20 GB shared");
+    await expect.poll(text).toContain("Limite: 20 GB compartilhada");
   });
 
   test("given: one device, should: qualify the limit as neither", async () => {
     show({ memberKeys: ["1"], memberCount: 1 });
-    await expect.poll(text).toContain("Limit: 20 GB");
-    expect(text()).not.toContain("each");
-    expect(text()).not.toContain("shared");
+    await expect.poll(text).toContain("Limite: 20 GB");
+    expect(text()).not.toContain("cada");
+    expect(text()).not.toContain("compartilhada");
   });
 
   test("given: a rule near its allowance, should: lead with how much is gone", async () => {
     show({ usageBytes: 18.5 * GB, capacityBytes: 20 * GB });
-    await expect.poll(text).toContain("% used");
-    expect(text()).toContain("93% used");
+    await expect.poll(text).toContain("% usado");
+    expect(text()).toContain("93% usado");
   });
 
   test("given: a timetable, should: list its hours rather than an allowance it has none of", async () => {
     show({ allocationBytes: 0, schedule: hours, windowEndMs: NOW + 3_600_000 });
 
-    await expect.poll(text).toContain("Mon–Fri");
-    expect(text()).toContain("4:00 PM – 8:00 PM");
-    expect(text()).toContain("Sat–Sun");
-    expect(text()).not.toContain("Limit:");
+    await expect.poll(text).toContain("Seg–Sex");
+    expect(text()).toContain("16:00 – 20:00");
+    expect(text()).toContain("Sáb–Dom");
+    expect(text()).not.toContain("Limite:");
   });
 
   test("given: a device shut by its hours, should: say so rather than blame a limit", async () => {
@@ -118,9 +118,9 @@ describe("RuleCard", () => {
       windowEndMs: NOW + 3_600_000,
     });
 
-    await expect.poll(text).toContain("Paused, outside its schedule");
-    expect(text()).not.toContain("limit reached");
-    expect(text()).toContain("Opens in");
+    await expect.poll(text).toContain("Pausado, fora da agenda");
+    expect(text()).not.toContain("limite atingido");
+    expect(text()).toContain("Abre em");
   });
 
   // One device out of bytes stops that device, not the rule. Reading the group
@@ -136,8 +136,8 @@ describe("RuleCard", () => {
       reached: true,
     });
 
-    await expect.poll(text).toContain("Active · 1 of 3 paused");
-    expect(text()).not.toContain("Paused, limit reached");
+    await expect.poll(text).toContain("Ativa · 1 de 3 pausados");
+    expect(text()).not.toContain("Pausado, limite atingido");
     expect(document.querySelector("[class*='status-critical']")).toBeNull();
   });
 
@@ -146,10 +146,10 @@ describe("RuleCard", () => {
   test("given: a timetable that does not cover today, should: say it is not scheduled", async () => {
     show({ allocationBytes: 0, schedule: notToday, windowEndMs: NOW + 32 * 3_600_000 });
 
-    await expect.poll(text).toContain("Not scheduled today");
-    expect(text()).toContain("Resumes in");
-    expect(text()).not.toContain("Active");
-    expect(text()).not.toContain("Closes in");
+    await expect.poll(text).toContain("Sem agenda hoje");
+    expect(text()).toContain("Retoma em");
+    expect(text()).not.toContain("Ativa");
+    expect(text()).not.toContain("Fecha em");
   });
 
   test("given: a rule over its allowance, should: name the limit as the reason", async () => {
@@ -160,7 +160,7 @@ describe("RuleCard", () => {
       pausedCount: 3,
       reached: true,
     });
-    await expect.poll(text).toContain("Paused, limit reached");
+    await expect.poll(text).toContain("Pausado, limite atingido");
   });
 
   // The card and the rule's own status have to name the same subject. Leading
@@ -169,9 +169,9 @@ describe("RuleCard", () => {
   test("given: a timetable and an allowance, should: lead with the hours and still show the allowance", async () => {
     show({ schedule: hours, windowEndMs: NOW + 3_600_000 });
 
-    await expect.poll(text).toContain("Mon–Fri");
-    expect(text()).toContain("4:00 PM – 8:00 PM");
-    expect(text()).toContain("of 20 GB each");
+    await expect.poll(text).toContain("Seg–Sex");
+    expect(text()).toContain("16:00 – 20:00");
+    expect(text()).toContain("de 20 GB cada");
   });
 
   // What holds the device is not always what the rule is about.
@@ -185,8 +185,8 @@ describe("RuleCard", () => {
       windowEndMs: NOW + 3_600_000,
     });
 
-    await expect.poll(text).toContain("Paused, limit reached");
-    expect(text()).not.toContain("outside its schedule");
+    await expect.poll(text).toContain("Pausado, limite atingido");
+    expect(text()).not.toContain("fora da agenda");
   });
 
   test("given: a timer, should: count the clock down rather than show bytes", async () => {
@@ -198,6 +198,6 @@ describe("RuleCard", () => {
 
     await expect.poll(text).toContain("of 2h");
     expect(text()).toContain("1h");
-    expect(text()).not.toContain("Limit:");
+    expect(text()).not.toContain("Limite:");
   });
 });

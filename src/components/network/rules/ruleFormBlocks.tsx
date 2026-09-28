@@ -83,7 +83,7 @@ export function MeasureFields({
       <ScheduleFields draft={timetable} />
       <div className='space-y-4 border-t border-border/60 pt-4'>
         <SwitchRow
-          title='Data allowance'
+          title='Franquia de dados'
           detail={capDetail}
           checked={rules.capping}
           onChange={rules.setCapping}

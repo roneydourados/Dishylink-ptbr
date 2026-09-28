@@ -93,10 +93,10 @@ describe("RouterSettingsTab factory reset", () => {
     mountWithSilentRouter();
     await settle();
 
-    expect(text()).toContain("Needs the router on this network, or your Starlink account");
-    expect(button("Factory reset").disabled).toBe(true);
+    expect(text()).toContain("Precisa do roteador nesta rede, ou da sua conta Starlink");
+    expect(button("Restaurar fábrica").disabled).toBe(true);
 
-    button("Factory reset").click();
+    button("Restaurar fábrica").click();
     await settle();
     // Still nothing to confirm: arming is what the gate refuses.
     expect(document.querySelector("[data-slide-handle]")).toBeNull();
@@ -108,16 +108,16 @@ describe("RouterSettingsTab factory reset", () => {
     mountWithSilentRouter();
     await settle();
 
-    expect(button("Factory reset").disabled).toBe(false);
-    button("Factory reset").click();
+    expect(button("Restaurar fábrica").disabled).toBe(false);
+    button("Restaurar fábrica").click();
     await settle();
 
-    slide("Slide to factory reset the router");
+    slide("Deslize para restaurar a fábrica do roteador");
     await settle();
 
     // The slide only opens the confirm; nothing is sent until it is accepted.
     expect(applyRouterConfigUpdate).not.toHaveBeenCalled();
-    button("Factory reset router").click();
+    button("Restaurar fábrica do roteador").click();
     await settle();
 
     expect(applyRouterConfigUpdate).toHaveBeenCalledWith({ kind: "factoryReset" });

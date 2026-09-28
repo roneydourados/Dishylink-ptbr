@@ -107,7 +107,7 @@ function webNotificationsSupported(): boolean {
 function webState(): NotificationState {
   const wanted = localStorage.getItem(ENABLED_STORAGE_KEY) === "on";
   if (!webNotificationsSupported())
-    return { wanted, deliverable: false, reason: "This browser doesn’t support notifications." };
+    return { wanted, deliverable: false, reason: "Este navegador não oferece notificações." };
   if (Notification.permission === "granted") return { wanted, deliverable: true };
   // A standing refusal and a dismissed prompt are different problems: only the
   // first is a setting to go and change, and naming it otherwise sends the user
@@ -117,8 +117,8 @@ function webState(): NotificationState {
     deliverable: false,
     reason:
       Notification.permission === "denied"
-        ? "Notifications are blocked for this page in your browser settings."
-        : "Notifications weren’t enabled.",
+        ? "As notificações estão bloqueadas para esta página nas configurações do navegador."
+        : "As notificações não foram ativadas.",
   };
 }
 
