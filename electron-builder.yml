@@ -45,6 +45,8 @@ files:
   - build/trayTemplateOutline.png
   - build/trayTemplateOutline@2x.png
   - package.json
+  # MIT requires the copyright notice and permission text in distributed copies.
+  - LICENSE
   - "!node_modules/**/*"
 
 # Two per-arch DMGs rather than one universal build. Without an explicit arch list
