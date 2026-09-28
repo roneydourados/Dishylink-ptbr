@@ -48,7 +48,7 @@ export function buildDeviceFacts({
   const facts: DeviceFact[] = [
     {
       key: "status",
-      label: "Status",
+      label: "Estado",
       value: idleSeconds < IDLE_AFTER_S ? "ativo" : `ocioso · ${formatUptime(idleSeconds)}`,
     },
   ];

@@ -273,7 +273,7 @@ function NetworkPanelBody({
         >
           {unreachable ? `${unreachable.message} ` : ""}Estes dispositivos vêm da sua conta
           Starlink, então atualizam a cada {CLOUD_CLIENTS_POLL_MS / 1000}&nbsp;s e não têm
-          throughput ao vivo.
+          taxa de transferência ao vivo.
         </Callout>
       )}
 

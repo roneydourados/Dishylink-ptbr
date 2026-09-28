@@ -40,16 +40,16 @@ export const SatelliteCallout = forwardRef<
             {/\[DTC\]/.test(selected.sky.name) && <Badge variant='tag'>DTC</Badge>}
             <button
               className='ml-auto cursor-pointer border-0 bg-transparent pl-1 text-[15px] leading-none text-muted-foreground hover:text-foreground'
-              aria-label='Close satellite details'
+              aria-label='Fechar detalhes do satélite'
               onClick={onClose}
             >
               ×
             </button>
           </div>
           <div className='grid grid-cols-[auto_1fr] gap-x-3.5 gap-y-[3px] font-mono text-[11px] tabular-nums [&>span:nth-child(odd)]:text-muted-foreground [&>span:nth-child(even)]:text-right'>
-            <span>elevation</span>
+            <span>elevação</span>
             <span>{selected.sky.elevationDeg.toFixed(1)}°</span>
-            <span>azimuth</span>
+            <span>azimute</span>
             <span>{((selected.sky.azimuthDeg + 360) % 360).toFixed(1)}°</span>
             <span>altitude</span>
             <span>
@@ -57,9 +57,9 @@ export const SatelliteCallout = forwardRef<
                 ? `${selected.sky.altitudeKm.toFixed(0)} km`
                 : "—"}
             </span>
-            <span>distance</span>
+            <span>distância</span>
             <span>{selected.sky.rangeKm.toFixed(0)} km</span>
-            <span>speed</span>
+            <span>velocidade</span>
             <span>
               {selected.sky.speedKmS !== undefined
                 ? `${selected.sky.speedKmS.toFixed(1)} km/s`

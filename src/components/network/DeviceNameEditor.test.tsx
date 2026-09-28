@@ -8,9 +8,9 @@ afterEach(cleanup);
 
 function saveButton(): HTMLButtonElement {
   const found = [...document.querySelectorAll("button")].find(
-    (element) => element.textContent?.trim() === "Save",
+    (element) => element.textContent?.trim() === "Salvar",
   );
-  if (!found) throw new Error('no button labelled "Save"');
+  if (!found) throw new Error('no button labelled "Salvar"');
   return found as HTMLButtonElement;
 }
 

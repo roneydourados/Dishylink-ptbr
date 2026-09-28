@@ -22,7 +22,7 @@ interface SpinLoaderProps {
   label?: string;
 }
 
-export function SpinLoader({ size = 48, variant = "conic", label = "Loading" }: SpinLoaderProps) {
+export function SpinLoader({ size = 48, variant = "conic", label = "Carregando" }: SpinLoaderProps) {
   const shared = { size, label };
 
   switch (variant) {

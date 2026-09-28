@@ -79,9 +79,9 @@ export function DeviceUsageList() {
     <div className='mt-6'>
       <div className='mb-0.5 flex items-center gap-[7px]'>
         <span className='text-[17px] font-bold tracking-[-0.01em] text-foreground'>
-          Devices Usage
+          Uso por dispositivos
         </span>
-        <InfoDot tip='How much data each device has used this month. The total keeps adding up even if a device leaves and rejoins your network, and it starts over at the beginning of each month.' />
+        <InfoDot tip='Quanto de dados cada dispositivo usou neste mês. O total continua somando mesmo se um dispositivo sair e voltar à rede, e recomeça no início de cada mês.' />
         {unavailable ? null : confirmingClear ? (
           <span className='ml-auto flex items-center gap-2'>
             <button
@@ -91,13 +91,13 @@ export function DeviceUsageList() {
                 setConfirmingClear(false);
               }}
             >
-              Clear all?
+              Limpar tudo?
             </button>
             <button
               className='cursor-pointer border-0 bg-transparent p-0 text-[12px] font-medium text-muted-foreground'
               onClick={() => setConfirmingClear(false)}
             >
-              Cancel
+              Cancelar
             </button>
           </span>
         ) : (
@@ -105,14 +105,14 @@ export function DeviceUsageList() {
             className='ml-auto cursor-pointer border-0 bg-transparent p-0 text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground'
             onClick={() => setConfirmingClear(true)}
           >
-            Clear all
+            Limpar tudo
           </button>
         )}
       </div>
       <div className='mb-1 text-[11.5px] font-medium text-muted-foreground'>{monthLabel}</div>
       {unavailable && (
         <div className='py-2.5 text-[12.5px] text-muted-foreground'>
-          Usage unavailable — historian not reachable.
+          Uso indisponível — gravador de histórico inacessível.
         </div>
       )}
       {writeError && <div className='py-2.5 text-[12.5px] text-destructive'>{writeError}</div>}
@@ -140,14 +140,14 @@ export function DeviceUsageList() {
           footnote to the list rather than a banner over it. */}
       {!selfDeviceIdentified && !unavailable && namingFixesIt && (
         <Callout tone='info' iconSeverity='warn' className='mt-2.5'>
-          The device you are using counts Dishylink&rsquo;s own checks of your dish and router as
-          its data. To leave them out,{" "}
+          O dispositivo que você está usando conta as próprias verificações do Dishylink na antena
+          e no roteador como seus dados. Para deixá-las de fora,{" "}
           <button
             type='button'
             className={inlineLinkButton}
             onClick={() => requestPanel("settings", "app")}
           >
-            pick it under app&rsquo;s settings
+            escolha-o nas configurações do app
           </button>
           .
         </Callout>
@@ -180,7 +180,7 @@ function DeviceUsageRow({
   // so anything seen this recently is here now; "Active now" reads clearer than a
   // last-seen of a few seconds. Older stamps mean the device has actually gone.
   const isActive = nowMs - total.lastSeenMs < 120_000;
-  const seenLabel = isActive ? "Active now" : formatRelativeTime(total.lastSeenMs);
+  const seenLabel = isActive ? "Ativo agora" : formatRelativeTime(total.lastSeenMs);
   // A device the historian has not seen this month still holds last month's
   // bucket, so name the month on the row — otherwise it reads as this month's
   // usage under the heading above.
@@ -218,10 +218,10 @@ function DeviceUsageRow({
       </span>
       {/* Actions live at the end of the row, always visible next to the usage. */}
       <span className='flex flex-none items-center gap-0.5'>
-        <RowAction label={`Reset this month's usage for ${name}`} onClick={onReset}>
+        <RowAction label={`Zerar o uso deste mês de ${name}`} onClick={onReset}>
           <ResetIcon />
         </RowAction>
-        <RowAction label={`Delete usage record for ${name}`} destructive onClick={onRemove}>
+        <RowAction label={`Excluir registro de uso de ${name}`} destructive onClick={onRemove}>
           <CloseIcon />
         </RowAction>
       </span>

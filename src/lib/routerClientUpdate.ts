@@ -42,7 +42,7 @@ export async function applyRouterClientUpdate(
   // 409 is a host refusing before anything left this machine, so its own message
   // is the whole answer.
   if (reply.status === 409) throw new Error(message);
-  throw new Error(`Starlink rejected the device update: ${message}`);
+  throw new Error(`A Starlink rejeitou a atualização do dispositivo: ${message}`);
 }
 
 export async function setRouterClientPaused(clientId: number, paused: boolean): Promise<void> {

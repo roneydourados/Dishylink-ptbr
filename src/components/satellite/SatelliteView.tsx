@@ -298,9 +298,9 @@ export function SatelliteView({
         className={`pointer-events-none absolute inset-y-0 left-0 flex w-[380px] flex-col gap-4 overflow-y-auto p-6 ${immersive ? "hidden" : ""}`}
       >
         <div className='flex flex-col gap-1.5'>
-          <h1 className='m-0 text-[15px] font-semibold'>Live satellite view</h1>
+          <h1 className='m-0 text-[15px] font-semibold'>Vista ao vivo dos satélites</h1>
           <p className='m-0 text-xs leading-relaxed text-[#8b97a8]'>
-            Satellites are propagated live from SpaceX's published ephemerides.
+            Os satélites são propagados ao vivo a partir das efemérides publicadas pela SpaceX.
           </p>
         </div>
 
@@ -308,14 +308,14 @@ export function SatelliteView({
           className={`pointer-events-auto flex flex-col gap-3.5 rounded-xl px-[16px] py-4 ${glassPanel}`}
         >
           <div className='flex items-baseline justify-between gap-2 text-[12px] font-medium text-muted-foreground'>
-            <span>{site ? `site ${site}` : "No location set to fetch live satellites"}</span>
+            <span>{site ? `local ${site}` : "Nenhuma localização definida para buscar satélites ao vivo"}</span>
             <span className='flex shrink-0 items-baseline gap-2.5'>
               <button
                 type='button'
                 className={siteAction}
                 onClick={() => setChangingLocation(!changingLocation)}
               >
-                {site ? "change" : "set"}
+                {site ? "alterar" : "definir"}
               </button>
               {site && (
                 <button
@@ -326,7 +326,7 @@ export function SatelliteView({
                     setChangingLocation(false);
                   }}
                 >
-                  clear
+                  limpar
                 </button>
               )}
             </span>
@@ -359,7 +359,7 @@ export function SatelliteView({
           {/* The first open sits empty for 10–20s while the ephemerides download
               and propagate. Say so rather than showing an unexplained empty sky. */}
           {satellites.feedState === "loading" && (
-            <Loading message="Loading SpaceX's published constellation ephemerides…" />
+            <Loading message='Carregando as efemérides publicadas da constelação SpaceX…' />
           )}
           {/* Names whichever side actually failed, rather than blaming the user's
               connection: the usual cause is the public data source being slow.
@@ -367,8 +367,8 @@ export function SatelliteView({
           {satellites.feedState === "error" && (
             <Callout tone='error'>
               {satellites.errorReason === "offline"
-                ? "Can't reach the satellite data source — check your internet connection. Retrying automatically."
-                : "The satellite data source isn't responding right now. Retrying automatically."}
+                ? "Não foi possível alcançar a fonte de dados dos satélites — verifique sua conexão com a internet. Tentando de novo automaticamente."
+                : "A fonte de dados dos satélites não está respondendo no momento. Tentando de novo automaticamente."}
             </Callout>
           )}
         </div>
@@ -379,8 +379,8 @@ export function SatelliteView({
         {!viewingHistory && hasSurvey && (
           <p className='m-0 text-xs leading-relaxed text-[#8b97a8]'>
             {(obstructionStats?.fractionObstructed ?? 0) < 0.005
-              ? "Your Starlink has an unobstructed view of the sky. The map sharpens as the dish collects data."
-              : "Obstructed patches cause brief interruptions as satellites pass behind them."}
+              ? "Sua Starlink tem visão desobstruída do céu. O mapa fica mais preciso conforme a antena coleta dados."
+              : "Regiões obstruídas causam interrupções breves quando os satélites passam atrás delas."}
           </p>
         )}
       </div>
@@ -427,14 +427,14 @@ export function SatelliteView({
 
       <div className='absolute right-6 top-5 flex items-center gap-2'>
         <SkyControl
-          label={immersive ? "Exit immersive view" : "Immersive view"}
+          label={immersive ? "Sair da vista imersiva" : "Vista imersiva"}
           pressed={immersive}
           onClick={() => setImmersive((on) => !on)}
         >
           <ImmersiveIcon size={14} />
         </SkyControl>
         <SkyControl
-          label={domeShown ? "Hide dome" : "Show dome"}
+          label={domeShown ? "Ocultar cúpula" : "Mostrar cúpula"}
           pressed={!domeShown}
           onClick={() => {
             const shown = scene?.toggleDome() ?? true;
@@ -447,22 +447,22 @@ export function SatelliteView({
           <DomeCanopyIcon off={!domeShown} />
         </SkyControl>
         <SkyControl
-          label={trimmed ? "Show unmapped sky" : "Hide unmapped sky"}
+          label={trimmed ? "Mostrar céu não mapeado" : "Ocultar céu não mapeado"}
           pressed={trimmed}
           onClick={() => setDomeTrimEnabled(!trimmed)}
         >
           <DomeIcon skirted={trimmed} />
         </SkyControl>
         <SkyControl
-          label={rotating ? "Pause rotation" : "Resume rotation"}
+          label={rotating ? "Pausar rotação" : "Retomar rotação"}
           onClick={() => setRotating(scene?.toggleRotation() ?? false)}
         >
           {rotating ? <Pause size={13} /> : <Play size={13} />}
         </SkyControl>
-        <SkyControl label='Reset view' onClick={() => scene?.resetView()}>
+        <SkyControl label='Redefinir vista' onClick={() => scene?.resetView()}>
           <Minimize2 size={13} />
         </SkyControl>
-        <SkyControl label='Close' onClick={onClose}>
+        <SkyControl label='Fechar' onClick={onClose}>
           ✕
         </SkyControl>
       </div>
@@ -471,7 +471,7 @@ export function SatelliteView({
         <div className='absolute bottom-[96px] left-1/2 w-[min(720px,55vw)] min-w-[320px] -translate-x-1/2'>
           {viewingHistory && scrubIndex !== null && (
             <p className='m-0 pb-1 text-center text-[11.5px] font-medium text-muted-foreground'>
-              Viewing the obstruction map as of{" "}
+              Visualizando o mapa de obstrução de{" "}
               {new Date(snapshots[scrubIndex].takenAtMs).toLocaleString()}.
             </p>
           )}
@@ -495,12 +495,12 @@ export function SatelliteView({
         className={`pointer-events-none absolute bottom-[74px] left-1/2 m-0 -translate-x-1/2 text-[11px] text-[#8b97a8] opacity-80 ${immersive ? "hidden" : ""}`}
       >
         {unsupported
-          ? "This browser could not open a WebGL context."
+          ? "Este navegador não conseguiu abrir um contexto WebGL."
           : !hasSurvey
-            ? "Waiting for the dish's obstruction map…"
+            ? "Aguardando o mapa de obstrução da antena…"
             : viewingHistory
-              ? "time-lapse"
-              : "Drag to orbit · Scroll to zoom · Esc to close"}
+              ? "histórico"
+              : "Arraste para orbitar · Role para zoom · Esc para fechar"}
       </p>
     </div>
   );

@@ -19,7 +19,7 @@ export function ToolbarRail({ items, activeId, onSelect }: ToolbarRailProps) {
 
   return (
     <motion.nav
-      aria-label='Dashboard sections'
+      aria-label='Seções do painel'
       onHoverStart={() => setOpen(true)}
       onHoverEnd={() => setOpen(false)}
       initial={{ opacity: 0, x: -16, y: "-50%" }}

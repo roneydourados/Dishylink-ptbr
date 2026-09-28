@@ -14,5 +14,5 @@ export async function applyDishConfigUpdate(
   if (reply.status === 200) return;
   const message = (reply.body as { message?: string })?.message ?? `HTTP ${reply.status}`;
   if (reply.status === 428) throw new AccountRequiredError(message);
-  throw new Error(`Starlink rejected the config change: ${message}`);
+  throw new Error(`A Starlink rejeitou a alteração de configuração: ${message}`);
 }

@@ -152,7 +152,7 @@ export function RulesTab({ candidates }: { candidates: MemberCandidate[] }) {
       {!loading && rules.length === 0 && (
         <EmptyState className='pt-1'>
           Ainda não há regras. Uma regra pode limitar dados, rodar um timer ou agendar quando os
-          dispositivos ficam online.
+          dispositivos ficam disponíveis.
         </EmptyState>
       )}
 

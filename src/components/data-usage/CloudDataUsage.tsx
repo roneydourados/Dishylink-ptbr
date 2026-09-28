@@ -92,12 +92,13 @@ export function CloudDataUsage({ active }: { active: boolean }) {
   if (status === "error") {
     return (
       <Callout tone='error' className='mt-2.5'>
-        Couldn’t reach Starlink’s usage service. Check your internet and try again.
+        Não foi possível acessar o serviço de uso da Starlink. Verifique sua internet e tente
+        novamente.
       </Callout>
     );
   }
   if (status === "loading") {
-    return <Loading message='Loading Starlink billing data…' size={26} stacked />;
+    return <Loading message='Carregando dados de faturamento Starlink…' size={26} stacked />;
   }
   // Ready but nothing to draw — a service line whose first billing cycle hasn't
   // been reported yet. An empty state, not a pending one: a spinner here would
@@ -105,7 +106,7 @@ export function CloudDataUsage({ active }: { active: boolean }) {
   if (!cycle) {
     return (
       <EmptyState className='mt-6'>
-        Starlink hasn’t reported a billing cycle for this service line yet.
+        A Starlink ainda não reportou um ciclo de faturamento para esta linha de serviço.
       </EmptyState>
     );
   }
@@ -118,14 +119,14 @@ export function CloudDataUsage({ active }: { active: boolean }) {
         <div className='text-[34px] leading-[1.05] font-bold tracking-[-0.01em]'>
           {formatGB(cycle.totalAmountGB)}
           <span className='ml-[6px] align-baseline text-[13px] font-medium'>
-            {data?.content?.dataBuckets?.[0]?.name ?? "Data"}
+            {data?.content?.dataBuckets?.[0]?.name ?? "Dados"}
           </span>
         </div>
         <div className='mt-0.5 text-[12px] font-medium text-muted-foreground'>
-          <span className='mr-1 font-semibold'>Usage Limit:</span>
+          <span className='mr-1 font-semibold'>Limite de uso:</span>
           {unlimited
-            ? `${formatAllowance(plan?.usageLimitGB)} included (unlimited)`
-            : `of ${formatAllowance(plan?.usageLimitGB)} included`}
+            ? `${formatAllowance(plan?.usageLimitGB)} incluídos (ilimitado)`
+            : `de ${formatAllowance(plan?.usageLimitGB)} incluídos`}
         </div>
       </div>
 
@@ -134,7 +135,7 @@ export function CloudDataUsage({ active }: { active: boolean }) {
           options={monthOptions}
           value={String(selectedIndex)}
           onChange={(value) => setSelected(Number(value))}
-          label='Billing cycle month'
+          label='Mês do ciclo de faturamento'
           className='mb-2.5'
         />
       )}
@@ -152,12 +153,12 @@ export function CloudDataUsage({ active }: { active: boolean }) {
           day: "numeric",
           timeZone: "UTC",
         })}{" "}
-        · billing cycle
+        · ciclo de faturamento
       </div>
 
-      <Explainer title='Where does this come from?'>
-        This is Starlink’s own billing meter, read from your account. It’s complete and counted in
-        UTC — the authoritative figure your statement uses.
+      <Explainer title='De onde vem isso?'>
+        Este é o medidor de faturamento da própria Starlink, lido da sua conta. É completo e
+        contado em UTC — o valor oficial que seu extrato usa.
       </Explainer>
     </div>
   );

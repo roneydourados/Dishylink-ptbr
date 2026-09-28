@@ -27,7 +27,7 @@ interface TopBarProps {
 
 const CONNECTION_LABEL: Record<DishConnectionState, string> = {
   connecting: "conectando",
-  online: "online",
+  online: "conectado",
   unreachable: "antena inacessível",
 };
 

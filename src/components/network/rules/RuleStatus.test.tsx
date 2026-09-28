@@ -131,7 +131,7 @@ describe("RuleStatus", () => {
 
     await expect.poll(text).toContain("Seg–Sex");
     expect(text()).toContain("16:00 – 20:00");
-    expect(text()).toContain("Online");
+    expect(text()).toContain("Ativo");
     expect(text()).not.toContain("Reinicia em");
     expect(text()).not.toContain("Restante");
   });

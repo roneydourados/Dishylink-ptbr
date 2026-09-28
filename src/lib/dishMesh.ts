@@ -106,7 +106,7 @@ const MODEL_SPECS: Record<DishModel, DishModelSpec> = {
   // Mount and tilt match the Standard, whose body stands in for it: unrecognised
   // hardware gets the commonest kit's alignment limits, and a name that admits it
   // is a guess rather than asserting a model.
-  unknown: { displayName: "Unknown Model", mount: "kickstand", defaultTiltDeg: 20 },
+  unknown: { displayName: "Modelo desconhecido", mount: "kickstand", defaultTiltDeg: 20 },
 };
 
 export function specForModel(model: DishModel): DishModelSpec {

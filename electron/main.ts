@@ -126,7 +126,7 @@ function logFailure(kind: string, value: unknown): void {
 function fatal(kind: string, value: unknown): never {
   const detail = value instanceof Error ? (value.stack ?? value.message) : String(value);
   try {
-    dialog.showErrorBox("A JavaScript error occurred in the main process", detail);
+    dialog.showErrorBox("Ocorreu um erro de JavaScript no processo principal", detail);
   } catch {
     // Before the app is ready there is no window server to ask; the throw stands.
   }
@@ -234,7 +234,7 @@ function createWindow(): void {
     ...(restoredBounds ? { x: savedBounds.x, y: savedBounds.y } : {}),
     minWidth: 800,
     minHeight: 700,
-    title: "Dishylink — Starlink Companion Desktop App (Unofficial)",
+    title: "Dishylink — App desktop companheiro da Starlink (não oficial)",
     titleBarStyle: "hiddenInset",
     show: false,
     // Matches index.css's dark --page. Electron's own default is white, which the
@@ -314,12 +314,12 @@ function createTray(): void {
   }
   tray.setToolTip("Dishylink");
   const menu = Menu.buildFromTemplate([
-    { label: "Open Dishylink", click: showWindow },
+    { label: "Abrir Dishylink", click: showWindow },
     { type: "separator" },
     {
       // Alerting runs when no window is open, so it must be switchable from the tray.
       id: NOTIFY_ITEM_ID,
-      label: "Notify Me About Alerts",
+      label: "Notificar-me sobre alertas",
       type: "checkbox",
       // Opening value only; the checkbox owns its `checked` after this, and later
       // values are written by publishNotificationState.
@@ -350,8 +350,8 @@ function createTray(): void {
             id: THROUGHPUT_ITEM_ID,
             label:
               process.platform === "darwin"
-                ? "Show Throughput in Menu Bar"
-                : "Show Throughput in Taskbar",
+                ? "Mostrar taxa de transferência na barra de menus"
+                : "Mostrar taxa de transferência na barra de tarefas",
             type: "checkbox" as const,
             checked: preferences().menuBarThroughput,
             click: (item: MenuItem) => setPreference("menuBarThroughput", item.checked),
@@ -362,7 +362,7 @@ function createTray(): void {
       ? [
           {
             id: HIDE_ICON_ITEM_ID,
-            label: "Hide Menu Bar Icon",
+            label: "Ocultar ícone da barra de menus",
             type: "checkbox" as const,
             checked: preferences().hideTrayIcon,
             visible: preferences().menuBarThroughput,
@@ -372,13 +372,13 @@ function createTray(): void {
       : []),
     {
       // openAsHidden + the wasOpenedAtLogin check below start collection with no window.
-      label: "Start at Login",
+      label: "Abrir ao iniciar sessão",
       type: "checkbox",
       checked: app.getLoginItemSettings().openAtLogin,
       click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked, openAsHidden: true }),
     },
     { type: "separator" },
-    { label: "Quit Dishylink", role: "quit" },
+    { label: "Sair do Dishylink", role: "quit" },
   ]);
   notifyItem = menu.getMenuItemById(NOTIFY_ITEM_ID);
   notifyReasonItem = menu.getMenuItemById(NOTIFY_REASON_ITEM_ID);
@@ -523,8 +523,8 @@ function registerCloudHandlers(): void {
  *  a binary it can't verify. */
 function undeliverableReason(): string {
   return app.isPackaged
-    ? "macOS isn’t delivering notifications — allow Dishylink under System Settings ▸ Notifications."
-    : "Native notifications need the installed Dishylink app; a dev run can’t post them.";
+    ? "O macOS não está entregando notificações — permita o Dishylink em Ajustes do Sistema ▸ Notificações."
+    : "Notificações nativas precisam do app Dishylink instalado; uma execução de desenvolvimento não consegue enviá-las.";
 }
 
 /** The one notification answer every surface renders: stored request + channel as last

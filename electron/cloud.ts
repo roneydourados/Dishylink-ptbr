@@ -184,11 +184,11 @@ export function accountSignedIn(): boolean {
 }
 
 export async function pauseDevice(clientId: number, paused: boolean): Promise<void> {
-  if (!handler) throw new Error("Cloud not started");
+  if (!handler) throw new Error("Nuvem não iniciada");
   const { status, body } = await handler.updateClient({ kind: "pause", clientId, paused });
   if (status === 200) return;
   const message = (body as { message?: string })?.message ?? `HTTP ${status}`;
-  throw new Error(status === 428 ? "No Starlink account connected" : message);
+  throw new Error(status === 428 ? "Nenhuma conta Starlink conectada" : message);
 }
 
 function json(status: number, body: unknown): Response {
@@ -259,7 +259,7 @@ async function verifyPartitionSession(): Promise<{ status: number; message?: str
  * connected, or when the user closes the window.
  */
 export async function signIn(parent?: BrowserWindow): Promise<{ ok: boolean; message?: string }> {
-  if (!handler) return { ok: false, message: "Cloud not started." };
+  if (!handler) return { ok: false, message: "Nuvem não iniciada." };
   // Reconnecting an account whose login is still live needs no window: the session
   // is already in the jar, so showing starlink.com would only flash the site up and
   // tear it down again.
@@ -275,7 +275,7 @@ function openLoginWindow(parent?: BrowserWindow): Promise<{ ok: boolean; message
       height: 800,
       parent,
       modal: Boolean(parent),
-      title: "Sign in to Starlink",
+      title: "Entrar na Starlink",
       autoHideMenuBar: true,
       webPreferences: { partition: LOGIN_PARTITION },
     });
@@ -355,7 +355,7 @@ function openLoginWindow(parent?: BrowserWindow): Promise<{ ok: boolean; message
       cookies.removeListener("changed", onCookieChanged);
       // A close we initiated has already resolved with its own verdict, so this only
       // ever speaks for the user closing the window themselves.
-      if (!connected) resolve({ ok: false, message: "Sign-in was cancelled." });
+      if (!connected) resolve({ ok: false, message: "O login foi cancelado." });
     });
     void win.loadURL(LOGIN_URL);
   });

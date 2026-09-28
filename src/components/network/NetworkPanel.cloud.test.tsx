@@ -305,9 +305,9 @@ test("given: an account read in flight, should: hold the control and show it wor
     />,
   );
 
-  const working = renderedPanel.getByRole("status", { name: "Connecting" });
+  const working = renderedPanel.getByRole("status", { name: "Conectando" });
   await vi.waitFor(() => expect(working.query()).not.toBeNull(), { timeout: 8_000 });
-  expect(renderedPanel.getByRole("button", { name: /Connecting/ }).query()).toBeDisabled();
+  expect(renderedPanel.getByRole("button", { name: /Conectando/ }).query()).toBeDisabled();
 });
 
 test("given: the same silence with no account roster, should: show the error instead", async () => {

@@ -154,7 +154,7 @@ export function MeterForm({
               {mode === "timer"
                 ? `Pausar “${deviceName}” quando o tempo acabar.`
                 : mode === "schedule"
-                  ? `Definir os horários em que “${deviceName}” fica online.`
+                  ? `Definir os horários em que “${deviceName}” fica disponível.`
                   : `Pausar “${deviceName}” ao usar sua franquia.`}
             </DialogDescription>
           </div>

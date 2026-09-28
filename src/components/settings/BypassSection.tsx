@@ -206,7 +206,7 @@ export function BypassSection({
             weight instead, which is what it is separately severable for. */}
         <Callout tone='info' icon='warning' iconSeverity={bypassed === false ? "danger" : "normal"}>
           {bypassed === false
-            ? "O modo bypass desativa completamente o roteador Starlink e o Wi-Fi dele. Só um roteador de terceiros ligado à antena permanece online. Você pode desativar de novo daqui enquanto este dispositivo tiver acesso à internet."
+            ? "O modo bypass desativa completamente o roteador Starlink e o Wi-Fi dele. Só um roteador de terceiros ligado à antena permanece conectado. Você pode desativar de novo daqui enquanto este dispositivo tiver acesso à internet."
             : bypassed
               ? "O bypass está ligado, então o roteador Starlink está desativado e um roteador de terceiros gerencia sua rede. Desativar o bypass traz de volta o roteador Starlink e o Wi-Fi dele."
               : "Não dá para saber se o bypass está ligado. Desativá-lo é o caminho seguro de qualquer forma: traz de volta o roteador Starlink e o Wi-Fi dele, e não muda nada se o bypass já estava desligado."}
@@ -223,7 +223,7 @@ export function BypassSection({
             <DialogTitle className='text-[19px] leading-snug'>Tem certeza?</DialogTitle>
             <DialogDescription className='text-[13.5px] leading-relaxed'>
               {offered
-                ? "O roteador Starlink e o Wi-Fi dele serão desligados. Só dispositivos atrás de um roteador de terceiros ligado à antena permanecem online. Você pode desativar o bypass daqui enquanto este dispositivo ainda tiver internet — se nada mais fornecer, será preciso outro dispositivo com dados móveis."
+                ? "O roteador Starlink e o Wi-Fi dele serão desligados. Só dispositivos atrás de um roteador de terceiros ligado à antena permanecem conectados. Você pode desativar o bypass daqui enquanto este dispositivo ainda tiver internet — se nada mais fornecer, será preciso outro dispositivo com dados móveis."
                 : "O roteador Starlink e o Wi-Fi dele voltam. Dispositivos conectados por um roteador de terceiros podem precisar reconectar."}
             </DialogDescription>
           </DialogHeader>

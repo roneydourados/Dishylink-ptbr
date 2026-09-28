@@ -37,7 +37,7 @@ export function Loading({
         className,
       )}
     >
-      <SpinLoader size={size} variant={variant} label={message ?? "Loading"} />
+      <SpinLoader size={size} variant={variant} label={message ?? "Carregando"} />
       {message && <span>{message}</span>}
     </div>
   );

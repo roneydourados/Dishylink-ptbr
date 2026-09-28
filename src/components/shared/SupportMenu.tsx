@@ -93,7 +93,7 @@ const SECTIONS: { label: string; items: MenuLinkItem[] }[] = [
     ],
   },
   {
-    label: "Feedback",
+    label: "Comentários",
     items: [
       { href: SUPPORT_LINKS.reportIssue, icon: BugIcon, children: "Reportar um problema" },
       { href: SUPPORT_LINKS.requestFeature, icon: BulbIcon, children: "Sugerir um recurso" },
@@ -108,7 +108,7 @@ const SECTIONS: { label: string; items: MenuLinkItem[] }[] = [
     ],
   },
   {
-    label: "Legal",
+    label: "Jurídico",
     items: [
       { href: SUPPORT_LINKS.privacyPolicy, icon: ShieldIcon, children: "Política de Privacidade" },
       { href: SUPPORT_LINKS.disclaimer, icon: ScaleIcon, children: "Aviso legal" },

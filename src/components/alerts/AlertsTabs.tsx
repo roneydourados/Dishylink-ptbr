@@ -125,7 +125,7 @@ export function StatusTab({
               {/* Never let a stale snapshot read as a live all-clear. */}
               {!live && (
                 <span className='normal-case tracking-normal'>
-                  Starlink offline · último status conhecido
+                  Starlink ausente · último estado conhecido
                 </span>
               )}
             </p>

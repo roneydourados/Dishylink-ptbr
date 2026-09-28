@@ -52,7 +52,7 @@ export function DeviceThroughput({
 
   return (
     <>
-      <SectionHeading title='Throughput'>
+      <SectionHeading title='Taxa de transferência'>
         {!recordingStopped && (
           <InfoDot tip='Quanto de dados este dispositivo está transferindo agora. Transmita um vídeo e veja o valor subir.' />
         )}
@@ -112,15 +112,15 @@ function noHistoryMessage(
   const noRecorder = historianAnswering === false;
   const noRouter = routerReachable === false;
   if (noRecorder && noRouter) {
-    return "Sem histórico de throughput. O gravador de histórico não está em execução, e o roteador da sua rede não pode ser alcançado.";
+    return "Sem histórico de taxa de transferência. O gravador de histórico não está em execução, e o roteador da sua rede não pode ser alcançado.";
   }
   if (noRecorder) {
-    return "Sem histórico de throughput. O gravador de histórico não está em execução, então nada está sendo registrado.";
+    return "Sem histórico de taxa de transferência. O gravador de histórico não está em execução, então nada está sendo registrado.";
   }
   if (noRouter) {
-    return "Sem histórico de throughput. As taxas por dispositivo são lidas do roteador da sua rede, que não pode ser alcançado agora.";
+    return "Sem histórico de taxa de transferência. As taxas por dispositivo são lidas do roteador da sua rede, que não pode ser alcançado agora.";
   }
-  return "Coletando throughput ao vivo… os gráficos preenchem conforme o roteador é consultado (a cada 5 s).";
+  return "Coletando taxa ao vivo… os gráficos preenchem conforme o roteador é consultado (a cada 5 s).";
 }
 
 function DirectionChart({

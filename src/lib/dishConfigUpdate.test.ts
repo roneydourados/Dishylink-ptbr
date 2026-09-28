@@ -22,7 +22,7 @@ describe("applyDishConfigUpdate", () => {
     });
 
     await expect(applyDishConfigUpdate({ powerSaveMode: true }, request)).rejects.toThrow(
-      "Starlink rejected the config change: Starlink did not answer in time.",
+      "A Starlink rejeitou a alteração de configuração: Starlink did not answer in time.",
     );
   });
 

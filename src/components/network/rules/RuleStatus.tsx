@@ -204,7 +204,7 @@ export function RuleStatus({
                   ? "Sem agenda"
                   : rule.windowBlocked
                     ? "Pausado"
-                    : "Online"
+                    : "Ativo"
               }
             />
             <Stat

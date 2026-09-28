@@ -111,7 +111,7 @@ export function ToolbarDock({ items, activeId, onSelect }: ToolbarDockProps) {
   return (
     <div className='fixed bottom-[25px] left-1/2 z-30 -translate-x-1/2'>
       <motion.nav
-        aria-label='Dashboard sections'
+        aria-label='Seções do painel'
         initial={{ opacity: 0, y: 26 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 26 }}

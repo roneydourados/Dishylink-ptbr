@@ -117,7 +117,7 @@ function StepColumn({
       <button
         type='button'
         onClick={onUp}
-        aria-label={`Increase ${unit}`}
+        aria-label={`Aumentar ${unit === "hour" ? "hora" : "minuto"}`}
         className={stepButton}
         tabIndex={typing ? -1 : 0}
       >
@@ -149,7 +149,7 @@ function StepColumn({
             setTyping(true);
             requestAnimationFrame(() => field.current?.select());
           }}
-          title='Click to type'
+          title='Clique para digitar'
           className='grid w-11 cursor-text place-items-center rounded-md py-0.5 transition-colors hover:bg-[color-mix(in_srgb,var(--ink)_10%,transparent)]'
         >
           <NumberFlow value={value} format={{ minimumIntegerDigits: 2 }} className={digits} />
@@ -158,7 +158,7 @@ function StepColumn({
       <button
         type='button'
         onClick={onDown}
-        aria-label={`Decrease ${unit}`}
+        aria-label={`Diminuir ${unit === "hour" ? "hora" : "minuto"}`}
         className={stepButton}
         tabIndex={typing ? -1 : 0}
       >

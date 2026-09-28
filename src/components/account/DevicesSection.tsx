@@ -8,6 +8,7 @@ import {
   routerHardwareName,
   type CloudTerminal,
   type DeviceTelemetry,
+  type DeviceStatus,
   type DishTelemetry,
   type RouterTelemetry,
 } from "../../lib/starlinkCloud";
@@ -15,6 +16,12 @@ import { DishIcon } from "../../assets/icons/DishIcon";
 import { RouterIcon } from "../../assets/icons/RouterIcon";
 import { Field, StatusDot } from "./accountChrome";
 import { buildDeviceList, type DeviceItem } from "./deviceList";
+
+const STATUS_LABEL: Record<DeviceStatus, string> = {
+  online: "conectado",
+  offline: "desconectado",
+  inactive: "inativo",
+};
 
 function lastUpdated(tel: DeviceTelemetry | undefined): string {
   return tel ? new Date(tel.timestampMs).toLocaleString() : "—";
@@ -37,18 +44,18 @@ function fieldsFor(item: DeviceItem): { label: string; value: ReactNode; mono?: 
     const t = item.terminal!;
     const tel = item.tel as DishTelemetry | undefined;
     return [
-      { label: "Starlink ID", value: t.userTerminalId ?? "—", mono: true },
-      { label: "Serial number", value: t.dishSerialNumber ?? "—", mono: true },
-      { label: "Kit number", value: t.serialNumber ?? "—", mono: true },
-      { label: "Software version", value: tel?.softwareVersion ?? "—", mono: true },
-      { label: "Uptime", value: formatUptime(tel?.uptimeS) },
-      { label: "Last updated", value: lastUpdated(tel) },
+      { label: "ID Starlink", value: t.userTerminalId ?? "—", mono: true },
+      { label: "Número de série", value: t.dishSerialNumber ?? "—", mono: true },
+      { label: "Número do kit", value: t.serialNumber ?? "—", mono: true },
+      { label: "Versão do software", value: tel?.softwareVersion ?? "—", mono: true },
+      { label: "Tempo ativo", value: formatUptime(tel?.uptimeS) },
+      { label: "Última atualização", value: lastUpdated(tel) },
       {
-        label: "Time obstructed",
+        label: "Tempo obstruído",
         value: tel?.obstructionPct != null ? `${(tel.obstructionPct * 100).toFixed(2)}%` : "—",
       },
       {
-        label: "Last connected",
+        label: "Última conexão",
         value: t.lastConnected ? new Date(t.lastConnected).toLocaleString() : "—",
       },
     ];
@@ -56,14 +63,14 @@ function fieldsFor(item: DeviceItem): { label: string; value: ReactNode; mono?: 
   const r = item.router!;
   const tel = item.tel as RouterTelemetry | undefined;
   return [
-    { label: "Router ID", value: r.routerId ?? "—", mono: true },
-    { label: "Hardware version", value: routerHardwareName(tel?.hardwareVersion) },
-    { label: "Software version", value: tel?.softwareVersion ?? "—", mono: true },
-    { label: "Clients", value: tel?.clients != null ? String(tel.clients) : "—" },
-    { label: "Uptime", value: formatUptime(tel?.uptimeS) },
-    { label: "Connection to Starlink", value: connectionLabel(tel?.hops) },
-    { label: "Bypassed", value: tel ? (tel.isBypassed ? "Yes" : "No") : "—" },
-    { label: "Last updated", value: lastUpdated(tel) },
+    { label: "ID do roteador", value: r.routerId ?? "—", mono: true },
+    { label: "Versão do hardware", value: routerHardwareName(tel?.hardwareVersion) },
+    { label: "Versão do software", value: tel?.softwareVersion ?? "—", mono: true },
+    { label: "Clientes", value: tel?.clients != null ? String(tel.clients) : "—" },
+    { label: "Tempo ativo", value: formatUptime(tel?.uptimeS) },
+    { label: "Conexão com a Starlink", value: connectionLabel(tel?.hops) },
+    { label: "Em bypass", value: tel ? (tel.isBypassed ? "Sim" : "Não") : "—" },
+    { label: "Última atualização", value: lastUpdated(tel) },
   ];
 }
 
@@ -75,7 +82,7 @@ function DeviceDetail({ item }: { item: DeviceItem }) {
         <span className='text-[15px] font-semibold'>{item.name}</span>
         <span className='ml-auto flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground'>
           <StatusDot status={item.status} />
-          {item.status}
+          {STATUS_LABEL[item.status]}
         </span>
       </div>
       <div className='grid grid-cols-2 gap-4 max-[520px]:grid-cols-1'>
@@ -106,7 +113,7 @@ export function DevicesSection({
   const selected = items.find((i) => i.key === selectedKey) ?? items[0];
 
   if (items.length === 0) {
-    return <div className='text-[13px] text-muted-foreground'>No devices on this account.</div>;
+    return <div className='text-[13px] text-muted-foreground'>Nenhum dispositivo nesta conta.</div>;
   }
   const firstInactiveKey = items.find((i) => i.groupInactive)?.key;
 
@@ -117,7 +124,7 @@ export function DevicesSection({
           <li key={item.key}>
             {item.key === firstInactiveKey && (
               <div className='mt-2 mb-1 px-2.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground'>
-                Inactive
+                Inativos
               </div>
             )}
             <button

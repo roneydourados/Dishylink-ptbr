@@ -261,7 +261,7 @@ export function MeterStatus({
                   ? "Sem agenda"
                   : rule.windowBlocked
                     ? "Pausado"
-                    : "Online"
+                    : "Ativo"
               }
               align='right'
             />

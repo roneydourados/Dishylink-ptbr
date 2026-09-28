@@ -95,12 +95,12 @@ const STEPS = [
   </>,
   <>
     Abra o DevTools (<kbd className='mono-value'>F12</kbd> / <kbd className='mono-value'>⌥⌘I</kbd>)
-    e vá à aba <strong>Network</strong>.
+    e vá à aba <strong>Rede</strong> (Network).
   </>,
   <>Recarregue a página e clique em qualquer requisição para starlink.com na lista.</>,
   <>
-    Em <strong>Request Headers</strong>, encontre <code>cookie:</code> e copie o valor{" "}
-    <strong>inteiro</strong>.
+    Em <strong>Cabeçalhos da solicitação</strong> (Request Headers), encontre <code>cookie:</code> e
+    copie o valor <strong>inteiro</strong>.
   </>,
   <>
     Cole abaixo e conecte. (Não use o document.cookie do console — ele omite a parte que

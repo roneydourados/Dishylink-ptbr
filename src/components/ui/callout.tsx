@@ -55,7 +55,7 @@ export function Callout({
   iconSeverity,
   icon,
   onDismiss,
-  dismissLabel = "Dismiss",
+  dismissLabel = "Dispensar",
   className,
 }: CalloutProps) {
   const resolvedTone = tone ?? "info";

@@ -41,7 +41,7 @@ export function ScheduleWindows({
             : "text-[11px] tracking-wide text-muted-foreground uppercase"
         }
       >
-        <span>{schedule.mode === "allow" ? "Online" : "Offline"}</span>
+        <span>{schedule.mode === "allow" ? "Disponível" : "Bloqueado"}</span>
         {compact && <span>Horários</span>}
       </div>
       {shown.map((window, index) => (
@@ -82,8 +82,8 @@ export function ScheduleFields({ draft }: { draft: ScheduleDraft }) {
           <div className='text-[13px] font-medium text-foreground'>Agenda</div>
           <div className='text-[12px] text-muted-foreground'>
             {draft.mode === "allow"
-              ? "Online nestes horários, pausado no restante do dia."
-              : "Pausado nestes horários, online no restante."}
+              ? "Disponível nestes horários, pausado no restante do dia."
+              : "Pausado nestes horários, disponível no restante."}
           </div>
         </div>
         <SegmentedControl
@@ -91,8 +91,8 @@ export function ScheduleFields({ draft }: { draft: ScheduleDraft }) {
           value={draft.mode}
           onChange={draft.setMode}
           options={[
-            { value: "allow", label: "Online" },
-            { value: "block", label: "Offline" },
+            { value: "allow", label: "Disponível" },
+            { value: "block", label: "Bloqueado" },
           ]}
         />
       </div>

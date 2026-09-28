@@ -19,8 +19,8 @@ import { CloudDataUsage } from "./CloudDataUsage";
 type UsageSource = "local" | "cloud";
 
 const SOURCE_TABS = [
-  { label: "Local session", value: "local" as const },
-  { label: "Starlink billing", value: "cloud" as const },
+  { label: "Sessão local", value: "local" as const },
+  { label: "Faturamento Starlink", value: "cloud" as const },
 ];
 
 /** The figure with its unit, for the places that render them as one string. */
@@ -40,7 +40,7 @@ function UsageBars({ buckets, range }: { buckets: UsageBucket[]; range: EnergyRa
       key: bucket.t,
       label: when,
       title: missing
-        ? `${when} · no data — the historian wasn't running`
+        ? `${when} · sem dados — o gravador de histórico não estava em execução`
         : `${when} · ↓${withUnit(bucket.downGB!)} · ↑${withUnit(bucket.upGB!)}`,
       bar: missing ? (
         // An empty slot, not a zero one: mark the hole rather than draw a
@@ -81,7 +81,7 @@ export function DataUsagePanel() {
         options={SOURCE_TABS}
         value={source}
         onChange={setSource}
-        label='Data usage source'
+        label='Fonte do uso de dados'
         variant='glider'
         className='mb-1'
       />
@@ -98,8 +98,8 @@ function LocalDataUsage() {
   if (unavailable) {
     return (
       <Callout className='mt-2.5'>
-        Data usage needs the history recorder running. Start it with <code>npm run historian</code>{" "}
-        and Dishylink will meter traffic from now on.
+        O uso de dados precisa do gravador de histórico em execução. Inicie com{" "}
+        <code>npm run historian</code> e o Dishylink passará a medir o tráfego a partir de agora.
       </Callout>
     );
   }
@@ -129,22 +129,23 @@ function LocalDataUsage() {
         options={RANGE_TABS}
         value={range}
         onChange={setRange}
-        label='Data usage range'
+        label='Período do uso de dados'
         className='mb-2.5'
       />
 
       {data && <UsageBars buckets={data.buckets} range={range} />}
       {data && (
         <div className='mt-0.5 text-[12px] font-medium text-muted-foreground'>
-          collected {coveragePct}% of this period
-          {coveragePct < 95 && " — totals cover only the time the recorder was running"}
+          coletado {coveragePct}% deste período
+          {coveragePct < 95 && " — os totais cobrem apenas o tempo em que o gravador estava em execução"}
         </div>
       )}
 
-      <Explainer title='How is this measured?'>
-        Dishylink integrates the dish's own per-second throughput telemetry into per-minute volume,
-        on this machine. It tracks your real traffic from the moment the historian started — it is
-        not Starlink's billing meter, which lives in their cloud and counts in UTC.
+      <Explainer title='Como isso é medido?'>
+        O Dishylink integra a telemetria de vazão por segundo da própria antena em volume por
+        minuto, nesta máquina. Ele acompanha seu tráfego real a partir do momento em que o
+        gravador de histórico foi iniciado — não é o medidor de faturamento da Starlink, que fica
+        na nuvem deles e conta em UTC.
       </Explainer>
 
       <DeviceUsageList />

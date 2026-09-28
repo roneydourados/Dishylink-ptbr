@@ -45,7 +45,7 @@ export function useDishSettings(): DishSettingsState {
       (loadError) =>
         !disposed &&
         setDishSettingsError(
-          new Error(`Couldn't read dish config: ${(loadError as Error).message}`),
+          new Error(`Não foi possível ler a configuração da antena: ${(loadError as Error).message}`),
         ),
     );
     return () => {

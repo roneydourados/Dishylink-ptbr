@@ -50,7 +50,7 @@ describe("applyRouterClientPaused", () => {
 
     await expect(
       applyRouterClientUpdate({ kind: "pause", clientId: 7, paused: false }, request),
-    ).rejects.toThrow("Starlink rejected the device update: Starlink did not answer in time.");
+    ).rejects.toThrow("A Starlink rejeitou a atualização do dispositivo: Starlink did not answer in time.");
     expect(request).toHaveBeenCalledOnce();
   });
 });

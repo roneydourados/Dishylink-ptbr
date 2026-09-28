@@ -163,7 +163,7 @@ test("the unknown kit draws the Standard but refuses to be named one", () => {
   // and render. Its name must not: claiming a kit the user doesn't own is worse
   // than admitting we don't know.
   expect(meshForModel("unknown")).toBe(meshForModel("rev4Standard"));
-  expect(specForModel("unknown").displayName).toBe("Unknown Model");
+  expect(specForModel("unknown").displayName).toBe("Modelo desconhecido");
   expect(specForModel("unknown").displayName).not.toBe(specForModel("rev4Standard").displayName);
 });
 

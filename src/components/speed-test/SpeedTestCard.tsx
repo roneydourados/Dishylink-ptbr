@@ -25,12 +25,12 @@ const IDLE_PROGRESS: SpeedTestProgress = {
 };
 
 const PHASE_LABEL: Record<SpeedTestProgress["phase"], string> = {
-  idle: "Measures download, upload, and latency through your Starlink link.",
-  download: "Measuring download…",
-  upload: "Measuring upload…",
-  resting: "Done.",
-  done: "Done.",
-  error: "Test failed — check the connection and try again.",
+  idle: "Mede download, upload e latência pela sua conexão Starlink.",
+  download: "Medindo download…",
+  upload: "Medindo upload…",
+  resting: "Concluído.",
+  done: "Concluído.",
+  error: "Teste falhou — verifique a conexão e tente de novo.",
 };
 
 interface LinkQuality {
@@ -176,21 +176,21 @@ export function SpeedTestPanel({
             phase === "resting"
             ? { value: null, mode: "download" as const, caption: "Download" }
             : failed
-              ? { value: null, mode: "idle" as const, caption: "Failed" }
-              : { value: null, mode: "idle" as const, caption: "Ready" };
+              ? { value: null, mode: "idle" as const, caption: "Falhou" }
+              : { value: null, mode: "idle" as const, caption: "Pronto" };
 
   return (
     <div className='flex flex-col items-center gap-1'>
       <SegmentedControl
         variant='glider'
-        label='Speed test view'
+        label='Visualização do teste de velocidade'
         className='mb-3'
         disabled={isRunning}
         value={view}
         onChange={setView}
         options={[
           { value: "beam", label: "Starlink" },
-          { value: "gauge", label: "Gauge" },
+          { value: "gauge", label: "Medidor" },
         ]}
       />
 
@@ -216,7 +216,7 @@ export function SpeedTestPanel({
         />
         <HeadlineFigure
           icon={<ClockIcon size={12} strokeWidth={2.5} />}
-          label='LATENCY'
+          label='LATÊNCIA'
           unit='ms'
           digits={0}
           value={quality.latencyMs}
@@ -227,7 +227,7 @@ export function SpeedTestPanel({
       <div className='flex w-full justify-center gap-[18px] border-t border-b border-border py-2'>
         {/* a decimal place: real Starlink jitter is often sub-1ms and would round to a bare 0 */}
         <MetricPill label='Jitter' value={fmt(quality.jitterMs, 1)} unit='ms' />
-        <MetricPill label='Loss' value={fmt(quality.lossPct, 1)} unit='%' />
+        <MetricPill label='Perda' value={fmt(quality.lossPct, 1)} unit='%' />
       </div>
 
       {view === "beam" ? (
@@ -268,18 +268,18 @@ export function SpeedTestPanel({
             className='animate-[speedtest-spin_1s_steps(12,end)_infinite]'
             size={20}
             strokeWidth={2.5}
-            aria-label='Running speed test'
+            aria-label='Executando teste de velocidade'
           />
         ) : phase === "done" ? (
           <>
-            <RotateCcwIcon size={15} strokeWidth={2.5} /> Run again
+            <RotateCcwIcon size={15} strokeWidth={2.5} /> Testar de novo
           </>
         ) : failed ? (
           <>
-            <RotateCcwIcon size={15} strokeWidth={2.5} /> Try again
+            <RotateCcwIcon size={15} strokeWidth={2.5} /> Tentar de novo
           </>
         ) : (
-          "Go"
+          "Iniciar"
         )}
       </button>
       {/* A failure has to look like one. This line is the only place the panel
@@ -293,7 +293,7 @@ export function SpeedTestPanel({
         {PHASE_LABEL[phase]}
       </div>
       <div className='mt-1 text-center text-[10.5px] font-medium text-muted-foreground opacity-70'>
-        Measured against Cloudflare · may read lower than tests to a nearby server
+        Medido via Cloudflare · pode ser menor que testes a um servidor próximo
       </div>
     </div>
   );

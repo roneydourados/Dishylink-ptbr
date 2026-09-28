@@ -28,7 +28,7 @@ export function ObstructionTimeLapse({
         className='text-[11.5px] font-medium text-muted-foreground'
         style={{ whiteSpace: "nowrap" }}
       >
-        Obstruction time-lapse
+        Timelapse de obstrução
       </span>
       <div className='relative flex h-[22px] flex-1 items-center'>
         <div
@@ -65,7 +65,7 @@ export function ObstructionTimeLapse({
             const next = Number(changeEvent.target.value);
             onScrub(next >= snapshots.length ? null : next);
           }}
-          aria-label='Obstruction time-lapse'
+          aria-label='Timelapse de obstrução'
         />
       </div>
       {/* Fixed width, not min: the label swaps between "LIVE" and a timestamp,
@@ -76,7 +76,7 @@ export function ObstructionTimeLapse({
           shorter "LIVE" drifting off to the right. */}
       <span
         className='flex items-center gap-1.5 text-[11.5px] font-medium'
-        style={{ whiteSpace: "nowrap", width: 64, flex: "0 0 auto" }}
+        style={{ whiteSpace: "nowrap", width: 72, flex: "0 0 auto" }}
       >
         {isViewingHistory ? (
           <span className='tabular-nums text-muted-foreground'>
@@ -86,10 +86,10 @@ export function ObstructionTimeLapse({
             })}
           </span>
         ) : stale ? (
-          <span className='font-semibold tracking-wide text-status-critical'>OFFLINE</span>
+          <span className='font-semibold tracking-wide text-status-critical'>AUSENTE</span>
         ) : (
           <>
-            <span className='font-semibold tracking-wide text-status-good'>LIVE</span>
+            <span className='font-semibold tracking-wide text-status-good'>AO VIVO</span>
             {/* The one moving thing in the row — a live pulse, not just a word. */}
             <span
               className='size-1.5 animate-pulse rounded-full bg-status-good'

@@ -171,17 +171,17 @@ export function routerStatus(
 export function dishDisplayName(terminal: CloudTerminal): string {
   const tail = (terminal.userTerminalId ?? "").split("-").pop() ?? "";
   const hex = tail.slice(-6).toUpperCase();
-  return hex ? `STARLINK ${hex}` : (terminal.serialNumber ?? "Starlink dish");
+  return hex ? `STARLINK ${hex}` : (terminal.serialNumber ?? "Antena Starlink");
 }
 
-/** Friendly router name: the controller reads "Main Router", a repeater "MESH". */
+/** Friendly router name: the controller reads "Roteador principal", a repeater "MESH". */
 export function routerDisplayName(
   routerId: string | undefined,
   tel: RouterTelemetry | undefined,
 ): string {
   const hex = (routerId ?? "").slice(-12).replace(/^0+/, "").toUpperCase();
   const isMesh = tel?.isRepeater === true || (tel?.hops ?? 0) > 0;
-  const prefix = tel ? (isMesh ? "MESH" : "Main Router") : "Router";
+  const prefix = tel ? (isMesh ? "MESH" : "Roteador principal") : "Roteador";
   return hex ? `${prefix} ${hex}` : prefix;
 }
 
@@ -193,10 +193,10 @@ export function routerHardwareName(hw: string | undefined): string {
   return hw ? `Starlink Router (${hw})` : "—";
 }
 
-/** Hops → "Direct" / "Mesh (N hops)", the portal's "Connection to Starlink". */
+/** Hops → "Direto" / "Mesh (N saltos)", the portal's "Connection to Starlink". */
 export function connectionLabel(hops: number | undefined): string {
-  if (!hops) return "Direct";
-  return `Mesh (${hops} hop${hops === 1 ? "" : "s"})`;
+  if (!hops) return "Direto";
+  return `Mesh (${hops} salto${hops === 1 ? "" : "s"})`;
 }
 
 /** Seconds → "11h 27m" / "4m 31s" / "88s". */
@@ -245,7 +245,7 @@ export interface CloudUsage {
 /** Raised when the host has no account session yet (HTTP 428). */
 export class CloudNotConnectedError extends Error {
   constructor() {
-    super("No Starlink account connected");
+    super("Nenhuma conta Starlink conectada");
     this.name = "CloudNotConnectedError";
   }
 }
@@ -305,7 +305,7 @@ export async function connectCloud(cookie: string): Promise<void> {
   });
   if (status < 200 || status >= 300) {
     const { message } = (body ?? {}) as { message?: string };
-    throw new Error(message ?? `Couldn’t connect (HTTP ${status}).`);
+    throw new Error(message ?? `Não foi possível conectar (HTTP ${status}).`);
   }
   noteCloudSessionChanged();
 }

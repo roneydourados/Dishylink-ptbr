@@ -46,7 +46,7 @@ describe("applyRouterConfigUpdate", () => {
         UPDATE,
         replying({ status: 502, body: { error: "device_call_failed", message: "socket hang up" } }),
       ),
-    ).rejects.toThrow("Starlink couldn't apply the change: socket hang up");
+    ).rejects.toThrow("A Starlink não pôde aplicar a alteração: socket hang up");
   });
 
   it("falls back to the status when the body carries no message", async () => {
