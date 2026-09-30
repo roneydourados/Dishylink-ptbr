@@ -309,7 +309,7 @@ export function MeterStatus({
 
         {(leading === "allowance" || (leading === "schedule" && capped)) && (
           <p className='text-center text-[12px] font-medium text-muted-foreground'>
-            Só os dados usados enquanto o Dishylink está em execução são contados.
+            Só os dados usados enquanto o Starlink Monitor Br está em execução são contados.
           </p>
         )}
         {!rule.autoPause && (

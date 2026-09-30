@@ -1,4 +1,4 @@
-# <img src="docs/logo.svg" alt="" width="34" height="34" align="top"> Dishylink
+# <img src="docs/logo.svg" alt="" width="34" height="34" align="top"> Starlink Monitor Br
 
 [![Downloads](https://img.shields.io/github/downloads/DaveyHert/dishylink/total.svg)](https://github.com/DaveyHert/dishylink/releases)
 [![macOS](https://img.shields.io/badge/macOS-12.0+-black.svg)](https://github.com/DaveyHert/dishylink/releases/latest)
@@ -9,7 +9,9 @@
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-%23FFDD00.svg?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/daveyhert)
 
 An open-source Starlink desktop app for macOS, Windows and browsers to monitor
-the performance and health of your Starlink.
+the performance and health of your Starlink. This repository is a Brazilian
+fork of [Dishylink](https://github.com/DaveyHert/dishylink), branded as
+**Starlink Monitor Br**.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="landing/src/assets/shots/dashboard-dark.png">

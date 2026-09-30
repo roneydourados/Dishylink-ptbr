@@ -136,16 +136,16 @@ function messagesFor(routerAddress: string): Record<RouterUnreachableCause, stri
       `Outro dispositivo nesta rede está usando ${routerAddress}, o endereço em que o roteador ` +
       `Starlink responde, então o roteador fica escondido atrás dele. Para corrigir, conecte-se ao ` +
       `Wi‑Fi Starlink, dê outro endereço ao outro roteador (como ` +
-      `${suggestedAlternative(routerAddress)}), ou aponte o endereço do roteador no Dishylink para ` +
+      `${suggestedAlternative(routerAddress)}), ou aponte o endereço do roteador no Starlink Monitor Br para ` +
       `onde o roteador Starlink realmente está.`,
     configuredAddressSilent:
-      `Nada respondeu em ${routerAddress}, o endereço que o Dishylink está configurado para usar, ` +
+      `Nada respondeu em ${routerAddress}, o endereço que o Starlink Monitor Br está configurado para usar, ` +
       `mas a antena indica que seu roteador Starlink está ligado. Provavelmente ele está em outro ` +
       `endereço. Confira essa configuração, ou limpe-a para voltar ao padrão.`,
     differentNetwork:
       `Seu roteador Starlink está ligado, mas este dispositivo não está na rede a que ` +
       `${routerAddress} pertence. Conecte-se ao Wi‑Fi Starlink ou, se a sub-rede do roteador foi ` +
-      `alterada, aponte o endereço do roteador no Dishylink para onde ele está agora.`,
+      `alterada, aponte o endereço do roteador no Starlink Monitor Br para onde ele está agora.`,
     bypassed:
       `O modo bypass está ativo, então o roteador Starlink está desligado e um roteador de ` +
       `terceiros gerencia sua rede. Wi‑Fi, lista de clientes e as configurações do roteador vêm ` +
@@ -157,7 +157,7 @@ function messagesFor(routerAddress: string): Record<RouterUnreachableCause, stri
     unknown:
       `Não foi possível alcançar o roteador Starlink em ${routerAddress}. Outro dispositivo pode ` +
       `estar usando esse endereço, o roteador pode estar em bypass ou em outra rede, ou em um ` +
-      `endereço diferente do que o Dishylink está configurado para usar.`,
+      `endereço diferente do que o Starlink Monitor Br está configurado para usar.`,
     checking:
       `Não foi possível alcançar o roteador Starlink em ${routerAddress}. Descobrindo o motivo; ` +
       `a maioria dos silêncios curtos é o roteador reiniciando.`,

@@ -67,14 +67,14 @@ export function RouterAddressRow({
     <>
       <SettingRow
         title='Endereço IP do roteador'
-        info={`O Dishylink procura seu roteador neste endereço. Altere só se a sub-rede do roteador foi mudada no app Starlink, ou se seu kit está em modo bypass atrás de um roteador de terceiros. Limpar o campo volta para ${fallback}.`}
+        info={`O Starlink Monitor Br procura seu roteador neste endereço. Altere só se a sub-rede do roteador foi mudada no app Starlink, ou se seu kit está em modo bypass atrás de um roteador de terceiros. Limpar o campo volta para ${fallback}.`}
         infoSeverity='warn'
         caption={`O padrão é ${fallback}`}
         note={
           refused ? (
             <span className='text-destructive'>{REFUSAL_MESSAGE[refused]}</span>
           ) : stored ? (
-            `O Dishylink está usando ${stored}. Limpe o campo para voltar a ${fallback}.`
+            `O Starlink Monitor Br está usando ${stored}. Limpe o campo para voltar a ${fallback}.`
           ) : undefined
         }
       >

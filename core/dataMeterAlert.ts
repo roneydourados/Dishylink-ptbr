@@ -22,7 +22,7 @@ import {
 
 /** Offered as the advice on a rule that asked for a pause this host cannot send. */
 export const CONNECT_ACCOUNT_ADVICE =
-  "Conecte sua conta Starlink para o Dishylink pausar um dispositivo ao atingir a franquia.";
+  "Conecte sua conta Starlink para o Starlink Monitor Br pausar um dispositivo ao atingir a franquia.";
 
 export function dataLimitAlertKey(clientKey: string): string {
   return `dataLimit:${clientKey}`;

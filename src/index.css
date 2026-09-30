@@ -1,7 +1,7 @@
-/* Dishylink — Starlink companion desktop app & browser extension design language. Theme tokens, the base reset, and
-   the handful of rules that have no Tailwind utility: keyframes, scrollbar
-   pseudo-elements, and positional selectors. Everything else is utilities in
-   the components. */
+/* Starlink Monitor Br — Brazilian fork of Dishylink. Theme tokens, the base
+   reset, and the handful of rules that have no Tailwind utility: keyframes,
+   scrollbar pseudo-elements, and positional selectors. Everything else is
+   utilities in the components. */
 
 /* Preflight is the base reset. It lands in @layer base, so it beats unstyled
    browser defaults but yields to both the unlayered CSS below and to utilities
@@ -48,6 +48,7 @@
   --color-series-up: var(--series-up);
   --color-status-good: var(--status-good);
   --color-status-critical: var(--status-critical);
+  --color-brand: var(--accent);
   --font-sans: var(--font-ui);
   --font-mono: var(--font-mono);
   --radius-lg: 12px;
@@ -62,45 +63,45 @@
    inside a light page. */
 :root,
 [data-theme="dark"] {
-  --page: #000000;
-  --surface: #0c0c0c;
-  --surface-raised: #1e1e1e;
-  --ink: #ffffff;
-  --ink-secondary: #b9b9b9;
-  --ink-muted: #7c7c7c;
-  --hairline: #232323;
-  --baseline: #3a3a3a;
-  --grid-dot: #161616;
+  --page: #070d18;
+  --surface: #0c1526;
+  --surface-raised: #152238;
+  --ink: #f8fafc;
+  --ink-secondary: #a8b4c8;
+  --ink-muted: #6b7a94;
+  --hairline: #1e2d45;
+  --baseline: #334155;
+  --grid-dot: #121c2e;
 
-  --chart-ink: #ffffff;
-  --chart-warm: #f09048;
+  --chart-ink: #f8fafc;
+  --chart-warm: #f59e0b;
 
-  /* brighter download blue / upload green on the black backdrop */
-  --series-down: #5b9bff;
+  /* cooler download cyan / upload green on the navy backdrop */
+  --series-down: #38bdf8;
   --series-up: #4ade80;
 
-  /* warm gold reads against the black dome + white clear dots */
-  --satellite: #e0a422;
-  --accent: #e0a422;
+  /* teal accent for satellites and highlights */
+  --satellite: #2dd4bf;
+  --accent: #2dd4bf;
 
-  /* white light against the black sky */
-  --beam: #ffffff;
+  /* soft beam against the navy sky */
+  --beam: #e2e8f0;
 
   /* The physical dish is white/silver hardware — never a black silhouette, so
      the body stays light in both themes and only its edge changes. */
   --dish-body: #fff;
-  --dish-edge: rgba(255, 255, 255, 0.559);
+  --dish-edge: rgba(226, 232, 240, 0.55);
 
-  --status-good: #4db450;
-  --status-critical: #f43f5e;
+  --status-good: #34d399;
+  --status-critical: #fb7185;
 
   /* Obstruction colours */
-  --sky-clear: #ffffff;
-  --sky-partial: #6e0f0f;
-  --sky-obstructed: #f51e1e;
-  --sky-unmapped: #7c7c7c;
+  --sky-clear: #f8fafc;
+  --sky-partial: #7f1d1d;
+  --sky-obstructed: #ef4444;
+  --sky-unmapped: #6b7a94;
 
-  --font-ui: "Barlow", system-ui, sans-serif;
+  --font-ui: "Poppins", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   color-scheme: dark;
@@ -108,36 +109,36 @@
 
 /* Equal specificity to :root, so it wins on source order — it must stay below. */
 [data-theme="light"] {
-  --page: #f4f3ee;
+  --page: #eef2f7;
   --surface: #ffffff;
   --surface-raised: #ffffff;
-  --ink: #111110;
-  --ink-secondary: #55544f;
-  --ink-muted: #8a8880;
-  --hairline: #e7e5dc;
-  --baseline: #c9c7bc;
-  --grid-dot: #dedcd2;
+  --ink: #0f172a;
+  --ink-secondary: #475569;
+  --ink-muted: #64748b;
+  --hairline: #d7e0ec;
+  --baseline: #94a3b8;
+  --grid-dot: #dbe4f0;
 
-  /* Starlink chart language: primary = ink, secondary = warm orange */
-  --chart-ink: #111110;
-  --chart-warm: #d1671f;
-  --series-down: #2f6fed;
-  --series-up: #1ba85f;
-  --satellite: #b7791f;
-  --accent: #b7791f;
-  --beam: var(--color-zinc-300);
+  /* Cool slate ink with teal accent */
+  --chart-ink: #0f172a;
+  --chart-warm: #d97706;
+  --series-down: #0284c7;
+  --series-up: #059669;
+  --satellite: #0d9488;
+  --accent: #0d9488;
+  --beam: var(--color-slate-300);
 
   --dish-body: #fff;
-  --dish-edge: #aba9a9;
+  --dish-edge: #94a3b8;
 
-  --status-good: #16a34a;
+  --status-good: #059669;
   --status-critical: #e11d48;
 
   /* The obstruction colours.*/
-  --sky-clear: #111110;
-  --sky-partial: #efa09b;
-  --sky-obstructed: #d81b1b;
-  --sky-unmapped: #8a8880;
+  --sky-clear: #0f172a;
+  --sky-partial: #fca5a5;
+  --sky-obstructed: #dc2626;
+  --sky-unmapped: #64748b;
 
   color-scheme: light;
 }
@@ -182,8 +183,10 @@ body {
   background: var(--page);
   color: var(--ink);
   font-family: var(--font-ui);
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 15.5px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -335,10 +338,10 @@ body {
 
 [data-theme="dark"] .glass-panel,
 .glass-panel:where([data-theme="dark"] *) {
-  background: color-mix(in srgb, #0e0e0e 80%, transparent);
+  background: color-mix(in srgb, #0c1526 82%, transparent);
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 12px 40px rgba(2, 8, 23, 0.5),
+    inset 0 1px 0 rgba(94, 234, 212, 0.06);
 }
 
 /* ---------- desktop (Electron) title bar ---------- */

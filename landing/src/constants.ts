@@ -121,8 +121,8 @@ export async function downloadPlatforms(fallbackVersion: string): Promise<{
         choiceLabel: "CPU architecture",
         requirement: "macOS 12 or later",
         options: [
-          option("arm64", "ARM64", /-arm64\.dmg$/, "DMG", `Dishylink-${version}-arm64.dmg`),
-          option("x64", "x64", /-x64\.dmg$/, "DMG", `Dishylink-${version}-x64.dmg`),
+          option("arm64", "ARM64", /-arm64\.dmg$/, "DMG", `Starlink Monitor Br-${version}-arm64.dmg`),
+          option("x64", "x64", /-x64\.dmg$/, "DMG", `Starlink Monitor Br-${version}-x64.dmg`),
         ],
       },
       {
@@ -135,12 +135,12 @@ export async function downloadPlatforms(fallbackVersion: string): Promise<{
           option(
             "universal",
             "Universal",
-            /^Dishylink-[\d.]+\.exe$/,
+            /^Starlink Monitor Br-[\d.]+\.exe$/,
             "EXE",
-            `Dishylink-${version}.exe`,
+            `Starlink Monitor Br-${version}.exe`,
           ),
-          option("x64", "x64", /-x64\.exe$/, "EXE", `Dishylink-${version}-x64.exe`),
-          option("arm64", "ARM64", /-arm64\.exe$/, "EXE", `Dishylink-${version}-arm64.exe`),
+          option("x64", "x64", /-x64\.exe$/, "EXE", `Starlink Monitor Br-${version}-x64.exe`),
+          option("arm64", "ARM64", /-arm64\.exe$/, "EXE", `Starlink Monitor Br-${version}-arm64.exe`),
         ],
       },
       {
@@ -160,7 +160,7 @@ export async function downloadPlatforms(fallbackVersion: string): Promise<{
 }
 
 export const SITE = {
-  name: "Dishylink",
+  name: "Starlink Monitor Br",
   domain: "dishylink.com",
-  tagline: "Know exactly what your dish is doing",
+  tagline: "Saiba exatamente o que sua antena está fazendo",
 };

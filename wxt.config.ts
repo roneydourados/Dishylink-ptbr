@@ -43,7 +43,7 @@ export default defineConfig({
     optimizeDeps: { entries: ["extension/entrypoints/**/*.html"] },
   }),
   manifest: ({ manifestVersion }) => ({
-    name: "Dishylink",
+    name: "Starlink Monitor Br",
     description:
       "Monitor your Starlink's performance and health. Live telemetry, speed test, obstruction map, alignment, alerts, per-device usage.",
     // A background service worker fetching 192.168.100.1 hit a Chromium Local
@@ -98,7 +98,7 @@ export default defineConfig({
     // the full dashboard page — a chart-heavy dashboard wants room, not a dropdown.
     // default_icon is set explicitly rather than left to the icons fallback.
     action: {
-      default_title: "Dishylink",
+      default_title: "Starlink Monitor Br",
       default_icon: {
         "16": "icon/16.png",
         "32": "icon/32.png",

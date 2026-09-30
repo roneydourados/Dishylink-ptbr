@@ -47,7 +47,7 @@ export function ToolbarRail({ items, activeId, onSelect }: ToolbarRailProps) {
               aria-hidden={!open}
               animate={{ opacity: open ? 1 : 0, x: open ? 0 : -4 }}
               transition={{ duration: 0.18 }}
-              className='text-[13.5px] font-medium whitespace-nowrap'
+              className='text-[14.5px] font-medium whitespace-nowrap'
             >
               {item.label}
             </motion.span>

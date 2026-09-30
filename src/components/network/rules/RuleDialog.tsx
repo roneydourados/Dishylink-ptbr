@@ -209,7 +209,7 @@ function RuleForm({
 
         {!groups.loading && !groups.pauseEnforceable && allowance.autoPause && (
           <Callout tone='error'>
-            Conecte sua conta Starlink para o Dishylink pausar um dispositivo sozinho. Até lá, esta
+            Conecte sua conta Starlink para o Starlink Monitor Br pausar um dispositivo sozinho. Até lá, esta
             regra é observada e anunciada, mas nada é pausado.
           </Callout>
         )}

@@ -195,7 +195,7 @@ export async function prepareRouterClientUpdate(
   const liveClient = clients.find((client) => client.clientId === update.clientId);
   if (!liveClient) throw new Error("Device is no longer connected to the router");
   if (update.paused && hostIdentity && clientIsHost(liveClient, hostIdentity))
-    throw new Error("Refusing to pause the device Dishylink is running on");
+    throw new Error("Refusing to pause the device Starlink Monitor Br is running on");
   return codec.encodeRequest(
     buildRouterPauseRequest(targetId, config, update.clientId, update.paused, liveClient),
   );

@@ -1,22 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none">
-  <!-- The AppLogo mark (src/components/icons/AppLogo.tsx) on a dark plate.
-       In-app the mark runs plateless and takes its color from the theme; a tab
-       strip gives it neither a known background nor a theme to follow, so the
-       icon form keeps the plate and states its own colors.
-       Strokes are heavier and the inner ellipse is dropped: at 16-32px the
-       in-app weights fall below a pixel and smear into grey. -->
+  <!-- Lucide Satellite on a navy plate for tab strips (no theme context). -->
   <defs>
     <linearGradient id="edge" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#555555"/>
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="100%" stop-color="#0e7490"/>
     </linearGradient>
   </defs>
-  <rect x="3" y="3" width="294" height="294" rx="75" fill="#0a0a0a" stroke="url(#edge)" stroke-width="6"/>
-  <g transform="translate(150, 150)">
-    <circle r="95" fill="none" stroke="#ffffff" stroke-width="10" opacity="0.85"/>
-    <circle cx="67" cy="-67" r="26" fill="#0a0a0a"/>
-    <circle cx="67" cy="-67" r="16" fill="#ffffff"/>
-    <circle r="30" fill="#ffffff"/>
-    <circle r="13" fill="#0a0a0a"/>
-  </g>
+  <rect x="3" y="3" width="294" height="294" rx="72" fill="#070d18" stroke="url(#edge)" stroke-width="6"/>
+  <!-- Lucide Satellite scaled from 24→200, offset 50 -->
+  <path d="M162.5 104.17L129.71 71.38A12.54 12.54 0 0 0 111.96 71.38L87 96.33A12.54 12.54 0 0 0 87 114.08L119.79 146.88" stroke="#5eead4" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M187.5 112.5L208.33 91.67" stroke="#5eead4" stroke-width="14" stroke-linecap="round"/>
+  <path d="M195.83 137.5L228.63 170.29A12.54 12.54 0 0 1 228.63 188.04L204.67 212A12.54 12.54 0 0 1 186.92 212L154.17 179.17" stroke="#5eead4" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M125 225A62.5 62.5 0 0 0 62.5 162.5" stroke="#5eead4" stroke-width="14" stroke-linecap="round"/>
+  <path d="M119.83 147.38A12.54 12.54 0 0 0 119.83 165.13L143.79 189.08A12.54 12.54 0 0 0 161.54 189.08L206.29 144.33A12.54 12.54 0 0 0 206.29 126.58L182.33 102.63A12.54 12.54 0 0 0 164.58 102.63Z" stroke="#5eead4" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

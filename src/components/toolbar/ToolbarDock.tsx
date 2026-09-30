@@ -61,7 +61,7 @@ function DockTile({
       className='group relative flex h-[34px] w-[46px] flex-none cursor-pointer items-end justify-center border-0 bg-transparent'
     >
       {/* The label floats clear above the icon that lifts under the pointer. */}
-      <span className='pointer-events-none absolute bottom-[calc(100%+20px)] left-1/2 -translate-x-1/2 translate-y-1 rounded-[8px] border border-[color-mix(in_srgb,var(--ink)_12%,transparent)] bg-popover px-2.5 py-1 text-[11.5px] font-semibold whitespace-nowrap text-popover-foreground opacity-0 shadow-[0_10px_28px_rgba(0,0,0,0.45)] transition-[opacity,transform] duration-150 group-hover:translate-y-0 group-hover:opacity-100'>
+      <span className='pointer-events-none absolute bottom-[calc(100%+20px)] left-1/2 -translate-x-1/2 translate-y-1 rounded-[8px] border border-[color-mix(in_srgb,var(--ink)_12%,transparent)] bg-popover px-2.5 py-1 text-[12.5px] font-semibold whitespace-nowrap text-popover-foreground opacity-0 shadow-[0_10px_28px_rgba(0,0,0,0.45)] transition-[opacity,transform] duration-150 group-hover:translate-y-0 group-hover:opacity-100'>
         {item.label}
       </span>
       <motion.span

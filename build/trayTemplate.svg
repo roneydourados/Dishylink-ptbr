@@ -1,11 +1,10 @@
-<svg width="16" height="16" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <mask id="mark">
-      <rect width="144" height="144" fill="#FFFFFF" />
-      <circle cx="72" cy="72" r="42" fill="none" stroke="#000000" stroke-width="14" />
-      <circle cx="104.16" cy="39.84" r="13" fill="#FFFFFF" />
-      <circle cx="104.16" cy="39.84" r="7" fill="#000000" />
-    </mask>
-  </defs>
-  <path d="M108 0H36C16.1178 0 0 16.1178 0 36V108C0 127.882 16.1178 144 36 144H108C127.882 144 144 127.882 144 108V36C144 16.1178 127.882 0 108 0Z" fill="#000000" mask="url(#mark)" />
+<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Lucide Satellite as a template (black silhouette for macOS menu bar). -->
+  <g stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m13.5 6.5-3.148-3.148a1.205 1.205 0 0 0-1.704 0L6.352 5.648a1.205 1.205 0 0 0 0 1.704L9.5 10.5"/>
+    <path d="M16.5 7.5 19 5"/>
+    <path d="m17.5 10.5 3.148 3.148a1.205 1.205 0 0 1 0 1.704l-2.296 2.296a1.205 1.205 0 0 1-1.704 0L13.5 14.5"/>
+    <path d="M9 21a6 6 0 0 0-6-6"/>
+    <path d="M9.352 10.648a1.205 1.205 0 0 0 0 1.704l2.296 2.296a1.205 1.205 0 0 0 1.704 0l4.296-4.296a1.205 1.205 0 0 0 0-1.704l-2.296-2.296a1.205 1.205 0 0 0-1.704 0z"/>
+  </g>
 </svg>

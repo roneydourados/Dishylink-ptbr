@@ -239,7 +239,7 @@ export function MeterForm({
             </Callout>
           ) : (
             <Callout tone='error'>
-              Conecte sua conta Starlink para o Dishylink pausar um dispositivo sozinho. Até lá, o
+              Conecte sua conta Starlink para o Starlink Monitor Br pausar um dispositivo sozinho. Até lá, o
               limite é observado e anunciado, mas nada é pausado.
             </Callout>
           ))}

@@ -58,7 +58,7 @@ export function AppPrompts() {
     return (
       <PromptDialog
         icon={<StarIcon />}
-        title='Curtindo o Dishylink?'
+        title='Curtindo o Starlink Monitor Br?'
         body='Uma avaliação leva dez segundos, mas é o que mais ajuda outros donos de Starlink a encontrar o app.'
         onLater={later}
         onNever={never}
@@ -78,7 +78,7 @@ export function AppPrompts() {
   return (
     <PromptDialog
       icon={<HandHeartIcon />}
-      title='O Dishylink é gratuito, e sempre será.'
+      title='O Starlink Monitor Br é gratuito, e sempre será.'
       body='Eu construí no meu tempo livre, porque nada assim existia. Sua contribuição pontual ou recorrente faz muita diferença para manter o projeto atualizado. Se puder, apoie!'
       onLater={later}
       onNever={never}

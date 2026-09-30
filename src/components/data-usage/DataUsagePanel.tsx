@@ -1,6 +1,6 @@
 // Data usage panel: self-measured download/upload volume from the historian,
 // in the layout of the Starlink account page's usage chart — headline GB,
-// range tabs, stacked down/up bars. Clearly labeled as measured by Dishylink
+// range tabs, stacked down/up bars. Clearly labeled as measured by Starlink Monitor Br
 // (Starlink's own billing meter is cloud-side and not exposed locally).
 
 import { useState } from "react";
@@ -99,7 +99,7 @@ function LocalDataUsage() {
     return (
       <Callout className='mt-2.5'>
         O uso de dados precisa do gravador de histórico em execução. Inicie com{" "}
-        <code>npm run historian</code> e o Dishylink passará a medir o tráfego a partir de agora.
+        <code>npm run historian</code> e o Starlink Monitor Br passará a medir o tráfego a partir de agora.
       </Callout>
     );
   }
@@ -142,7 +142,7 @@ function LocalDataUsage() {
       )}
 
       <Explainer title='Como isso é medido?'>
-        O Dishylink integra a telemetria de vazão por segundo da própria antena em volume por
+        O Starlink Monitor Br integra a telemetria de vazão por segundo da própria antena em volume por
         minuto, nesta máquina. Ele acompanha seu tráfego real a partir do momento em que o
         gravador de histórico foi iniciado — não é o medidor de faturamento da Starlink, que fica
         na nuvem deles e conta em UTC.
