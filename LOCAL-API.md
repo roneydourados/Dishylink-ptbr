@@ -1,60 +1,62 @@
-# Starlink local API — measured behaviour
+# API local da Starlink — comportamento medido
 
-There is no official documentation for the dish's or router's local gRPC API.
-`public/dish.protoset` is dumped from the device's own gRPC **reflection**
-service, which gives field names and wire types and nothing else — no units,
-no update rates, and **no indication of which fields the firmware actually
-fills in**.
+Não há documentação oficial da API gRPC local da antena ou do roteador.
+`public/dish.protoset` é extraído do serviço de **reflection** gRPC do próprio
+dispositivo, o que dá nomes de campos e tipos no fio — e nada mais: sem
+unidades, sem taxas de atualização e **sem indicação de quais campos o
+firmware realmente preenche**.
 
-That last point is the expensive one. Reflection describes the _interface_; it
-says nothing about the _implementation_. A field can be present, correctly
-typed, and permanently empty.
+Esse último ponto é o caro. A reflection descreve a _interface_; não diz nada
+sobre a _implementação_. Um campo pode existir, ter o tipo certo e estar
+permanentemente vazio.
 
-Everything below was measured against live hardware, not read from a spec.
+Tudo abaixo foi medido em hardware ao vivo, não lido de uma especificação.
 
-Hardware at time of measurement: `rev4_panda_prod2`, firmware `2026.07.06.mr81950`.
-Re-measure after a firmware update before trusting any of it.
+Hardware na época da medição: `rev4_panda_prod2`, firmware `2026.07.06.mr81950`.
+Remeça após uma atualização de firmware antes de confiar em qualquer disso.
 
-## Sample clocks — the floor on resolution
+## Relógios de amostragem — o piso da resolução
 
-| Source                         | Rate                                                   | Depth                |
+| Fonte                          | Taxa                                                   | Profundidade         |
 | ------------------------------ | ------------------------------------------------------ | -------------------- |
-| `dish_get_history` ring buffer | **1.00 s/sample** (counter advanced 10 over 10.1s)     | 900 samples = 15 min |
-| `dish_get_status`              | sub-second (49 distinct readings in 50 polls at 200ms) | instantaneous only   |
-| `wifi_get_clients`             | instantaneous only — **no buffer**                     | —                    |
+| Buffer circular `dish_get_history` | **1,00 s/amostra** (contador avançou 10 em 10,1s)  | 900 amostras = 15 min |
+| `dish_get_status`              | subsegundo (49 leituras distintas em 50 polls a 200ms) | só instantâneo       |
+| `wifi_get_clients`             | só instantâneo — **sem buffer**                        | —                    |
 
-**Polling faster than the sample clock buys nothing.** For the dish this
-matters less than it sounds: every `dish_get_history` call returns the whole
-900-sample ring, so a 5s poll still captures every 1 Hz sample. Poll rate
-there controls _freshness_ (how old the newest point is), not _resolution_.
+**Fazer poll mais rápido que o relógio de amostragem não ganha nada.** Para a
+antena isso importa menos do que parece: cada chamada a `dish_get_history`
+devolve o anel inteiro de 900 amostras, então um poll de 5s ainda captura
+cada amostra de 1 Hz. A taxa de poll controla a _atualidade_ (quão velho é o
+ponto mais novo), não a _resolução_.
 
-For the router the opposite holds. There is no working buffer, so the poll
-rate **is** the resolution — whatever isn't sampled is gone for good.
+No roteador vale o contrário. Não há buffer funcional, então a taxa de poll
+**é** a resolução — o que não for amostrado se perde de vez.
 
-## Poll costs
+## Custo dos polls
 
-| RPC                       | Payload             | Median RTT | Cost at 1 Hz |
-| ------------------------- | ------------------- | ---------- | ------------ |
-| `dish_get_history` (1007) | 18,128 B            | 66 ms      | 17.7 kB/s    |
-| `dish_get_status` (1004)  | 523 B               | 86 ms      | 0.5 kB/s     |
-| `wifi_get_clients` (3002) | 1,611 B (5 clients) | 7 ms       | 1.6 kB/s     |
+| RPC                       | Payload             | RTT mediano | Custo a 1 Hz |
+| ------------------------- | ------------------- | ----------- | ------------ |
+| `dish_get_history` (1007) | 18.128 B            | 66 ms       | 17,7 kB/s    |
+| `dish_get_status` (1004)  | 523 B               | 86 ms       | 0,5 kB/s     |
+| `wifi_get_clients` (3002) | 1.611 B (5 clientes)| 7 ms        | 1,6 kB/s     |
 
-`wifi_get_clients` at 1 Hz occupies the router ~0.7% of each second, 0
-failures over 30 consecutive calls. One call covers every client — there is
-no per-device fan-out.
+`wifi_get_clients` a 1 Hz ocupa o roteador ~0,7% de cada segundo, 0 falhas em
+30 chamadas consecutivas. Uma chamada cobre todos os clientes — não há
+fan-out por dispositivo.
 
-## Fields that exist but are never populated
+## Campos que existem mas nunca são preenchidos
 
-Present in the schema, always empty on this firmware. Do not build on these without re-probing first.
+Presentes no schema, sempre vazios neste firmware. Não construa em cima
+deles sem reprovar primeiro.
 
-### `wifi_get_client_history` (3015) — entirely empty
+### `wifi_get_client_history` (3015) — completamente vazio
 
-The most convincing dead end in the API. It returns a ring buffer shaped exactly
-like the dish's — `current` advancing at a genuine 1 Hz, 900-float arrays — and
-**every sample is zero, on every client, always**.
+O beco sem saída mais convincente da API. Devolve um buffer circular com o
+mesmo formato da antena — `current` avançando a um genuíno 1 Hz, arrays de
+900 floats — e **cada amostra é zero, em todo cliente, sempre**.
 
-Verified under 65 Mbps of sustained load, with one client the router itself
-reported at 106.58 Mbps live:
+Verificado sob 65 Mbps de carga sustentada, com um cliente que o próprio
+roteador reportava a 106,58 Mbps ao vivo:
 
 ```
 Controller   live=   0.00 Mbps  maxRx=0.0000 maxTx=0.0000  nonZeroOfAll=0/1800
@@ -62,98 +64,105 @@ Controller   live=   0.00 Mbps  maxRx=0.0000 maxTx=0.0000  nonZeroOfAll=0/1800
 iPhone       live=   1.78 Mbps  maxRx=0.0000 maxTx=0.0000  nonZeroOfAll=0/1800
 ```
 
-Its `rssi`, `throughput_limited` and `rx_rate_mbps` fields are absent entirely.
+Seus campos `rssi`, `throughput_limited` e `rx_rate_mbps` estão ausentes por
+completo.
 
-The counter ticking at 1 Hz makes this look alive on a shallow probe. It is
-not. Re-check with `scripts/probe-client-history.mts`.
+O contador ticando a 1 Hz faz isso parecer vivo numa sonda rasa. Não é.
+Reverifique com `scripts/probe-client-history.mts`.
 
-### Others
+### Outros
 
-| RPC                    | Field                | Reality                                              |
+| RPC                    | Campo                | Realidade                                            |
 | ---------------------- | -------------------- | ---------------------------------------------------- |
-| `dish_get_status`      | `popPingDropRate`    | absent — history only                                |
-| `dish_get_status`      | `powerIn`            | absent — history only                                |
-| `get_radio_stats`      | `thermalStatus.temp` | absent; only `temp2` is filled                       |
-| `TransceiverGetStatus` | all                  | `Unimplemented` — no numeric dish temperatures exist |
+| `dish_get_status`      | `popPingDropRate`    | ausente — só no histórico                            |
+| `dish_get_status`      | `powerIn`            | ausente — só no histórico                            |
+| `get_radio_stats`      | `thermalStatus.temp` | ausente; só `temp2` é preenchido                     |
+| `TransceiverGetStatus` | todos                | `Unimplemented` — não existem temperaturas numéricas da antena |
 
-The `dish_get_status` gaps matter more than they look: building chart samples
-from status alone silently zeroes `dropRate` and `powerW`, which flat-lines the
-power chart **and disables outage detection**, since that fires only when every
-recent sample shows total packet loss.
+As lacunas de `dish_get_status` importam mais do que parecem: montar amostras
+de gráfico só a partir do status zera silenciosamente `dropRate` e `powerW`,
+o que achata o gráfico de potência **e desliga a detecção de outage**, já que
+ela só dispara quando toda amostra recente mostra perda total de pacotes.
 
-## Where the data actually comes from
+## De onde os dados realmente vêm
 
-| Series                            | Source                                   | Why                                    |
+| Série                             | Fonte                                    | Por quê                                |
 | --------------------------------- | ---------------------------------------- | -------------------------------------- |
-| Dish throughput / latency / power | `dish_get_history` @ 1s                  | full 1 Hz ring; poll rate is freshness |
-| Live stat tiles                   | `dish_get_status` @ 1s                   | sub-second, tiny payload               |
-| Per-device throughput             | `wifi_get_clients` @ 1s → `ClientWindow` | only source; no buffer to fall back on |
-| Per-device 6h view                | same → `ClientStore` (per-minute)        | aggregate tier                         |
-| Router event log                  | `wifi_get_history` (1007 to the router)  | same `UXEvent` shape as the dish       |
-| Wi-Fi radio temps                 | `get_radio_stats` (1036, router only)    | dish answers `Unimplemented`           |
+| Throughput / latência / potência da antena | `dish_get_history` @ 1s         | anel completo a 1 Hz; poll = atualidade |
+| Tiles de estatísticas ao vivo     | `dish_get_status` @ 1s                   | subsegundo, payload minúsculo          |
+| Throughput por dispositivo        | `wifi_get_clients` @ 1s → `ClientWindow` | única fonte; sem buffer de fallback    |
+| Visão 6h por dispositivo          | mesma → `ClientStore` (por minuto)       | nível agregado                         |
+| Log de eventos do roteador        | `wifi_get_history` (1007 no roteador)    | mesmo formato `UXEvent` da antena      |
+| Temps dos rádios Wi‑Fi            | `get_radio_stats` (1036, só roteador)    | antena responde `Unimplemented`        |
 
-## LAN writes are blocked
+## Escritas pela LAN estão bloqueadas
 
-July 2026 firmware rejects **all** LAN write RPCs — rename, `set_config` —
-with grpc status 7. The official app performs writes via Starlink's cloud,
-not over the LAN. No local elevation path exists.
+O firmware de julho/2026 rejeita **todas** as RPCs de escrita pela LAN —
+renomear, `set_config` — com status gRPC 7. O app oficial faz escritas pela
+nuvem da Starlink, não pela LAN. Não existe caminho local de elevação.
 
-## Authenticated cloud router writes
+## Escritas autenticadas na nuvem do roteador
 
-Two things learned the hard way, both measured 2026-08-15:
+Duas coisas aprendidas da forma difícil, ambas medidas em 2026-08-15:
 
-1. **Key client writes on `clientId`, never `macAddress`.** This firmware masks
-   the low three octets of every MAC it reports (`60:74:f4:XX:XX:XX`), so devices
-   behind one vendor share an address. A MAC-keyed rename renamed four devices.
-2. **The dish accepts writes on this path too** — `dishSetConfig` with the dish's
-   `ut…` targetId, not just `wifiSetConfig` with `Router-…`. Confirmed by setting
-   `swupdateRebootHour` and reading it back in the official app.
+1. **Chaveie escritas de cliente em `clientId`, nunca em `macAddress`.** Este
+   firmware mascara os três octetos baixos de todo MAC que reporta
+   (`60:74:f4:XX:XX:XX`), então dispositivos do mesmo fabricante compartilham
+   um endereço. Um rename chaveado por MAC renomeou quatro dispositivos.
+2. **A antena também aceita escritas neste caminho** — `dishSetConfig` com o
+   `targetId` `ut…` da antena, não só `wifiSetConfig` com `Router-…`.
+   Confirmado ao definir `swupdateRebootHour` e ler de volta no app oficial.
 
-Pause and unpause were measured through Starlink's authenticated grpc-web
-`SpaceX.API.Device.Device/Handle` endpoint. This is an unofficial, observed
-interface rather than a published API and may change with Starlink firmware or
-service updates. The behavior was verified on the same installation described
-at the top of this document; record the router hardware and firmware from
-**Copy debug data** when reporting or re-testing it.
+Pause e unpause foram medidos pelo endpoint grpc-web autenticado da Starlink
+`SpaceX.API.Device.Device/Handle`. Esta é uma interface não oficial, observada,
+e não uma API publicada — pode mudar com firmware ou atualizações de serviço
+da Starlink. O comportamento foi verificado na mesma instalação descrita no
+topo deste documento; registre o hardware e o firmware do roteador a partir de
+**Copiar dados de depuração** ao reportar ou retestar.
 
-The accepted request uses `wifiSetConfig.wifiConfig.clientConfigs` with
-`applyClientConfigs: true`. A permanently paused client has a
-`weeklyBlockSchedules` entry whose `groupId` is `_permanent` and whose single
-range covers the full week (`0` through `10080` minutes). Unpausing removes
-only that entry so unrelated schedules remain intact.
+A requisição aceita usa `wifiSetConfig.wifiConfig.clientConfigs` com
+`applyClientConfigs: true`. Um cliente permanentemente pausado tem uma entrada
+em `weeklyBlockSchedules` cujo `groupId` é `_permanent` e cuja única faixa
+cobre a semana inteira (`0` a `10080` minutos). Despausar remove só essa
+entrada, para agendas não relacionadas permanecerem intactas.
 
-This is a whole-list update, not a single-client patch. Dishylink therefore
-reads the current router configuration over the LAN immediately before each
-write, preserves every client and unrelated schedule, changes only the selected
-client, and serializes mutations so concurrent writes cannot overwrite one
-another. The encoded request is built by the trusted host; renderer-provided
-protobuf is never accepted.
+Isto é uma atualização da lista inteira, não um patch de um único cliente. O
+Starlink Monitor Br, portanto, lê a configuração atual do roteador pela LAN
+imediatamente antes de cada escrita, preserva todos os clientes e agendas não
+relacionadas, muda só o cliente selecionado e serializa mutações para que
+escritas concorrentes não se sobrescrevam. A requisição codificada é montada
+pelo host confiável; protobuf fornecido pelo renderer nunca é aceito.
 
-The write requires a current Starlink account session and is available only for
-a device present in the router's live client list. Dishylink does not expose the
-control for the device it is running on, avoiding a self-inflicted disconnect.
-The browser extension disables the control entirely because it cannot reliably
-identify its own LAN client; desktop and the web development host can establish
-that identity before offering the write. Electron reads the host's network
-interfaces, while the web development server answers `/api/whoami` from its local
-host or caller address. The extension has neither path: its `/api/*` requests are
-messages to an internal service worker/IndexedDB router, and ordinary desktop
-Chrome extensions do not expose a reliable host LAN IP or MAC. The cloud mutation
-itself works, but enabling it without self-identity could let a user pause the
-computer running Dishylink, so both the extension UI capability and background
-mutation route are disabled.
-Use `scripts/probe-client-pause-state.mts` for a read-only snapshot of persisted
-block schedules and effective connected-client state.
+A escrita exige uma sessão de conta Starlink atual e só está disponível para
+um dispositivo presente na lista ao vivo de clientes do roteador. O Starlink
+Monitor Br não expõe o controle para o dispositivo em que está rodando,
+evitando uma desconexão autoinfligida. A extensão do navegador desativa o
+controle por completo porque não consegue identificar de forma confiável o
+próprio cliente na LAN; o desktop e o host de desenvolvimento web conseguem
+estabelecer essa identidade antes de oferecer a escrita. O Electron lê as
+interfaces de rede do host, enquanto o servidor de desenvolvimento web responde
+`/api/whoami` a partir do endereço local do host ou do chamador. A extensão não
+tem nenhum dos dois caminhos: suas requisições `/api/*` são mensagens a um
+roteador interno de service worker/IndexedDB, e extensões desktop comuns do
+Chrome não expõem IP ou MAC da LAN do host de forma confiável. A mutação na
+nuvem em si funciona, mas habilitá-la sem auto-identidade poderia permitir que
+o usuário pause o computador rodando o Starlink Monitor Br — por isso a
+capacidade da UI da extensão e a rota de mutação em background ficam
+desabilitadas.
+Use `scripts/probe-client-pause-state.mts` para um snapshot somente leitura das
+agendas de bloqueio persistidas e do estado efetivo dos clientes conectados.
 
-## Probing
+## Sondagem
 
-`scripts/probe-rpcs.mts` — which optional RPCs this firmware implements.
-`scripts/probe-client-history.mts` — buffer depth and sample interval for
-the per-client history RPC.
-`scripts/probe-client-pause-state.mts` — read-only persisted pause schedules
-and effective state for connected clients.
+`scripts/probe-rpcs.mts` — quais RPCs opcionais este firmware implementa.
+`scripts/probe-client-history.mts` — profundidade do buffer e intervalo de
+amostra da RPC de histórico por cliente.
+`scripts/probe-client-pause-state.mts` — agendas de pause persistidas
+(somente leitura) e estado efetivo dos clientes conectados.
 
-Two lessons worth keeping, both learned the hard way:
+Duas lições que valem guardar, ambas aprendidas da forma difícil:
 
-1. **A field being present says nothing about it being filled.** Check `max()` across the whole array, not the newest few values.
-2. **Probe under load.** Zeros on an idle network are indistinguishable from zeros that are always zero.
+1. **Um campo existir não diz nada sobre ele estar preenchido.** Cheque `max()`
+   no array inteiro, não só nos valores mais novos.
+2. **Sonde sob carga.** Zeros numa rede ociosa são indistinguíveis de zeros
+   que são sempre zero.

@@ -1,57 +1,61 @@
-# Energy historian
+# Gravador de energia (historian)
 
-A small always-on Node service that records the dish's power draw over time so
-the dashboard can show **day / week / month** energy totals — data neither the
-dish (≈15 min ring buffer) nor the browser tab (≤6 h, wiped on reload) retains.
+Um serviço Node sempre ligado, pequeno, que registra o consumo de energia da
+antena ao longo do tempo para o dashboard poder mostrar totais de **dia /
+semana / mês** — dados que nem a antena (buffer circular de ≈15 min) nem a
+aba do navegador (≤6 h, apagado no reload) guardam.
 
-## What it does
+## O que faz
 
-- Polls the dish's history ring buffer every 5 s, reusing the frontend's
-  grpc-web transport (`src/lib/grpcWeb.ts`) and decoder (`src/lib/telemetry.ts`)
-  so the two never drift.
-- Folds new per-second power readings into per-minute energy buckets and appends
-  each completed minute to `collector/data/energy.ndjson` (one JSON line per
-  minute: `{ minute, wattSeconds, samples }`).
-- Serves totals over HTTP on `:8088` — the dev server proxies `/api` to it.
+- Faz poll do buffer de histórico da antena a cada 5 s, reutilizando o
+  transporte grpc-web do frontend (`src/lib/grpcWeb.ts`) e o decoder
+  (`src/lib/telemetry.ts`) para os dois não divergirem.
+- Agrega novas leituras de potência por segundo em buckets de energia por
+  minuto e anexa cada minuto concluído em `collector/data/energy.ndjson`
+  (uma linha JSON por minuto: `{ minute, wattSeconds, samples }`).
+- Serve totais via HTTP em `:8088` — o servidor de desenvolvimento faz proxy
+  de `/api` para ele.
 
-## Honesty about gaps
+## Honestidade sobre lacunas
 
-Energy is integrated **only over minutes actually sampled**. If the historian is
-down (sleep, restart, Wi‑Fi drop) those minutes simply have no data — the total
-never invents "last known watts" across a gap. Every response includes a
-`coverage` fraction, and the UI shows e.g. _"collected 82% of this period"_.
+A energia é integrada **somente nos minutos realmente amostrados**. Se o
+historian estiver parado (sono, reinício, queda de Wi‑Fi), esses minutos
+simplesmente não têm dados — o total nunca inventa “últimos watts conhecidos”
+através de uma lacuna. Toda resposta inclui uma fração de `coverage`, e a UI
+mostra, por exemplo, _“coletado 82% deste período”_.
 
-Short gaps (≤15 min) are backfilled losslessly on the next poll from the dish's
-own ring buffer; longer gaps show as reduced coverage.
+Lacunas curtas (≤15 min) são preenchidas sem perda no próximo poll a partir
+do próprio buffer circular da antena; lacunas maiores aparecem como cobertura
+reduzida.
 
-## Run it
+## Como rodar
 
-Foreground (dies on terminal close / sleep):
+Em primeiro plano (morre ao fechar o terminal / dormir):
 
 ```
 npm run historian
 ```
 
-Always-on (survives logout, relaunches after sleep/crash) via launchd:
+Sempre ligado (sobrevive ao logout, relança após sono/crash) via launchd:
 
 ```
 cp collector/com.dishylink.historian.plist ~/Library/LaunchAgents/
 launchctl load ~/Library/LaunchAgents/com.dishylink.historian.plist
 ```
 
-Stop / uninstall:
+Parar / desinstalar:
 
 ```
 launchctl unload ~/Library/LaunchAgents/com.dishylink.historian.plist
 ```
 
-The plist paths are absolute for this machine — update them if the repo moves or
-the Node version changes.
+Os caminhos do plist são absolutos para esta máquina — atualize-os se o repo
+mudar de lugar ou a versão do Node mudar.
 
 ## API
 
 - `GET /api/energy?range=day|week|month` →
   `{ range, totalKWh, coverage: { sampledSeconds, expectedSeconds, fraction }, buckets: [{ t, kWh, sampledSeconds }] }`
-  Ranges are aligned to **local midnight** (system timezone). `day` returns
-  hourly buckets; `week`/`month` return daily buckets.
+  Os intervalos são alinhados à **meia-noite local** (fuso do sistema). `day`
+  devolve buckets horários; `week`/`month` devolvem buckets diários.
 - `GET /api/health` → `{ ok, lastWrittenMinute }`

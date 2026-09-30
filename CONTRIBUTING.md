@@ -1,110 +1,115 @@
-# Contributing to Dishylink
+# Contribuindo com o Starlink Monitor Br
 
-Thanks for taking an interest. Dishylink talks to real Starlink hardware, so a
-couple of the rules below are about not breaking someone's internet rather than
-about code style — please read the hardware section before touching anything
-that polls the dish or router.
+Obrigado pelo interesse. O Starlink Monitor Br conversa com hardware Starlink
+de verdade, então algumas regras abaixo são para não derrubar a internet de
+alguém — e não só sobre estilo de código. Leia a seção de hardware antes de
+tocar em qualquer coisa que faça poll na antena ou no roteador.
 
-## Before you start
+## Antes de começar
 
-Most of the app can be worked on from anywhere, but anything that reads live
-telemetry needs you to be **on the Starlink network itself**. The dish answers on
-`192.168.100.1` and the router on `192.168.1.1`; neither is reachable from
-outside the LAN, and there is no public test fixture that behaves like real
-hardware under load.
+A maior parte do app pode ser trabalhada de qualquer lugar, mas tudo que lê
+telemetria ao vivo exige que você esteja **na própria rede Starlink**. A
+antena responde em `192.168.100.1` e o roteador em `192.168.1.1`; nenhum dos
+dois é alcançável de fora da LAN, e não existe fixture pública de teste que se
+comporte como o hardware real sob carga.
 
-If you can't get on a Starlink network, good areas to help with are the charts,
-the recorded-history views, tests, and documentation — all of which run against
-recorded or synthetic data.
+Se você não consegue entrar numa rede Starlink, boas áreas para ajudar são os
+gráficos, as visualizações de histórico gravado, testes e documentação — tudo
+isso roda com dados gravados ou sintéticos.
 
-## Hardware safety
+## Segurança de hardware
 
-The router is a small embedded device and has rebooted under ordinary polling
-load. Two rules follow from that:
+O roteador é um dispositivo embarcado pequeno e já reiniciou sob carga comum
+de polling. Duas regras seguem disso:
 
-- **Never call the router's `get_ping` (field 1009), at any cadence.** It was
-  trialled at 2s, 5s and 30s; each trial was followed within ~15 minutes by a
-  router watchdog reboot that took the network down. Router ping success is
-  already available from `get_status`'s `popPingDropRate5m`, which rides a reply
-  the app is fetching anyway.
-- **Don't add a new poll against the dish or router.** Reuse a reply that is
-  already being fetched — `routerStatusFeed` in the browser, or the existing
-  status poll in the recorder. If you genuinely need a new one, raise an issue
-  first so it can be discussed before anyone's link goes down.
+- **Nunca chame o `get_ping` do roteador (campo 1009), em nenhum intervalo.**
+  Foi testado em 2s, 5s e 30s; cada teste foi seguido, em cerca de 15 minutos,
+  por um reboot do watchdog do roteador que derrubou a rede. O sucesso de ping
+  do roteador já vem do `popPingDropRate5m` do `get_status`, que vem numa
+  resposta que o app já busca.
+- **Não adicione um novo poll contra a antena ou o roteador.** Reutilize uma
+  resposta que já está sendo buscada — `routerStatusFeed` no navegador, ou o
+  poll de status existente no gravador. Se você realmente precisar de um novo,
+  abra uma issue antes para discutir, antes que o link de alguém caia.
 
-Custom DNS, bypass mode and content filtering are deliberately not exposed: a
-bad write there can take the WiFi down until a physical reset.
+DNS customizado, bypass mode e filtro de conteúdo deliberadamente não são
+expostos: uma escrita ruim aí pode derrubar o Wi‑Fi até um reset físico.
 
-## Running it
+## Como rodar
 
 ```bash
 npm install
 
-npm run dev             # web dev harness — requires being on the Starlink LAN
-npm run dev:electron    # desktop app (macOS, Windows)
-npm run dev:extension   # browser extension (Chrome, Edge, Firefox)
+npm run dev             # harness web — exige estar na LAN Starlink
+npm run dev:electron    # app desktop (macOS, Windows)
+npm run dev:extension   # extensão do navegador (Chrome, Edge, Firefox)
 ```
 
-The three products are independent: they don't share a runtime, and each polls
-and records on its own. A change to shared code under `src/` affects all three,
-so check the one you didn't intend to touch.
+Os três produtos são independentes: não compartilham runtime, e cada um faz
+poll e grava por conta própria. Uma mudança no código compartilhado em `src/`
+afeta os três, então verifique o que você não pretendia tocar.
 
-## Checks
+## Checagens
 
-CI runs on every push and pull request, and must be green before a PR is merged:
+O CI roda em todo push e pull request, e precisa estar verde antes do merge:
 
 ```bash
 npm run typecheck            # tsc -b
-npm run lint                 # eslint, warnings fail the build
+npm run lint                 # eslint; warnings falham o build
 npm test                     # vitest
-npm run format               # prettier, fixes the tree in place
-npm run typecheck:extension  # extension-specific types
+npm run format               # prettier; corrige a árvore no lugar
+npm run typecheck:extension  # tipos específicos da extensão
 ```
 
-Formatting is only enforced on files a change touches, so you won't be asked to
-reformat code you didn't write.
+A formatação só é exigida nos arquivos que a mudança toca, então você não
+será pedido para reformatar código que não escreveu.
 
-Tests run in Node except for a few extension files that need real IndexedDB;
-those run in headless Chromium via Playwright. `npx playwright install chromium`
-once if you haven't got it.
+Os testes rodam em Node, exceto alguns arquivos da extensão que precisam de
+IndexedDB de verdade; esses rodam em Chromium headless via Playwright. Rode
+`npx playwright install chromium` uma vez se ainda não tiver.
 
 ## Pull requests
 
-- Branch off `master`, one topic per PR.
-- **Label the PR** `enhancement`, `bug` or `documentation`. Release notes are
-  generated from these labels, so an unlabelled PR lands under "Other Changes".
-- Describe what you changed and, for anything touching the dish or router, how
-  you verified it against real hardware.
+- Crie o branch a partir de `master`, um assunto por PR.
+- **Rotule o PR** com `enhancement`, `bug` ou `documentation`. As notas de
+  release são geradas a partir desses rótulos; um PR sem rótulo cai em
+  “Other Changes”.
+- Descreva o que mudou e, para qualquer coisa que toque a antena ou o
+  roteador, como você verificou no hardware real.
 
-## Releasing
+## Releases
 
-For maintainers:
+Para mantenedores:
 
 ```bash
-npm version minor        # bumps package.json, commits, and tags
+npm version minor        # sobe package.json, faz commit e tag
 git push --follow-tags
 ```
 
-Pushing a `v*` tag builds macOS, Windows and the extension archives, and creates
-a **draft** release. Nothing reaches users until the draft is published on
-GitHub — installed apps ignore drafts, so that click is the actual rollout.
+Enviar uma tag `v*` gera builds macOS, Windows e os arquivos da extensão, e
+cria um release em **rascunho**. Nada chega aos usuários até o rascunho ser
+publicado no GitHub — apps instalados ignoram drafts, então esse clique é o
+rollout de fato.
 
-The tag must match `package.json`'s version; CI fails fast if it doesn't, which
-is why `npm version` is the right way to bump rather than editing by hand.
+A tag precisa bater com a versão do `package.json`; o CI falha rápido se não
+bater — por isso `npm version` é o jeito certo de subir a versão, em vez de
+editar na mão.
 
-## Reporting problems
+## Reportar problemas
 
-Open an issue with your dish and router firmware versions, the platform you're
-on, and the output of **Copy debug data** from the settings panel where it's
-relevant — it bundles diagnostics, status and config as JSON.
+Abra uma issue com as versões de firmware da antena e do roteador, a
+plataforma em que está e a saída de **Copiar dados de depuração** do painel
+de configurações quando for relevante — ela junta diagnósticos, status e
+config em JSON.
 
-If you believe you've found a security issue, please report it privately through
-the repository's security tab rather than opening a public issue.
+Se acredita ter encontrado um problema de segurança, reporte de forma privada
+pela aba de segurança do repositório, em vez de abrir uma issue pública.
 
-## Thank you
+## Obrigado
 
-However you're helping — a new feature, a bug fix, better docs, or just a typo
-in this file — it's appreciated. Dishylink is better for having more eyes on it,
-and every improvement lands with someone squinting at a bad link at 2am.
+Seja com um recurso novo, uma correção de bug, documentação melhor ou só um
+typo neste arquivo — a ajuda é apreciada. O Starlink Monitor Br fica melhor
+com mais olhos nele, e cada melhoria chega a alguém encarando um link ruim às
+2h da manhã.
 
-Happy contributing.
+Boas contribuições.

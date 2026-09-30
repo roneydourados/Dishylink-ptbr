@@ -1,47 +1,49 @@
-# Security Policy
+# Política de Segurança
 
-## Reporting a vulnerability
+## Como reportar uma vulnerabilidade
 
-Please report security issues privately rather than opening a public issue. Use
-the **Report a vulnerability** button on this repository's
-[Security tab](https://github.com/roneydourados/starlink-monitor-br/security/advisories/new),
-which opens a private thread visible only to you and the maintainer. If you
-would rather use email, **roneydourados@gmail.com** reaches the same place.
+Reporte problemas de segurança de forma privada, em vez de abrir uma issue
+pública. Use o botão **Report a vulnerability** na
+[aba Security](https://github.com/roneydourados/starlink-monitor-br/security/advisories/new)
+deste repositório, que abre uma conversa privada visível só para você e o
+mantenedor. Se preferir e-mail, **roneydourados@gmail.com** chega ao mesmo
+lugar.
 
-Include what you found, how to reproduce it, which platform you were on, and the
-version of Dishylink you were running.
+Inclua o que encontrou, como reproduzir, em qual plataforma estava e a versão
+do Starlink Monitor Br que estava usando.
 
-Reports are read and answered on a best effort basis by a single maintainer.
-Please allow a reasonable window for a fix before sharing details publicly.
+Os relatos são lidos e respondidos sob o melhor esforço de um único
+mantenedor. Aguarde um prazo razoável para a correção antes de divulgar
+detalhes publicamente.
 
-## Supported versions
+## Versões suportadas
 
-Fixes land in the latest published release. Older releases are not patched, so
-updating is the way to pick up a fix.
+As correções entram na última versão publicada. Versões antigas não recebem
+patch — atualizar é o caminho para receber a correção.
 
-## Scope
+## Escopo
 
-In scope:
+No escopo:
 
-- The desktop app (macOS and Windows builds)
-- The browser extension
-- The history recorder that runs in the background
-- How the app handles your Starlink account session, and anything it writes to
-  local storage or to disk
+- O app desktop (builds macOS e Windows)
+- A extensão do navegador
+- O gravador de histórico que roda em segundo plano
+- Como o app trata a sessão da conta Starlink, e tudo o que ele grava no
+  armazenamento local ou em disco
 
-Out of scope:
+Fora do escopo:
 
-- Vulnerabilities in Starlink hardware, in dish or router firmware, or in
-  `starlink.com` itself. Those belong to SpaceX and should go through SpaceX's
-  own reporting channels.
-- Anything that requires an attacker to already have full access to your machine
-  or browser profile. [PRIVACY.md](PRIVACY.md) documents what is stored locally
-  and how.
+- Vulnerabilidades no hardware Starlink, no firmware da antena ou do roteador,
+  ou no próprio `starlink.com`. Isso é da SpaceX e deve seguir os canais de
+  reporte da SpaceX.
+- Qualquer coisa que exija que o atacante já tenha acesso total à sua máquina
+  ou ao perfil do navegador. O [PRIVACY.md](PRIVACY.md) documenta o que é
+  armazenado localmente e como.
 
-## Testing
+## Testes
 
-Test against hardware you own. Dishylink talks to a dish and router on your own
-network, and the router is a small embedded device that has been observed
-rebooting under ordinary polling load. Please do not fuzz or stress its
-endpoints. A crashed router takes the whole connection down with it, and that on
-its own is not a finding.
+Teste em hardware que você possui. O Starlink Monitor Br fala com a antena e
+o roteador na sua própria rede, e o roteador é um dispositivo embarcado
+pequeno que já foi observado reiniciando sob carga comum de polling. Não faça
+fuzz nem estresse nos endpoints dele. Um roteador travado derruba a conexão
+inteira, e isso por si só não é um achado.

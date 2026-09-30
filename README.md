@@ -3,237 +3,247 @@
 [![Downloads](https://img.shields.io/github/downloads/roneydourados/starlink-monitor-br/total.svg)](https://github.com/roneydourados/starlink-monitor-br/releases)
 [![macOS](https://img.shields.io/badge/macOS-12.0+-black.svg)](https://github.com/roneydourados/starlink-monitor-br/releases/latest)
 [![Windows](https://img.shields.io/badge/Windows-10+-0078D4.svg)](https://github.com/roneydourados/starlink-monitor-br/releases/latest)
-[![Browsers](https://img.shields.io/badge/Chrome%20%7C%20Edge%20%7C%20Firefox-extension-FF6F00.svg)](#browser-extension-chrome-edge-firefox)
+[![Browsers](https://img.shields.io/badge/Chrome%20%7C%20Edge%20%7C%20Firefox-extension-FF6F00.svg)](#extensão-do-navegador-chrome-edge-firefox)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![GitHub](https://img.shields.io/badge/GitHub-Star-181717.svg?style=flat&logo=github)](https://github.com/roneydourados/starlink-monitor-br)
 [![PIX](https://img.shields.io/badge/Doar%20via%20PIX-32BCAD.svg?style=flat)](mailto:roneydourados@gmail.com)
 
-An open-source Starlink desktop app for macOS, Windows and browsers to monitor
-the performance and health of your Starlink. This repository is a Brazilian
-fork of [Dishylink](https://github.com/DaveyHert/dishylink), branded as
+App open-source de desktop para macOS, Windows e navegadores para monitorar o
+desempenho e a saúde do seu Starlink. Este repositório é um fork brasileiro do
+[Dishylink](https://github.com/DaveyHert/dishylink), com a marca
 **Starlink Monitor Br**.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="landing/src/assets/shots/dashboard-dark.png">
-  <img alt="The Dishylink dashboard: download, upload, latency, power draw, ping success and sky-obstruction tiles above live throughput, latency and power charts, with the 3D obstruction dome and an events and outages log alongside." src="landing/src/assets/shots/dashboard-light.png">
+  <img alt="O dashboard do Starlink Monitor Br: tiles de download, upload, latência, consumo de energia, sucesso de ping e obstrução do céu acima dos gráficos ao vivo de throughput, latência e potência, com o dome 3D de obstrução e um log de eventos e outages ao lado." src="landing/src/assets/shots/dashboard-light.png">
 </picture>
 
-It reads your dish and router directly over your local network, so it keeps
-working during an outage — which is exactly when you want to see what happened.
-No account, no cloud, no telemetry: everything it records is written to your own
-machine and stays there. Connecting a Starlink account is optional. It adds
-your plan and billing figures and enables supported router controls such as
-pausing connected devices. Your session remains stored locally and is sent
-only to Starlink.
+Ele lê a antena e o roteador diretamente pela sua rede local, então continua
+funcionando durante uma outage — exatamente quando você mais quer ver o que
+aconteceu. Sem conta, sem nuvem, sem telemetria: tudo o que grava fica na sua
+própria máquina. Conectar uma conta Starlink é opcional. Isso adiciona plano e
+números de faturamento e habilita controles do roteador suportados, como
+pausar dispositivos conectados. A sessão permanece armazenada localmente e só
+é enviada à Starlink.
 
 ## <img src="docs/platforms/download.svg" alt="" width="22" height="22" align="top"> Download
 
-| Platform                                                                                     | Format    | Architecture           |                                                                                                                                                          |
+| Plataforma                                                                                   | Formato   | Arquitetura            |                                                                                                                                                          |
 | :------------------------------------------------------------------------------------------- | :-------- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | <img src="docs/platforms/apple.svg" alt="" width="16" align="top"> **macOS** 12+             | `DMG`     | `arm64`: Apple silicon |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
 | <img src="docs/platforms/apple.svg" alt="" width="16" align="top"> **macOS** 12+             | `DMG`     | `x64`: Intel           |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
 | <img src="docs/platforms/windows.svg" alt="" width="16" align="top"> **Windows** 10+         | `EXE`     | Universal              |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
 | <img src="docs/platforms/windows.svg" alt="" width="16" align="top"> **Windows** 10+         | `EXE`     | `x64`                  |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
 | <img src="docs/platforms/windows.svg" alt="" width="16" align="top"> **Windows** 10+         | `EXE`     | `arm64`                |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
-| <img src="landing/public/browsers/chrome.svg" alt="" width="16" align="top"> **Chrome** 144+ | Extension | Any                    | [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://chromewebstore.google.com/detail/dishylink/pljgamnkfokhbchiiommnblkjffffnna) |
-| <img src="landing/public/browsers/edge.svg" alt="" width="16" align="top"> **Edge**          | Extension | Any                    | [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://microsoftedge.microsoft.com/addons/detail/pknccegejhlgmeiojalenedmkbcaimdo)  |
-| <img src="landing/public/browsers/firefox.svg" alt="" width="16" align="top"> **Firefox**    | Extension | Any                    |                     [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://addons.mozilla.org/addon/dishylink/)                     |
+| <img src="landing/public/browsers/chrome.svg" alt="" width="16" align="top"> **Chrome** 144+ | Extensão  | Qualquer               | [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://chromewebstore.google.com/detail/dishylink/pljgamnkfokhbchiiommnblkjffffnna) |
+| <img src="landing/public/browsers/edge.svg" alt="" width="16" align="top"> **Edge**          | Extensão  | Qualquer               | [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://microsoftedge.microsoft.com/addons/detail/pknccegejhlgmeiojalenedmkbcaimdo)  |
+| <img src="landing/public/browsers/firefox.svg" alt="" width="16" align="top"> **Firefox**    | Extensão  | Qualquer               |                     [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://addons.mozilla.org/addon/dishylink/)                     |
 
 [latest]: https://github.com/roneydourados/starlink-monitor-br/releases/latest
 
-Not sure which to pick? On Windows, take Universal. On macOS, take `arm64` for
-Apple silicon (M1 and later) or `x64` for Intel.
+Não sabe qual escolher? No Windows, pegue Universal. No macOS, pegue `arm64`
+para Apple silicon (M1 em diante) ou `x64` para Intel.
 
-## Features
+## Recursos
 
-### What it shows
+### O que mostra
 
-- **Stat tiles**: live downlink and uplink, pop-ping latency, power draw in watts,
-  60-second ping-success rate and sky-obstruction fraction. Each carries a
-  sparkline and opens into a detail panel.
-- **Throughput chart**: download and upload across 15m, 1h and 6h windows on the
-  dashboard, or by day, week and month from recorded history rather than only what
-  the current tab has seen.
-- **Latency chart**: bucketed by _max_, so spikes survive downsampling instead of
-  averaging away. Outages are drawn as red bands.
-- **Energy and power chart**: what the dish actually draws over time, with kWh
-  totals by day, week and month, and honest gaps wherever recording stopped.
-- **Sky obstruction map**: the dish's 123×123 SNR grid drawn as a polar sky dome,
-  with obstructed cells escalating through a status palette.
-- **Obstruction time-lapse**: scrub back through hourly snapshots of the sky
-  survey, with LIVE as the last stop.
-- **Sky view**: a full-viewport scene of the dome, your dish, and the satellite
-  constellation passing overhead. Click any satellite for its pass details.
-- **Alignment dials**: rotation and tilt against the desired azimuth and elevation
-  band, ported from the dish's own web app.
-- **Data usage**: self-measured download and upload volume by day, week and month,
-  plus **per-device usage** for the billing month taken from the router's own
-  per-client counters. Name your devices and see vendor, device type and last-seen
-  times.
-- **Network**: router radio temperatures, the client list, per-client throughput
-  and the router's own event log.
-- **Event logs**: outages, thermal events, and a terminal panel covering firmware,
-  GPS, alignment, mesh routers and alerts.
-- **Speed test and alerts**: on-demand speed tests, alerts graded by severity with
-  an in-app bell, and light, dark or system instrument themes.
-- **Cloud account tab** (optional, opt-in): your Starlink plan, billing cycles and
-  authoritative monthly data usage, plus the authenticated controls your router
-  supports.
+- **Tiles de estatísticas**: downlink e uplink ao vivo, latência de pop-ping,
+  consumo em watts, taxa de sucesso de ping em 60 segundos e fração de
+  obstrução do céu. Cada um tem sparkline e abre num painel de detalhe.
+- **Gráfico de throughput**: download e upload em janelas de 15m, 1h e 6h no
+  dashboard, ou por dia, semana e mês a partir do histórico gravado — não só
+  do que a aba atual viu.
+- **Gráfico de latência**: agregação por _máximo_, para picos sobreviverem ao
+  downsampling em vez de sumirem na média. Outages aparecem como faixas
+  vermelhas.
+- **Gráfico de energia e potência**: o que a antena realmente consome ao
+  longo do tempo, com totais em kWh por dia, semana e mês, e lacunas honestas
+  onde a gravação parou.
+- **Mapa de obstrução do céu**: a grade SNR 123×123 da antena desenhada como
+  um dome polar, com células obstruídas numa paleta de status.
+- **Time-lapse de obstrução**: role snapshots horários do levantamento do céu,
+  com LIVE como última parada.
+- **Vista do céu**: cena em tela cheia do dome, da antena e da constelação de
+  satélites passando. Clique em qualquer satélite para detalhes da passagem.
+- **Dials de alinhamento**: rotação e inclinação contra a faixa desejada de
+  azimute e elevação, portados do próprio web app da antena.
+- **Uso de dados**: volume medido de download e upload por dia, semana e mês,
+  mais **uso por dispositivo** do mês de faturamento a partir dos contadores
+  por cliente do roteador. Nomeie dispositivos e veja fabricante, tipo e
+  última vez visto.
+- **Rede**: temperaturas dos rádios do roteador, lista de clientes, throughput
+  por cliente e o log de eventos do próprio roteador.
+- **Logs de eventos**: outages, eventos térmicos e um painel de terminal
+  cobrindo firmware, GPS, alinhamento, roteadores mesh e alertas.
+- **Teste de velocidade e alertas**: testes sob demanda, alertas por
+  severidade com sino no app, e temas claro, escuro ou do sistema.
+- **Aba de conta na nuvem** (opcional, opt-in): plano Starlink, ciclos de
+  faturamento e uso mensal oficial, mais os controles autenticados que o
+  roteador suporta.
 
-### What it controls
+### O que controla
 
-Monitoring is only half of it. Most settings write to the dish or router over
-the same LAN API; controls that current firmware rejects locally are identified
-below as requiring an optional Starlink account connection:
+Monitorar é só metade. A maioria das configurações escreve na antena ou no
+roteador pela mesma API da LAN; controles que o firmware atual rejeita
+localmente estão identificados abaixo como exigindo conexão opcional de conta
+Starlink:
 
-- **Snow melt**: automatic, always on, or off.
-- **Sleep schedule**: power the dish down for a set number of hours each day.
-- **Software updates**: pick the reboot window, or defer updates for 3 days.
-- **Maintenance**: reboot the dish, reset the learned obstruction map, and
-  stow/unstow motorized kits.
-- **Router**: SSIDs and their bands, mesh node trust, firmware and country, and
-  a router reboot.
-- **Router address and subnet**: point Dishylink at a router that isn't on the
-  default address, and change the address range the router hands out. Changing the
-  subnet needs a connected account.
-- **Custom DNS**: point the router at your own resolvers.
-- **Bypass mode**: put the router into bridge mode for your own networking gear.
-- **Connected devices**: pause or unpause another device while it is connected.
-  Available in the desktop app and web development harness, this control requires
-  an optional Starlink account sign-in: Dishylink reads the router configuration
-  locally, prepares the smallest accepted client update on the trusted host, and
-  sends it only to Starlink's authenticated device endpoint. The device running
-  Dishylink cannot pause itself, which is what **Your device on this network** in
-  app settings pins down. The browser extension does not expose this control
-  because ordinary desktop extensions cannot reliably read the host computer's LAN
-  IP or MAC address. Although the extension can send the update, it cannot prove
-  which router client is itself and therefore cannot safely prevent self-pausing.
-- **Copy debug data**: diagnostics + status + config as JSON, for bug reports.
+- **Derretimento de neve**: automático, sempre ligado ou desligado.
+- **Agenda de sono**: desliga a antena por um número de horas por dia.
+- **Atualizações de software**: escolha a janela de reboot, ou adie
+  atualizações por 3 dias.
+- **Manutenção**: reinicie a antena, limpe o mapa de obstrução aprendido e
+  recolha/desça kits motorizados.
+- **Roteador**: SSIDs e bandas, confiança de nós mesh, firmware e país, e
+  reboot do roteador.
+- **Endereço e sub-rede do roteador**: aponte o app a um roteador que não
+  está no endereço padrão, e altere a faixa de endereços que o roteador
+  distribui. Mudar a sub-rede exige conta conectada.
+- **DNS customizado**: aponte o roteador aos seus próprios resolvers.
+- **Modo bypass**: coloque o roteador em bridge mode para o seu próprio
+  equipamento de rede.
+- **Dispositivos conectados**: pause ou despause outro dispositivo enquanto
+  estiver conectado. Disponível no app desktop e no harness web de
+  desenvolvimento; exige sign-in opcional da conta Starlink: o app lê a
+  configuração do roteador localmente, prepara a menor atualização de cliente
+  aceita no host confiável e envia só ao endpoint autenticado da Starlink. O
+  dispositivo rodando o Starlink Monitor Br não pode pausar a si mesmo — é o
+  que **Seu dispositivo nesta rede** nas configurações fixa. A extensão do
+  navegador não expõe esse controle porque extensões desktop comuns não leem
+  de forma confiável o IP ou MAC da LAN do host. Embora a extensão possa
+  enviar a atualização, ela não prova qual cliente do roteador é ela mesma e
+  portanto não pode impedir o auto-pause com segurança.
+- **Copiar dados de depuração**: diagnósticos + status + config em JSON, para
+  relatos de bug.
 
-Content filtering is deliberately _not_ exposed: a bad write there can take the
-WiFi down until a physical reset.
+Filtro de conteúdo deliberadamente _não_ é exposto: uma escrita ruim aí pode
+derrubar o Wi‑Fi até um reset físico.
 
-### Network rules
+### Regras de rede
 
-Meter any device on your network and pause it automatically when it goes over.
+Meça qualquer dispositivo na rede e pause automaticamente quando ultrapassar
+o limite.
 
-- **Three kinds of limit**: a data allowance, a schedule that pauses by the clock,
-  or a countdown that runs for a set stretch of time.
-- **One device or a group**: meter a device on its own, or group several together.
-  A group can either pool its allowance, so members spend from one shared budget
-  and run out together, or give each member the full allowance to spend
-  independently.
-- **One list for everything**: every rule on the network appears in one place,
-  whether you wrote it there or from a device's own card, each showing how much of
-  its limit is left.
-- Rules use the same account-connected pausing described above, including the
-  protection that stops Dishylink pausing the device it is running on.
+- **Três tipos de limite**: cota de dados, agenda que pausa pelo relógio, ou
+  contagem regressiva por um intervalo definido.
+- **Um dispositivo ou um grupo**: meça um dispositivo sozinho, ou agrupe
+  vários. Um grupo pode compartilhar a cota (membros gastam de um orçamento
+  comum e acabam juntos) ou dar a cada membro a cota cheia de forma
+  independente.
+- **Uma lista para tudo**: toda regra da rede aparece num só lugar, seja
+  criada ali ou no card do dispositivo, cada uma mostrando quanto do limite
+  resta.
+- As regras usam o mesmo pause com conta descrito acima, inclusive a proteção
+  que impede o app de pausar o dispositivo em que está rodando.
 
-## Three ways to run it in dev
+## Três formas de rodar em desenvolvimento
 
-Dishylink ships as three independent products from one codebase. To run any of
-them from source:
+O Starlink Monitor Br sai como três produtos independentes a partir de uma
+base de código. Para rodar qualquer um a partir do fonte:
 
 ```bash
 npm install
 
-npm run dev              # web harness on localhost:5173
-npm run dev:electron     # desktop app on Mac and Linux
-npm run dev:electron:win # desktop app on Windows
-npm run dev:extension    # browser extension, loaded unpacked from .output/ (WXT)
+npm run dev              # harness web em localhost:5173
+npm run dev:electron     # app desktop no Mac e Linux
+npm run dev:electron:win # app desktop no Windows
+npm run dev:extension    # extensão do navegador, carregada unpacked de .output/ (WXT)
 ```
 
-Windows needs `dev:electron:win` rather than `dev:electron`: it sets the
-environment variable through `cross-env` and skips the icon generation step,
-neither of which works from a Windows shell.
+No Windows use `dev:electron:win` em vez de `dev:electron`: ele define a
+variável de ambiente via `cross-env` e pula a geração de ícone, nenhum dos
+quais funciona bem num shell Windows.
 
-All three read the real hardware, so you have to be on the Starlink LAN for
-anything to appear. Tests and typechecks run anywhere.
+Os três leem o hardware real, então você precisa estar na LAN Starlink para
+algo aparecer. Testes e typechecks rodam em qualquer lugar.
 
-They don't talk to each other or share a runtime: each independently polls the
-dish/router and records its own history. Packaging:
+Eles não conversam entre si nem compartilham runtime: cada um faz poll da
+antena/roteador e grava o próprio histórico. Empacotamento:
 
 ```bash
-npm run pack:mac        # signed Mac build
-npm run pack:win        # Windows build
-npm run build:extension # Chromium extension bundle
+npm run pack:mac        # build Mac
+npm run pack:win        # build Windows
+npm run build:extension # pacote da extensão Chromium
 npm run build:extension:firefox
 npm run build:extension:edge
-docker compose up --build   # browser dashboard + recorder, this machine only
+docker compose up --build   # dashboard web + gravador, só nesta máquina
 ```
 
-### Docker (browser)
+### Docker (navegador)
 
-Packages the web dashboard and the history recorder in one container. The
-image is built **only for the CPU of the machine you clone and build on** —
-amd64 on an x86 box, arm64 on Apple Silicon or a 64-bit Raspberry Pi. Compose
-does not cross-build. Open `http://localhost:8080`. The **host running Docker
-must be on the Starlink LAN** — the dish (`192.168.100.1`) and router
-(`192.168.1.1`) are reached through the host, not from inside Compose. Docker
-Desktop has no real `--network host`; do not set it.
+Empacota o dashboard web e o gravador de histórico num container. A imagem é
+construída **só para a CPU da máquina em que você clona e builda** — amd64
+num box x86, arm64 no Apple Silicon ou Raspberry Pi 64 bits. O Compose não
+faz cross-build. Abra `http://localhost:8080`. O **host rodando Docker precisa
+estar na LAN Starlink** — a antena (`192.168.100.1`) e o roteador
+(`192.168.1.1`) são alcançados pelo host, não de dentro do Compose. Docker
+Desktop não tem `--network host` de verdade; não configure isso.
 
 ```bash
 docker compose up --build
 ```
 
-A Raspberry Pi 4/5 needs the 64-bit OS and enough RAM for the Vite build
-(4 GB is comfortable; 2 GB often OOMs).
+Um Raspberry Pi 4/5 precisa do OS 64 bits e RAM suficiente para o build Vite
+(4 GB é confortável; 2 GB muitas vezes dá OOM).
 
-Recordings, and a pasted starlink.com session, persist in the `historian-data`
-volume — a session survives a restart with no extra mount needed. If
-`com.dishylink.historian` is already running under launchd, stop it first —
-two recorders double the router's 200 ms client poll.
+Gravações e uma sessão colada do starlink.com persistem no volume
+`historian-data` — a sessão sobrevive a um reinício sem mount extra. Se
+`com.dishylink.historian` já estiver rodando no launchd, pare-o primeiro —
+dois gravadores dobram o poll de 200 ms de clientes do roteador.
 
-Optional, in `compose.yaml`:
+Opcional, em `compose.yaml`:
 
-- `HOST_LAN_IP` / `HOST_MAC` — the host's LAN address, so "This device" and
-  pause-self-protect still work through Docker Desktop's port publish.
+- `HOST_LAN_IP` / `HOST_MAC` — o endereço LAN do host, para “Este dispositivo”
+  e a proteção de auto-pause ainda funcionarem pelo publish de porta do Docker
+  Desktop.
 
-Cloud session writes stay localhost-only. Opening the dashboard via the host's
-LAN IP from a phone still shows live data and history.
+Escritas de sessão na nuvem ficam só em localhost. Abrir o dashboard pelo IP
+LAN do host num celular ainda mostra dados ao vivo e histórico.
 
-Useful while working on it:
+Útil enquanto trabalha:
 
 ```bash
-npm run historian       # standalone energy collector, serving /api/energy
-npm run test:watch      # vitest in watch mode
-npm run lint:fix        # eslint with --fix
+npm run historian       # coletor de energia standalone, servindo /api/energy
+npm run test:watch      # vitest em modo watch
+npm run lint:fix        # eslint com --fix
 ```
 
-A fresh desktop build opens with no history by design: it fills up as it runs.
+Um build desktop novo abre sem histórico de propósito: ele se preenche
+conforme roda.
 
-### Desktop app (Mac, Windows)
+### App desktop (Mac, Windows)
 
-- Lives in the tray / menu bar and **keeps recording after its window is
-  closed**; it quits only from the tray's Quit.
-- **Live throughput readout** — ↓/↑ rates in the macOS menu bar, or a draggable
-  always-on-top pill on Windows. Whichever surface, the open window feeds it
-  when there is one and the recorder takes over when there isn't, so the dish is
-  never polled twice.
-- **Start at Login**, launching hidden, so collection covers the outages that
-  happen while nobody is looking.
-- Native OS notifications for alerts when the window isn't in front, throttled
-  so a flapping link can't spam.
-- Auto-updates, and remembers its window position across runs and displays.
+- Vive na bandeja / barra de menus e **continua gravando depois que a janela
+  fecha**; só sai pelo Quit da bandeja.
+- **Painel ao vivo de throughput** — taxas ↓/↑ na barra de menus do macOS, ou
+  um pill arrastável always-on-top no Windows. Em qualquer superfície, a
+  janela aberta alimenta quando há uma, e o gravador assume quando não há,
+  para a antena nunca ser polled duas vezes.
+- **Iniciar no Login**, abrindo oculto, para a coleta cobrir outages enquanto
+  ninguém está olhando.
+- Notificações nativas do SO para alertas quando a janela não está na frente,
+  com throttle para um link oscilando não spammar.
+- Auto-atualização, e lembra a posição da janela entre execuções e monitores.
 
-### Browser extension (Chrome, Edge, Firefox)
+### Extensão do navegador (Chrome, Edge, Firefox)
 
-Install it from the
+Instale pela
 [Chrome Web Store](https://chromewebstore.google.com/detail/dishylink/pljgamnkfokhbchiiommnblkjffffnna),
 [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/pknccegejhlgmeiojalenedmkbcaimdo)
-or [Firefox Add-ons](https://addons.mozilla.org/addon/dishylink/).
+ou [Firefox Add-ons](https://addons.mozilla.org/addon/dishylink/).
 
-- The toolbar icon opens the dashboard as a chromeless window (default) or an
-  ordinary tab — never a cramped toolbar popup.
-- **Toolbar badge** — the number of alerts firing right now, tinted by the worst
-  one's severity, so it reads the same outside the app as the bell does inside.
-- **Recording** — its own history store in IndexedDB, filled by a 30s
-  `chrome.alarms` tick that survives service-worker teardown, with honest
-  coverage gaps for stretches when the browser was closed.
-- Chrome 144+ — below that a Local Network Access bug makes the worker silently
-  collect nothing.
+- O ícone da barra abre o dashboard numa janela sem chrome (padrão) ou numa
+  aba comum — nunca num popup apertado da toolbar.
+- **Badge da toolbar** — o número de alertas ativos agora, tingido pela pior
+  severidade, para ler igual fora do app e no sino de dentro.
+- **Gravação** — depósito próprio de histórico no IndexedDB, preenchido por um
+  tick de 30s do `chrome.alarms` que sobrevive ao teardown do service worker,
+  com lacunas honestas de cobertura quando o navegador estava fechado.
+- Chrome 144+ — abaixo disso um bug de Local Network Access faz o worker
+  coletar nada em silêncio.
 
-Dev workflow:
+Fluxo de desenvolvimento:
 
 ```bash
 npm test                # vitest
@@ -241,35 +251,36 @@ npm run typecheck       # tsc -b
 npm run lint            # eslint
 ```
 
-Diagnostics:
+Diagnósticos:
 
 ```bash
-node scripts/debug-decode.mjs <captured-body.bin>   # decode a captured response
-node scripts/debug-browser.mjs                      # probe fetch path in headless Chrome
+node scripts/debug-decode.mjs <captured-body.bin>   # decodifica uma resposta capturada
+node scripts/debug-browser.mjs                      # sonda o caminho de fetch no Chrome headless
 ```
 
-## How it talks to the dish and router
+## Como fala com a antena e o roteador
 
-The dish serves its API at `192.168.100.1` on two ports; the router answers
-a matching API on its own LAN address:
+A antena serve a API em `192.168.100.1` em duas portas; o roteador responde
+uma API correspondente no próprio endereço LAN:
 
-| Port | Protocol                | Notes                               |
-| ---- | ----------------------- | ----------------------------------- |
-| 9200 | native gRPC (HTTP/2)    | used by `grpcurl`, has reflection   |
-| 9201 | **grpc-web** (HTTP/1.1) | what this app uses from the browser |
+| Porta | Protocolo               | Notas                                   |
+| ----- | ----------------------- | --------------------------------------- |
+| 9200  | gRPC nativo (HTTP/2)    | usado pelo `grpcurl`, tem reflection    |
+| 9201  | **grpc-web** (HTTP/1.1) | o que este app usa a partir do navegador |
 
-Two quirks discovered while building (both handled by the Vite proxy in dev,
-and by the host's own transport in Electron/the extension):
+Dois quirks descobertos na construção (ambos tratados pelo proxy Vite no
+dev, e pelo transporte próprio do host no Electron/extensão):
 
-1. **CORS allowlist** — port 9201 only answers CORS preflights for the dish's
-   own origin, so a third-party web page cannot call it cross-origin.
-2. **Referer guard** — requests carrying an unrecognized `Referer` header get
-   an empty 200 back; the transport strips `Referer`/`Origin` before forwarding.
+1. **Allowlist de CORS** — a porta 9201 só responde preflights CORS para a
+   origem da própria antena, então uma página de terceiros não chama
+   cross-origin.
+2. **Guarda de Referer** — requisições com `Referer` não reconhecido recebem
+   um 200 vazio; o transporte remove `Referer`/`Origin` antes de encaminhar.
 
-Protobuf schema is **not guessed**: `schema/dish.protoset` was dumped from the
-dish's own gRPC reflection service and is decoded at runtime with
-`@bufbuild/protobuf` (`core/dishClient.ts`). To refresh the schema after a
-firmware update:
+O schema protobuf **não é adivinhado**: `schema/dish.protoset` foi dumpado do
+próprio serviço de reflection gRPC da antena e é decodificado em runtime com
+`@bufbuild/protobuf` (`core/dishClient.ts`). Para atualizar o schema após uma
+atualização de firmware:
 
 ```bash
 grpcurl -plaintext -protoset-out schema/dish.protoset \
@@ -277,27 +288,29 @@ grpcurl -plaintext -protoset-out schema/dish.protoset \
 cp schema/dish.protoset public/dish.protoset
 ```
 
-The dish's history ring buffer (900 samples @ 1 Hz) is unrolled via its
-absolute sample counter (`core/telemetry.ts`); note it reports `outages[]`
-timestamps in the **GPS epoch** while `eventLog` uses Unix — the converter
-accounts for the 18 leap seconds. See `LOCAL-API.md` for the full set of
-measured behaviours, quirks, and dead-end fields on this firmware.
+O buffer circular de histórico da antena (900 amostras @ 1 Hz) é desenrolado
+via contador absoluto de amostras (`core/telemetry.ts`); note que ele reporta
+timestamps de `outages[]` na **época GPS** enquanto `eventLog` usa Unix — o
+conversor leva em conta os 18 leap seconds. Veja `LOCAL-API.md` para o
+conjunto completo de comportamentos medidos, quirks e campos sem saída neste
+firmware.
 
-## Recorded history
+## Histórico gravado
 
-The dish and router only hold a few minutes to a few hours locally. An
-always-on **history recorder** (`collector/`, the "historian") polls
-continuously and writes append-only local records so day/week/month views
-have real data behind them — never anything invented across a gap; every
-range reports what fraction of it was actually sampled. See
-`collector/README.md` for how it runs and its on-disk format.
+A antena e o roteador só guardam alguns minutos a algumas horas localmente. Um
+**gravador de histórico** sempre ligado (`collector/`, o “historian”) faz poll
+contínuo e escreve registros locais append-only para as vistas dia/semana/mês
+terem dados reais — nunca inventando através de uma lacuna; cada intervalo
+reporta que fração foi realmente amostrada. Veja `collector/README.md` para
+como roda e o formato em disco.
 
-Everything above is local-only by design: your telemetry, your history, your
-storage, never transmitted.
+Tudo acima é só local de propósito: sua telemetria, seu histórico, seu
+armazenamento, nunca transmitidos.
 
-## License
+## Licença
 
-MIT. See [LICENSE](LICENSE).
+MIT. Veja [LICENSE](LICENSE).
 
-Dishylink is an unofficial, independent project with no affiliation to SpaceX or
-Starlink. Starlink is a trademark of Space Exploration Technologies Corp.
+O Starlink Monitor Br é um projeto não oficial e independente, sem afiliação
+à SpaceX ou à Starlink. Starlink é marca registrada da Space Exploration
+Technologies Corp.

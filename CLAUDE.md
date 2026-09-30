@@ -1,40 +1,49 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Este arquivo orienta o Claude Code (claude.ai/code) ao trabalhar com código
+neste repositório.
 
-## Project Overview
+## Visão geral do projeto
 
-Live dashboard plus an always-on recorder (the "historian") for a Starlink kit. The dev machine
-is on the Starlink network itself — changes are verified against real hardware.
+Dashboard ao vivo mais um gravador sempre ligado (o “historian”) para um kit
+Starlink. A máquina de desenvolvimento está na própria rede Starlink —
+mudanças são verificadas contra hardware real.
 
-## Hardware safety — read before touching anything router-facing
+## Segurança de hardware — leia antes de tocar em qualquer coisa do roteador
 
-- **NEVER call or poll the router's `get_ping` (field 1009), at any cadence.** Trialled three
-  times on 2026-07-20 (2s, 5s, and 30s); each trial was followed within ~15 minutes by a router
-  watchdog reboot that took the network down. Router ping success comes from `get_status`'s
-  `popPingDropRate5m` (lowercase trailing `m`), which rides a reply we already fetch.
-- `wifi_get_ping_metrics` (3007) and `set_config` answer PERMISSION_DENIED to anonymous LAN
-  clients on current firmware. The official app gets its cloud data through an authenticated
-  `api.starlink.com` session, not the LAN.
-- The router is a small embedded box and has rebooted under ordinary load: **never add a new
-  poll against it without explicit approval.** Reuse replies already being fetched —
-  `routerStatusFeed` in the browser, the 5s status poll in the recorder.
+- **NUNCA chame ou faça poll do `get_ping` do roteador (campo 1009), em
+  nenhum intervalo.** Testado três vezes em 2026-07-20 (2s, 5s e 30s); cada
+  teste foi seguido, em cerca de 15 minutos, por um reboot do watchdog do
+  roteador que derrubou a rede. O sucesso de ping do roteador vem do
+  `popPingDropRate5m` do `get_status` (com `m` minúsculo no final), que vem
+  numa resposta que já buscamos.
+- `wifi_get_ping_metrics` (3007) e `set_config` respondem PERMISSION_DENIED
+  a clientes anônimos na LAN no firmware atual. O app oficial obtém dados da
+  nuvem por uma sessão autenticada em `api.starlink.com`, não pela LAN.
+- O roteador é uma caixinha embarcada e já reiniciou sob carga comum:
+  **nunca adicione um novo poll contra ele sem aprovação explícita.**
+  Reutilize respostas que já estão sendo buscadas — `routerStatusFeed` no
+  navegador, o poll de status de 5s no gravador.
 
 ## CI
 
-CI runs `npm run typecheck`, `npm run lint`, `npm test`, and a prettier check. The format job
-checks only changed files, so a full-tree `prettier --check` reports a pre-existing backlog that
-is not yours. Tests that open a socket behave differently on the Linux runner than on macOS, so
-a green local run is not a guaranteed green CI run.
+O CI roda `npm run typecheck`, `npm run lint`, `npm test` e uma checagem do
+prettier. O job de format só checa arquivos alterados, então um
+`prettier --check` na árvore inteira reporta um backlog pré-existente que não
+é seu. Testes que abrem socket se comportam diferente no runner Linux e no
+macOS, então um verde local não garante verde no CI.
 
-## Process facts
+## Fatos de processo
 
-- The historian (`collector/historian.mts`) is the always-on recording service, run by launchd as
-  `com.dishylink.historian`. Edits under `collector/` need
-  `launchctl kickstart -k gui/$UID/com.dishylink.historian` to take effect; `tsc` and `vitest`
-  pass without it. Its recordings live in `collector/data`.
-- "Historian" is the component's name in code, service, and docs. User-facing copy stays plain
-  English — "history recorder" or "recording" — because UI readers aren't assumed to know the
-  industrial term.
-- The pasted starlink.com session lives in `.starlink-cookie` at the repo root (written by
-  `dev/starlinkCloudProxy.ts`). It is a live credential: never print it, never commit it.
+- O historian (`collector/historian.mts`) é o serviço de gravação sempre
+  ligado, rodado pelo launchd como `com.dishylink.historian`. Edições em
+  `collector/` precisam de
+  `launchctl kickstart -k gui/$UID/com.dishylink.historian` para valer;
+  `tsc` e `vitest` passam sem isso. As gravações ficam em `collector/data`.
+- “Historian” é o nome do componente no código, no serviço e na documentação.
+  O texto voltado ao usuário fica em português simples — “gravador de
+  histórico” ou “gravação” — porque quem lê a UI não precisa conhecer o termo
+  industrial.
+- A sessão colada do starlink.com fica em `.starlink-cookie` na raiz do repo
+  (escrita por `dev/starlinkCloudProxy.ts`). É uma credencial viva: nunca
+  imprima, nunca faça commit.
