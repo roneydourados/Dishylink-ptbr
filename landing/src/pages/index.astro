@@ -12,7 +12,7 @@ import ShootingStars from "../components/ShootingStars.astro";
 import HeroGlow from "../components/HeroGlow.astro";
 import DownloadCard from "../components/DownloadCard.astro";
 import { readFileSync } from "node:fs";
-import { GITHUB, SPONSOR, EMAIL, downloadPlatforms } from "../constants";
+import { GITHUB, PIX_KEY, EMAIL, downloadPlatforms } from "../constants";
 import { sections } from "../data/sections";
 
 // Real captures of the running app — no mockups, no illustrations. If a surface
@@ -61,7 +61,7 @@ const faqs: { q: string; a: string; aside?: string }[] = [
   {
     q: "What does it cost?",
     a: "Nothing. It is free and open source, with no paid tier and nothing held back behind one.",
-    aside: `If it earns its place on your machine, you can ${link(SPONSOR.coffee, "buy me a coffee", "decoration-[#FFDD06]")} or ${link(SPONSOR.github, "sponsor the project", "decoration-[#ea4aaa]")} as a thank you!`,
+    aside: `Se o app for útil, você pode doar via PIX (${PIX_KEY}) ou ${link(GITHUB, "deixar uma estrela no GitHub", "decoration-[#32bcad]")} — obrigado!`,
   },
 ];
 ---

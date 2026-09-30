@@ -1,12 +1,12 @@
 # <img src="docs/logo.svg" alt="" width="34" height="34" align="top"> Starlink Monitor Br
 
-[![Downloads](https://img.shields.io/github/downloads/DaveyHert/dishylink/total.svg)](https://github.com/DaveyHert/dishylink/releases)
-[![macOS](https://img.shields.io/badge/macOS-12.0+-black.svg)](https://github.com/DaveyHert/dishylink/releases/latest)
-[![Windows](https://img.shields.io/badge/Windows-10+-0078D4.svg)](https://github.com/DaveyHert/dishylink/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/roneydourados/starlink-monitor-br/total.svg)](https://github.com/roneydourados/starlink-monitor-br/releases)
+[![macOS](https://img.shields.io/badge/macOS-12.0+-black.svg)](https://github.com/roneydourados/starlink-monitor-br/releases/latest)
+[![Windows](https://img.shields.io/badge/Windows-10+-0078D4.svg)](https://github.com/roneydourados/starlink-monitor-br/releases/latest)
 [![Browsers](https://img.shields.io/badge/Chrome%20%7C%20Edge%20%7C%20Firefox-extension-FF6F00.svg)](#browser-extension-chrome-edge-firefox)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![X](https://img.shields.io/badge/X-%23000000.svg?style=flat&logo=X&logoColor=white)](https://x.com/daveyhert)
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-%23FFDD00.svg?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/daveyhert)
+[![GitHub](https://img.shields.io/badge/GitHub-Star-181717.svg?style=flat&logo=github)](https://github.com/roneydourados/starlink-monitor-br)
+[![PIX](https://img.shields.io/badge/Doar%20via%20PIX-32BCAD.svg?style=flat)](mailto:roneydourados@gmail.com)
 
 An open-source Starlink desktop app for macOS, Windows and browsers to monitor
 the performance and health of your Starlink. This repository is a Brazilian
@@ -39,7 +39,7 @@ only to Starlink.
 | <img src="landing/public/browsers/edge.svg" alt="" width="16" align="top"> **Edge**          | Extension | Any                    | [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://microsoftedge.microsoft.com/addons/detail/pknccegejhlgmeiojalenedmkbcaimdo)  |
 | <img src="landing/public/browsers/firefox.svg" alt="" width="16" align="top"> **Firefox**    | Extension | Any                    |                     [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://addons.mozilla.org/addon/dishylink/)                     |
 
-[latest]: https://github.com/DaveyHert/dishylink/releases/latest
+[latest]: https://github.com/roneydourados/starlink-monitor-br/releases/latest
 
 Not sure which to pick? On Windows, take Universal. On macOS, take `arm64` for
 Apple silicon (M1 and later) or `x64` for Intel.

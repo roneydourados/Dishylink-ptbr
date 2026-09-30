@@ -39,9 +39,8 @@ Dishylink is an unofficial, independent project with no affiliation to SpaceX or
 
 ## Source and contact
 
-- [Source code](https://github.com/DaveyHert/dishylink): MIT licensed.
-- [Releases](https://github.com/DaveyHert/dishylink/releases/latest)
-- [Issues and bug reports](https://github.com/DaveyHert/dishylink/issues)
-- Email: hello@dishylink.com
-- [X/Twitter](https://x.com/daveyhert)
-- [Sponsor the project](https://github.com/sponsors/daveyhert)
+- [Source code](https://github.com/roneydourados/starlink-monitor-br): MIT licensed Brazilian fork of Dishylink.
+- [Releases](https://github.com/roneydourados/starlink-monitor-br/releases/latest)
+- [Issues and bug reports](https://github.com/roneydourados/starlink-monitor-br/issues)
+- Email / PIX: roneydourados@gmail.com
+- [Star the repository](https://github.com/roneydourados/starlink-monitor-br)

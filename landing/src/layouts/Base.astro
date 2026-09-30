@@ -24,19 +24,18 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": ORGANIZATION_ID,
-  name: "Dishylink",
+  name: "Starlink Monitor Br",
   url: site,
   logo: new URL("/apple-touch-icon.png", `${site}/`).toString(),
-  email: "hello@dishylink.com",
+  email: "roneydourados@gmail.com",
   description:
-    "Independent open-source project building Dishylink, a local-first monitoring app for Starlink. Not affiliated with, endorsed by or sponsored by SpaceX or Starlink.",
-  sameAs: ["https://github.com/DaveyHert/dishylink", "https://x.com/daveyhert"],
+    "Independent open-source Brazilian fork of Dishylink — a local-first monitoring app for Starlink. Not affiliated with, endorsed by or sponsored by SpaceX or Starlink.",
+  sameAs: ["https://github.com/roneydourados/starlink-monitor-br"],
   founder: {
     "@type": "Person",
-    name: "David Herbert",
-    alternateName: "daveyhert",
-    url: "https://github.com/DaveyHert",
-    sameAs: ["https://github.com/DaveyHert", "https://x.com/daveyhert"],
+    name: "Roney Dourados",
+    url: "https://github.com/roneydourados",
+    sameAs: ["https://github.com/roneydourados"],
   },
 };
 
@@ -44,10 +43,10 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${site}/#website`,
-  name: "Dishylink",
+  name: "Starlink Monitor Br",
   url: site,
   description,
-  inLanguage: "en",
+  inLanguage: "pt-BR",
   publisher: { "@id": ORGANIZATION_ID },
 };
 
@@ -56,7 +55,7 @@ const websiteSchema = {
 const appSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Dishylink",
+  name: "Starlink Monitor Br",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "macOS, Windows, Chrome, Edge, Firefox",
   description,

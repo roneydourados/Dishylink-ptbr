@@ -1,17 +1,11 @@
-export const GITHUB = "https://github.com/DaveyHert/dishylink";
+export const GITHUB = "https://github.com/roneydourados/starlink-monitor-br";
 export const RELEASES = `${GITHUB}/releases/latest`;
 export const ISSUES = `${GITHUB}/issues`;
 export const PRIVACY = `${GITHUB}/blob/master/PRIVACY.md`;
-export const X = "https://x.com/daveyhert";
 
-/** Cloudflare Email Routing address; forwards to the verified destination. */
-export const EMAIL = "hello@dishylink.com";
-
-export const SPONSOR = {
-  github: "https://github.com/sponsors/daveyhert",
-  patreon: "https://www.patreon.com/DaveyHert",
-  coffee: "https://buymeacoffee.com/daveyhert",
-};
+/** Contato e chave PIX (e-mail). */
+export const EMAIL = "roneydourados@gmail.com";
+export const PIX_KEY = "roneydourados@gmail.com";
 
 /** null = listing not published yet; the UI renders a disabled control instead. */
 export const STORES: Record<string, string | null> = {
@@ -50,7 +44,7 @@ interface ReleaseAsset {
 async function fetchLatestRelease(): Promise<{ tag: string; assets: ReleaseAsset[] } | null> {
   try {
     const response = await fetch(
-      "https://api.github.com/repos/DaveyHert/dishylink/releases/latest",
+      "https://api.github.com/repos/roneydourados/starlink-monitor-br/releases/latest",
       { headers: { accept: "application/vnd.github+json" } },
     );
     if (!response.ok) return null;

@@ -4,9 +4,9 @@
 
 Please report security issues privately rather than opening a public issue. Use
 the **Report a vulnerability** button on this repository's
-[Security tab](https://github.com/DaveyHert/Dishylink/security/advisories/new),
+[Security tab](https://github.com/roneydourados/starlink-monitor-br/security/advisories/new),
 which opens a private thread visible only to you and the maintainer. If you
-would rather use email, **hello@dishylink.com** reaches the same place.
+would rather use email, **roneydourados@gmail.com** reaches the same place.
 
 Include what you found, how to reproduce it, which platform you were on, and the
 version of Dishylink you were running.

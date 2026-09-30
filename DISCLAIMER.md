@@ -31,4 +31,4 @@ software, including any disruption to your Starlink service.
 
 ## Contact
 
-hello@dishylink.com
+roneydourados@gmail.com

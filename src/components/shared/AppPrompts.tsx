@@ -2,11 +2,9 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { PromptDialog } from "./PromptDialog";
 import { SUPPORT_LINKS } from "./supportLinks";
-import { HeartIcon } from "../../assets/icons/HeartIcon";
 import { HandHeartIcon } from "../../assets/icons/HandHeartIcon";
 import { StarIcon } from "../../assets/icons/StarIcon";
-import { CoffeeIcon } from "../../assets/icons/CoffeeIcon";
-import { PatreonIcon } from "../../assets/icons/PatreonIcon";
+import { HeartIcon } from "../../assets/icons/HeartIcon";
 import { promptDue, retirePrompt, snoozePrompt, type PromptId } from "@/lib/promptSchedule";
 import { reviewStore, reviewStoreName, reviewUrl } from "@/lib/storeReview";
 
@@ -23,20 +21,10 @@ function choose(canRate: boolean): PromptId | null {
   return null;
 }
 
-const FUNDING = [
-  { href: SUPPORT_LINKS.buyMeACoffee, icon: CoffeeIcon, label: "Buy Me a Coffee" },
-  {
-    href: SUPPORT_LINKS.githubSponsors,
-    icon: HeartIcon,
-    label: "Tornar-se GitHub Sponsor",
-    iconClassName: "text-[#ea4aaa]",
-  },
-  { href: SUPPORT_LINKS.patreon, icon: PatreonIcon, label: "Apoiar no Patreon" },
-];
-
 export function AppPrompts() {
   const store = reviewStore();
   const [showing, setShowing] = useState(() => choose(store !== null));
+  const [pixCopied, setPixCopied] = useState(false);
 
   if (showing === null) return null;
 
@@ -52,6 +40,13 @@ export function AppPrompts() {
     open(url);
     retirePrompt(showing);
     setShowing(null);
+  };
+  const copyPix = (): void => {
+    void navigator.clipboard.writeText(SUPPORT_LINKS.pixKey).then(() => {
+      setPixCopied(true);
+      retirePrompt(showing);
+      window.setTimeout(() => setShowing(null), 1200);
+    });
   };
 
   if (showing === "rating" && store !== null) {
@@ -79,25 +74,31 @@ export function AppPrompts() {
     <PromptDialog
       icon={<HandHeartIcon />}
       title='O Starlink Monitor Br é gratuito, e sempre será.'
-      body='Eu construí no meu tempo livre, porque nada assim existia. Sua contribuição pontual ou recorrente faz muita diferença para manter o projeto atualizado. Se puder, apoie!'
+      body='Eu construí no meu tempo livre, porque nada assim existia para o Brasil. Se puder, doe via PIX ou deixe uma estrela no GitHub — isso ajuda a manter o projeto atualizado.'
       onLater={later}
       onNever={never}
-      actions={FUNDING.map(({ href, icon: Icon, label, iconClassName }, i) => (
-        <Button
-          key={href}
-          variant={i === 0 ? "default" : "outline"}
-          size='lg'
-          className={
-            i === 0
-              ? "w-full cursor-pointer bg-[color-mix(in_srgb,var(--ink)_86%,transparent)] text-page hover:bg-ink"
-              : "w-full cursor-pointer"
-          }
-          onClick={() => acted(href)}
-        >
-          <Icon className={iconClassName} />
-          {label}
-        </Button>
-      ))}
+      actions={
+        <>
+          <Button
+            size='lg'
+            className='w-full cursor-pointer bg-[color-mix(in_srgb,var(--ink)_86%,transparent)] text-page hover:bg-ink'
+            onClick={copyPix}
+          >
+            <HeartIcon />
+            {pixCopied ? "Chave PIX copiada" : "Copiar chave PIX"}
+          </Button>
+          <p className='font-mono text-[12px] text-ink-muted'>{SUPPORT_LINKS.pixKey}</p>
+          <Button
+            variant='outline'
+            size='lg'
+            className='w-full cursor-pointer'
+            onClick={() => acted(SUPPORT_LINKS.starRepo)}
+          >
+            <StarIcon />
+            Dar estrela no GitHub
+          </Button>
+        </>
+      }
     />
   );
 }

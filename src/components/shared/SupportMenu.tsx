@@ -3,14 +3,10 @@ import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { HeartIcon } from "../../assets/icons/HeartIcon";
 import { StarIcon } from "../../assets/icons/StarIcon";
-import { CoffeeIcon } from "../../assets/icons/CoffeeIcon";
-import { PatreonIcon } from "../../assets/icons/PatreonIcon";
 import { DownloadIcon } from "../../assets/icons/DownloadIcon";
 import { BugIcon } from "../../assets/icons/BugIcon";
 import { BulbIcon } from "../../assets/icons/BulbIcon";
 import { MailIcon } from "../../assets/icons/MailIcon";
-import { XIcon } from "../../assets/icons/XIcon";
-import { LinkedinIcon } from "../../assets/icons/LinkedinIcon";
 import { ShieldIcon } from "../../assets/icons/ShieldIcon";
 import { ScaleIcon } from "../../assets/icons/ScaleIcon";
 import { SUPPORT_LINKS } from "./supportLinks";
@@ -32,6 +28,10 @@ function openExternal(url: string): void {
     return;
   }
   window.open(url, "_blank", "noopener,noreferrer");
+}
+
+async function copyPixKey(): Promise<void> {
+  await navigator.clipboard.writeText(SUPPORT_LINKS.pixKey);
 }
 
 const MENU_ITEM =
@@ -62,36 +62,34 @@ function MenuLink({ href, icon: Icon, iconClassName, children }: MenuLinkItem) {
   );
 }
 
+function CopyPixItem() {
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <button
+      type='button'
+      className={cn(MENU_ITEM, "cursor-pointer border-0 bg-transparent")}
+      onClick={() => {
+        void copyPixKey().then(() => {
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 1800);
+        });
+      }}
+    >
+      <span className='size-[15px] flex-none text-status-good'>
+        <HeartIcon className='size-full' />
+      </span>
+      <span className='flex min-w-0 flex-col items-start gap-0.5'>
+        <span>{copied ? "Chave PIX copiada" : "Doar via PIX"}</span>
+        <span className='truncate font-mono text-[11px] text-ink-muted'>
+          {SUPPORT_LINKS.pixKey}
+        </span>
+      </span>
+    </button>
+  );
+}
+
 const SECTIONS: { label: string; items: MenuLinkItem[] }[] = [
-  {
-    label: "Apoiar o desenvolvimento",
-    items: [
-      {
-        href: SUPPORT_LINKS.starRepo,
-        icon: StarIcon,
-        iconClassName: "text-(--accent)",
-        children: "Dar estrela no GitHub",
-      },
-      {
-        href: SUPPORT_LINKS.githubSponsors,
-        icon: HeartIcon,
-        iconClassName: "text-[#ea4aaa]",
-        children: "Tornar-se GitHub Sponsor",
-      },
-      {
-        href: SUPPORT_LINKS.patreon,
-        icon: PatreonIcon,
-        iconClassName: "text-ink",
-        children: "Apoiar no Patreon",
-      },
-      {
-        href: SUPPORT_LINKS.buyMeACoffee,
-        icon: CoffeeIcon,
-        iconClassName: "text-ink",
-        children: "Buy Me a Coffee",
-      },
-    ],
-  },
   {
     label: "Comentários",
     items: [
@@ -101,11 +99,7 @@ const SECTIONS: { label: string; items: MenuLinkItem[] }[] = [
   },
   {
     label: "Contato",
-    items: [
-      { href: SUPPORT_LINKS.contact, icon: MailIcon, children: "Fale comigo" },
-      { href: SUPPORT_LINKS.x, icon: XIcon, children: "@daveyhert" },
-      { href: SUPPORT_LINKS.linkedin, icon: LinkedinIcon, children: "LinkedIn" },
-    ],
+    items: [{ href: SUPPORT_LINKS.contact, icon: MailIcon, children: "Fale comigo" }],
   },
   {
     label: "Jurídico",
@@ -186,6 +180,18 @@ export function SupportMenu() {
             </MenuLink>
           </div>
         )}
+
+        <div className={SECTION}>
+          <div className={MENU_LABEL}>Apoiar o desenvolvimento</div>
+          <MenuLink
+            href={SUPPORT_LINKS.starRepo}
+            icon={StarIcon}
+            iconClassName='text-(--accent)'
+          >
+            Dar estrela no GitHub
+          </MenuLink>
+          <CopyPixItem />
+        </div>
 
         {SECTIONS.map((section) => (
           <div key={section.label} className={SECTION}>
