@@ -371,11 +371,11 @@ function createTray(): void {
         ]
       : []),
     {
-      // openAsHidden + the wasOpenedAtLogin check below start collection with no window.
+      // A login launch stays in the tray; wasOpenedAtLogin skips the window below.
       label: "Abrir ao iniciar sessão",
       type: "checkbox",
       checked: app.getLoginItemSettings().openAtLogin,
-      click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked, openAsHidden: true }),
+      click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked }),
     },
     { type: "separator" },
     { label: "Sair do Starlink Monitor Br", role: "quit" },
@@ -482,7 +482,7 @@ function configureLoginItem(): void {
   }
   const marker = join(app.getPath("userData"), ".setup-done");
   if (existsSync(marker)) return;
-  app.setLoginItemSettings({ openAtLogin: true, openAsHidden: true });
+  app.setLoginItemSettings({ openAtLogin: true });
   try {
     writeFileSync(marker, new Date().toISOString());
   } catch {
