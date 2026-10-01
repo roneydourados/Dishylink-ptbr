@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "dishylink-landing",
+  "name": "painel-orbita-landing",
   // No Worker code — this is a static asset upload. Nothing here reads a secret,
   // and account_id is deliberately absent: pass CLOUDFLARE_ACCOUNT_ID as an env
   // var so no account identifier is committed to a public repo.
@@ -9,12 +9,10 @@
     "directory": "./dist",
     "not_found_handling": "404-page",
   },
-  // Both hosts serve the same assets. The apex is the canonical one — every page
-  // emits <link rel="canonical"> against it (Base.astro), so search engines fold
-  // the www copy into the apex rather than treating it as duplicate content.
-  // Cloudflare creates and manages the DNS record for each custom_domain route.
-  "routes": [
-    { "pattern": "dishylink.com", "custom_domain": true },
-    { "pattern": "www.dishylink.com", "custom_domain": true },
-  ],
+  // Add custom_domain routes here when a Painel Órbita domain is ready.
+  // Example:
+  // "routes": [
+  //   { "pattern": "painelorbita.com.br", "custom_domain": true },
+  //   { "pattern": "www.painelorbita.com.br", "custom_domain": true },
+  // ],
 }

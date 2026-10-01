@@ -140,7 +140,7 @@ export function DeviceUsageList() {
           footnote to the list rather than a banner over it. */}
       {!selfDeviceIdentified && !unavailable && namingFixesIt && (
         <Callout tone='info' iconSeverity='warn' className='mt-2.5'>
-          O dispositivo que você está usando conta as próprias verificações do Starlink Monitor Br na antena
+          O dispositivo que você está usando conta as próprias verificações do Painel Órbita na antena
           e no roteador como seus dados. Para deixá-las de fora,{" "}
           <button
             type='button'

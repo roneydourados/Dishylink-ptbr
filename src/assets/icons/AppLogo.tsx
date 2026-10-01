@@ -9,7 +9,7 @@ export function AppLogo({ size = 26, ...props }: React.ComponentProps<"svg"> & {
       size={size}
       strokeWidth={2}
       role='img'
-      aria-label='Starlink Monitor Br'
+      aria-label='Painel Órbita'
       {...props}
     />
   );

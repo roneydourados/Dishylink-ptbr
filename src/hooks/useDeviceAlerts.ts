@@ -340,5 +340,5 @@ export function useDeviceAlerts(
 function alertTitle(source: AlertSource, cleared: boolean): string {
   if (source === "dish") return cleared ? "Alerta da antena resolvido" : "Alerta da antena";
   if (source === "router") return cleared ? "Alerta do roteador resolvido" : "Alerta do roteador";
-  return cleared ? "Alerta do Starlink Monitor Br resolvido" : "Alerta do Starlink Monitor Br";
+  return cleared ? "Alerta do Painel Órbita resolvido" : "Alerta do Painel Órbita";
 }

@@ -1,12 +1,12 @@
 # Changelog
 
-Todas as mudanças notáveis do Starlink Monitor Br são documentadas aqui.
+Todas as mudanças notáveis do Painel Órbita são documentadas aqui.
 
 ## [1.2.0] - 2026-09-18
 
 ### Uso por dispositivo
 
-- O Starlink Monitor Br não cobra mais as próprias consultas no dispositivo em
+- O Painel Órbita não cobra mais as próprias consultas no dispositivo em
   que roda. Ele mede o custo do próprio polling e desconta antes de gravar o
   número, para a máquina em que você usa mostrar o uso que você fez, e não o
   uso de ficar olhando. Consultas de satélite também deixaram de ser contadas,
@@ -36,11 +36,11 @@ Todas as mudanças notáveis do Starlink Monitor Br são documentadas aqui.
 
 - O ícone da barra de menus do macOS pode combinar com o resto da barra, ou
   ser ocultado para só o painel de throughput aparecer. (#38)
-- Abrir o Starlink Monitor Br enquanto ele já está rodando traz a janela
+- Abrir o Painel Órbita enquanto ele já está rodando traz a janela
   aberta para frente, em vez de falhar. (#43)
 - Nós mesh podem ser renomeados na aba Nós.
 - O dashboard web e o gravador de histórico saem como imagens Docker. (#16)
-- O Starlink Monitor Br agora está na loja Edge Add-ons.
+- O Painel Órbita agora está na loja Edge Add-ons.
 
 ### Também adicionado
 
@@ -87,7 +87,7 @@ Todas as mudanças notáveis do Starlink Monitor Br são documentadas aqui.
   tentativa automática e failover entre edges se um parar de responder.
 - Renomeie e pause dispositivos pela conta vinculada, inclusive pela extensão
   do navegador.
-- O Starlink Monitor Br se recusa a pausar o dispositivo em que está rodando,
+- O Painel Órbita se recusa a pausar o dispositivo em que está rodando,
   de qualquer rede.
 
 ### Modo bypass

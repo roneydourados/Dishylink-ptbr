@@ -77,7 +77,7 @@ export function TopBar({
     <header className='sticky top-0 z-20 flex items-center justify-between gap-4 bg-gradient-to-b from-[color-mix(in_srgb,var(--page)_72%,transparent)] via-[color-mix(in_srgb,var(--page)_42%,transparent)] to-transparent px-6 pt-3.5 pb-4'>
       <div className='flex min-w-0 items-center gap-3'>
         <AppLogo size={30} className='flex-none text-[var(--accent)]' />
-        <span className='text-[19px] font-semibold tracking-[-0.01em]'>Starlink Monitor Br</span>
+        <span className='text-[19px] font-semibold tracking-[-0.01em]'>Painel Órbita</span>
       </div>
       <div className='flex flex-none flex-wrap items-center justify-end gap-3'>
         <div className='flex items-center gap-2.5'>

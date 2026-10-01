@@ -80,7 +80,7 @@ describe("describeTransition", () => {
     const engine = new AlertEngine();
     const [transition] = engine.update({ dish: { alerts: null, atMs: NOW } });
     expect(describeTransition(transition!)).toMatchObject({
-      title: "Alerta do Starlink Monitor Br",
+      title: "Alerta do Painel Órbita",
       body: "A antena não está respondendo",
     });
   });

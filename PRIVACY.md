@@ -1,12 +1,12 @@
 # Política de Privacidade
 
-O Starlink Monitor Br é um aplicativo de código aberto que monitora o
-desempenho e a saúde do seu Starlink. Esta página descreve o que o app faz
-com os seus dados.
+O Painel Órbita é um aplicativo de código aberto que monitora o
+desempenho e a saúde do seu kit de internet satélite. Esta página descreve o
+que o app faz com os seus dados.
 
 ## O que permanece na sua máquina
 
-O Starlink Monitor Br se comunica diretamente com a antena e o roteador pela
+O Painel Órbita se comunica diretamente com a antena e o roteador pela
 sua própria rede local (LAN), inclusive com a janela fechada. Tudo o que ele
 mede — taxa de transferência, latência, consumo de energia, obstrução,
 interrupções, eventos térmicos, temperatura dos rádios, lista de dispositivos —
@@ -31,7 +31,7 @@ resultante apenas no seu dispositivo:
   próprias solicitações.
 - Ela nunca é enviada para nós nem para terceiros — não temos servidor que
   pudesse recebê-la. Ao desconectar a conta, a sessão armazenada é apagada.
-  Na extensão, desconectar limpa apenas a cópia do Starlink Monitor Br — o
+  Na extensão, desconectar limpa apenas a cópia do Painel Órbita — o
   login do starlink.com no navegador permanece conectado.
 
 Este recurso é totalmente opcional (opt-in). Se você nunca entrar, nenhuma
@@ -47,7 +47,7 @@ conexão de internet com a Cloudflare já envolve.
 
 ## Código aberto
 
-O código-fonte do Starlink Monitor Br é público, então você mesmo pode
+O código-fonte do Painel Órbita é público, então você mesmo pode
 verificar tudo acima — veja o repositório em que este arquivo está.
 
 ## Alterações

@@ -1,6 +1,6 @@
-# Contribuindo com o Starlink Monitor Br
+# Contribuindo com o Painel Órbita
 
-Obrigado pelo interesse. O Starlink Monitor Br conversa com hardware Starlink
+Obrigado pelo interesse. O Painel Órbita conversa com hardware Starlink
 de verdade, então algumas regras abaixo são para não derrubar a internet de
 alguém — e não só sobre estilo de código. Leia a seção de hardware antes de
 tocar em qualquer coisa que faça poll na antena ou no roteador.
@@ -108,7 +108,7 @@ pela aba de segurança do repositório, em vez de abrir uma issue pública.
 ## Obrigado
 
 Seja com um recurso novo, uma correção de bug, documentação melhor ou só um
-typo neste arquivo — a ajuda é apreciada. O Starlink Monitor Br fica melhor
+typo neste arquivo — a ajuda é apreciada. O Painel Órbita fica melhor
 com mais olhos nele, e cada melhoria chega a alguém encarando um link ruim às
 2h da manhã.
 

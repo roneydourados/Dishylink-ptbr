@@ -127,7 +127,7 @@ cobre a semana inteira (`0` a `10080` minutos). Despausar remove só essa
 entrada, para agendas não relacionadas permanecerem intactas.
 
 Isto é uma atualização da lista inteira, não um patch de um único cliente. O
-Starlink Monitor Br, portanto, lê a configuração atual do roteador pela LAN
+Painel Órbita, portanto, lê a configuração atual do roteador pela LAN
 imediatamente antes de cada escrita, preserva todos os clientes e agendas não
 relacionadas, muda só o cliente selecionado e serializa mutações para que
 escritas concorrentes não se sobrescrevam. A requisição codificada é montada
@@ -146,7 +146,7 @@ tem nenhum dos dois caminhos: suas requisições `/api/*` são mensagens a um
 roteador interno de service worker/IndexedDB, e extensões desktop comuns do
 Chrome não expõem IP ou MAC da LAN do host de forma confiável. A mutação na
 nuvem em si funciona, mas habilitá-la sem auto-identidade poderia permitir que
-o usuário pause o computador rodando o Starlink Monitor Br — por isso a
+o usuário pause o computador rodando o Painel Órbita — por isso a
 capacidade da UI da extensão e a rota de mutação em background ficam
 desabilitadas.
 Use `scripts/probe-client-pause-state.mts` para um snapshot somente leitura das

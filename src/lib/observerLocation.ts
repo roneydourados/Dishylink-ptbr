@@ -8,8 +8,8 @@
 
 import type { ObserverLocation } from "./satellites";
 
-const LOCATION_STORAGE_KEY = "dishylink-observer-location";
-const LOCATION_CLEARED_KEY = "dishylink-observer-cleared";
+const LOCATION_STORAGE_KEY = "painel-orbita-observer-location";
+const LOCATION_CLEARED_KEY = "painel-orbita-observer-cleared";
 
 export function loadSavedLocation(): ObserverLocation | null {
   try {

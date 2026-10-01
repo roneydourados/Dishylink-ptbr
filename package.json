@@ -1,13 +1,13 @@
 {
-  "name": "MonitorStarlinkBrasil",
-  "productName": "Monitor Starlink Brasil",
+  "name": "painel-orbita",
+  "productName": "Painel Orbita",
   "private": true,
   "version": "2.0.0",
   "type": "module",
   "main": "dist-electron/main.js",
-  "author": "daveyhert <daviehert@gmail.com>",
+  "author": "roneydourados <roneydourados@gmail.com>",
   "license": "MIT",
-  "description": "Monitor Starlink no Brasil — fork brasileiro do Dishylink para acompanhar desempenho e saúde do seu kit.",
+  "description": "Painel Órbita — acompanhe desempenho e saúde do seu kit de internet satélite. Fork brasileiro do Dishylink.",
   "scripts": {
     "postinstall": "wxt prepare",
     "dev": "vite",

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  launchd service for the Painel Órbita energy historian — keeps it running across
+  logout and (re)launches it after sleep/crash.
+
+  Install:
+    cp collector/com.painelorbita.historian.plist ~/Library/LaunchAgents/
+    launchctl load  ~/Library/LaunchAgents/com.painelorbita.historian.plist
+  Stop / uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.painelorbita.historian.plist
+  Logs: collector/data/historian.out.log  /  historian.err.log
+
+  Paths below are absolute for this machine; update them if the repo moves.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.painelorbita.historian</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/roney/github/starlink-monitor-br/node_modules/.bin/tsx</string>
+    <string>/Users/roney/github/starlink-monitor-br/collector/historian.mts</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/roney/github/starlink-monitor-br</string>
+
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/Users/roney/github/starlink-monitor-br/collector/data/historian.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/roney/github/starlink-monitor-br/collector/data/historian.err.log</string>
+</dict>
+</plist>

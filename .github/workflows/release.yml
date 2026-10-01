@@ -92,5 +92,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "${{ needs.prepare.outputs.tag }}" .output/dishylink-*.zip \
+          gh release upload "${{ needs.prepare.outputs.tag }}" .output/painel-orbita-*.zip \
             --clobber --repo "$GITHUB_REPOSITORY"

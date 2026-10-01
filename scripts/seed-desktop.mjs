@@ -1,7 +1,7 @@
 // Copies the developer's own collected history (collector/data) into the packaged
-// Dishylink app's per-user data directory, so a local build opens with real data.
+// Painel Órbita app's per-user data directory, so a local build opens with real data.
 // A fresh install starts empty by design; this is a developer convenience, not part
-// of the shipped app. Quit Dishylink first — the collector must not be writing to
+// of the shipped app. Quit Painel Órbita first — the collector must not be writing to
 // these files while they are replaced.
 //
 //   npm run seed:desktop
@@ -17,17 +17,17 @@ if (!existsSync(source)) {
 }
 
 // The per-user data directory Electron resolves for app.getPath("userData")/data,
-// by platform. app.getName() is "Dishylink".
+// by platform. Packaged builds use productName "Painel Orbita" (ASCII).
 function appDataDir() {
   if (process.platform === "darwin") {
-    return join(homedir(), "Library", "Application Support", "Dishylink", "data");
+    return join(homedir(), "Library", "Application Support", "Painel Orbita", "data");
   }
   if (process.platform === "win32") {
     const roaming = process.env.APPDATA ?? join(homedir(), "AppData", "Roaming");
-    return join(roaming, "Dishylink", "data");
+    return join(roaming, "Painel Orbita", "data");
   }
   const config = process.env.XDG_CONFIG_HOME ?? join(homedir(), ".config");
-  return join(config, "Dishylink", "data");
+  return join(config, "Painel Orbita", "data");
 }
 
 const dest = appDataDir();

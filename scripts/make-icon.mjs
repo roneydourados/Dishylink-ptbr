@@ -51,7 +51,7 @@ const rasterize = (size, destination, input = source) =>
     { stdio: "pipe" },
   );
 
-const work = mkdtempSync(join(tmpdir(), "dishylink-icon-"));
+const work = mkdtempSync(join(tmpdir(), "painel-orbita-icon-"));
 const iconset = join(work, "icon.iconset");
 mkdirSync(iconset);
 

@@ -9,9 +9,9 @@ export const PIX_KEY = "roneydourados@gmail.com";
 
 /** null = listing not published yet; the UI renders a disabled control instead. */
 export const STORES: Record<string, string | null> = {
-  chrome: "https://chromewebstore.google.com/detail/dishylink/pljgamnkfokhbchiiommnblkjffffnna",
-  edge: "https://microsoftedge.microsoft.com/addons/detail/pknccegejhlgmeiojalenedmkbcaimdo",
-  firefox: "https://addons.mozilla.org/addon/dishylink/",
+  chrome: null,
+  edge: null,
+  firefox: null,
 };
 
 export interface DownloadOption {
@@ -105,6 +105,9 @@ export async function downloadPlatforms(fallbackVersion: string): Promise<{
     };
   };
 
+  // Installer productName is ASCII ("Painel Orbita") — see electron-builder.yml.
+  const productFile = "Painel Orbita";
+
   return {
     version,
     platforms: [
@@ -115,8 +118,8 @@ export async function downloadPlatforms(fallbackVersion: string): Promise<{
         choiceLabel: "CPU architecture",
         requirement: "macOS 12 or later",
         options: [
-          option("arm64", "ARM64", /-arm64\.dmg$/, "DMG", `Starlink Monitor Br-${version}-arm64.dmg`),
-          option("x64", "x64", /-x64\.dmg$/, "DMG", `Starlink Monitor Br-${version}-x64.dmg`),
+          option("arm64", "ARM64", /-arm64\.dmg$/, "DMG", `${productFile}-${version}-arm64.dmg`),
+          option("x64", "x64", /-x64\.dmg$/, "DMG", `${productFile}-${version}-x64.dmg`),
         ],
       },
       {
@@ -129,12 +132,12 @@ export async function downloadPlatforms(fallbackVersion: string): Promise<{
           option(
             "universal",
             "Universal",
-            /^Starlink Monitor Br-[\d.]+\.exe$/,
+            /^Painel Orbita-[\d.]+\.exe$/,
             "EXE",
-            `Starlink Monitor Br-${version}.exe`,
+            `${productFile}-${version}.exe`,
           ),
-          option("x64", "x64", /-x64\.exe$/, "EXE", `Starlink Monitor Br-${version}-x64.exe`),
-          option("arm64", "ARM64", /-arm64\.exe$/, "EXE", `Starlink Monitor Br-${version}-arm64.exe`),
+          option("x64", "x64", /-x64\.exe$/, "EXE", `${productFile}-${version}-x64.exe`),
+          option("arm64", "ARM64", /-arm64\.exe$/, "EXE", `${productFile}-${version}-arm64.exe`),
         ],
       },
       {
@@ -154,7 +157,7 @@ export async function downloadPlatforms(fallbackVersion: string): Promise<{
 }
 
 export const SITE = {
-  name: "Starlink Monitor Br",
-  domain: "dishylink.com",
+  name: "Painel Órbita",
+  domain: "github.com/roneydourados/starlink-monitor-br",
   tagline: "Saiba exatamente o que sua antena está fazendo",
 };

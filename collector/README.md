@@ -39,14 +39,14 @@ npm run historian
 Sempre ligado (sobrevive ao logout, relança após sono/crash) via launchd:
 
 ```
-cp collector/com.dishylink.historian.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.dishylink.historian.plist
+cp collector/com.painelorbita.historian.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.painelorbita.historian.plist
 ```
 
 Parar / desinstalar:
 
 ```
-launchctl unload ~/Library/LaunchAgents/com.dishylink.historian.plist
+launchctl unload ~/Library/LaunchAgents/com.painelorbita.historian.plist
 ```
 
 Os caminhos do plist são absolutos para esta máquina — atualize-os se o repo

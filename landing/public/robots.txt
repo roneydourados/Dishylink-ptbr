@@ -13,4 +13,4 @@ User-agent: PerplexityBot
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://dishylink.com/sitemap-index.xml
+Sitemap: https://github.com/roneydourados/starlink-monitor-br

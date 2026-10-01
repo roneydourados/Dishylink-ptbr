@@ -64,7 +64,7 @@ const trayOutlinePath = join(here, "../build/trayTemplateOutline.png");
 
 // Drives the menu-bar title and per-app data directory; must be set before anything
 // reads it.
-app.setName("Starlink Monitor Br");
+app.setName("Painel Orbita");
 
 // Must run before the app is ready, so it's at module load rather than in whenReady.
 registerAppProtocolScheme();
@@ -234,7 +234,7 @@ function createWindow(): void {
     ...(restoredBounds ? { x: savedBounds.x, y: savedBounds.y } : {}),
     minWidth: 800,
     minHeight: 700,
-    title: "Starlink Monitor Br — App desktop companheiro da Starlink (não oficial)",
+    title: "Painel Órbita",
     titleBarStyle: "hiddenInset",
     show: false,
     // Matches index.css's dark --page. Electron's own default is white, which the
@@ -312,9 +312,9 @@ function createTray(): void {
     const image = nativeImage.createFromPath(iconPath);
     tray = new Tray(image.isEmpty() ? image : image.resize({ width: 18, height: 18 }));
   }
-  tray.setToolTip("Starlink Monitor Br");
+  tray.setToolTip("Painel Órbita");
   const menu = Menu.buildFromTemplate([
-    { label: "Abrir Starlink Monitor Br", click: showWindow },
+    { label: "Abrir Painel Órbita", click: showWindow },
     { type: "separator" },
     {
       // Alerting runs when no window is open, so it must be switchable from the tray.
@@ -378,7 +378,7 @@ function createTray(): void {
       click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked }),
     },
     { type: "separator" },
-    { label: "Sair do Starlink Monitor Br", role: "quit" },
+    { label: "Sair do Painel Órbita", role: "quit" },
   ]);
   notifyItem = menu.getMenuItemById(NOTIFY_ITEM_ID);
   notifyReasonItem = menu.getMenuItemById(NOTIFY_REASON_ITEM_ID);
@@ -523,8 +523,8 @@ function registerCloudHandlers(): void {
  *  a binary it can't verify. */
 function undeliverableReason(): string {
   return app.isPackaged
-    ? "O macOS não está entregando notificações — permita o Starlink Monitor Br em Ajustes do Sistema ▸ Notificações."
-    : "Notificações nativas precisam do app Starlink Monitor Br instalado; uma execução de desenvolvimento não consegue enviá-las.";
+    ? "O macOS não está entregando notificações — permita o Painel Órbita em Ajustes do Sistema ▸ Notificações."
+    : "Notificações nativas precisam do app Painel Órbita instalado; uma execução de desenvolvimento não consegue enviá-las.";
 }
 
 /** The one notification answer every surface renders: stored request + channel as last

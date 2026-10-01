@@ -233,7 +233,7 @@ export async function applyDrain(
 
 // --- IndexedDB (service worker) ---
 
-const DB_NAME = "dishylink-history";
+const DB_NAME = "painel-orbita-history";
 const DB_VERSION = 1;
 const MINUTES = "minutes";
 const MONTHS = "months";

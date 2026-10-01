@@ -11,25 +11,25 @@ interface Props {
 }
 
 const { title, description, path = "/" } = Astro.props;
-const canonical = new URL(path, Astro.site ?? "https://dishylink.com").toString();
-const ogImage = new URL("/og.png", Astro.site ?? "https://dishylink.com").toString();
+const canonical = new URL(path, Astro.site ?? "https://github.com/roneydourados/starlink-monitor-br").toString();
+const ogImage = new URL("/og.png", Astro.site ?? "https://github.com/roneydourados/starlink-monitor-br").toString();
 
-const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://dishylink.com";
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://github.com/roneydourados/starlink-monitor-br";
 const ORGANIZATION_ID = `${site}/#organization`;
 
-// The publisher behind the app and the site. Dishylink is an independent
+// The publisher behind the app and the site. Painel Órbita is an independent
 // open-source project, not a registered company, so this carries only what the
 // repo can evidence — no address, no founding date, no employee count.
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": ORGANIZATION_ID,
-  name: "Starlink Monitor Br",
+  name: "Painel Órbita",
   url: site,
   logo: new URL("/apple-touch-icon.png", `${site}/`).toString(),
   email: "roneydourados@gmail.com",
   description:
-    "Independent open-source Brazilian fork of Dishylink — a local-first monitoring app for Starlink. Not affiliated with, endorsed by or sponsored by SpaceX or Starlink.",
+    "Independent open-source Brazilian fork of Dishylink — a local-first monitoring app for satellite internet kits. Not affiliated with, endorsed by or sponsored by SpaceX or Starlink.",
   sameAs: ["https://github.com/roneydourados/starlink-monitor-br"],
   founder: {
     "@type": "Person",
@@ -43,7 +43,7 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${site}/#website`,
-  name: "Starlink Monitor Br",
+  name: "Painel Órbita",
   url: site,
   description,
   inLanguage: "pt-BR",
@@ -55,7 +55,7 @@ const websiteSchema = {
 const appSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Starlink Monitor Br",
+  name: "Painel Órbita",
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "macOS, Windows, Chrome, Edge, Firefox",
   description,
@@ -72,18 +72,18 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Is Dishylink an official Starlink app?",
+      name: "Is Painel Órbita an official Starlink app?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. Dishylink is an unofficial, independent project and is not affiliated with, endorsed by or connected to SpaceX or Starlink.",
+        text: "No. Painel Órbita is an unofficial, independent project and is not affiliated with, endorsed by or connected to SpaceX or Starlink.",
       },
     },
     {
       "@type": "Question",
-      name: "Does Dishylink need a Starlink account or an internet connection?",
+      name: "Does Painel Órbita need a Starlink account or an internet connection?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. Dishylink talks to your dish and router directly over your local network, so it keeps working during an outage — which is exactly when you want to see what happened. Signing in to a Starlink account is optional and read-only, and only adds your plan and billing figures.",
+        text: "No. Painel Órbita talks to your dish and router directly over your local network, so it keeps working during an outage — which is exactly when you want to see what happened. Signing in to a Starlink account is optional and read-only, and only adds your plan and billing figures.",
       },
     },
     {
@@ -91,12 +91,12 @@ const faqSchema = {
       name: "Is my telemetry sent anywhere?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Never. Everything Dishylink records is written to your own machine and stays there. There is no cloud sync, no analytics and no tracking of any kind.",
+        text: "Never. Everything Painel Órbita records is written to your own machine and stays there. There is no cloud sync, no analytics and no tracking of any kind.",
       },
     },
     {
       "@type": "Question",
-      name: "Which platforms does Dishylink run on?",
+      name: "Which platforms does Painel Órbita run on?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "A native desktop app for macOS and Windows, and a browser extension for Chrome, Edge and Firefox. The desktop app is the one that records around the clock.",
@@ -104,10 +104,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "How much does Dishylink cost?",
+      name: "How much does Painel Órbita cost?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Nothing. Dishylink is free and open source, with no paid tier and no feature held back behind one.",
+        text: "Nothing. Painel Órbita is free and open source, with no paid tier and no feature held back behind one.",
       },
     },
   ],
@@ -136,7 +136,7 @@ const faqSchema = {
             async
             src="https://www.sabilytics.com/script.js"
             data-site="ggxgos113juq"
-            data-domain="dishylink.com"
+            data-domain="painelorbita"
           />
         </>
       )
@@ -153,7 +153,7 @@ const faqSchema = {
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Dishylink" />
+    <meta property="og:site_name" content="Painel Órbita" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -162,7 +162,7 @@ const faqSchema = {
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Dishylink — monitor your Starlink's performance and health, shown on the app's dashboard."
+      content="Painel Órbita — monitor your Starlink's performance and health, shown on the app's dashboard."
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

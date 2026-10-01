@@ -6,7 +6,7 @@
 
 export type ToolbarStyle = "dock" | "rail";
 
-const STORAGE_KEY = "dishylink-toolbar-style";
+const STORAGE_KEY = "painel-orbita-toolbar-style";
 
 const listeners = new Set<() => void>();
 

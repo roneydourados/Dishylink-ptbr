@@ -43,9 +43,9 @@ export default defineConfig({
     optimizeDeps: { entries: ["extension/entrypoints/**/*.html"] },
   }),
   manifest: ({ manifestVersion }) => ({
-    name: "Starlink Monitor Br",
+    name: "Painel Órbita",
     description:
-      "Monitor your Starlink's performance and health. Live telemetry, speed test, obstruction map, alignment, alerts, per-device usage.",
+      "Acompanhe desempenho e saúde do seu kit satélite. Telemetria ao vivo, teste de velocidade, mapa de obstrução, alinhamento, alertas e uso por dispositivo.",
     // A background service worker fetching 192.168.100.1 hit a Chromium Local
     // Network Access bug fixed only in 144; below it the drain silently collects
     // nothing, which is an unreproducible bug report. Excludes Chrome 142–143.
@@ -98,7 +98,7 @@ export default defineConfig({
     // the full dashboard page — a chart-heavy dashboard wants room, not a dropdown.
     // default_icon is set explicitly rather than left to the icons fallback.
     action: {
-      default_title: "Starlink Monitor Br",
+      default_title: "Painel Órbita",
       default_icon: {
         "16": "icon/16.png",
         "32": "icon/32.png",

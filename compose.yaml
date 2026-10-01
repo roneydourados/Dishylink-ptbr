@@ -1,4 +1,4 @@
-# Browser Dishylink. No `platform:` and no `build.platforms` — Docker builds
+# Browser Painel Órbita. No `platform:` and no `build.platforms` — Docker builds
 # and runs only the architecture of this host (amd64 or arm64), never both.
 # The host must be on the Starlink LAN — dish (192.168.100.1) and router
 # (192.168.1.1) are not inside this compose network. Do not set
@@ -6,14 +6,14 @@
 # the host's Wi-Fi. On native Linux (a Pi on the LAN) published ports + NAT
 # are enough if the host can already reach those addresses.
 #
-# If launchd is already running com.dishylink.historian, stop it first. Two
+# If launchd is already running com.painelorbita.historian, stop it first. Two
 # recorders double the 200ms router client poll.
 
 services:
-  dishylink:
+  painel-orbita:
     build:
       context: .
-    image: dishylink:local
+    image: painel-orbita:local
     ports:
       - "8080:8080"
     volumes:

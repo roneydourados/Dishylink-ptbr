@@ -63,12 +63,12 @@ export const sections: SectionContent[] = [
     layout: "media-right",
     title: "Dish alignment you can act on.",
     body: [
-      "Dishylink lets you see the desired target rotation and tilt of your dish to accurately fine-tune it for the strongest possible signal. Its visualized so you can see at a glance whether it's aligned, and the exact nudge in degrees when it isn't.",
+      "Painel Órbita lets you see the desired target rotation and tilt of your dish to accurately fine-tune it for the strongest possible signal. Its visualized so you can see at a glance whether it's aligned, and the exact nudge in degrees when it isn't.",
     ],
     media: [
       screenshot(
         "alignment",
-        "Dishylink's alignment panel: rotation and tilt dials with orange needles inside their tolerance wedges, plus current rotation, boresight error, attitude uncertainty, satellites in view and the acceptable elevation range.",
+        "Painel Órbita's alignment panel: rotation and tilt dials with orange needles inside their tolerance wedges, plus current rotation, boresight error, attitude uncertainty, satellites in view and the acceptable elevation range.",
         halfWidthSizing,
       ),
     ],
@@ -97,7 +97,7 @@ export const sections: SectionContent[] = [
     media: [
       screenshot(
         "speedtest",
-        "Dishylink's speed test: 267.1 Mbps down, 37.6 Mbps up and 20 ms latency, with jitter and packet loss beneath, a Starlink-styled dish animation, and a run-again button. Measured against Cloudflare.",
+        "Painel Órbita's speed test: 267.1 Mbps down, 37.6 Mbps up and 20 ms latency, with jitter and packet loss beneath, a Starlink-styled dish animation, and a run-again button. Measured against Cloudflare.",
         halfWidthSizing,
       ),
     ],
@@ -108,16 +108,16 @@ export const sections: SectionContent[] = [
     layout: "two-media",
     title: "See every connected client device on your network",
     body: [
-      "Dishylink lists every client the router can see, live and refreshed every five seconds — each named, tagged with its vendor and the band it's on. Open one for the full picture: status, signal strength and signal-to-noise, which node it's joined to, and its own live download and upload history.",
+      "Painel Órbita lists every client the router can see, live and refreshed every five seconds — each named, tagged with its vendor and the band it's on. Open one for the full picture: status, signal strength and signal-to-noise, which node it's joined to, and its own live download and upload history.",
     ],
     media: [
       screenshot(
         "network-list",
-        "Dishylink's Network panel: twelve devices live from the router, refreshed every five seconds — a MacBook Pro, PS5, iPhones, a HomePod, a Hisense TV and several Govee lamps — each with its vendor and WiFi band, alongside a Nodes tab.",
+        "Painel Órbita's Network panel: twelve devices live from the router, refreshed every five seconds — a MacBook Pro, PS5, iPhones, a HomePod, a Hisense TV and several Govee lamps — each with its vendor and WiFi band, alongside a Nodes tab.",
       ),
       screenshot(
         "network-detail",
-        "A single device's detail in Dishylink: status, role, the router it's connected to, manufacturer, connection band, signal strength and signal-to-noise, above its own live download and upload throughput charts.",
+        "A single device's detail in Painel Órbita: status, role, the router it's connected to, manufacturer, connection band, signal strength and signal-to-noise, above its own live download and upload throughput charts.",
       ),
     ],
   },
@@ -132,7 +132,7 @@ export const sections: SectionContent[] = [
     media: [
       screenshot(
         "data-usage",
-        "Dishylink's data usage panel on the Local Session tab: 13.1 GB down, 2.4 GB up and 15.5 GB total, stacked hourly bars across twelve hours, and a Devices Usage list showing a MacBook Pro at 819.22 GB, two iPhones and other clients with their download and upload split for August 2026.",
+        "Painel Órbita's data usage panel on the Local Session tab: 13.1 GB down, 2.4 GB up and 15.5 GB total, stacked hourly bars across twelve hours, and a Devices Usage list showing a MacBook Pro at 819.22 GB, two iPhones and other clients with their download and upload split for August 2026.",
       ),
       screenshot(
         "data-usage-billing",
@@ -146,13 +146,13 @@ export const sections: SectionContent[] = [
     layout: "media-right",
     title: "Complete energy usage visibility.",
     body: [
-      "Monitor your terminal's real-time power draw and historical energy breakdowns with high-fidelity and real-time graphs. Your terminal only remembers the last few minutes, so Dishylink records around the clock and keeps the total.",
+      "Monitor your terminal's real-time power draw and historical energy breakdowns with high-fidelity and real-time graphs. Your terminal only remembers the last few minutes, so Painel Órbita records around the clock and keeps the total.",
       "Every total says how much of its period was actually recorded, so a gap never quietly pads the number.",
     ],
     media: [
       screenshot(
         "power",
-        "Dishylink's power draw panel: 59 W average and 46 W current, a live 15-minute draw chart peaking near 90 W, 0.015 kWh used over that window, and 0.421 kWh of total energy split into hourly bars across the last twelve hours.",
+        "Painel Órbita's power draw panel: 59 W average and 46 W current, a live 15-minute draw chart peaking near 90 W, 0.015 kWh used over that window, and 0.421 kWh of total energy split into hourly bars across the last twelve hours.",
         { sizes: "(max-width: 1024px) 100vw, 620px" },
       ),
     ],
@@ -163,12 +163,12 @@ export const sections: SectionContent[] = [
     layout: "media-left",
     title: "See whether the lag is Starlink or your router",
     body: [
-      "The dish and the router each time their own round trip to the internet. Dishylink reads both and charts them together, so a spike shows whether the delay is coming from Starlink or from your router network.",
+      "The dish and the router each time their own round trip to the internet. Painel Órbita reads both and charts them together, so a spike shows whether the delay is coming from Starlink or from your router network.",
     ],
     media: [
       screenshot(
         "latency",
-        "Dishylink's latency detail: 30 ms average and 23 ms current, a 15-minute chart comparing Starlink and router latency, latency distribution histograms for each, and a plain-English note explaining what latency is.",
+        "Painel Órbita's latency detail: 30 ms average and 23 ms current, a 15-minute chart comparing Starlink and router latency, latency distribution histograms for each, and a plain-English note explaining what latency is.",
         halfWidthSizing,
       ),
     ],
@@ -179,12 +179,12 @@ export const sections: SectionContent[] = [
     layout: "full-media",
     title: "Know the moment something breaks",
     body: [
-      "Dishylink raises an alert the moment the dish or router stops answering, overheats or runs into weather, and clears it once the problem passes. Every event lands in a log you can scroll back through, and a live status list shows the health of each component as it changes.",
+      "Painel Órbita raises an alert the moment the dish or router stops answering, overheats or runs into weather, and clears it once the problem passes. Every event lands in a log you can scroll back through, and a live status list shows the health of each component as it changes.",
     ],
     media: [
       screenshot(
         "alerts",
-        "Dishylink's alerting: active alerts for a dish and router that have stopped answering and for weather interference; an events and outages log listing WiFi band switches, Starlink boots, a ping interruption and a public IP change; an alert history showing how long each fault lasted and when it cleared; and per-component status lists for the dish and router covering temperature, water ingress, motors, Ethernet speed and mesh health.",
+        "Painel Órbita's alerting: active alerts for a dish and router that have stopped answering and for weather interference; an events and outages log listing WiFi band switches, Starlink boots, a ping interruption and a public IP change; an alert history showing how long each fault lasted and when it cleared; and per-component status lists for the dish and router covering temperature, water ingress, motors, Ethernet speed and mesh health.",
         { widths: [720, 1200, 1800, 2400], sizes: "(max-width: 1200px) 100vw, 1200px" },
       ),
     ],
@@ -202,7 +202,7 @@ export const sections: SectionContent[] = [
     media: [
       screenshot(
         "settings-starlink",
-        "Dishylink's settings on the Starlink tab: snow melt, sleep schedule, a software update window set to overnight around 3 AM, firmware deferral, a debug data copy button, and maintenance actions to reset the obstruction map or reboot the dish.",
+        "Painel Órbita's settings on the Starlink tab: snow melt, sleep schedule, a software update window set to overnight around 3 AM, firmware deferral, a debug data copy button, and maintenance actions to reset the obstruction map or reboot the dish.",
       ),
       screenshot(
         "settings-router",
@@ -220,7 +220,7 @@ export const sections: SectionContent[] = [
     media: [
       screenshot(
         "os-notifications",
-        "Dishylink in macOS: the live down and up rate in the menu bar, and Notification Center stacked with Dishylink alerts — the dish and router not answering, pings to the Starlink network failing, and the matching cleared notifications as each recovered.",
+        "Painel Órbita in macOS: the live down and up rate in the menu bar, and Notification Center stacked with Painel Órbita alerts — the dish and router not answering, pings to the Starlink network failing, and the matching cleared notifications as each recovered.",
         halfWidthSizing,
       ),
     ],
@@ -237,7 +237,7 @@ export const sections: SectionContent[] = [
       video(
         "satellite",
         "/satellite-view.mp4",
-        "Dishylink's live satellite view: Starlink satellites drifting across the sky above a 3D obstruction dome, with the serving satellite beamed to the dish, a panel reading 0.17% sky obstructed over 4.1 hours and 258 satellites overhead, and an obstruction time-lapse scrubber.",
+        "Painel Órbita's live satellite view: Starlink satellites drifting across the sky above a 3D obstruction dome, with the serving satellite beamed to the dish, a panel reading 0.17% sky obstructed over 4.1 hours and 258 satellites overhead, and an obstruction time-lapse scrubber.",
       ),
     ],
   },

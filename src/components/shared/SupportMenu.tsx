@@ -158,7 +158,7 @@ export function SupportMenu() {
       >
         <div className='border-b border-border/50 px-4 py-3'>
           <div className='flex items-baseline gap-2'>
-            <span className='text-[15px] font-semibold'>Starlink Monitor Br</span>
+            <span className='text-[15px] font-semibold'>Painel Órbita</span>
             <span className='font-mono text-[12px] text-ink-muted tabular-nums'>
               v{APP_VERSION}
             </span>

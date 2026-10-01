@@ -36,9 +36,9 @@ macOS, então um verde local não garante verde no CI.
 ## Fatos de processo
 
 - O historian (`collector/historian.mts`) é o serviço de gravação sempre
-  ligado, rodado pelo launchd como `com.dishylink.historian`. Edições em
+  ligado, rodado pelo launchd como `com.painelorbita.historian`. Edições em
   `collector/` precisam de
-  `launchctl kickstart -k gui/$UID/com.dishylink.historian` para valer;
+  `launchctl kickstart -k gui/$UID/com.painelorbita.historian` para valer;
   `tsc` e `vitest` passam sem isso. As gravações ficam em `collector/data`.
 - “Historian” é o nome do componente no código, no serviço e na documentação.
   O texto voltado ao usuário fica em português simples — “gravador de

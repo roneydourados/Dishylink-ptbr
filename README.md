@@ -1,4 +1,4 @@
-# <img src="docs/logo.svg" alt="" width="34" height="34" align="top"> Starlink Monitor Br
+# <img src="docs/logo.svg" alt="" width="34" height="34" align="top"> Painel Órbita
 
 [![Downloads](https://img.shields.io/github/downloads/roneydourados/starlink-monitor-br/total.svg)](https://github.com/roneydourados/starlink-monitor-br/releases)
 [![macOS](https://img.shields.io/badge/macOS-12.0+-black.svg)](https://github.com/roneydourados/starlink-monitor-br/releases/latest)
@@ -9,13 +9,13 @@
 [![PIX](https://img.shields.io/badge/Doar%20via%20PIX-32BCAD.svg?style=flat)](mailto:roneydourados@gmail.com)
 
 App open-source de desktop para macOS, Windows e navegadores para monitorar o
-desempenho e a saúde do seu Starlink. Este repositório é um fork brasileiro do
-[Dishylink](https://github.com/DaveyHert/dishylink), com a marca
-**Starlink Monitor Br**.
+desempenho e a saúde do seu kit de internet satélite. Este repositório é um
+fork brasileiro do [Dishylink](https://github.com/DaveyHert/dishylink), com a
+marca **Painel Órbita**.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="landing/src/assets/shots/dashboard-dark.png">
-  <img alt="O dashboard do Starlink Monitor Br: tiles de download, upload, latência, consumo de energia, sucesso de ping e obstrução do céu acima dos gráficos ao vivo de throughput, latência e potência, com o dome 3D de obstrução e um log de eventos e outages ao lado." src="landing/src/assets/shots/dashboard-light.png">
+  <img alt="O dashboard do Painel Órbita: tiles de download, upload, latência, consumo de energia, sucesso de ping e obstrução do céu acima dos gráficos ao vivo de throughput, latência e potência, com o dome 3D de obstrução e um log de eventos e outages ao lado." src="landing/src/assets/shots/dashboard-light.png">
 </picture>
 
 Ele lê a antena e o roteador diretamente pela sua rede local, então continua
@@ -35,9 +35,9 @@ pausar dispositivos conectados. A sessão permanece armazenada localmente e só
 | <img src="docs/platforms/windows.svg" alt="" width="16" align="top"> **Windows** 10+         | `EXE`     | Universal              |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
 | <img src="docs/platforms/windows.svg" alt="" width="16" align="top"> **Windows** 10+         | `EXE`     | `x64`                  |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
 | <img src="docs/platforms/windows.svg" alt="" width="16" align="top"> **Windows** 10+         | `EXE`     | `arm64`                |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
-| <img src="landing/public/browsers/chrome.svg" alt="" width="16" align="top"> **Chrome** 144+ | Extensão  | Qualquer               | [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://chromewebstore.google.com/detail/dishylink/pljgamnkfokhbchiiommnblkjffffnna) |
-| <img src="landing/public/browsers/edge.svg" alt="" width="16" align="top"> **Edge**          | Extensão  | Qualquer               | [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://microsoftedge.microsoft.com/addons/detail/pknccegejhlgmeiojalenedmkbcaimdo)  |
-| <img src="landing/public/browsers/firefox.svg" alt="" width="16" align="top"> **Firefox**    | Extensão  | Qualquer               |                     [<img src="docs/platforms/download.svg" alt="Download" width="16">](https://addons.mozilla.org/addon/dishylink/)                     |
+| <img src="landing/public/browsers/chrome.svg" alt="" width="16" align="top"> **Chrome** 144+ | Extensão  | Qualquer               |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
+| <img src="landing/public/browsers/edge.svg" alt="" width="16" align="top"> **Edge**          | Extensão  | Qualquer               |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
+| <img src="landing/public/browsers/firefox.svg" alt="" width="16" align="top"> **Firefox**    | Extensão  | Qualquer               |                                       [<img src="docs/platforms/download.svg" alt="Download" width="16">][latest]                                        |
 
 [latest]: https://github.com/roneydourados/starlink-monitor-br/releases/latest
 
@@ -108,7 +108,7 @@ Starlink:
   desenvolvimento; exige sign-in opcional da conta Starlink: o app lê a
   configuração do roteador localmente, prepara a menor atualização de cliente
   aceita no host confiável e envia só ao endpoint autenticado da Starlink. O
-  dispositivo rodando o Starlink Monitor Br não pode pausar a si mesmo — é o
+  dispositivo rodando o Painel Órbita não pode pausar a si mesmo — é o
   que **Seu dispositivo nesta rede** nas configurações fixa. A extensão do
   navegador não expõe esse controle porque extensões desktop comuns não leem
   de forma confiável o IP ou MAC da LAN do host. Embora a extensão possa
@@ -139,7 +139,7 @@ o limite.
 
 ## Três formas de rodar em desenvolvimento
 
-O Starlink Monitor Br sai como três produtos independentes a partir de uma
+O Painel Órbita sai como três produtos independentes a partir de uma
 base de código. Para rodar qualquer um a partir do fonte:
 
 ```bash
@@ -189,7 +189,7 @@ Um Raspberry Pi 4/5 precisa do OS 64 bits e RAM suficiente para o build Vite
 
 Gravações e uma sessão colada do starlink.com persistem no volume
 `historian-data` — a sessão sobrevive a um reinício sem mount extra. Se
-`com.dishylink.historian` já estiver rodando no launchd, pare-o primeiro —
+`com.painelorbita.historian` já estiver rodando no launchd, pare-o primeiro —
 dois gravadores dobram o poll de 200 ms de clientes do roteador.
 
 Opcional, em `compose.yaml`:
@@ -228,11 +228,10 @@ conforme roda.
 
 ### Extensão do navegador (Chrome, Edge, Firefox)
 
-Instale pela
-[Chrome Web Store](https://chromewebstore.google.com/detail/dishylink/pljgamnkfokhbchiiommnblkjffffnna),
-[Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/pknccegejhlgmeiojalenedmkbcaimdo)
-ou [Firefox Add-ons](https://addons.mozilla.org/addon/dishylink/).
-
+As listagens nas lojas sob a marca Painel Órbita ainda não foram publicadas.
+Enquanto isso, use os ZIPs da [última release][latest] ou construa localmente
+com `npm run zip:extension` (Chrome), `zip:extension:edge` e
+`zip:extension:firefox`.
 - O ícone da barra abre o dashboard numa janela sem chrome (padrão) ou numa
   aba comum — nunca num popup apertado da toolbar.
 - **Badge da toolbar** — o número de alertas ativos agora, tingido pela pior
@@ -311,6 +310,6 @@ armazenamento, nunca transmitidos.
 
 MIT. Veja [LICENSE](LICENSE).
 
-O Starlink Monitor Br é um projeto não oficial e independente, sem afiliação
+O Painel Órbita é um projeto não oficial e independente, sem afiliação
 à SpaceX ou à Starlink. Starlink é marca registrada da Space Exploration
 Technologies Corp.

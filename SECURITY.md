@@ -10,7 +10,7 @@ mantenedor. Se preferir e-mail, **roneydourados@gmail.com** chega ao mesmo
 lugar.
 
 Inclua o que encontrou, como reproduzir, em qual plataforma estava e a versão
-do Starlink Monitor Br que estava usando.
+do Painel Órbita que estava usando.
 
 Os relatos são lidos e respondidos sob o melhor esforço de um único
 mantenedor. Aguarde um prazo razoável para a correção antes de divulgar
@@ -42,7 +42,7 @@ Fora do escopo:
 
 ## Testes
 
-Teste em hardware que você possui. O Starlink Monitor Br fala com a antena e
+Teste em hardware que você possui. O Painel Órbita fala com a antena e
 o roteador na sua própria rede, e o roteador é um dispositivo embarcado
 pequeno que já foi observado reiniciando sob carga comum de polling. Não faça
 fuzz nem estresse nos endpoints dele. Um roteador travado derruba a conexão

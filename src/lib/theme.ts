@@ -4,7 +4,7 @@
 export type ThemeName = "light" | "dark" | "system";
 export type ResolvedTheme = "light" | "dark";
 
-export const THEME_STORAGE_KEY = "dishylink-theme";
+export const THEME_STORAGE_KEY = "painel-orbita-theme";
 export const DARK_SCHEME_QUERY = "(prefers-color-scheme: dark)";
 
 export function readTheme(): ThemeName {

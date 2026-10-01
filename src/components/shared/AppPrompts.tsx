@@ -53,7 +53,7 @@ export function AppPrompts() {
     return (
       <PromptDialog
         icon={<StarIcon />}
-        title='Curtindo o Starlink Monitor Br?'
+        title='Curtindo o Painel Órbita?'
         body='Uma avaliação leva dez segundos, mas é o que mais ajuda outros donos de Starlink a encontrar o app.'
         onLater={later}
         onNever={never}
@@ -73,7 +73,7 @@ export function AppPrompts() {
   return (
     <PromptDialog
       icon={<HandHeartIcon />}
-      title='O Starlink Monitor Br é gratuito, e sempre será.'
+      title='O Painel Órbita é gratuito, e sempre será.'
       body='Eu construí no meu tempo livre, porque nada assim existia para o Brasil. Se puder, doe via PIX ou deixe uma estrela no GitHub — isso ajuda a manter o projeto atualizado.'
       onLater={later}
       onNever={never}

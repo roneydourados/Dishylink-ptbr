@@ -87,13 +87,13 @@ export function notificationsProblem(state: NotificationState): string | null {
  *  alerts panel confirm in the same words. */
 export const NOTIFICATIONS_ON_CONFIRMATION = {
   title: "Notificações ativadas",
-  body: "O Starlink Monitor Br vai avisá-lo sobre interrupções da Starlink.",
+  body: "O Painel Órbita vai avisá-lo sobre interrupções da Starlink.",
 };
 
 function alertTitle(source: AlertTransition["source"], cleared: boolean): string {
   if (source === "dish") return cleared ? "Alerta da antena resolvido" : "Alerta da antena";
   if (source === "router") return cleared ? "Alerta do roteador resolvido" : "Alerta do roteador";
-  return cleared ? "Alerta do Starlink Monitor Br resolvido" : "Alerta do Starlink Monitor Br";
+  return cleared ? "Alerta do Painel Órbita resolvido" : "Alerta do Painel Órbita";
 }
 
 /**

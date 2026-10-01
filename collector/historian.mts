@@ -1935,7 +1935,7 @@ export function handleRequest(request: IncomingMessage, response: ServerResponse
 //
 // globalThis, not module-scope state or a PID compare: Vite's SSR restart can
 // re-evaluate this module within one process, and this must survive that.
-const CLAIM_SENTINEL = Symbol.for("dishylink.historian.dataDirClaim");
+const CLAIM_SENTINEL = Symbol.for("painelorbita.historian.dataDirClaim");
 
 function claimDataDir(): void {
   mkdirSync(DATA_DIR, { recursive: true });

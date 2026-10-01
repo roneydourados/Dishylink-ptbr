@@ -1,4 +1,4 @@
-// App-level display choices — the ones that are about Starlink Monitor Br itself, not the
+// App-level display choices — the ones that are about Painel Órbita itself, not the
 // dish or the router. Kept in their own tab so the two device tabs stay a mirror
 // of the official app and app preferences don't masquerade as dish config.
 //
@@ -174,7 +174,7 @@ function SelfDeviceRow({ clients }: { clients: WifiClientJson[] }) {
   return (
     <SettingRow
       title='Seu dispositivo nesta rede'
-      info='O roteador lista todos os dispositivos conectados da mesma forma, então o Starlink Monitor Br não consegue saber em qual você está. Escolha o seu e ele fica marcado como "Este dispositivo" na lista da rede, sem botão de pausa próprio: pausá-lo cortaria a internet que este painel precisa para despausar de novo, e você teria que desfazer em outro dispositivo ou no app Starlink. Altere ou limpe aqui a qualquer momento.'
+      info='O roteador lista todos os dispositivos conectados da mesma forma, então o Painel Órbita não consegue saber em qual você está. Escolha o seu e ele fica marcado como "Este dispositivo" na lista da rede, sem botão de pausa próprio: pausá-lo cortaria a internet que este painel precisa para despausar de novo, e você teria que desfazer em outro dispositivo ou no app Starlink. Altere ou limpe aqui a qualquer momento.'
       infoSeverity='warn'
       caption='Escolha o computador que você está usando agora'
       note={

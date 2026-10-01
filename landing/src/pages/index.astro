@@ -20,9 +20,9 @@ import { sections } from "../data/sections";
 import dashboardLight from "../assets/shots/dashboard-light.png";
 import dashboardDark from "../assets/shots/dashboard-dark.png";
 
-const title = "Dishylink — Starlink monitoring app for Mac, Windows & browsers";
+const title = "Painel Órbita — monitor do kit satélite para Mac, Windows e navegadores";
 const description =
-  "Monitor your Starlink's speed, latency, power draw and obstructions in real time, and see exactly what happened during an outage. Free and open source.";
+  "Acompanhe velocidade, latência, consumo e obstruções do seu kit em tempo real, e veja exatamente o que aconteceu numa outage. Grátis e open source.";
 
 const { version, platforms } = await downloadPlatforms(
   JSON.parse(readFileSync(new URL("../../../package.json", import.meta.url), "utf-8")).version,
@@ -44,11 +44,11 @@ const link = (href: string, text: string, colour: string) =>
 const faqs: { q: string; a: string; aside?: string }[] = [
   {
     q: "Is this an official Starlink app?",
-    a: "No. Dishylink is an unofficial, independent project with no affiliation to SpaceX or Starlink. Starlink is a trademark of SpaceX.",
+    a: "No. Painel Órbita is an unofficial, independent project with no affiliation to SpaceX or Starlink. Starlink is a trademark of SpaceX.",
   },
   {
     q: "Does it need an account or an internet connection?",
-    a: "No. Dishylink talks to your dish and router directly over your local network, so it keeps working during an outage — which is exactly when you want to see what happened. Connecting a Starlink account is optional, read-only, and only adds your plan and billing data from the cloud.",
+    a: "No. Painel Órbita talks to your dish and router directly over your local network, so it keeps working during an outage — which is exactly when you want to see what happened. Connecting a Starlink account is optional, read-only, and only adds your plan and billing data from the cloud.",
   },
   {
     q: "Is my telemetry sent anywhere?",
@@ -111,7 +111,7 @@ const faqs: { q: string; a: string; aside?: string }[] = [
         <Figure
           light={dashboardLight}
           dark={dashboardDark}
-          alt="The Dishylink dashboard: download, upload, latency, power draw, ping success and sky-obstruction tiles above live throughput, latency and power charts, with the 3D obstruction dome and an events and outages log alongside."
+          alt="The Painel Órbita dashboard: download, upload, latency, power draw, ping success and sky-obstruction tiles above live throughput, latency and power charts, with the 3D obstruction dome and an events and outages log alongside."
           widths={[1200, 1800, 2400]}
           sizes="(max-width: 1200px) 100vw, 1200px"
           class="mt-16 shadow-[0_30px_80px_-40px_rgb(0_0_0/0.6)]"

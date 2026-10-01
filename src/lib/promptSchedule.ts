@@ -1,7 +1,7 @@
 const DAY_MS = 24 * 60 * 60 * 1000;
 const SNOOZE_MS = 2 * DAY_MS;
 const RETIRED = "retired";
-const INSTALLED_KEY = "dishylink-installed-at";
+const INSTALLED_KEY = "painel-orbita-installed-at";
 
 export type PromptId = "rating" | "donation";
 
@@ -11,7 +11,7 @@ const FIRST_ASK_AFTER: Record<PromptId, number> = {
 };
 
 function key(id: PromptId): string {
-  return `dishylink-prompt-${id}`;
+  return `painel-orbita-prompt-${id}`;
 }
 
 function stored(id: PromptId): string | null {

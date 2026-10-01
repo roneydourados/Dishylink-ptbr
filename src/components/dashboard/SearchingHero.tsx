@@ -14,7 +14,7 @@ export function SearchingHero() {
       </div>
       <div className='text-[19px] font-bold tracking-[0.18em]'>PROCURANDO ANTENA</div>
       <p className='max-w-[420px] text-[13.5px] text-ink-secondary'>
-        O Starlink Monitor Br se comunica diretamente com o terminal Starlink em{" "}
+        O Painel Órbita se comunica diretamente com o terminal Starlink em{" "}
         <code className='rounded-[5px] dark:bg-card px-1.5 py-px font-mono text-[12px]'>
           {DISH_LAN_ADDRESS}
         </code>

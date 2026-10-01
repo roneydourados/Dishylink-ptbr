@@ -3,9 +3,10 @@
 # inlined at build time, so no node_modules ships. Developer ID signing needs a
 # paid Apple account, which this project doesn't have; identity:null tells
 # electron-builder to skip signing rather than hunt for a certificate and fail.
-appId: com.dishylink.app
-productName: Starlink Monitor Br
-copyright: © 2026 daveyhert
+appId: com.painelorbita.app
+# ASCII productName: accents break some Windows paths and GitHub asset URLs.
+productName: Painel Orbita
+copyright: © 2026 Painel Órbita
 
 # Ad-hoc sign the built .app so macOS will post notifications (an unsigned build
 # fails the notification call outright). Free, no Apple account — see the hook.
@@ -25,8 +26,8 @@ directories:
 # an installed app has no credential to authenticate a private-repo download.
 publish:
   provider: github
-  owner: DaveyHert
-  repo: dishylink
+  owner: roneydourados
+  repo: starlink-monitor-br
   releaseType: draft
 
 # Only the built app ships. The build/*.png icons are named explicitly because
@@ -61,7 +62,7 @@ files:
 # modules — so x64 costs only the x64 Electron download at build time.
 mac:
   # Both DMGs name their arch. electron-builder omits the suffix for x64 on its
-  # own, which leaves the Intel build as plain Starlink Monitor Br-<version>.dmg — unlabelled
+  # own, which leaves the Intel build as plain Painel Orbita-<version>.dmg — unlabelled
   # next to an explicit arm64 file, so it reads as the one to grab by default and
   # lands Intel binaries on Apple Silicon machines.
   artifactName: ${productName}-${version}-${arch}.${ext}

@@ -3,7 +3,7 @@ import { Slider as SliderPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
 
-// Dishylink slider: a hairline track with a hollow thumb, so a value sitting
+// Painel Órbita slider: a hairline track with a hollow thumb, so a value sitting
 // near either end still reads against the track rather than swallowing it.
 function Slider({ className, ...props }: React.ComponentProps<typeof SliderPrimitive.Root>) {
   return (

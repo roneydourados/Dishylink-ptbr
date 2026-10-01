@@ -6,13 +6,9 @@ const STORE_NAME: Record<ReviewStore, string> = {
   firefox: "Firefox Add-ons",
 };
 
-// Edge has no /reviews route; it 404s, so Edge lands on the listing.
-const REVIEW_URL: Record<ReviewStore, string> = {
-  chrome:
-    "https://chromewebstore.google.com/detail/dishylink/pljgamnkfokhbchiiommnblkjffffnna/reviews",
-  edge: "https://microsoftedge.microsoft.com/addons/detail/pknccegejhlgmeiojalenedmkbcaimdo",
-  firefox: "https://addons.mozilla.org/addon/dishylink/reviews/",
-};
+// Listings under the Painel Órbita brand are not published yet. Keep the
+// shape so prompts can resume once store URLs are filled in.
+const REVIEW_URL: Partial<Record<ReviewStore, string>> = {};
 
 // Undefined in the web and Electron builds, which never define it.
 function buildTarget(): string | undefined {
@@ -21,6 +17,8 @@ function buildTarget(): string | undefined {
 
 export function reviewStore(): ReviewStore | null {
   if (typeof window !== "undefined" && window.dishlink) return null;
+  // No store listing for this brand yet — skip the in-app review prompt.
+  if (Object.keys(REVIEW_URL).length === 0) return null;
 
   const target = buildTarget();
   if (target === "firefox") return "firefox";
@@ -36,5 +34,7 @@ export function reviewStoreName(store: ReviewStore): string {
 }
 
 export function reviewUrl(store: ReviewStore): string {
-  return REVIEW_URL[store];
+  const url = REVIEW_URL[store];
+  if (!url) throw new Error(`No review URL configured for ${store}`);
+  return url;
 }

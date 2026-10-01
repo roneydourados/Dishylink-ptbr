@@ -6,7 +6,7 @@
 // for the same reason the toolbar choice is: it describes this install's
 // reading, not the kit.
 
-const STORAGE_KEY = "dishylink-account-roster-notice-dismissed";
+const STORAGE_KEY = "painel-orbita-account-roster-notice-dismissed";
 
 export function accountRosterNoticeDismissed(): boolean {
   return typeof localStorage !== "undefined" && localStorage.getItem(STORAGE_KEY) === "1";
